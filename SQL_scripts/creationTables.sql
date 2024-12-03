@@ -63,10 +63,10 @@ ALTER TABLE `interlocuteur`
 
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`identifiant`),
-  ADD KEY 'fk_interlocuteur' ('interlocuteur'),
-  ADD KEY 'fk_salle' ('salle'),
-  ADD KEY 'fk_activite' ('activite'),
-  ADD KEY 'fk_utilisateur' ('reservant');
+  ADD KEY `fk_interlocuteur` (`interlocuteur`),
+  ADD KEY `fk_salle` (`salle`),
+  ADD KEY `fk_activite` (`activite`),
+  ADD KEY `fk_utilisateur` (`reservant`);
 
 
 -- AUTO INCREMENTS
@@ -92,7 +92,7 @@ ALTER TABLE `reservation`
   ADD CONSTRAINT `fk_activite` FOREIGN KEY (`activite`) REFERENCES `activite` (`identifiant`),
   ADD CONSTRAINT `fk_utilisateur` FOREIGN KEY (`reservant`) REFERENCES `utilisateur` (`identifiant`);
 
-ALTER TABLE 'salle'
-  ADD CONSTRAINT 'oui_non_projecteur' CHECK (videoProjecteur = "oui" OR videoProjecteur = "non"),
-  ADD CONSTRAINT 'oui_non_ecranXXL' CHECK (ecranXXL = "oui" OR ecranXXL = "non"),
-  ADD CONSTRAINT 'oui_non_imprimante' CHECK (imprimante = "oui" OR imprimante = "non");
+ALTER TABLE `salle`
+  ADD CONSTRAINT `oui_non_projecteur` CHECK (videoProjecteur = "oui" OR videoProjecteur = "non"),
+  ADD CONSTRAINT `oui_non_ecranXXL` CHECK (ecranXXL = "oui" OR ecranXXL = "non"),
+  ADD CONSTRAINT `oui_non_imprimante` CHECK (imprimante = "oui" OR imprimante = "non");
