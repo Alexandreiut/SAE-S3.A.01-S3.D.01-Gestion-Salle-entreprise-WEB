@@ -43,7 +43,7 @@ CREATE TABLE `reservation` (
   `interlocuteur` int(7),
   `salle` int(8) NOT NULL,
   `activite` int(7) NOT NULL,
-  `reservant` int(7) NOT NULL,
+  `reservant` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -62,13 +62,11 @@ ALTER TABLE `interlocuteur`
   ADD PRIMARY KEY (`identifiant`);
 
 ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`identifiant`);
-  -- TODO FK
-
-
--- CONSTRAINTS (OUI / NON)
-
-
+  ADD PRIMARY KEY (`identifiant`),
+  ADD KEY 'fk_interlocuteur' ('interlocuteur'),
+  ADD KEY 'fk_salle' ('salle'),
+  ADD KEY 'fk_activite' ('activite'),
+  ADD KEY 'fk_utilisateur' ('reservant');
 
 
 -- AUTO INCREMENTS
@@ -84,3 +82,17 @@ ALTER TABLE `utilisateur`
 
 ALTER TABLE `reservation`
   MODIFY `identifiant` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+
+-- CONSTRAINTS
+
+ALTER TABLE `reservation`
+  ADD CONSTRAINT `fk_interlocuteur` FOREIGN KEY (`interlocuteur`) REFERENCES `interlocuteur` (`identifiant`),
+  ADD CONSTRAINT `fk_salle` FOREIGN KEY (`salle`) REFERENCES `salle` (`identifiant`),
+  ADD CONSTRAINT `fk_activite` FOREIGN KEY (`activite`) REFERENCES `activite` (`identifiant`),
+  ADD CONSTRAINT `fk_utilisateur` FOREIGN KEY (`reservant`) REFERENCES `utilisateur` (`identifiant`);
+
+ALTER TABLE 'salle'
+  ADD CONSTRAINT 'oui_non_projecteur' CHECK (videoProjecteur = "oui" OR videoProjecteur = "non"),
+  ADD CONSTRAINT 'oui_non_ecranXXL' CHECK (ecranXXL = "oui" OR ecranXXL = "non"),
+  ADD CONSTRAINT 'oui_non_imprimante' CHECK (imprimante = "oui" OR imprimante = "non");
