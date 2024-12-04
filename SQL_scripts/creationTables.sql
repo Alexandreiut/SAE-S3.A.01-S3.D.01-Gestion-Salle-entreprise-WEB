@@ -5,6 +5,11 @@ CREATE TABLE `activite` (
   `nom` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `logiciel` (
+  `identifiant` int(7) NOT NULL,
+  `nom` varchar(70) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `salle` (
   `identifiant` int(8) NOT NULL,
   `nom` varchar(70) NOT NULL,
@@ -14,6 +19,11 @@ CREATE TABLE `salle` (
   `nombreOrdinateur` int(5) NOT NULL,
   `typeOrdinateur` varchar(70) NOT NULL,
   `imprimante` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `logiciel_salle` (
+  `id_logiciel` int(7) NOT NULL,
+  `id_salle` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `utilisateur` (
@@ -52,8 +62,14 @@ CREATE TABLE `reservation` (
 ALTER TABLE `activite`
   ADD PRIMARY KEY (`identifiant`);
 
+ALTER TABLE `logiciel`
+  ADD PRIMARY KEY (`identifiant`);
+
 ALTER TABLE `salle`
   ADD PRIMARY KEY (`identifiant`);
+
+ALTER TABLE `logiciel_salle`
+  ADD PRIMARY KEY (`id_logiciel`, `id_salle`);
 
 ALTER TABLE `utilisateur`
   ADD PRIMARY KEY (`identifiant`);
@@ -74,10 +90,16 @@ ALTER TABLE `reservation`
 ALTER TABLE `activite`
   MODIFY `identifiant` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
+ALTER TABLE `logiciel`
+  MODIFY `identifiant` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
 ALTER TABLE `salle`
   MODIFY `identifiant` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 ALTER TABLE `utilisateur`
+  MODIFY `identifiant` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+ALTER TABLE `interlocuteur`
   MODIFY `identifiant` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 ALTER TABLE `reservation`
@@ -86,9 +108,13 @@ ALTER TABLE `reservation`
 
 -- CONSTRAINTS
 
+ALTER TABLE `logiciel_salle`
+  ADD CONSTRAINT `fk_logiciel` FOREIGN KEY (`logiciel`) REFERENCES `logiciel` (`identifiant`),
+  ADD CONSTRAINT `fk_salle` FOREIGN KEY (`salle`) REFERENCES `salle` (`identifiant`),
+
 ALTER TABLE `reservation`
   ADD CONSTRAINT `fk_interlocuteur` FOREIGN KEY (`interlocuteur`) REFERENCES `interlocuteur` (`identifiant`),
-  ADD CONSTRAINT `fk_salle` FOREIGN KEY (`salle`) REFERENCES `salle` (`identifiant`),
+  ADD CONSTRAINT `fk_salle_reservee` FOREIGN KEY (`salle`) REFERENCES `salle` (`identifiant`),
   ADD CONSTRAINT `fk_activite` FOREIGN KEY (`activite`) REFERENCES `activite` (`identifiant`),
   ADD CONSTRAINT `fk_utilisateur` FOREIGN KEY (`reservant`) REFERENCES `utilisateur` (`identifiant`);
 
