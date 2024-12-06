@@ -117,7 +117,7 @@ ALTER TABLE `reservation`
 
 ALTER TABLE `logiciel_salle`
   ADD CONSTRAINT `fk_logiciel` FOREIGN KEY (`logiciel`) REFERENCES `logiciel` (`identifiant`),
-  ADD CONSTRAINT `fk_salle` FOREIGN KEY (`salle`) REFERENCES `salle` (`identifiant`),
+  ADD CONSTRAINT `fk_salle` FOREIGN KEY (`salle`) REFERENCES `salle` (`identifiant`);
 
 ALTER TABLE `reservation`
   ADD CONSTRAINT `fk_interlocuteur` FOREIGN KEY (`interlocuteur`) REFERENCES `interlocuteur` (`identifiant`),
