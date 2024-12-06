@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        to left,
+        #E3FFFE 0%,
+        #FFFFFF 40%,
+        #FFFFFF 60%,
+        #E3FFFE 100%
+    );
+    align-items: center;
+    justify-content: center;
+}
+
+/*TODO image*/
+
+.header {
+    margin-top: 20px;
+    background-color: #016401;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo {
+    align-items: left;
+    justify-content: left;
+    height: 70px;
+    margin-right: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #016401;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-connexion {
+    background-color: #00BBB0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-connexion:hover {
+    background-color: #009D92;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
