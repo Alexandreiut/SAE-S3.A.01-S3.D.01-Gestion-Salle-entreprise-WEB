@@ -9,23 +9,25 @@
 		
 	</head>
 	<body>
-		<div>
-			<img src="ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
-			<div class="header">
-    			<h1>Connexion</h1>
-			</div>
+		<div class="header">
+    		<img src="ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
+    		<h1>Connexion</h1>
 		</div>
 		<form method="post" action="index.php">
-			<h2>Accéder à mon compte</h2>
+			<br/>
+			<h2 class="acces-text">Accéder à mon compte</h2>
 			<div>
-				<label for="login">Identifiant :</label>
+				<br/>
+				<label for="login" class="saisie-text">Identifiant :</label><br/>
 				<input type="text" id="login" name="login" required>
 			</div>
 			<div>
-				<label for="pwd">Mot de Passe :</label>
+				<label for="pwd" class="saisie-text">Mot de Passe :</label><br/>
 				<input type="password" id="pwd" name="pwd" required>
 			</div>
-			<button type="submit" class="btn">Se connecter</button>
+			<br/>
+			<br/>
+			<button type="submit" class="btn-connexion">Se connecter</button>
 		</form>
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
