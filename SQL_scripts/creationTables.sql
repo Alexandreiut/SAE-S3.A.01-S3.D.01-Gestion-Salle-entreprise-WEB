@@ -1,4 +1,11 @@
 -- CREATION TABLES
+DROP table if EXISTS activite;
+DROP table if EXISTS logiciel;
+DROP table if EXISTS salle;
+DROP table if EXISTS logiciel_salle;
+DROP table if EXISTS utilisateur;
+DROP table if EXISTS interlocuteur;
+DROP table if EXISTS reservation;
 
 CREATE TABLE `activite` (
   `identifiant` int(7) NOT NULL,
