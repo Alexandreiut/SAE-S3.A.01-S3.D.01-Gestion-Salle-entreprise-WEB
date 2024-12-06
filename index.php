@@ -1,11 +1,33 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        
-    </head>
-    <body>
-        <a href = "pages/accueil.php" target = "_blank" title "accueil">accueil</a><br>
-        <a href = "pages/exportation.php" target = "_blank" title "exportation">exportation</a><br>
-        <a href = "pages/connexion.php" target = "_blank" title "connexion">connexion</a><br>
-    </body>
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="ressources/fontawesome-free-6.5.1-web/css/all.min.css">
+		<title>Connexion</title>
+		
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1>Connexion</h1>
+			</div>
+			<form method="post" action="index.php">
+				<h2>Accéder à mon compte</h2>
+				<div>
+					<label for="login">Identifiant :</label>
+					<input type="text" id="login" name="login" required>
+				</div>
+				<div>
+					<label for="pwd">Mot de Passe :</label>
+					<input type="password" id="pwd" name="pwd" required>
+				</div>
+				<button type="submit" class="btn">Se connecter</button>
+			</form>
+			<div class="footer">
+				<p>2024 © RoomManager. IUT de Rodez.</p>
+			</div>
+		</div>
+	</body>
 </html>
