@@ -1,6 +1,6 @@
 # Ignorer le dossier SQL_sripts
-SQL_sripts/
-
+#SQL_sripts/
+#ressources/
 # Ignorer le fichier README.md
 README.md
 
