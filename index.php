@@ -2,7 +2,7 @@
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/consultations.css" />
 		<link rel="stylesheet" href="ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="ressources/fontawesome-free-6.5.1-web/css/all.min.css">
 		<title>Connexion</title>

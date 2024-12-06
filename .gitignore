@@ -1,6 +1,9 @@
 # Ignorer le dossier SQL_sripts
 #SQL_sripts/
 #ressources/
+
+# PhpStorm
+.idea
 # Ignorer le fichier README.md
 README.md
 
