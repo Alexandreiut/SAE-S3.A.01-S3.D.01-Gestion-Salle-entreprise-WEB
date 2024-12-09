@@ -54,7 +54,7 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/connexion.css" />
 		<link rel="stylesheet" href="ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="ressources/fontawesome-free-6.5.1-web/css/all.min.css">
+		<link rel="stylesheet" href="ressources/fontawesome-free-6.5.1-web/css/all.css">
 		<title>Connexion</title>
 		
 	</head>
@@ -85,6 +85,8 @@
 				<div class="<?php echo$couleurMotDePasse?>">
 					<input type="password" id="pwd" name="pwd" placeholder="Ex : Password" required>
 				</div>
+				<input type="checkbox" id="togglePwd" class="checkbox">
+        		<label for="togglePwd">Afficher le mot de passe</label>
 				<?php
 					if($couleurMotDePasse == "rouge"){
 						echo "<span class='erreur'>Mot de passe incorrect !</span>";
@@ -98,5 +100,6 @@
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
 		</div>
+		<script src="engine/js/oeil.js" defer></script>
 	</body>
 </html>
