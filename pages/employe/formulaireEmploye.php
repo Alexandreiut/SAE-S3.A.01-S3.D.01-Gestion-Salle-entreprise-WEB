@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="../../css/creation.css" />
     </head>
     <body>
-        OUI
+        <div class = "header">
+            <img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
+            <h1>oui<span class = "fas fa-user"></span></h1>
+        </div> 
     </body>
 </html>    
