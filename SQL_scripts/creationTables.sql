@@ -1,3 +1,7 @@
+-- CREATION BASE DE DONNEES
+CREATE DATABASE IF NOT EXISTS RoomManager DEFAULT CHARACTER SET utf8mb4  COLLATE utf8mb4_general_ci;
+USE RoomManager;
+
 -- CREATION TABLES
 DROP table if EXISTS activite;
 DROP table if EXISTS logiciel;
