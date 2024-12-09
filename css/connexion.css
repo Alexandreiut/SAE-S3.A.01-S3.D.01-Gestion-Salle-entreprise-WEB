@@ -28,16 +28,16 @@ body {
 
 .logo {
     position: absolute;
-    top: -20px; /* Positionne l'image au-dessus du header */
-    left: 0px; /* Garde l'image à gauche */
-    height: 118px; /* Augmente la taille de l'image */
-    z-index: 2; /* Met l'image au-dessus du header */
+    top: -20px;
+    left: 0px;
+    height: 118px;
+    z-index: 2;
     border-radius: 0 0 30px 30px;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 48px; /* Augmente la taille de la police */
+    font-size: 48px;
     text-align: center;
 }
 
@@ -47,17 +47,17 @@ body {
 }
 
 .acces-text {
-    font-size: 38px; /* Taille de la police */
-    font-weight: bold; /* Met le texte en gras */
-    color: black; /* Couleur du texte */
-    text-align: center; /* Centre horizontalement */
-    margin: 20px 0; /* Espacement vertical autour du titre */
+    font-size: 38px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin: 20px 0;
 }
 
 label {
-    font-size: 18px; /* Augmente la taille de la police du label */
-    margin-bottom: 8px; /* Ajoute un petit espace sous le label */
-    display: inline-block; /* Permet un espacement vertical précis */
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: inline-block;
 }
 
 input[type="text"],
@@ -74,44 +74,44 @@ input[type="password"] {
 }
 
 .saisie-text {
-    font-size: 24px; /* Taille de la police */
-    font-weight: bold; /* Met le texte en gras */
-    color: black; /* Couleur du texte */
-    text-align: center; /* Centre horizontalement */
-    margin: 20px 0; /* Espacement vertical autour du titre */
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .btn-connexion {
-    background-color: #CCF5F3; /* Couleur intérieure */
-    color: black; /* Couleur du texte */
-    padding: 10px 50px; /* Taille du bouton */
-    border: 2px solid #00BBB0; /* Bordure cyan */
-    border-radius: 25px; /* Arrondir les coins */
-    font-size: 28px; /* Taille du texte */
-    font-weight: bold; /* Texte en gras */
+    background-color: #CCF5F3;
+    color: black;
+    padding: 10px 50px;
+    border: 2px solid #00BBB0;
+    border-radius: 25px;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease; /* Animation fluide */
+    transition: all 0.3s ease;
 }
 
 .btn-connexion:hover {
-    background-color: #00BBB0; /* Fond cyan */
-    color: black; /* Texte reste noir */
-    border-color: #00BBB0; /* Assure une bordure homogène */
+    background-color: #00BBB0;
+    color: black;
+    border-color: #00BBB0;
 }
 
 button.btn {
-    margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
+    margin-top: 20px;
     background-color: #00BBB0;
     color: white;
-    padding: 12px 24px; /* Augmente la taille du bouton */
+    padding: 12px 24px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px; /* Taille du texte du bouton */
+    font-size: 18px;
 }
 
 button.btn:hover {
-    background-color: #009D92; /* Couleur différente au survol */
+    background-color: #009D92;
 }
 
 .footer {
@@ -128,14 +128,14 @@ button.btn:hover {
 
 form {
     display: flex;
-    flex-direction: column; /* Aligne les éléments verticalement */
-    align-items: center; /* Centre horizontalement */
-    margin-top: 20px; /* Ajoute un espacement au-dessus du formulaire */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
 form div {
-    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ */
-    width: 100%; /* Permet au champ de prendre tout l'espace disponible */
-    max-width: 300px; /* Définit une largeur maximale */
-    text-align: left; /* Garde le label aligné à gauche */
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 300px;
+    text-align: left;
 }
