@@ -2,8 +2,16 @@
 CREATE DATABASE IF NOT EXISTS RoomManager DEFAULT CHARACTER SET utf8mb4  COLLATE utf8mb4_general_ci;
 USE RoomManager;
 
--- CREATION TABLES
+-- SUPPRESSION DES TABLES
+DROP table if EXISTS reservation;
+DROP table if EXISTS logiciel_salle;
+DROP table if EXISTS interlocuteur;
+DROP table if EXISTS utilisateur;
+DROP table if EXISTS activite;
+DROP table if EXISTS logiciel;
+DROP table if EXISTS salle;
 
+-- CREATION TABLES
 CREATE TABLE `activite` (
   `identifiant` int(7) NOT NULL,
   `nom` varchar(70) NOT NULL
