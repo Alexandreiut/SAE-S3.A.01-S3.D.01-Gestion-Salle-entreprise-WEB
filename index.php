@@ -1,3 +1,53 @@
+<?php
+	try {
+		require("engine/connexion.php");
+		
+		session_start();
+		
+		/*if(isset($_COOKIE['cookieLogin'])){
+			$cookieLogin = $_COOKIE['cookieLogin'];
+		} else {
+			$cookieLogin = "";
+		}*/
+		
+		if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {
+			header('Location: pages/accueil.php');
+			exit();
+		}
+		
+		$login = "";
+		$login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
+		$pwd = "";
+		$bd = "RoomManager";
+
+		$couleurIdentifiant = "normal";
+		$couleurMotDePasse = "normal";
+	
+		$pdo = connexion($bd);
+		
+		if(isset($_POST['login']) && isset($_POST['pwd']) && !empty($_POST['login']) && !empty($_POST['pwd'])) {
+			$pwd = htmlspecialchars($_POST['pwd']);
+			//setcookie('cookieLogin', $_POST['login'], time() + 120);
+
+			$resultat = authentification($pdo, $login, $pwd);
+			
+			if($resultat[1]) {
+				$_SESSION['login'] = $login;
+				$_SESSION['session'] = session_id();
+				header('Location: pages/accueil.php');
+				exit();
+			} else if (!$resultat[0]) {
+				$couleurIdentifiant = "rouge";
+				$couleurMotDePasse = "rouge";
+			} else {
+				$couleurMotDePasse = "rouge";
+			}
+		}		
+	} catch(PDOException $e){
+		header('Location: erreurs/erreurConnexion.php');
+		exit();
+	}	
+?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -18,12 +68,28 @@
 			<h2 class="acces-text">Accéder à mon compte</h2>
 			<div>
 				<br/>
-				<label for="login" class="saisie-text">Identifiant :</label><br/>
-				<input type="text" id="login" name="login" required>
+				<label for="login" class="saisie-text">Identifiant :</label>
+				<span class="saisie-text require">*</span><br/>
+				<div class="<?php echo$couleurIdentifiant?>">
+					<input type="text" name="login" placeholder="Ex : Nom, Prénom, ..." value="<?php echo $login?>" required>
+				</div>
+				<?php
+					if($couleurIdentifiant == "rouge"){
+						echo "<span class='erreur'>Identifiant incorrect !</span>";
+					}
+				?>
 			</div>
 			<div>
-				<label for="pwd" class="saisie-text">Mot de Passe :</label><br/>
-				<input type="password" id="pwd" name="pwd" required>
+				<label for="pwd" class="saisie-text">Mot de Passe :</label>
+				<span class="saisie-text require">*</span><br/>
+				<div class="<?php echo$couleurMotDePasse?>">
+					<input type="password" id="pwd" name="pwd" placeholder="Ex : Password" required>
+				</div>
+				<?php
+					if($couleurMotDePasse == "rouge"){
+						echo "<span class='erreur'>Mot de passe incorrect !</span>";
+					}
+				?>
 			</div>
 			<br/>
 			<br/>

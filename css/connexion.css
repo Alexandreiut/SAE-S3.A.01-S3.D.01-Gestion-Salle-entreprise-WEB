@@ -28,16 +28,16 @@ body {
 
 .logo {
     position: absolute;
-    top: -20px; /* Positionne l'image au-dessus du header */
-    left: 0px; /* Garde l'image à gauche */
-    height: 118px; /* Augmente la taille de l'image */
-    z-index: 2; /* Met l'image au-dessus du header */
+    top: -20px;
+    left: 0px;
+    height: 118px;
+    z-index: 2;
     border-radius: 0 0 30px 30px;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 48px; /* Augmente la taille de la police */
+    font-size: 48px;
     text-align: center;
 }
 
@@ -79,6 +79,14 @@ input[type="password"] {
     color: black; /* Couleur du texte */
     text-align: center; /* Centre horizontalement */
     margin: 20px 0; /* Espacement vertical autour du titre */
+}
+
+.erreur {
+    font-size: 24px;
+    font-style: italic;
+    color: black;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .btn-connexion {
@@ -138,4 +146,30 @@ form div {
     width: 100%; /* Permet au champ de prendre tout l'espace disponible */
     max-width: 300px; /* Définit une largeur maximale */
     text-align: left; /* Garde le label aligné à gauche */
+}
+
+.rouge {
+    width: 100%;
+    max-width: 500px;
+    font-size: 22px;
+    background-color: #f0f0f0;
+    border: solid 2px red;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.normal {
+    width: 100%;
+    max-width: 500px;
+    font-size: 22px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.require {
+    color : red; 
 }
