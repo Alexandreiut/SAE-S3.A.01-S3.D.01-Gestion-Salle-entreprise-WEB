@@ -193,3 +193,23 @@ form div {
     background-color: white;
     cursor: pointer;
 }
+
+.btn-deconnexion {
+    background-color: black;
+    color: white;
+    /*padding: 10px 20px;*/
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    height: 100%;
+    left: 90.75%;
+    z-index: 2;
+}
+
+.btn-deconnexion:hover {
+    background-color: #222;
+}
