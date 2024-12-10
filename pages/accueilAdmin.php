@@ -36,7 +36,15 @@
 				<button type="submit" class="btn-deconnexion">Se déconnecter<span class=""><span></button>
 			</form>
 		</div>
-
+		<div class="info-text">
+			Que voulez-vous faire ?
+		</div>
+		<div class="btn-container">
+			<button type="submit" class="btn-action">Gestion des salles<br/><br/><span class="fas fa-door-open"></span></button>
+			<button type="submit" class="btn-action">Gestion des employés<br/><br/><span class="fas fa-user"></span></button>
+			<button type="submit" class="btn-action">Télécharger des données<br/><br/><span class="fas fa-download"></span></button>
+			<button type="submit" class="btn-action">Gestion des réservations<br/><br/><span class="fas fa-calendar-days"></span></button>
+		</div>
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
 		</div>
