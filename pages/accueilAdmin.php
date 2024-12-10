@@ -7,6 +7,11 @@
 		header('Location: ../index.php');
 		exit();
 	}
+
+	if($_SESSION['role'] != "administrateur"){
+		header('Location: accueilEmploye.php');
+		exit();
+	}
 	
 	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
 		deconnexion();
@@ -28,7 +33,7 @@
     		<h1>Accueil</h1>
 			<form method="post" action="accueilAdmin.php">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
-				<button type="submit" class="btn-deconnexion">Se déconnecter</button>
+				<button type="submit" class="btn-deconnexion">Se déconnecter<span class=""><span></button>
 			</form>
 		</div>
 

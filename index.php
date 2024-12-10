@@ -33,6 +33,7 @@
 			
 			if($resultat[1]) {
 				$_SESSION['login'] = $login;
+				$_SESSION['role'] = getRole($pdo, $login, $pwd);
 				$_SESSION['session'] = session_id();
 
 				var_dump(getRole($pdo, $login, $pwd));
@@ -79,7 +80,7 @@
 				<label for="login" class="saisie-text">Identifiant :</label>
 				<span class="saisie-text require">*</span><br/>
 				<div class="<?php echo$couleurIdentifiant?>">
-					<input type="text" name="login" placeholder="Ex : Nom, Prénom, ..." value="<?php echo $login?>" required>
+					<input type="text" name="login" placeholder="Entrez votre identifiant" value="<?php echo $login?>" required>
 				</div>
 				<?php
 					if($couleurIdentifiant == "rouge"){
@@ -91,7 +92,7 @@
 				<label for="pwd" class="saisie-text">Mot de Passe :</label>
 				<span class="saisie-text require">*</span><br/>
 				<div class="<?php echo$couleurMotDePasse?>">
-					<input type="password" id="pwd" name="pwd" placeholder="Ex : Password" required>
+					<input type="password" id="pwd" name="pwd" placeholder="Entrez votre mot de passe" required>
 				</div>
 				<input type="checkbox" id="togglePwd" class="checkbox">
         		<label for="togglePwd">Afficher le mot de passe</label>

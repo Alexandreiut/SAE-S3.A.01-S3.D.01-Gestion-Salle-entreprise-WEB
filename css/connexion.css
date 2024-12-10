@@ -197,19 +197,24 @@ form div {
 .btn-deconnexion {
     background-color: black;
     color: white;
-    /*padding: 10px 20px;*/
-    font-size: 16px;
+    font-size: 22px;
+    font-weight: bold;
     font-family: Arial, sans-serif;
     cursor: pointer;
     border-radius: 5px;
+    border: none;
     display: flex;
-    position: absolute;
     align-items: center;
-    height: 100%;
-    left: 90.75%;
-    z-index: 2;
 }
 
 .btn-deconnexion:hover {
-    background-color: #222;
+    background-color: #222222;
+}
+
+.info-text {
+    font-size: 48px; /* Taille de la police */
+    font-weight: bold; /* Met le texte en gras */
+    color: black; /* Couleur du texte */
+    text-align: center; /* Centre horizontalement */
+    margin-top: 50px; /* Espacement vertical autour du titre */
 }
