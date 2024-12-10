@@ -47,7 +47,7 @@
                                 </div>
                                 <div class = "col-12">
                                     <!-- login -->
-                                    <label for = "login">Login : </label><br>
+                                    <label for = "login">Identifiant : </label><br>
                                     <input type = "text" name = "login" id = "login" placeholder = "Entrez l'idenfiant du compte"><br><br>
                                 </div>
                                 <div class = "col-12">
