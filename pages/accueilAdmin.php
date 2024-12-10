@@ -24,13 +24,13 @@
 		<link rel="stylesheet" href="../css/connexion.css" />
 		<link rel="stylesheet" href="../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../ressources/fontawesome-free-6.5.1-web/css/all.css">
-		<title>Accueil</title>
+		<title>RoomManager</title>
 		
 	</head>
 	<body>
 		<div class="header">
     		<img src="../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
-    		<h1>Accueil</h1>
+    		<h1>RoomManager</h1>
 			<form method="post" action="accueilAdmin.php">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
 				<button type="submit" class="btn-deconnexion">Se déconnecter<span class=""><span></button>
