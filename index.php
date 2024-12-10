@@ -1,6 +1,6 @@
 <?php
 	try {
-		require("engine/connexion.php");
+		require("engine/fonctionsAuthentification.php");
 		
 		session_start();
 		
@@ -11,7 +11,7 @@
 		}*/
 		
 		if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {
-			header('Location: pages/accueil.php');
+			header('Location: pages/accueilEmploye.php');
 			exit();
 		}
 		
@@ -34,8 +34,16 @@
 			if($resultat[1]) {
 				$_SESSION['login'] = $login;
 				$_SESSION['session'] = session_id();
-				header('Location: pages/accueil.php');
-				exit();
+
+				var_dump(getRole($pdo, $login, $pwd));
+
+				if(getRole($pdo, $login, $pwd) == "administrateur"){
+					header('Location: pages/accueilAdmin.php');
+					exit();
+				} else {
+					header('Location: pages/accueilEmploye.php');
+					exit();
+				}
 			} else if (!$resultat[0]) {
 				$couleurIdentifiant = "rouge";
 				$couleurMotDePasse = "rouge";
@@ -89,11 +97,10 @@
         		<label for="togglePwd">Afficher le mot de passe</label>
 				<?php
 					if($couleurMotDePasse == "rouge"){
-						echo "<span class='erreur'>Mot de passe incorrect !</span>";
+						echo "<br/><span class='erreur'>Mot de passe incorrect !</span>";
 					}
 				?>
 			</div>
-			<br/>
 			<br/>
 			<button type="submit" class="btn-connexion">Se connecter</button>
 		</form>
