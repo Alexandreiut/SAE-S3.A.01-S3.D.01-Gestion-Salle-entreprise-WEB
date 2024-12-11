@@ -1,36 +1,36 @@
 <?php
-  session_start();
-  require("../../engine/fonction/connexion.php");
-  require("../../engine/fonction/fonctionSalle.php");
-  require("../../engine/fonction/fonctionLogiciel.php");
-  try{
-      $connexion = connexion("RoomManager");
-      $videoProjecteur = "non";
-      $ecranXxl = "non";
-      $imprimante = "non";
-      if(isset($_POST["videoProjecteur"])){
-        $videoProjecteur = "oui";
-      }
-      if(isset($_POST["ecranXxl"])){
-        $ecranXxl = "oui";
-      }
-      if(isset($_POST["imprimante"])){
-        $imprimante = "oui";
-      }
-      $listeLogiciel = getListeLogiciel($connexion);
-	  $listeLogicielSelectionnes = array();
+    session_start();
+    require("../../engine/fonction/connexion.php");
+    require("../../engine/fonction/fonctionSalle.php");
+    require("../../engine/fonction/fonctionLogiciel.php");
+    try{
+        $connexion = connexion("RoomManager");
+        $videoProjecteur = "non";
+        $ecranXxl = "non";
+        $imprimante = "non";
+        if(isset($_POST["videoProjecteur"])){
+            $videoProjecteur = "oui";
+        }
+        if(isset($_POST["ecranXxl"])){
+            $ecranXxl = "oui";
+        }
+        if(isset($_POST["imprimante"])){
+            $imprimante = "oui";
+        }
+        $listeLogiciel = getListeLogiciel($connexion);
+	    $listeLogicielSelectionnes = array();
 
-	  foreach ($listeLogiciel as $logiciel) {
-	    if (isset($_POST[$logiciel["nom"]])) {
-		  $listeLogicielSelectionnes[] = $logiciel["nom"];
-		}
-	  }
+	    foreach ($listeLogiciel as $logiciel) {
+	        if (isset($_POST[$logiciel["nom"]])) {
+		        $listeLogicielSelectionnes[] = $logiciel["nom"];
+		    }
+	    }
 
-      if(isset($_POST["nomSalle"]) && isset($_POST["capaciteSalle"])
-	    && $_POST["nomSalle"]!="" && $_POST["capaciteSalle"]!=""){
-        ajoutSalle($connexion,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
-		header('Location: consultationSalle.php');
-	  }
+        if(isset($_POST["nomSalle"]) && isset($_POST["capaciteSalle"])
+	        && $_POST["nomSalle"]!="" && $_POST["capaciteSalle"]!=""){
+            ajoutSalle($connexion,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
+		    header('Location: consultationSalle.php');
+	    }
 
 	} catch ( Exception $e ) {
 		header('Location: consultationSalle.php');
@@ -41,13 +41,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="css/connexion.css" />
-		<link rel="stylesheet" href="../../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../../ressources/fontawesome-free-6.5.1-web/css/all.min.css">
-		<title>Connexion</title>
-		
-	</head>
+        <title>RoomManager - Création salle</title>
+        <meta name="Description" content="" />
+        <link rel="stylesheet" href="../../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../ressources/fontawesome-free-6.5.1-web/css/all.css">
+        <link rel="stylesheet" href="../../css/creation.css" />
+    </head>
 	<body>
 		<div class="header">
 		</div>
@@ -110,8 +109,6 @@
 						</div>
           			</div>
 				</div>
-				 
-
 				<button type="submit" class=""><?php //echo $_SESSION["mode"]; ?> de la salle</button>
 			</form>
 		</div>
