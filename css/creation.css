@@ -123,3 +123,7 @@ form div {
     width: 100%; /* Permet au champ de prendre tout l'espace disponible */
     text-align: left; /* Garde le label aligné à gauche */
 }
+
+.rouge {
+    color : red;
+}
