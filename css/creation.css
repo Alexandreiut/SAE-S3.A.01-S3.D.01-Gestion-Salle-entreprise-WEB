@@ -46,7 +46,6 @@ body {
 }
 
 .btn-ajouter {
-    margin : 20px;
     background-color: #CCF5F3; /* Couleur intérieure */
     color: black; /* Couleur du texte */
     padding: 10px 50px; /* Taille du bouton */

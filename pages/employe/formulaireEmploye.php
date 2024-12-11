@@ -49,7 +49,7 @@
             </div>
 
             <div class="header-title">
-                <h1>RoomManager</h1>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomManager</h1>
             </div>
 
 			<form method="post" action="../accueilEmploye.php">
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "col-6 offset-4">
+                    <div class = "col-6 offset-xl-4 offset-3">
                         <button type="submit" class="btn-ajouter"><span class = "fas fa-plus"></span><span class = "fas fa-user"></span> Ajouter l'employé</button>
                     </div>
                 </div>

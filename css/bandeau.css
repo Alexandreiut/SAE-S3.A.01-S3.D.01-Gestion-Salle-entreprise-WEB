@@ -112,8 +112,8 @@ html, body {
 }
 
 .header-title h1 {
+    text-align : center;
     font-size: calc(var(--header-height) * 0.5); /* Taille dynamique pour le titre */
-    margin: 0; /* Supprime les marges par défaut */
     color: #ffffff;
 }
 
