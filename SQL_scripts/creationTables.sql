@@ -44,7 +44,7 @@ CREATE TABLE `utilisateur` (
   `identifiant` int(7) NOT NULL,
   `nom` varchar(70) NOT NULL,
   `prenom` varchar(70) NOT NULL,
-  `telephone` char(4) NOT NULL,
+  `telephone` char(4),
   `role` varchar(70) NOT NULL,
   `login` varchar(70) NOT NULL,
   `motDePasse` varchar(70) NOT NULL
