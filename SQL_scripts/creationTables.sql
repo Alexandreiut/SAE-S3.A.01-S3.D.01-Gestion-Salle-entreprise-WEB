@@ -31,7 +31,8 @@ CREATE TABLE `salle` (
   `ecranXXL` varchar(3) NOT NULL,
   `nombreOrdinateur` int(5) NOT NULL,
   `typeOrdinateur` varchar(70) NOT NULL,
-  `imprimante` varchar(3) NOT NULL
+  `imprimante` varchar(3) NOT NULL,
+  UNIQUE(`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `logiciel_salle` (
