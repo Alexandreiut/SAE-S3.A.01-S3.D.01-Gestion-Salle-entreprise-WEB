@@ -12,12 +12,7 @@ body {
     justify-content: center;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-.header {
+.header-connexion {
     background-color: #016401;
     width: 100%;
     height: 11%;
@@ -31,14 +26,14 @@ html, body {
 }
 
 
-.logo {
+.logo-connexion {
     position: absolute;
     height: 90%;
     left: 0.25%;
     z-index: 2;
 }
 
-.header h1 {
+.header-connexion h1 {
     margin: 0;
     font-size: 48px;
     text-align: center;
@@ -101,7 +96,6 @@ input[type="password"] {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
     transition: all 0.3s ease; /* Animation fluide */
 }
 
@@ -109,22 +103,6 @@ input[type="password"] {
     background-color: #00BBB0;
     color: black;
     border-color: #00BBB0;
-}
-
-button.btn {
-    margin-top: 20px;
-    background-color: #00BBB0;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: all 0.3s ease; /* Animation fluide */
-}
-
-button.btn:hover {
-    background-color: #009D92;
 }
 
 .footer {
@@ -139,14 +117,15 @@ button.btn:hover {
     padding: 10px 0;
 }
 
-form {
+.form-pas-entete {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
 
-form div {
+.form-pas-entete div {
+    align-items: center;
     margin-bottom: 20px;
     width: 100%;
     max-width: 300px;
@@ -196,24 +175,6 @@ form div {
     cursor: pointer;
 }
 
-.btn-deconnexion {
-    background-color: black;
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    display: flex;
-    padding: 10px 20px;
-    align-items: center;
-    transition: all 0.3s ease; /* Animation fluide */
-}
-
-.btn-deconnexion:hover {
-    background-color: #222222;
-}
 
 .btn-action {
     background-color: #CCF5F3;

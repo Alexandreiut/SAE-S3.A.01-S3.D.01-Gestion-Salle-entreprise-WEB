@@ -62,17 +62,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/connexion.css" />
+		<link rel="stylesheet" href="css/bandeau.css" />
 		<link rel="stylesheet" href="ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="ressources/fontawesome-free-6.5.1-web/css/all.css">
 		<title>Connexion</title>
 		
 	</head>
 	<body>
-		<div class="header">
-    		<img src="ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
-    		<h1>Connexion</h1>
-		</div>
-		<form method="post" action="index.php">
+		<div class="header-connexion">
+            <div class="header-left">
+                <img src="ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo-connexion">
+            </div>
+
+            <div class="header-title">
+                <h1>Connexion</h1>
+            </div>
+        </div>
+		<form method="post" action="index.php" class="form-pas-entete">
 			<br/>
 			<h2 class="acces-text">Accéder à mon compte</h2>
 			<div>

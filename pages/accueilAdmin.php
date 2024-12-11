@@ -22,20 +22,45 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="../css/connexion.css" />
+		<link rel="stylesheet" href="../css/bandeau.css" />
 		<link rel="stylesheet" href="../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../ressources/fontawesome-free-6.5.1-web/css/all.css">
 		<title>RoomManager</title>
 		
 	</head>
 	<body>
-		<div class="header">
-    		<img src="../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
-    		<h1>RoomManager</h1>
+        <div class="header">
+            <div class="header-left">
+				<div class="menu-container">
+					<button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
+				</div>
+                <img src="../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
+            </div>
+
+            <div class="header-title">
+                <h1>RoomManager</h1>
+            </div>
+
 			<form method="post" action="accueilAdmin.php">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
-				<button type="submit" class="btn-deconnexion">Se déconnecter<span class=""><span></button>
+				<button type="submit" class="deconnexion">
+					Se déconnecter
+					<i class="fas fa-right-from-bracket"></i>
+				</button>
 			</form>
+        </div>
+
+		<!--Initialement caché-->
+		<div id="sideMenu" class="side-menu">
+			<ul>
+				<li><a href="#"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="#"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
+				<li><a href="#"><i class="fas fa-door-open"></i> Salle</a></li>
+				<li><a href="#"><i class="fas fa-user"></i> Employé</a></li>
+				<li><a href="#"><i class="fas fa-download"></i> Télécharger</a></li>
+			</ul>
 		</div>
+
 		<div class="info-text">
 			Que voulez-vous faire ?
 		</div>
@@ -43,11 +68,11 @@
 			<button type="submit" class="btn-action">Gestion des salles<br/><br/><span class="fas fa-door-open"></span></button>
 			<button type="submit" class="btn-action">Gestion des employés<br/><br/><span class="fas fa-user"></span></button>
 			<button type="submit" class="btn-action">Télécharger des données<br/><br/><span class="fas fa-download"></span></button>
-			<button type="submit" class="btn-action">Gestion des réservations<br/><br/><span class="fas fa-calendar-days"></span></button>
+			<button type="submit" class="btn-action">Gestion des réservations<br/><br/><span class="fas fa-clock-rotate-left"></span></button>
 		</div>
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
 		</div>
-		<script src="engine/js/oeil.js" defer></script>
-	</body>
+		<script src="../engine/js/menu.js" defer></script>
+    </body>
 </html>
