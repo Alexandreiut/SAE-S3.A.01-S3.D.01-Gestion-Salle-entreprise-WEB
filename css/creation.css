@@ -2,8 +2,8 @@ body {
     background: linear-gradient(
         to left,
         #E3FFFE 0%,
-        #FFFFFF 40%,
-        #FFFFFF 60%,
+        #FFFFFF 20%,
+        #FFFFFF 80%,
         #E3FFFE 100%
     );
     margin: 0;
@@ -28,18 +28,17 @@ body {
 
 .logo {
     position: absolute;
-    top: -20px; /* Positionne l'image au-dessus du header */
-    left: 0px; /* Garde l'image à gauche */
-    height: 118px; /* Augmente la taille de l'image */
-    z-index: 2; /* Met l'image au-dessus du header */
-    border-radius: 0 0 30px 30px;
+    height: 90%;
+    left: 0.25%;
+    z-index: 2;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 48px; /* Augmente la taille de la police */
+    font-size: 48px;
     text-align: center;
 }
+
 
 .container {
     text-align: center;
