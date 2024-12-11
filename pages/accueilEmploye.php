@@ -53,10 +53,10 @@
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
-				<li><a href="#"><i class="fas fa-house"></i> Accueil</a></li>
-				<li><a href="#"><i class="fas fa-door-open"></i> Salle</a></li>
-				<li><a href="#"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
-				<li><a href="#"><i class="fas fa-download"></i> Télécharger</a></li>
+				<li><a href="accueilEmploye.php"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
+				<li><a href="reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
+				<li><a href="exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
 
@@ -64,9 +64,15 @@
 			Que voulez-vous faire ?
 		</div>
 		<div class="btn-container">
-			<button type="submit" class="btn-action">Gestion des salles<br/><br/><span class="fas fa-door-open"></span></button>
-			<button type="submit" class="btn-action">Gestion des réservations<br/><br/><span class="fas fa-clock-rotate-left"></span></button>
-			<button type="submit" class="btn-action">Télécharger des données<br/><br/><span class="fas fa-download"></span></button>
+			<a href="salle/consultationSalle.php">
+				<button type="submit" class="btn-action">Gestion des salles<br/><br/><span class="fas fa-door-open"></span></button>
+			</a>
+			<a href="reservation/consultationReservation.php">
+				<button type="submit" class="btn-action">Gestion des réservations<br/><br/><span class="fas fa-clock-rotate-left"></span></button>
+			</a>
+			<a href="exportation.php">
+				<button type="submit" class="btn-action">Télécharger des données<br/><br/><span class="fas fa-download"></span></button>
+			</a>				
 		</div>
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
