@@ -1,3 +1,75 @@
+:root {
+    --header-height: 11vh; /* Hauteur dynamique pour le header */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .header {
-	
+    background-color: #016401; /* Couleur du header */
+    height: var(--header-height); /* Utilisation de la variable */
+    display: flex;
+    align-items: center; /* Centre verticalement les éléments */
+    justify-content: space-between; /* Sépare les éléments horizontalement */
+    padding: 0 20px; /* Ajoute un espace intérieur */
+    box-sizing: border-box;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 20px; /* Espace entre menu et logo */
+}
+
+.menu {
+    font-size: calc(var(--header-height) * 0.6); /* Taille dynamique de l'icône */
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.logo {
+    height: 80%; /* L'image prend 80% de la hauteur du header */
+    cursor: pointer;
+}
+
+.header-title {
+    height: 100%;
+    flex-grow: 1; /* Permet au titre de s'étendre au milieu */
+    display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
+    align-items: center; /* Centre verticalement l'icône et le texte */
+    justify-content: center; /* Centre horizontalement le contenu */
+    gap: 10px; /* Espace entre l'icône et le texte */
+}
+
+.header-title i {
+    font-size: calc(var(--header-height) * 0.6); /* Taille dynamique pour l'icône */
+    color: white;
+}
+
+.header-title h1 {
+    font-size: calc(var(--header-height) * 0.5); /* Taille dynamique pour le titre */
+    margin: 0; /* Supprime les marges par défaut */
+    color: #ffffff;
+}
+
+.deconnexion {
+    display: flex;
+    align-items: center; /* Centre verticalement le bouton et l'icône */
+    justify-content: center;
+    background-color: black; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none; /* Supprime les bordures */
+    padding: 10px 20px; /* Ajoute des espaces internes */
+    border-radius: 5px; /* Coins arrondis */
+    font-size: calc(var(--header-height) * 0.2); /* Taille dynamique */
+    cursor: pointer; /* Change le curseur en main au survol */
+}
+
+.deconnexion i {
+    margin-left: 10px; /* Ajoute un espace entre le texte et l'icône */
+    font-size: calc(var(--header-height) * 0.2);
 }

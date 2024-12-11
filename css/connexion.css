@@ -1,0 +1,142 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+            to left,
+            #E3FFFE 0%,
+            #FFFFFF 40%,
+            #FFFFFF 60%,
+            #E3FFFE 100%
+    );
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    margin-top: 20px;
+    background-color: #016401;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+
+.logo {
+    position: absolute;
+    top: -20px; /* Positionne l'image au-dessus du header */
+    left: 0px; /* Garde l'image à gauche */
+    height: 118px; /* Augmente la taille de l'image */
+    z-index: 2; /* Met l'image au-dessus du header */
+    border-radius: 0 0 30px 30px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 48px; /* Augmente la taille de la police */
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.acces-text {
+    font-size: 38px; /* Taille de la police */
+    font-weight: bold; /* Met le texte en gras */
+    color: black; /* Couleur du texte */
+    text-align: center; /* Centre horizontalement */
+    margin: 20px 0; /* Espacement vertical autour du titre */
+}
+
+label {
+    font-size: 18px; /* Augmente la taille de la police du label */
+    margin-bottom: 8px; /* Ajoute un petit espace sous le label */
+    display: inline-block; /* Permet un espacement vertical précis */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px;
+    font-size: 22px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.saisie-text {
+    font-size: 24px; /* Taille de la police */
+    font-weight: bold; /* Met le texte en gras */
+    color: black; /* Couleur du texte */
+    text-align: center; /* Centre horizontalement */
+    margin: 20px 0; /* Espacement vertical autour du titre */
+}
+
+.btn-connexion {
+    background-color: #CCF5F3; /* Couleur intérieure */
+    color: black; /* Couleur du texte */
+    padding: 10px 50px; /* Taille du bouton */
+    border: 2px solid #00BBB0; /* Bordure cyan */
+    border-radius: 25px; /* Arrondir les coins */
+    font-size: 28px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Animation fluide */
+}
+
+.btn-connexion:hover {
+    background-color: #00BBB0; /* Fond cyan */
+    color: black; /* Texte reste noir */
+    border-color: #00BBB0; /* Assure une bordure homogène */
+}
+
+button.btn {
+    margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
+    background-color: #00BBB0;
+    color: white;
+    padding: 12px 24px; /* Augmente la taille du bouton */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Taille du texte du bouton */
+}
+
+button.btn:hover {
+    background-color: #009D92; /* Couleur différente au survol */
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 10px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Aligne les éléments verticalement */
+    align-items: center; /* Centre horizontalement */
+    margin-top: 20px; /* Ajoute un espacement au-dessus du formulaire */
+}
+
+form div {
+    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ */
+    width: 100%; /* Permet au champ de prendre tout l'espace disponible */
+    max-width: 300px; /* Définit une largeur maximale */
+    text-align: left; /* Garde le label aligné à gauche */
+}
