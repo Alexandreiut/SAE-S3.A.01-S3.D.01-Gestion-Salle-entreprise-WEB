@@ -12,28 +12,37 @@
             <h1>Exportation</h1>
         </div>
 
-        <div class="container">
-            <div class="acces-text">Sélectionner les éléments à exporter :</div>
-
-            <button class="btn">
-                <i class="fas fa-calendar-alt"></i> Exporter activités
+    <div class="container">
+        <!-- Ligne 1 : Deux boutons en haut -->
+        <div class="row">
+            <button class="btn-export">
+                <i class="fas fa-chalkboard-teacher"></i> Activités
             </button>
-            <button class="btn">
-                <i class="fas fa-users"></i> Exporter employés
-            </button>
-            <button class="btn">
-                <i class="fas fa-cogs"></i> Exporter réservations
-            </button>
-            <button class="btn">
-                <i class="fas fa-store"></i> Exporter salles
-            </button>
-            <button class="btn">
-                <i class="fas fa-download"></i> Tout exporter
+            <button class="btn-export">
+                <i class="fas fa-user"></i> Employés
             </button>
         </div>
 
-        <footer class="footer">
-            © 2024 Room Manager | Assistance : support@roommanager.com
-        </footer>
+        <!-- Ligne 2 : Deux boutons au milieu -->
+        <div class="row">
+            <button class="btn-export">
+                <i class="fas fa-clock-rotate-left"></i></i> Réservations
+            </button>
+            <button class="btn-export">
+                <i class="fas fa-door-open"></i> Salles
+            </button>
+        </div>
+
+        <!-- Ligne 3 : Un bouton centré tout en bas -->
+        <div class="row">
+            <button class="btn-export">
+                <i class="fas fa-download"></i> Tout Exporter
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        © 2024 Room Manager | Assistance : support@roommanager.com
+    </footer>
     </body>
 </html>
