@@ -49,7 +49,7 @@
             </div>
 
             <div class="header-title">
-                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RoomManager</h1>
+                <h1>RoomManager</h1>
             </div>
 
 			<form method="post" action="../accueilEmploye.php">
@@ -169,6 +169,9 @@
                 </div>
             </form>
         </div>
+        <div class="footer">
+			<p>2024 © RoomManager. IUT de Rodez.</p>
+		</div>
         <script src="../../engine/js/menu.js" defer></script>
     </body>
 </html>    

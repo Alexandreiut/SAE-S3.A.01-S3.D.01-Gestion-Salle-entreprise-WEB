@@ -14,4 +14,4 @@ document.addEventListener("DOMContentLoaded", function() {
         menuIcon.classList.add("fa-bars");
       }
     });
-  });
+});

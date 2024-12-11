@@ -2,12 +2,6 @@
     --header-height: 11vh; /* Hauteur dynamique pour le header */
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 .header {
     background-color: #016401; /* Couleur du header */
     height: var(--header-height); /* Utilisation de la variable */
@@ -92,12 +86,12 @@ html, body {
 }
 
 .logo {
-    margin-left : 100px;
-    height: 80%; /* L'image prend 80% de la hauteur du header */
+    height: 80%;
     cursor: pointer;
 }
 
 .header-title {
+    text-align : center;
     height: 100%;
     flex-grow: 1; /* Permet au titre de s'étendre au milieu */
     display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
@@ -112,7 +106,6 @@ html, body {
 }
 
 .header-title h1 {
-    text-align : center;
     font-size: calc(var(--header-height) * 0.5); /* Taille dynamique pour le titre */
     color: #ffffff;
 }
