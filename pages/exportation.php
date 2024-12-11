@@ -43,7 +43,7 @@
 
             <!-- Ligne 3 : Un bouton centré tout en bas -->
             <div class="row justify-content-center">
-                <div class="col-12 col-md-6 text-center">
+                <div class="col-12 col-md- text-center">
                     <button class="btn-export w-100">
                         <i class="fas fa-download"></i> Tout Exporter
                     </button>
