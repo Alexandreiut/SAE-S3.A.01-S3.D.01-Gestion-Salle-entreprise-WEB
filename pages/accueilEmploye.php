@@ -44,7 +44,7 @@
 			<form method="post" action="accueilEmploye.php">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
 				<button type="submit" class="deconnexion">
-					Se déconnecter
+					<span class="deconnexion-text">Se déconnecter</span>
 					<i class="fas fa-right-from-bracket"></i>
 				</button>
 			</form>
@@ -73,6 +73,20 @@
 			<a href="exportation.php">
 				<button type="submit" class="btn-action">Télécharger des données<br/><br/><span class="fas fa-download"></span></button>
 			</a>				
+		</div>
+		<div id="footMenu" class="foot-menu d-md-none">
+			<div class = "container bott-menu-container">
+				<div class = "row">
+					<table>
+						<tr>
+							<td><a href="accueilEmploye.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+							<td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+							<td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+							<td><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
