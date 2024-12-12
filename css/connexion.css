@@ -1,3 +1,11 @@
+:root {
+    --font-size: 100px;
+}
+
+:root {
+    --button-size: 100px;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -179,7 +187,7 @@ input[type="password"] {
 .btn-action {
     background-color: #CCF5F3;
     color: black;
-    padding: 10px 0;
+    padding: 10px 20px;
     border: 2px solid #00BBB0;
     border-radius: 25px;
     font-size: 32px;
@@ -189,7 +197,7 @@ input[type="password"] {
     width: 300px;
     height: 500px;
     margin-top: 30px;
-    margin-left: 50px;
+    /*margin-left: 50px;*/
     text-align: center;
 }
 
@@ -217,4 +225,28 @@ input[type="password"] {
     color: black;
     text-align: center;
     margin-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+    .info-text {
+        font-size: calc(var(--font-size) * 0.4);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --font-size: 50px; /* Réduction de la taille de la police pour les petits écrans */
+        --button-size: 60px; /* Réduction de la taille des boutons pour les petits écrans */
+    }
+
+    .btn-action {
+        font-size: calc(var(--font-size) * 0.33);
+        padding: calc(var(--button-size) / 3) calc(var(--button-size) / 2);
+        height: auto; /* Hauteur automatique */
+        width: calc(var(--button-size) * 3.1);
+    }
+
+    .btn-action .fas {
+        font-size: calc(var(--font-size) * 0.5);
+    }
 }

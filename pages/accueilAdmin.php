@@ -44,7 +44,7 @@
 			<form method="post" action="accueilAdmin.php">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
 				<button type="submit" class="deconnexion">
-					Se déconnecter
+					<span class="deconnexion-text">Se déconnecter</span>
 					<i class="fas fa-right-from-bracket"></i>
 				</button>
 			</form>
@@ -79,13 +79,17 @@
 			</a>
 		</div>
 		<div id="footMenu" class="foot-menu d-md-none">
-			<div class = "container-fluid bott-menu-container">
+			<div class = "container bott-menu-container">
 				<div class = "row">
-					<span class = "col-2 offset-1"><a href="accueilAdmin.php"><button class="menuBouton"><i class="fas fa-house"></i> Accueil</button></a></span>
-					<span class = "col-2"><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i> Salle</button></a></span>
-					<span class = "col-2"><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i> Réservation</button></a></span>
-					<span class = "col-2"><a href="employe/consultationEmploye.php"><button class="menuBouton"><i class="fas fa-user"></i> Employé</button></a></span>
-					<span class = "col-2"><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i> Télécharger</button></a></span>
+					<table>
+						<tr>
+							<td><a href="accueilAdmin.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+							<td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+							<td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+							<td><a href="employe/consultationEmploye.php"><button class="menuBouton"><i class="fas fa-user"></i><span>Employé</span></button></a></td>
+							<td><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
