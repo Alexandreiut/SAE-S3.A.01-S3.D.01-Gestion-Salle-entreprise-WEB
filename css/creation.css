@@ -57,7 +57,7 @@ button.btn:hover {
 .cadre_principal {
     font-size : 1.5em;
     padding : 10px;
-    text-align : center;
+    text-align : left;
     width : 100%;
 }
 
@@ -73,19 +73,6 @@ button.btn:hover {
 .cadre_principal select {
     text-align : center;
     border-radius : 0px;
-}
-
-form {
-    display: flex;
-    flex-direction: column; /* Aligne les éléments verticalement */
-    align-items: center; /* Centre horizontalement */
-    margin-top: 20px; /* Ajoute un espacement au-dessus du formulaire */
-}
-
-form div {
-    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ */
-    width: 100%; /* Permet au champ de prendre tout l'espace disponible */
-    text-align: left; /* Garde le label aligné à gauche */
 }
 
 .rouge {

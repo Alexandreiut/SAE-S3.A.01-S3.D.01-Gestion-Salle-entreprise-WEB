@@ -157,13 +157,13 @@
                                 ?>
                                     <!-- mot de passe -->
                                     <label for = "confirm_mdp">Confirmation mot de Passe : <span class = "rouge">*</span></label><br>
-                                    <input type = "password" name = "confirm_mdp" id = "confirm_mdp" required placeholder = "Confirmez le mot de passe du compte"
+                                    <input type = "password" name = "confirm_mdp" id = "confirm_mdp" required placeholder = "Confirmez le mot de passe"
                                     <?php if (isset($_POST['confirm_mdp'])) { echo 'value = "'.htmlspecialchars($_POST['confirm_mdp']).'"'; } ?> ><br><br>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class = "col-6 offset-xl-4 offset-3">
+                    <div class = "col-6 offset-3">
                         <button type="submit" class="btn-ajouter"><span class = "fas fa-plus"></span><span class = "fas fa-user"></span> Ajouter l'employé</button>
                     </div>
                 </div>
