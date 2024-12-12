@@ -68,7 +68,7 @@ body {
     justify-content: center;
     gap: 15px;
     transition: all 0.3s ease;
-
+    position: relative;
 }
 
 .btn-export:hover {
@@ -77,8 +77,39 @@ body {
     border-color: #00BBB0;
 }
 
+.btn-export:focus {
+    outline: 3px solid #00BBB0;
+    background-color: #99ECE7;
+}
+
+.btn-export:active {
+    background-color: #008F87;
+    transform: scale(0.95);
+}
+
 .btn-export i {
     font-size: 24px;
+}
+
+.btn-export[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 14px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.btn-export[title]:hover::after {
+    opacity: 1;
 }
 
 .footer {
