@@ -78,6 +78,17 @@
 				<button type="submit" class="btn-action">Télécharger des données<br/><br/><span class="fas fa-download"></span></button>
 			</a>
 		</div>
+		<div id="footMenu" class="foot-menu d-md-none">
+			<div class = "container-fluid bott-menu-container">
+				<div class = "row">
+					<span class = "col-2 offset-1"><a href="accueilAdmin.php"><button class="menuBouton"><i class="fas fa-house"></i> Accueil</button></a></span>
+					<span class = "col-2"><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i> Salle</button></a></span>
+					<span class = "col-2"><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i> Réservation</button></a></span>
+					<span class = "col-2"><a href="employe/consultationEmploye.php"><button class="menuBouton"><i class="fas fa-user"></i> Employé</button></a></span>
+					<span class = "col-2"><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i> Télécharger</button></a></span>
+				</div>
+			</div>
+		</div>
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
 		</div>

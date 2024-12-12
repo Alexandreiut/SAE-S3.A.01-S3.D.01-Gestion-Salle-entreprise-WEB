@@ -41,6 +41,15 @@ html, body {
 
 }
 
+.bott-menu-container{
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Optionnel, pour centrer le bouton horizontalement */
+    height: var(--header-height); /* Ta hauteur fixe pour l'en-tête */
+    width: 50px;
+
+}
+
 #menuIcon {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -84,6 +93,15 @@ html, body {
 /* Option pour le fond lorsque le menu est ouvert (transparence) */
 .side-menu.open {
     left: 0; /* Le menu est déplacé à la position visible */
+}
+
+.foot-menu {
+    text-align: center;
+    position: fixed;
+    bottom : 0px;
+    background-color: #D9D9D9;
+    transition: left 0.3s ease;
+    color: black;
 }
 
 .bouton-menu{
@@ -138,3 +156,10 @@ html, body {
     margin-left: 10px; /* Ajoute un espace entre le texte et l'icône */
     font-size: calc(var(--header-height) * 0.2);
 }
+
+.menuBouton{
+    border: none;
+    background: none;
+    font-size: 1.5em;
+}
+
