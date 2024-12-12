@@ -26,9 +26,69 @@ html, body {
 }
 
 .menu {
-    font-size: calc(var(--header-height) * 0.6); /* Taille dynamique de l'icône */
-    color: #ffffff;
-    cursor: pointer;
+    font-size: calc(var(--header-height) * 0.6);
+    color: #ffffff; /* Couleur par défaut */
+    cursor: pointer; /* Curseur au survol */
+    transition: transform 0.3s ease, color 0.3s ease; /* Animation fluide */
+}
+
+.menu-container{
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Optionnel, pour centrer le bouton horizontalement */
+    height: var(--header-height); /* Ta hauteur fixe pour l'en-tête */
+    width: 50px;
+
+}
+
+#menuIcon {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#menuIcon.fa-bars {
+    transform: rotate(0deg);
+}
+  
+#menuIcon.fa-xmark {
+    transform: rotate(180deg)
+}
+
+.side-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: -250px;
+    width: 250px;
+    height: calc(100% - var(--header-height));
+    background-color: #333;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Liens dans le menu */
+.side-menu ul {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.side-menu ul li {
+    margin: 20px 0;
+}
+
+.side-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Option pour le fond lorsque le menu est ouvert (transparence) */
+.side-menu.open {
+    left: 0; /* Le menu est déplacé à la position visible */
+}
+
+.bouton-menu{
+    background-color: transparent;
+    border: none;
 }
 
 .logo {
@@ -69,7 +129,35 @@ html, body {
     cursor: pointer; /* Change le curseur en main au survol */
 }
 
+.deconnexion:hover {
+    background-color: #222;
+    transition: all 0.3s ease;
+}
+
 .deconnexion i {
     margin-left: 10px; /* Ajoute un espace entre le texte et l'icône */
     font-size: calc(var(--header-height) * 0.2);
+}
+
+body {
+    background: linear-gradient(
+        to left,
+        #E3FFFE 0%,
+        #FFFFFF 20%,
+        #FFFFFF 80%,
+        #E3FFFE 100%
+    );
+    margin: 0;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 10px 0;
 }
