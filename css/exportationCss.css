@@ -91,8 +91,13 @@ body {
     font-size: 24px;
 }
 
-.btn-export[title]:hover::after {
-    content: attr(title);
+/* Pour afficher l'infobulle personnalisée et supprimer celle par défaut */
+/*.btn-export[title]:hover {
+    pointer-events: none; /* Désactive l'infobulle native 
+}*/
+
+.btn-export[desc]:hover::after {
+    content: attr(desc);
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
     color: white;
@@ -108,7 +113,7 @@ body {
     transition: opacity 0.2s ease-in-out;
 }
 
-.btn-export[title]:hover::after {
+.btn-export[desc]:hover::after {
     opacity: 1;
 }
 
