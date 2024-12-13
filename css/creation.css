@@ -12,9 +12,13 @@ body {
     justify-content: center;
 }
 
-.container {
+#container-general {
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Aligner à droite*/
+    align-items: flex-start;  /* Aligner en haut */
 }
 
 .btn-ajouter {
@@ -79,26 +83,12 @@ button.btn:hover {
     color : red;
 }
 
-<<<<<<< HEAD
-form div {
-    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ */
-    width: 100%; /* Permet au champ de prendre tout l'espace disponible */
-    text-align: left; /* Garde le label aligné à gauche */
-}
+/*form div {
+    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ     
+    width: 100%; /* Permet au champ de prendre tout l'espace disponible 
+    text-align: left; /* Garde le label aligné à gauche 
+}*/
 
-=======
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-    padding: 5px 0;
-}
->>>>>>> 53d6e2b9b59970a0dade2104bf739f173bb5177d
 .inputText {
     font-size: 16px; /* Taille du texte */
     width: 150px;     /* Largeur de l'input (100% de l'élément parent) */
@@ -168,14 +158,6 @@ form div {
     display: block;
 }
 
-/* Container des checkboxes avec alignement à droite et en haut */
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end; /* Aligner à droite */
-    align-items: flex-start;  /* Aligner en haut */
-}
-
 .erreurInput{
     border: 3px solid red;
 }
@@ -208,13 +190,11 @@ form div {
     padding: 10px 0;
 }
 
-<<<<<<< HEAD
 .bouton_cadre {
 
     text-align:  center;
+}
 
-=======
 .fas {
     margin : 3px;
->>>>>>> 53d6e2b9b59970a0dade2104bf739f173bb5177d
 }

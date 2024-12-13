@@ -131,7 +131,7 @@
 				<li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
-        <div class = "container">
+        <div class = "container" id="container-general">
             <form action = "" method = "post">
                 <div class = "row">
                     <div class = "col-lg-6 col-12">
@@ -305,11 +305,17 @@
                         }
                         ?>
                         l'employé</button>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
                 </div>
             </form>
         </div>
-        <div id="footMenu" class="foot-menu"><!--d-md-none-->
+        <div id="footMenu" class="foot-menu d-md-none">
 			<div class = "container bott-menu-container">
 				<div class = "row">
 					<table>
