@@ -31,7 +31,7 @@
 
         $tabBoolean = [];
         $tabBoolean[0] = $stmt->fetch()['COUNT(*)'] != 0;
-
+        $pwd = md5($pwd);
         $requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login AND motDePasse = md5(:pwd)";
         $stmt = $pdo->prepare($requete);
         $stmt->bindParam(':login', $login);
@@ -43,9 +43,19 @@
 		return $tabBoolean;
 	}
 
-    function deconnexion() {
+    function deconnexion($chemin) {
 		session_destroy();
-		header('Location: ../index.php');
+		header('Location: '.$chemin);
 		exit();
 	}
+    function getRole($pdo, $login){
+        $requete = "SELECT role FROM utilisateur WHERE login = :login";
+        
+        $stmt = $pdo->prepare($requete);
+        $stmt->bindParam(':login', $login);
+        
+        $stmt->execute();
+        
+        return $stmt->fetch()["role"];
+    }
 ?>
