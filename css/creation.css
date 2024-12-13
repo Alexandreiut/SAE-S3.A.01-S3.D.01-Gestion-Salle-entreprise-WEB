@@ -1,4 +1,3 @@
-
 body {
     background: linear-gradient(
         to left,
@@ -11,12 +10,15 @@ body {
     font-family: Arial, sans-serif;
     align-items: center;
     justify-content: center;
-    
 }
 
-.container {
+#container-general {
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Aligner à droite*/
+    align-items: flex-start;  /* Aligner en haut */
 }
 
 .btn-ajouter {
@@ -81,17 +83,12 @@ button.btn:hover {
     color : red;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-    padding: 5px 0;
-}
+/*form div {
+    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ     
+    width: 100%; /* Permet au champ de prendre tout l'espace disponible 
+    text-align: left; /* Garde le label aligné à gauche 
+}*/
+
 .inputText {
     font-size: 16px; /* Taille du texte */
     width: 150px;     /* Largeur de l'input (100% de l'élément parent) */
@@ -161,14 +158,6 @@ button.btn:hover {
     display: block;
 }
 
-/* Container des checkboxes avec alignement à droite et en haut */
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end; /* Aligner à droite */
-    align-items: flex-start;  /* Aligner en haut */
-}
-
 .erreurInput{
     border: 3px solid red;
 }
@@ -199,6 +188,11 @@ button.btn:hover {
     border-radius: 5px;
     cursor: pointer;
     padding: 10px 0;
+}
+
+.bouton_cadre {
+
+    text-align:  center;
 }
 
 .fas {
