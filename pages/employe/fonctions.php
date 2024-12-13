@@ -1,5 +1,4 @@
 <?php
-    
     function connexionBD() {
         $host='localhost';
         $db='roommanager';
@@ -65,5 +64,28 @@
         }
         
         return $verifications;
+    }
+    
+    function modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp) {
+        
+        $requete = "UPDATE utilisateur
+                    SET
+                        nom = :nom,
+                        prenom = :prenom,
+                        telephone = NULLIF(:telephone, ''),
+                        login = :login,
+                        motDePasse = md5(:motDePasse)
+                    WHERE identifiant = :id";
+        
+        $stmt = $pdo->prepare($requete);
+        
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':telephone', $telephone);
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':motDePasse', $mdp);
+        $stmt->bindParam(':id', $id);
+        
+        $stmt->execute();
     }
 ?>
