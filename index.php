@@ -13,7 +13,7 @@
 		if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {
 			header('Location: pages/accueilEmploye.php');
 			exit();
-		}
+		} //TODO
 		
 		$login = "";
 		$login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
