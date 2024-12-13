@@ -2,6 +2,12 @@
     --header-height: 11vh; /* Hauteur dynamique pour le header */
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .header {
     background-color: #016401; /* Couleur du header */
     height: var(--header-height); /* Utilisation de la variable */
@@ -86,7 +92,7 @@
 }
 
 .logo {
-    height: 80%;
+    height: 80%; /* L'image prend 80% de la hauteur du header */
     cursor: pointer;
 }
 
@@ -107,6 +113,7 @@
 
 .header-title h1 {
     font-size: calc(var(--header-height) * 0.5); /* Taille dynamique pour le titre */
+    margin: 0; /* Supprime les marges par défaut */
     color: #ffffff;
 }
 
