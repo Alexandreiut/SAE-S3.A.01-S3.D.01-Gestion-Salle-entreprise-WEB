@@ -81,12 +81,6 @@ button.btn:hover {
     color : red;
 }
 
-form div {
-    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ */
-    width: 100%; /* Permet au champ de prendre tout l'espace disponible */
-    text-align: left; /* Garde le label aligné à gauche */
-}
-
 .footer {
     position: fixed;
     bottom: 0;
@@ -205,4 +199,8 @@ form div {
     border-radius: 5px;
     cursor: pointer;
     padding: 10px 0;
+}
+
+.fas {
+    margin : 3px;
 }

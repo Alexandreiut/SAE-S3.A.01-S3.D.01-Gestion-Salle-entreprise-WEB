@@ -2,6 +2,20 @@
 
     session_start();
     
+    //TESTS
+    $_SESSION['mode'] = 'modification'; //test
+    $_SESSION['id'] = 8;
+    $_SESSION['nom'] = 'a';
+    $_SESSION['prenom'] = 'a';
+    $_SESSION['telephone'] = 4235;
+    $_SESSION['login'] = 'a';
+    $_SESSION['mdp'] = 'a';
+    //TESTS
+    
+    if (!isset($_SESSION['mode'])) {
+        header('Location: consultationEmploye.php');
+    }
+    
     try {
         require('fonctions.php');
         
@@ -12,27 +26,62 @@
                 
                 $pdo = connexionBD();
                 
-                $nom = htmlspecialchars($_POST['nom']);
-                $prenom = htmlspecialchars($_POST['prenom']);
-                $telephone = htmlspecialchars($_POST['telephone']);
-                $login = htmlspecialchars($_POST['login']);
-                $mdp = htmlspecialchars($_POST['mdp']);
+                // test présence éléments nécessaires
+                if (!isset($_POST['nom']) || !isset($_POST['prenom'])
+                    || !isset($_POST['telephone']) || !isset($_POST['login'])
+                    || !isset($_POST['mdp'])) {
+                        
+                    throw new Exception('informations manquantes pour ajout');
+                }
                 
-                ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp);
-                $_SESSION['ajout_employe'] = true;
+                if ($_SESSION['mode'] == 'ajout') {
+                    
+                    $nom = htmlspecialchars($_POST['nom']);
+                    $prenom = htmlspecialchars($_POST['prenom']);
+                    $telephone = htmlspecialchars($_POST['telephone']);
+                    $login = htmlspecialchars($_POST['login']);
+                    $mdp = htmlspecialchars($_POST['mdp']);
+                    
+                    ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp);
+                    $_SESSION['ajout_employe'] = true;
+                } else {
+                    
+                    // test présence id
+                    if (!isset($_SESSION['id'])) {
+                            
+                        throw new Exception('informations manquantes pour modification');
+                    }
+                    
+                    $id = htmlspecialchars($_SESSION['id']);
+                    $nom = htmlspecialchars($_POST['nom']);
+                    $prenom = htmlspecialchars($_POST['prenom']);
+                    $telephone = htmlspecialchars($_POST['telephone']);
+                    $login = htmlspecialchars($_POST['login']);
+                    $mdp = htmlspecialchars($_POST['mdp']);
+                    
+                    modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp);
+                    $_SESSION['modif_employe'] = true;
+                }
                 header('Location: consultationEmploye.php');
             }
         }
         
     } catch (Exception $e) {
-        echo $e;
+        //echo $e;
         //header('Location: erreurBD.php');
     }
 ?>
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>RoomManager - Création employés</title>
+        <title>RoomManager - <?php  if ($_SESSION['mode'] == 'ajout') {
+                                        echo 'Création';
+                                    } else {
+                                        echo 'Modification';
+                                    }
+                              ?>
+                            employé
+        </title>
         <meta name="Description" content="" />
         <link rel="stylesheet" href="../../css/bandeau.css" />
         <link rel="stylesheet" href="../../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
@@ -49,7 +98,18 @@
             </div>
 
             <div class="header-title">
-                <h1>RoomManager</h1>
+                <h1>
+                    <?php 
+                        echo '<span class = "fas fa-';
+                        if ($_SESSION['mode'] == 'ajout') {
+                            echo 'plus">';
+                        } else {
+                            echo 'edit">';
+                        }
+                    ?>
+                    </span>
+                    <span class = "fas fa-user"></span> Employé
+                </h1>
             </div>
 
 			<form method="post" action="../accueilEmploye.php">
@@ -89,7 +149,18 @@
                                     <!-- nom -->
                                     <label for = "nom">Nom : <span class = "rouge">*</span></label><br>
                                     <input type = "text" name = "nom" id = "nom" required placeholder = "Entrez le nom de l'employé" 
-                                     <?php if (isset($_POST['nom'])) { echo 'value = "'.htmlspecialchars($_POST['nom']).'"'; } ?> ><br><br>
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['nom'])) {
+                                            echo htmlspecialchars($_POST['nom']);
+                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['nom'])) {
+                                            echo $_SESSION['nom'];
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
@@ -101,7 +172,18 @@
                                     <!-- prénom -->
                                     <label for = "prenom">Prénom : <span class = "rouge">*</span></label><br>
                                     <input type = "text" name = "prenom" id = "prenom" required placeholder = "Entrez le prénom de l'employé"
-                                    <?php if (isset($_POST['prenom'])) { echo 'value = "'.htmlspecialchars($_POST['prenom']).'"'; } ?> ><br><br>
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['prenom'])) {
+                                            echo htmlspecialchars($_POST['prenom']);
+                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['prenom'])) {
+                                            echo $_SESSION['prenom'];
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
@@ -113,7 +195,18 @@
                                     <!-- téléphone -->
                                     <label for = "telephone">Téléphone (optionnel) : </label><br>
                                     <input type = "text" maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé"
-                                    <?php if (isset($_POST['telephone'])) { echo 'value = "'.htmlspecialchars($_POST['telephone']).'"'; } ?> ><br><br>
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['telephone'])) {
+                                            echo htmlspecialchars($_POST['telephone']);
+                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['telephone'])) {
+                                            echo $_SESSION['telephone'];
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +227,18 @@
                                     <!-- login -->
                                     <label for = "login">Identifiant : <span class = "rouge">*</span></label><br>
                                     <input type = "text" name = "login" id = "login" required placeholder = "Entrez l'idenfiant du compte"
-                                    <?php if (isset($_POST['login'])) { echo 'value = "'.htmlspecialchars($_POST['login']).'"'; } ?> ><br><br>
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['login'])) {
+                                            echo htmlspecialchars($_POST['login']);
+                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['login'])) {
+                                            echo $_SESSION['login'];
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
@@ -146,7 +250,18 @@
                                     <!-- mot de passe -->
                                     <label for = "mdp">Mot de Passe : <span class = "rouge">*</span></label><br>
                                     <input type = "password" name = "mdp" id = "mdp" required placeholder = "Entrez le mot de passe du compte"
-                                    <?php if (isset($_POST['mdp'])) { echo 'value = "'.htmlspecialchars($_POST['mdp']).'"'; } ?> ><br><br>
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['mdp'])) {
+                                            echo htmlspecialchars($_POST['mdp']);
+                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['mdp'])) {
+                                            echo $_SESSION['mdp'];
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
@@ -158,13 +273,37 @@
                                     <!-- mot de passe -->
                                     <label for = "confirm_mdp">Confirmation mot de Passe : <span class = "rouge">*</span></label><br>
                                     <input type = "password" name = "confirm_mdp" id = "confirm_mdp" required placeholder = "Confirmez le mot de passe"
-                                    <?php if (isset($_POST['confirm_mdp'])) { echo 'value = "'.htmlspecialchars($_POST['confirm_mdp']).'"'; } ?> ><br><br>
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['confirm_mdp'])) {
+                                            echo htmlspecialchars($_POST['confirm_mdp']);
+                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['mdp'])) {
+                                            echo $_SESSION['mdp'];
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class = "col-6 offset-3">
-                        <button type="submit" class="btn-ajouter"><span class = "fas fa-plus"></span><span class = "fas fa-user"></span> Ajouter l'employé</button>
+                        <button type="submit" class="btn-ajouter">
+                        <?php 
+                        echo '<span class = "fas fa-';
+                        if ($_SESSION['mode'] == 'ajout') {
+                            echo 'plus"></span>';
+                            echo '<span class = "fas fa-user"></span>';
+                            echo ' Ajouter';
+                        } else {
+                            echo 'edit"></span>';
+                            echo '<span class = "fas fa-user"></span>';
+                            echo ' Modifier';
+                        }
+                        ?>
+                        l'employé</button>
                     </div>
                 </div>
             </form>
