@@ -45,17 +45,17 @@
 				<div class="menu-container">
 					<button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
 				</div>
-				<img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
+                <img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
             </div>
 
             <div class="header-title">
                 <h1>RoomManager</h1>
             </div>
 
-			<form method="post" action="../accueilEmploye.php">
+			<form method="post" action="accueilAdmin.php">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
 				<button type="submit" class="deconnexion">
-					Se déconnecter
+					<span class="deconnexion-text">Se déconnecter</span>
 					<i class="fas fa-right-from-bracket"></i>
 				</button>
 			</form>
@@ -64,10 +64,11 @@
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
-				<li><a href="#"><i class="fas fa-house"></i> Accueil</a></li>
-				<li><a href="#"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
-				<li><a href="#"><i class="fas fa-door-open"></i> Salle</a></li>
-				<li><a href="#"><i class="fas fa-download"></i> Télécharger</a></li>
+				<li><a href="../accueilAdmin.php"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="../salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
+				<li><a href="../reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
+				<li><a href="../employe/consultationEmploye.php"><i class="fas fa-user"></i> Employé</a></li>
+				<li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
         <div class = "container">
@@ -77,7 +78,7 @@
                         <div class = "cadre_principal">
                             <div class = "row">
                                 <div class = "col-12 titre">
-                                    <h1>Informations personnelles</h1>
+                                    <h1>Informations<br/>personnelles</h1>
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
@@ -122,7 +123,7 @@
                         <div class = "cadre_principal col-6">
                             <div class = "row">
                                 <div class = "col-12 titre">
-                                    <h1>Informations du compte</h1>
+                                    <h1>Informations du<br/>compte</h1>
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
@@ -158,19 +159,31 @@
                                     <!-- mot de passe -->
                                     <label for = "confirm_mdp">Confirmation mot de Passe : <span class = "rouge">*</span></label><br>
                                     <input type = "password" name = "confirm_mdp" id = "confirm_mdp" required placeholder = "Confirmez le mot de passe"
-                                    <?php if (isset($_POST['confirm_mdp'])) { echo 'value = "'.htmlspecialchars($_POST['confirm_mdp']).'"'; } ?> ><br><br>
+                                    <?php if (isset($_POST['confirm_mdp'])) { echo 'value = "'.htmlspecialchars($_POST['confirm_mdp']).'"'; } ?> >
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class = "col-6 offset-3">
+                    <div class = "col-6 offset-3 bouton_cadre">
                         <button type="submit" class="btn-ajouter"><span class = "fas fa-plus"></span><span class = "fas fa-user"></span> Ajouter l'employé</button>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="footer">
-			<p>2024 © RoomManager. IUT de Rodez.</p>
+        <div id="footMenu" class="foot-menu"><!--d-md-none-->
+			<div class = "container bott-menu-container">
+				<div class = "row">
+					<table>
+						<tr>
+							<td><a href="accueilAdmin.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+							<td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+							<td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+							<td><a href="employe/consultationEmploye.php"><button class="menuBouton"><i class="fas fa-user"></i><span>Employé</span></button></a></td>
+							<td><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
         <script src="../../engine/js/menu.js" defer></script>
     </body>
