@@ -97,6 +97,7 @@ html, body {
 }
 
 .header-title {
+    text-align : center;
     height: 100%;
     flex-grow: 1; /* Permet au titre de s'étendre au milieu */
     display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
