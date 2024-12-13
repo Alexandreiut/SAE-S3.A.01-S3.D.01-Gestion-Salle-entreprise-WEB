@@ -1,3 +1,7 @@
+-- CREATION DATABASE
+CREATE DATABASE IF NOT EXISTS RoomManager DEFAULT CHARACTER SET utf8mb4  COLLATE utf8mb4_general_ci;
+USE RoomManager;
+
 -- SUPPRESSION DES TABLES EXISTANTES (SI ELLES EXISTENT)
 DROP TABLE IF EXISTS `reservation`;
 DROP TABLE IF EXISTS `logiciel_salle`;
@@ -27,7 +31,8 @@ CREATE TABLE `salle` (
   `ecranXXL` varchar(3) NOT NULL,
   `nombreOrdinateur` int(5) NOT NULL,
   `typeOrdinateur` varchar(70) NOT NULL,
-  `imprimante` varchar(3) NOT NULL
+  `imprimante` varchar(3) NOT NULL,
+  UNIQUE(`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `logiciel_salle` (
@@ -39,7 +44,7 @@ CREATE TABLE `utilisateur` (
   `identifiant` int(7) NOT NULL,
   `nom` varchar(70) NOT NULL,
   `prenom` varchar(70) NOT NULL,
-  `telephone` char(10) NOT NULL,
+  `telephone` char(4),
   `role` varchar(70) NOT NULL,
   `login` varchar(70) NOT NULL,
   `motDePasse` varchar(70) NOT NULL
