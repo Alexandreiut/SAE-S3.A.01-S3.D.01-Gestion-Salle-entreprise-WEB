@@ -8,25 +8,25 @@
         <link rel="stylesheet" href="../../css/consultations.css" />
     </head>
     <body>
-        <!-- Barre de navigation -->
         <div class="header">
-            <!-- Section gauche -->
             <div class="header-left">
-                <i class="fa-solid fa-bars menu" alt="menu" id="menu"></i>
-                <img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
+				<div class="menu-container">
+					<button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
+				</div>
+				<img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
             </div>
 
-            <!-- Titre au centre -->
             <div class="header-title">
-                <i class="fa-solid fa-user"></i>
-                <h1>Employé</h1>
+                <h1>RoomManager</h1>
             </div>
 
-            <!-- Bouton à droite -->
-            <button type="submit" class="deconnexion">
-                Se déconnecter
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </button>
+			<form method="post" action="../accueilEmploye.php">
+				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
+				<button type="submit" class="deconnexion">
+					Se déconnecter
+					<i class="fas fa-right-from-bracket"></i>
+				</button>
+			</form>
         </div>
 
         <div class="container">
@@ -169,6 +169,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Navigation page et ajout salle -->
             <div class="row mt-3">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="navigation">
@@ -186,21 +188,21 @@
                 </div>
             </div>
 
-
-
-            <!--            <div class="container-nav-page mt-3">-->
-<!--                <div class="btn-precedent">-->
-<!--                    Précedent-->
-<!--                </div>-->
-<!--                <div class="page-actuelle">-->
-<!--                    12/50-->
-<!--                </div>-->
-<!--                <div class="btn-precedent">-->
-<!--                    Suivant-->
-<!--                </div>-->
-<!--            </div>-->
-
+        <!-- menu pour téléphone -->
         </div>
-
+		<!--Initialement caché-->
+		<div id="sideMenu" class="side-menu">
+			<ul>
+				<li><a href="#"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="#"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
+				<li><a href="#"><i class="fas fa-door-open"></i> Salle</a></li>
+				<li><a href="#"><i class="fas fa-download"></i> Télécharger</a></li>
+			</ul>
+		</div>
+        
+        <div class="footer">
+			<p>2024 © RoomManager. IUT de Rodez.</p>
+		</div>
+        <script src="../../engine/js/menu.js" defer></script>
     </body>
 </html>
