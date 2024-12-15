@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../../ressources/fontawesome-free-6.5.1-web/css/all.min.css">
         <link rel="stylesheet" href="../../css/consultations.css" />
+        <link rel="stylesheet" href="../../css/bandeau.css" />
     </head>
     <body>
         <div class="header">
@@ -174,9 +175,15 @@
             <div class="row mt-3">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="navigation">
-                        <button class="btn">⬅ Précédent</button>
+                        <button class="btn">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Précédent
+                        </button>
                         <span class="page-info">1/10</span>
-                        <button class="btn">Suivant ➡</button>
+                        <button class="btn">
+                            Suivant
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1 container-btn-add">
@@ -187,9 +194,9 @@
                     </button>
                 </div>
             </div>
+        </div>
 
         <!-- menu pour téléphone -->
-        </div>
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
