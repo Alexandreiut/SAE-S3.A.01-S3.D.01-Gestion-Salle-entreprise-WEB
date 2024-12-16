@@ -3,13 +3,13 @@
     session_start();
     
     //TESTS
-    $_SESSION['mode'] = 'modification'; //test
-    $_SESSION['id'] = 8;
-    $_SESSION['nom'] = 'a';
-    $_SESSION['prenom'] = 'a';
-    $_SESSION['telephone'] = 4235;
-    $_SESSION['login'] = 'a';
-    $_SESSION['mdp'] = 'a';
+    // $_SESSION['mode'] = 'modification'; //test
+    // $_SESSION['id'] = 8;
+    // $_SESSION['nom'] = 'a';
+    // $_SESSION['prenom'] = 'a';
+    // $_SESSION['telephone'] = 4235;
+    // $_SESSION['login'] = 'a';
+    // $_SESSION['mdp'] = 'a';
     //TESTS
     
     if (!isset($_SESSION['mode'])) {
