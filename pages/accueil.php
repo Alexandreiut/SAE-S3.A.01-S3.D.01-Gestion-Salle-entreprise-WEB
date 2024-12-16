@@ -27,24 +27,26 @@
 	</head>
 	<body>
         <div class="header">
-            <div class="header-left">
+            <div class="col-lg-2 header-left">
 				<div class="menu-container">
 					<button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
 				</div>
 				<img src="../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
             </div>
 
-            <div class="header-title">
+            <div class="offset-lg-2 col-lg-4 header-title">
                 <h1>RoomManager</h1>
             </div>
 
-			<form method="post" action="accueil.php">
-				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
-				<button type="submit" class="deconnexion">
-					<span class="deconnexion-text">Se déconnecter</span>
-					<i class="fas fa-right-from-bracket"></i>
-				</button>
-			</form>
+            <div class="offset-lg-2 col-lg-2 container-deconnexion">
+                <form method="post" action="accueil.php">
+                    <input type="hidden" name="deconnexion" id="deconnexion" value="1">
+                    <button type="submit" class="deconnexion">
+                        <span class="deconnexion-text">Se déconnecter</span>
+                        <i class="fas fa-right-from-bracket"></i>
+                    </button>
+                </form>
+            </div>
         </div>
 
 		<!--Initialement caché-->

@@ -231,6 +231,10 @@ input[type="password"] {
     .info-text {
         font-size: calc(var(--font-size) * 0.4);
     }
+
+    .footer {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 768px) {
