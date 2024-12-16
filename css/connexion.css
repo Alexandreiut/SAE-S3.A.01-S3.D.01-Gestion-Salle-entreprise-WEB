@@ -104,7 +104,7 @@ input[type="password"] {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease; /* Animation fluide */
+    transition: all 0.3s ease;
 }
 
 .btn-connexion:hover {
