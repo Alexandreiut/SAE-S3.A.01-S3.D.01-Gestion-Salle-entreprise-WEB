@@ -2,6 +2,10 @@
     --header-height: 11vh; /* Hauteur dynamique pour le header */
 }
 
+:root {
+    --footer-height: 100px;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -41,6 +45,13 @@ html, body {
 
 }
 
+.bott-menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Optionnel, pour centrer le bouton horizontalement */
+    height: 11%;
+}
+
 #menuIcon {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -61,7 +72,7 @@ html, body {
     height: calc(100% - var(--header-height));
     background-color: #333;
     transition: left 0.3s ease;
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);*/
 }
 
 /* Liens dans le menu */
@@ -86,6 +97,20 @@ html, body {
     left: 0; /* Le menu est déplacé à la position visible */
 }
 
+.foot-menu {
+    display: flex;
+    justify-content: space-between; /* Écarts uniformes entre les boutons */
+    align-items: center; /* Centre verticalement les boutons */
+    padding: 20px; /* Espace autour du menu */
+    background-color: #D9D9D9; /* Couleur de fond */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Ombre pour démarquer */
+    box-sizing: border-box; /* Inclut padding et bordures dans la largeur totale */
+    height: var(--footer-height);
+}
+
 .bouton-menu{
     background-color: transparent;
     border: none;
@@ -97,7 +122,6 @@ html, body {
 }
 
 .header-title {
-    text-align : center;
     height: 100%;
     flex-grow: 1; /* Permet au titre de s'étendre au milieu */
     display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
@@ -119,15 +143,17 @@ html, body {
 
 .deconnexion {
     display: flex;
-    align-items: center; /* Centre verticalement le bouton et l'icône */
+    align-items: center;
     justify-content: center;
-    background-color: black; /* Couleur de fond */
-    color: white; /* Couleur du texte */
-    border: none; /* Supprime les bordures */
-    padding: 10px 20px; /* Ajoute des espaces internes */
-    border-radius: 5px; /* Coins arrondis */
-    font-size: calc(var(--header-height) * 0.2); /* Taille dynamique */
-    cursor: pointer; /* Change le curseur en main au survol */
+    gap: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: calc(var(--header-height) * 0.2);
+    cursor: pointer;
+    text-align: center;
 }
 
 .deconnexion:hover {
@@ -138,4 +164,83 @@ html, body {
 .deconnexion i {
     margin-left: 10px; /* Ajoute un espace entre le texte et l'icône */
     font-size: calc(var(--header-height) * 0.2);
+}
+
+.menuBouton {
+    flex: 1; /* Tous les boutons occupent un espace équivalent */
+    max-width: 150px; /* Limite la largeur des boutons */
+    margin: 0 10px; /* Espace horizontal entre les boutons */
+    text-align: center;
+    font-size: 1rem; /* Taille de la police */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menuBouton i {
+    display: block;
+    font-size: 1.8rem; /* Icône plus grande */
+    margin-bottom: 5px; /* Espace sous l'icône */
+}
+
+.deconnexion .deconnexion-text {
+    display: inline;
+}
+
+@media screen and (max-width: 768px) {
+    
+    .deconnexion .deconnexion-text {
+        display: none;
+        font-size: 0.9rem;
+        text-align: center;
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .deconnexion {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .deconnexion i {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-left {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .foot-menu {
+        flex-wrap: wrap; /* Permet aux boutons de passer à plusieurs lignes */
+        justify-content: center; /* Centre les boutons */
+    }
+
+    .menuBouton {
+        flex: none; /* Désactive l'occupation de tout l'espace pour chaque bouton */
+        margin: 5px 10px; /* Espace plus serré */
+        max-width: 100px; /* Réduction de la largeur */
+    }
+
+    .menuBouton i {
+        font-size: 1.5rem; /* Réduit légèrement la taille des icônes */
+    }
+
+    .menuBouton span {
+        font-size: 0.9rem; /* Réduction de la taille du texte */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-title h1 {
+        font-size: calc(var(--header-height) * 0.4); /* Taille de police réduite */
+    }
 }
