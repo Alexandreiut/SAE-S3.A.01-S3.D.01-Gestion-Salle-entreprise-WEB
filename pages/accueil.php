@@ -8,10 +8,7 @@
 		exit();
 	}
 
-	if($_SESSION['role'] != "employe"){
-		header('Location: accueilAdmin.php');
-		exit();
-	}
+    $role = $_SESSION['role'];
 	
 	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
 		deconnexion();
@@ -41,7 +38,7 @@
                 <h1>RoomManager</h1>
             </div>
 
-			<form method="post" action="accueilEmploye.php">
+			<form method="post" action="accueil.php">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
 				<button type="submit" class="deconnexion">
 					<span class="deconnexion-text">Se déconnecter</span>
@@ -53,9 +50,14 @@
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
-				<li><a href="accueilEmploye.php"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
 				<li><a href="salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
 				<li><a href="reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
+                <?php
+                    if($role === "administrateur") {
+                        echo "<li><a href='employe/consultationEmploye.php'><i class='fas fa-user'></i> Employé</a></li>";
+                    }
+                ?>
 				<li><a href="exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
@@ -70,6 +72,13 @@
 			<a href="reservation/consultationReservation.php">
 				<button type="submit" class="btn-action">Gestion des réservations<br/><br/><span class="fas fa-clock-rotate-left"></span></button>
 			</a>
+            <?php
+                if($role === "administrateur") {
+                    echo "<a href='employe/consultationEmploye.php'>";
+                    echo "<button type='submit' class='btn-action'>Gestion des employés<br/><br/><span class='fas fa-user'></span></button>";
+                    echo "</a>";
+                }
+            ?>
 			<a href="exportation.php">
 				<button type="submit" class="btn-action">Télécharger des données<br/><br/><span class="fas fa-download"></span></button>
 			</a>				
@@ -79,9 +88,14 @@
 				<div class = "row">
 					<table>
 						<tr>
-							<td><a href="accueilEmploye.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+							<td><a href="accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
 							<td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
 							<td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+                            <?php
+                                if($role === "administrateur") {
+                                    echo "<td><a href='employe/consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
+                                }
+                            ?>
 							<td><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
 						</tr>
 					</table>

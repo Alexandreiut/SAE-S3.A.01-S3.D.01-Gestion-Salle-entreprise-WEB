@@ -11,9 +11,9 @@
 		}*/
 		
 		if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {
-			header('Location: pages/accueilEmploye.php');
+			header('Location: pages/accueil.php');
 			exit();
-		} //TODO
+		}
 		
 		$login = "";
 		$login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
@@ -38,13 +38,9 @@
 
 				var_dump(getRole($pdo, $login, $pwd));
 
-				if(getRole($pdo, $login, $pwd) == "administrateur"){
-					header('Location: pages/accueilAdmin.php');
-					exit();
-				} else {
-					header('Location: pages/accueilEmploye.php');
-					exit();
-				}
+				header('Location: pages/accueil.php');
+				exit();
+				
 			} else if (!$resultat[0]) {
 				$couleurIdentifiant = "rouge";
 				$couleurMotDePasse = "rouge";
