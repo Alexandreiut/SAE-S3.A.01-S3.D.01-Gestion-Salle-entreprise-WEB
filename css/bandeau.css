@@ -138,6 +138,11 @@ html, body {
     color: #ffffff;
 }
 
+.container-deconnexion {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .deconnexion {
     display: flex;
     align-items: center;

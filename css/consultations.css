@@ -180,20 +180,16 @@
     }
 
     /***********************************************************************/
+    .hauteur-recherche {
+        height: 52vh;
+    }
+
     .sous-container-nb-items {
         display: flex;
         /*justify-content: space-between;*/
         align-items: center;
         gap: 5%;
         white-space: nowrap;
-    }
-
-    .btn-navigation-page {
-        background-color: #D9D9D9;
-        padding-left: 8px;
-        padding-right: 8px;
-        /*border: 3px solid #D9D9D9;*/
-        border-radius: 50px;
     }
 
     .sous-container-informations {
@@ -255,8 +251,8 @@
         border-radius: 5px;
     }
 
-    .btn {
-        background-color: #e6e6e6;
+    .btn-navigation-page {
+        background-color: #D9D9D9;
         border: none;
         border-radius: 5px;
         padding: 5px 10px;

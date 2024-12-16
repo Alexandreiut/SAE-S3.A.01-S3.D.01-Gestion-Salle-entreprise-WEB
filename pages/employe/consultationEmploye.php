@@ -10,24 +10,26 @@
     </head>
     <body>
         <div class="header">
-            <div class="header-left">
-				<div class="menu-container">
-					<button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
-				</div>
-				<img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
+            <div class="col-lg-2 header-left">
+                <div class="menu-container">
+                    <button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
+                </div>
+                <img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
             </div>
 
-            <div class="header-title">
+            <div class="offset-lg-2 col-lg-4 header-title">
                 <h1>RoomManager</h1>
             </div>
 
-			<form method="post" action="../accueilEmploye.php">
-				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
-				<button type="submit" class="deconnexion">
-					Se déconnecter
-					<i class="fas fa-right-from-bracket"></i>
-				</button>
-			</form>
+            <div class="offset-lg-2 col-lg-2 container-deconnexion">
+                <form method="post" action="accueilEmploye.php">
+                    <input type="hidden" name="deconnexion" id="deconnexion" value="1">
+                    <button type="submit" class="deconnexion">
+                        <span class="deconnexion-text">Se déconnecter</span>
+                        <i class="fas fa-right-from-bracket"></i>
+                    </button>
+                </form>
+            </div>
         </div>
 
         <div class="container">
@@ -68,119 +70,122 @@
                     Nombre de salles trouvé : <span>150</span>
                 </div>
             </div>
-            <div class="row mt-1">
-                <div class="sous-container-informations">
-                    <span class="col-lg-4 texte-ellipsis">A6</span>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                        Voir les détails
-                    </div>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                        Modifier
-                    </div>
-                    <div class="col-lg-2 btn-supprimer">
-                        <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                        Supprimer
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="sous-container-informations">
-                    <span class="col-lg-4 texte-ellipsis">A7</span>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                        Voir les détails
-                    </div>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                        Modifier
-                    </div>
-                    <div class="col-lg-2 btn-supprimer">
-                        <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                        Supprimer
+            <div class="hauteur-recherche">
+                <div class="row mt-1">
+                    <div class="sous-container-informations">
+                        <span class="col-lg-4 texte-ellipsis">A6</span>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
+                            Voir les détails
+                        </div>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
+                            Modifier
+                        </div>
+                        <div class="col-lg-2 btn-supprimer">
+                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
+                            Supprimer
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-1">
-                <div class="sous-container-informations">
-                    <span class="col-lg-4 texte-ellipsis">Salle bleu</span>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                        Voir les détails
-                    </div>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                        Modifier
-                    </div>
-                    <div class="col-lg-2 btn-supprimer">
-                        <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                        Supprimer
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="sous-container-informations">
-                    <span class="col-lg-4 texte-ellipsis">Salle ronde</span>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                        Voir les détails
-                    </div>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                        Modifier
-                    </div>
-                    <div class="col-lg-2 btn-supprimer">
-                        <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                        Supprimer
+                <div class="row mt-1">
+                    <div class="sous-container-informations">
+                        <span class="col-lg-4 texte-ellipsis">A7</span>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
+                            Voir les détails
+                        </div>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
+                            Modifier
+                        </div>
+                        <div class="col-lg-2 btn-supprimer">
+                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
+                            Supprimer
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-1">
-                <div class="sous-container-informations">
-                    <span class="col-lg-4 texte-ellipsis">Salle picasso</span>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                        Voir les détails
-                    </div>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                        Modifier
-                    </div>
-                    <div class="col-lg-2 btn-supprimer">
-                        <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                        Supprimer
+                <div class="row mt-1">
+                    <div class="sous-container-informations">
+                        <span class="col-lg-4 texte-ellipsis">Salle bleu</span>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
+                            Voir les détails
+                        </div>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
+                            Modifier
+                        </div>
+                        <div class="col-lg-2 btn-supprimer">
+                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
+                            Supprimer
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-1">
-                <div class="sous-container-informations">
-                    <span class="col-lg-4 texte-ellipsis">Je suis un nom de salle trop longggggggggggggggggggggggggggggggggggggggggggggggggg</span>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                        Voir les détails
+                <div class="row mt-1">
+                    <div class="sous-container-informations">
+                        <span class="col-lg-4 texte-ellipsis">Salle ronde</span>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
+                            Voir les détails
+                        </div>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
+                            Modifier
+                        </div>
+                        <div class="col-lg-2 btn-supprimer">
+                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
+                            Supprimer
+                        </div>
                     </div>
-                    <div class="col-lg-2 btn-details-modifier">
-                        <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                        Modifier
+                </div>
+                <div class="row mt-1">
+                    <div class="sous-container-informations">
+                        <span class="col-lg-4 texte-ellipsis">Salle picasso</span>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
+                            Voir les détails
+                        </div>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
+                            Modifier
+                        </div>
+                        <div class="col-lg-2 btn-supprimer">
+                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
+                            Supprimer
+                        </div>
                     </div>
-                    <div class="col-lg-2 btn-supprimer">
-                        <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                        Supprimer
+                </div>
+                <div class="row mt-1">
+                    <div class="sous-container-informations">
+                        <span class="col-lg-4 texte-ellipsis">Je suis un nom de salle trop longggggggggggggggggggggggggggggggggggggggggggggggggg</span>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
+                            Voir les détails
+                        </div>
+                        <div class="col-lg-2 btn-details-modifier">
+                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
+                            Modifier
+                        </div>
+                        <div class="col-lg-2 btn-supprimer">
+                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
+                            Supprimer
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Navigation page et ajout salle -->
             <div class="row mt-3">
+                <hr>
                 <div class="col-lg-4 offset-lg-4">
                     <div class="navigation">
-                        <button class="btn">
+                        <button class="btn btn-navigation-page">
                             <i class="fa-solid fa-arrow-left"></i>
                             Précédent
                         </button>
                         <span class="page-info">1/10</span>
-                        <button class="btn">
+                        <button class="btn btn-navigation-page">
                             Suivant
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
@@ -206,10 +211,23 @@
 				<li><a href="#"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
-        
-        <div class="footer">
-			<p>2024 © RoomManager. IUT de Rodez.</p>
-		</div>
+
+        <!-- Menu pour téléphone -->
+        <div id="footMenu" class="foot-menu d-md-none">
+            <div class = "container bott-menu-container">
+                <div class = "row">
+                    <table>
+                        <tr>
+                            <td><a href="accueilEmploye.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+                            <td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+                            <td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+                            <td><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <script src="../../engine/js/menu.js" defer></script>
     </body>
 </html>
