@@ -25,7 +25,7 @@ VALUES
 -- Administrateur
 INSERT INTO utilisateur (nom, prenom, telephone, role, login, motDePasse)
 VALUES
-('nomAdmin', 'prenomAdmin', '2614000000', 'administrateur', 'admin', 'password123');
+('nomAdmin', 'prenomAdmin', '2614', 'administrateur', 'admin', 'password123');
 
 -- Logiciels 
 INSERT INTO logiciel (nom) 
