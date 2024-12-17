@@ -13,14 +13,14 @@ VALUES
 -- Employés
 INSERT INTO utilisateur (nom, prenom, telephone, role, login, motDePasse)
 VALUES
-('Dupont', 'Pierre', '2614000000', 'employé', 'pierre_dupont', 'password123'),
-('Lexpert', 'Noemie', '2614000000', 'employé', 'noemie_lexpert', 'password123'),
-('Dujardin', 'Océane', '2633000000', 'employé', 'oceane_dujardin', 'password123'),
-('Durand', 'Bill', '2696000000', 'employé', 'bill_durand', 'password123'),
-('Dupont', 'Max', '2614000000', 'employé', 'max_dupont', 'password123'),
-('Martin', 'Martin', '2678000000', 'employé', 'martin_martin', 'password123'),
-('Legrand', 'Jean-Pierre', '2689000000', 'employé', 'jean_pierre_legrand', 'password123'),
-('Deneuve', 'Zoé', '2626000000', 'employé', 'zoe_denueve', 'password123');
+('Dupont', 'Pierre', '2614', 'employé', 'pierre_dupont', 'password123'),
+('Lexpert', 'Noemie', '2614', 'employé', 'noemie_lexpert', 'password123'),
+('Dujardin', 'Océane', '2633', 'employé', 'oceane_dujardin', 'password123'),
+('Durand', 'Bill', '2696', 'employé', 'bill_durand', 'password123'),
+('Dupont', 'Max', '2614', 'employé', 'max_dupont', 'password123'),
+('Martin', 'Martin', '2678', 'employé', 'martin_martin', 'password123'),
+('Legrand', 'Jean-Pierre', '2689', 'employé', 'jean_pierre_legrand', 'password123'),
+('Deneuve', 'Zoé', '2626', 'employé', 'zoe_denueve', 'password123');
 
 -- Administrateur
 INSERT INTO utilisateur (nom, prenom, telephone, role, login, motDePasse)
