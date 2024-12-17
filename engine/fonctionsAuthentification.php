@@ -45,7 +45,7 @@
 
     function deconnexion() {
 		session_destroy();
-		header('Location: connexion.php');
+		header('Location: ../index.php');
 		exit();
 	}
 

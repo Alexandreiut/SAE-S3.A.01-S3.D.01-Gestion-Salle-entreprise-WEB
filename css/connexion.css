@@ -114,7 +114,7 @@ input[type="password"] {
 }
 
 .footer {
-    margin-top: 75px;
+    margin-top: 50px;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -130,6 +130,10 @@ input[type="password"] {
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
+}
+
+#bouton-connexion-bas {
+    margin-bottom: 10px;
 }
 
 .form-pas-entete div {
@@ -227,6 +231,56 @@ input[type="password"] {
     margin-top: 50px;
 }
 
+.container-accueil {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.presentation-accueil {
+    font-size: 20px;
+    margin: 30px auto;
+    max-width: 800px; /* Largeur maximale */
+    text-align: center;
+    color: #000; /* Texte sombre */
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+.presentation-accueil h2 {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.presentation-accueil h3 {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 30px;
+    color: #000;
+}
+
+.presentation-accueil ul {
+    font-size: 18px;
+    list-style: none;
+    padding: 0;
+}
+
+.presentation-accueil li {
+    font-size: 18px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.presentation-accueil em {
+    font-size: 1rem;
+    color: #555;
+}
+
 @media screen and (max-width: 768px) {
     .info-text {
         font-size: calc(var(--font-size) * 0.4);
@@ -252,5 +306,9 @@ input[type="password"] {
 
     .btn-action .fas {
         font-size: calc(var(--font-size) * 0.5);
+    }
+
+    .footer-text {
+        display: none;
     }
 }
