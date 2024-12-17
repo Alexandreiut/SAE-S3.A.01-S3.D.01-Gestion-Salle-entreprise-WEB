@@ -91,11 +91,6 @@ body {
     font-size: 24px;
 }
 
-/* Pour afficher l'infobulle personnalisée et supprimer celle par défaut */
-/*.btn-export[title]:hover {
-    pointer-events: none; /* Désactive l'infobulle native 
-}*/
-
 .btn-export[desc]:hover::after {
     content: attr(desc);
     position: absolute;
