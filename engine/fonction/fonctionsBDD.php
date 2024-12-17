@@ -1,22 +1,44 @@
 <?php
-    function connexionBD() {
-        $host='localhost';
-        $db='roommanager';
-        $user='root';
-        $pass='root';
-        $charset='utf8mb4';
+    function authentification($pdo, $login = "", $pwd = ""){
+		$requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login";
+		
+		$stmt = $pdo->prepare($requete);
+		$stmt->bindParam(':login', $login);
+		
+		$stmt->execute();
+
+        $tabBoolean = [];
+        $tabBoolean[0] = $stmt->fetch()['COUNT(*)'] != 0;
+
+        $requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login AND motDePasse = md5(:pwd)";
+        $stmt = $pdo->prepare($requete);
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':pwd', $pwd);
+        $stmt->execute();
+
+        $tabBoolean[1] = $stmt->fetch()['COUNT(*)'] != 0;
+		
+		return $tabBoolean;
+	}
+
+    function deconnexion() {
+		session_destroy();
+		header('Location: ../index.php');
+		exit();
+	}
+
+    function getRole($pdo, $login, $pwd){
+        $requete = "SELECT role FROM utilisateur WHERE login = :login AND motDePasse = md5(:pwd)";
         
-        $dsn="mysql:host=$host;dbname=$db;charset=$charset";
+        $stmt = $pdo->prepare($requete);
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':pwd', $pwd);
         
-        $options=[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
-                  PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC,
-                  PDO::ATTR_EMULATE_PREPARES=>false];
+        $stmt->execute();
         
-        $pdo=new PDO($dsn,$user,$pass,$options);
-        
-        return $pdo;
+        return $stmt->fetch()["role"];
     }
-    
+
     function ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp) {
         
         $requete = "INSERT INTO utilisateur(nom, prenom, telephone, role, login, motDePasse)

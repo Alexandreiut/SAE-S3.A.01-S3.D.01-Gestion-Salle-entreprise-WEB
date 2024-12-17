@@ -124,7 +124,6 @@ html, body {
 
 .logo {
     height: 80%; /* L'image prend 80% de la hauteur du header */
-    cursor: pointer;
 }
 
 .header-title {
@@ -160,6 +159,7 @@ html, body {
     font-size: calc(var(--header-height) * 0.2);
     cursor: pointer;
     text-align: center;
+    white-space: nowrap;
 }
 
 .deconnexion:hover {

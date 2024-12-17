@@ -8,6 +8,10 @@
             }
             return self::$pdo;
         }
+
+        public static function deconnexion() {
+            self::$pdo = null;
+        }
         private static function connexion() {
             $host='localhost';
             $db= 'RoomManager';
