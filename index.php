@@ -1,14 +1,8 @@
 <?php
 	try {
-		require("engine/fonctionsAuthentification.php");
+		require("engine/fonction/fonctionsBDD.php");
 		
 		session_start();
-		
-		/*if(isset($_COOKIE['cookieLogin'])){
-			$cookieLogin = $_COOKIE['cookieLogin'];
-		} else {
-			$cookieLogin = "";
-		}*/
 		
 		if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {
 			header('Location: pages/accueil.php');
@@ -27,7 +21,6 @@
 		
 		if(isset($_POST['login']) && isset($_POST['pwd']) && !empty($_POST['login']) && !empty($_POST['pwd'])) {
 			$pwd = htmlspecialchars($_POST['pwd']);
-			//setcookie('cookieLogin', $_POST['login'], time() + 120);
 
 			$resultat = authentification($pdo, $login, $pwd);
 			
@@ -95,7 +88,6 @@
 				<br/>
 				<a href="#ancre">
 					<button class="btn-connexion"><span>Me connecter</span></button>
-					<!-- <i class="fas fa-arrow-down"></i> -->
 				</a>
 			</div>
 		</div>

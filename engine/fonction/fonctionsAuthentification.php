@@ -1,10 +1,10 @@
 <?php
     function connexion($bd) {
-        $host='localhost'; 
+        $host='localhost'; //Modif
         $db= $bd;
-        $user='root';
-        $pass='root';
-        $charset='utf8mb4';
+        $user='root'; // Modif
+        $pass='root'; //Modif
+        $charset='utf8mb4'; 
     
         $dsn="mysql:host=$host;dbname=$db;charset=$charset";
     
@@ -31,7 +31,7 @@
 
         $tabBoolean = [];
         $tabBoolean[0] = $stmt->fetch()['COUNT(*)'] != 0;
-        $pwd = md5($pwd);
+
         $requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login AND motDePasse = md5(:pwd)";
         $stmt = $pdo->prepare($requete);
         $stmt->bindParam(':login', $login);
@@ -43,16 +43,18 @@
 		return $tabBoolean;
 	}
 
-    function deconnexion($chemin) {
+    function deconnexion() {
 		session_destroy();
-		header('Location: '.$chemin);
+		header('Location: ../index.php');
 		exit();
 	}
-    function getRole($pdo, $login){
-        $requete = "SELECT role FROM utilisateur WHERE login = :login";
+
+    function getRole($pdo, $login, $pwd){
+        $requete = "SELECT role FROM utilisateur WHERE login = :login AND motDePasse = md5(:pwd)";
         
         $stmt = $pdo->prepare($requete);
         $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':pwd', $pwd);
         
         $stmt->execute();
         
