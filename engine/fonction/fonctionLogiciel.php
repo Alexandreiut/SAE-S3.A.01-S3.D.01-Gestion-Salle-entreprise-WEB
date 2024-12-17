@@ -1,8 +1,8 @@
 <?php
-    function getListeLogiciel($connexion){
+    function getListeLogiciel($pdo){
 		$tableauLogiciel = array(); 
 		try {
-			$requeteLogiciel = $connexion->prepare("SELECT DISTINCT identifiant, nom FROM logiciel ORDER BY nom ASC");
+			$requeteLogiciel = $pdo->prepare("SELECT DISTINCT identifiant, nom FROM logiciel ORDER BY nom ASC");
 			
 			if ($requeteLogiciel->execute()) {
 				while ($ligne = $requeteLogiciel->fetch(PDO::FETCH_ASSOC)) {
@@ -20,11 +20,11 @@
 	}
 	
 	
-	function getIdByLogiciel($connexion, $nomLogiciel) {
+	function getIdByLogiciel($pdo, $nomLogiciel) {
 		$logicielRenvoye = null;
 		try {
 			$requeteGetId = "SELECT identifiant FROM logiciel WHERE nom = ?";
-			$logicielRenvoye = $connexion->prepare($requeteGetId);
+			$logicielRenvoye = $pdo->prepare($requeteGetId);
 			
 			$logicielRenvoye->execute([$nomLogiciel]);
 	

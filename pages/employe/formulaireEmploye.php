@@ -17,14 +17,15 @@
     }
     
     try {
-        require('../../engine/fonction/fonctionsBDD.php');
+        require('../../engine/fonction/fonctionEmploye.php');
+        require("../../engine/fonction/connexionBD.php");
         
         if (!empty($_POST)) {
             $verifications = verifChamps();
             
             if ($verifications['tout']) {
                 
-                $pdo = connexionBD('roommanager');
+                $pdo = ConnexionBD::getPDO();
                 
                 // test présence éléments nécessaires
                 if (!isset($_POST['nom']) || !isset($_POST['prenom'])
