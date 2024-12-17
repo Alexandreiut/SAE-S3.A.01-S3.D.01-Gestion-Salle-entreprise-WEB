@@ -289,9 +289,7 @@ input[type="password"] {
     .footer {
         display: none;
     }
-}
-
-@media screen and (max-width: 768px) {
+    
     :root {
         --font-size: 50px; /* Réduction de la taille de la police pour les petits écrans */
         --button-size: 60px; /* Réduction de la taille des boutons pour les petits écrans */

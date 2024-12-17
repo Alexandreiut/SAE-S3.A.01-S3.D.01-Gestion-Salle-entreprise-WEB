@@ -219,9 +219,7 @@ html, body {
         font-size: 1.8rem;
         margin: 0;
     }
-}
-
-@media screen and (max-width: 768px) {
+    
     .header-left {
         display: none;
     }
@@ -229,9 +227,6 @@ html, body {
     .side-menu {
         display: none;
     } 
-}
-
-@media screen and (max-width: 768px) {
     .foot-menu {
         flex-wrap: wrap; /* Permet aux boutons de passer à plusieurs lignes */
         justify-content: center; /* Centre les boutons */
@@ -250,9 +245,7 @@ html, body {
     .menuBouton span {
         font-size: 0.9rem; /* Réduction de la taille du texte */
     }
-}
 
-@media screen and (max-width: 768px) {
     .header-title h1 {
         font-size: calc(var(--header-height) * 0.4); /* Taille de police réduite */
     }
