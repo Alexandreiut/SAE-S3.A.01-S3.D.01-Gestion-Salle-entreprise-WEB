@@ -39,12 +39,12 @@ VALUES
 INSERT INTO salle (nom, capacite, videoProjecteur, ecranXXL, nombreOrdinateur, typeOrdinateur, imprimante) 
 VALUES 
 ('A6', 15, 'oui', 'non', 4, 'PC portable', 'non'),
-('salle bleue', 18, 'oui', 'oui', NULL, NULL, 'non'),
-('salle ronde', 14, 'oui', 'non', NULL, NULL, 'non'),
-('salle Picasso', 15, 'non', 'non', NULL, NULL, 'non'),
-('petite salle', 7, 'oui', 'oui', NULL, NULL, 'non'),
-('A7', 4, 'non', 'non', NULL, NULL, 'non'),
-('salle patio', 6, 'non', 'non', NULL, NULL, 'non'),
+('salle bleue', 18, 'oui', 'oui', 0, '', 'non'),
+('salle ronde', 14, 'oui', 'non', 0, '', 'non'),
+('salle Picasso', 15, 'non', 'non', 0, '', 'non'),
+('petite salle', 7, 'oui', 'oui', 0, '', 'non'),
+('A7', 4, 'non', 'non', 0, '', 'non'),
+('salle patio', 6, 'non', 'non', 0, '', 'non'),
 ('salle Sydney', 20, 'oui', 'non', 16, 'PC Windows', 'non'),
 ('salle Brisbane', 22, 'oui', 'non', 18, 'PC Windows', 'oui');
 
