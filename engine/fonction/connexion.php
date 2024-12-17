@@ -1,26 +1,4 @@
 <?php
-    function connexion($bd) {
-        $host='localhost'; 
-        $db= $bd;
-        $user='root';
-        $pass='root';
-        $charset='utf8mb4';
-    
-        $dsn="mysql:host=$host;dbname=$db;charset=$charset";
-    
-        $options=[
-        PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES=>false];
-        
-        try {
-            $pdo=new PDO($dsn,$user,$pass,$options);
-        } catch(PDOException $connexionErreur){
-            throw new PDOException($connexionErreur->getMessage(), (int)$connexionErreur->getCode());
-        }
-        return $pdo;
-    }
-
     function authentification($pdo, $login = "", $pwd = ""){
 		$requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login";
 		

@@ -18,7 +18,9 @@
             </div>
 
             <div class="offset-lg-2 col-lg-4 header-title">
-                <h1>RoomManager</h1>
+                <h1>
+                    <i class="fa-solid fa-user"></i>
+                    Employé</h1>
             </div>
 
             <div class="offset-lg-2 col-lg-2 container-deconnexion">
@@ -67,7 +69,7 @@
             <!-- Résultat recherche -->
             <div class="row mt-3 mb-3">
                 <div class="col-12 sous-container-nb-items">
-                    Nombre de salles trouvé : <span>150</span>
+                    Nombre d'employés trouvé : <span>150</span>
                 </div>
             </div>
             <div class="hauteur-recherche">
@@ -194,8 +196,8 @@
                 <div class="col-lg-3 offset-lg-1 container-btn-add">
                     <button class="btn-add">
                         <i class="fa-solid fa-plus"></i>
-                        <i class="fa-solid fa-door-open"></i>
-                        Ajouter une salle
+                        <i class="fa-solid fa-user"></i>
+                        Ajouter un employé
                     </button>
                 </div>
             </div>
