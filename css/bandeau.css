@@ -33,6 +33,11 @@ html, body {
     transition: transform 0.3s ease, color 0.3s ease; /* Animation fluide */
 }
 
+.menu:hover {
+    color: #D0D0D0;
+    transition: all 0.3s ease;
+}
+
 .menu-container{
     display: flex;
     align-items: center;
@@ -40,6 +45,11 @@ html, body {
     height: var(--header-height); /* Ta hauteur fixe pour l'en-tête */
     width: 50px;
 
+}
+
+.container-deconnexion {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .bott-menu-container {
@@ -69,7 +79,6 @@ html, body {
     height: calc(100% - var(--header-height));
     background-color: #333;
     transition: left 0.3s ease;
-    /*box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);*/
 }
 
 /* Liens dans le menu */
@@ -138,11 +147,6 @@ html, body {
     color: #ffffff;
 }
 
-.container-deconnexion {
-    display: flex;
-    justify-content: flex-end;
-}
-
 .deconnexion {
     display: flex;
     align-items: center;
@@ -156,7 +160,6 @@ html, body {
     font-size: calc(var(--header-height) * 0.2);
     cursor: pointer;
     text-align: center;
-    white-space: nowrap;
 }
 
 .deconnexion:hover {
@@ -213,15 +216,14 @@ html, body {
         font-size: 1.8rem;
         margin: 0;
     }
-}
 
-@media screen and (max-width: 768px) {
     .header-left {
         display: none;
     }
-}
 
-@media screen and (max-width: 768px) {
+    .side-menu {
+        display: none;
+    }
     .foot-menu {
         flex-wrap: wrap; /* Permet aux boutons de passer à plusieurs lignes */
         justify-content: center; /* Centre les boutons */
@@ -240,9 +242,7 @@ html, body {
     .menuBouton span {
         font-size: 0.9rem; /* Réduction de la taille du texte */
     }
-}
 
-@media screen and (max-width: 768px) {
     .header-title h1 {
         font-size: calc(var(--header-height) * 0.4); /* Taille de police réduite */
     }

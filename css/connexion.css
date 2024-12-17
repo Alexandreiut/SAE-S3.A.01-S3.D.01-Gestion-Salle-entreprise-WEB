@@ -1,25 +1,32 @@
+:root {
+    --font-size: 100px;
+}
+
+:root {
+    --button-size: 100px;
+}
 
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(
-            to left,
-            #E3FFFE 0%,
-            #FFFFFF 40%,
-            #FFFFFF 60%,
-            #E3FFFE 100%
+        to left,
+        #E3FFFE 0%,
+        #FFFFFF 40%,
+        #FFFFFF 60%,
+        #E3FFFE 100%
     );
     align-items: center;
     justify-content: center;
 }
 
-.header {
-    margin-top: 20px;
+.header-connexion {
     background-color: #016401;
     width: 100%;
-    padding: 20px;
+    height: 11%;
     display: flex;
     justify-content: center;
+    align-items: center;
     color: white;
     box-sizing: border-box;
     position: relative;
@@ -27,18 +34,16 @@ body {
 }
 
 
-.logo {
+.logo-connexion {
     position: absolute;
-    top: -20px; /* Positionne l'image au-dessus du header */
-    left: 0px; /* Garde l'image à gauche */
-    height: 118px; /* Augmente la taille de l'image */
-    z-index: 2; /* Met l'image au-dessus du header */
-    border-radius: 0 0 30px 30px;
+    height: 90%;
+    left: 0.25%;
+    z-index: 2;
 }
 
-.header h1 {
+.header-connexion h1 {
     margin: 0;
-    font-size: 48px; /* Augmente la taille de la police */
+    font-size: 48px;
     text-align: center;
 }
 
@@ -48,17 +53,17 @@ body {
 }
 
 .acces-text {
-    font-size: 38px; /* Taille de la police */
-    font-weight: bold; /* Met le texte en gras */
-    color: black; /* Couleur du texte */
-    text-align: center; /* Centre horizontalement */
-    margin: 20px 0; /* Espacement vertical autour du titre */
+    font-size: 38px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin: 20px 0;
 }
 
 label {
-    font-size: 18px; /* Augmente la taille de la police du label */
-    margin-bottom: 8px; /* Ajoute un petit espace sous le label */
-    display: inline-block; /* Permet un espacement vertical précis */
+    font-size: 18px;
+    margin-bottom: 8px;
+    display: inline-block;
 }
 
 input[type="text"],
@@ -75,48 +80,41 @@ input[type="password"] {
 }
 
 .saisie-text {
-    font-size: 24px; /* Taille de la police */
-    font-weight: bold; /* Met le texte en gras */
-    color: black; /* Couleur du texte */
-    text-align: center; /* Centre horizontalement */
-    margin: 20px 0; /* Espacement vertical autour du titre */
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.erreur {
+    font-size: 24px;
+    font-style: italic;
+    color: black;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .btn-connexion {
-    background-color: #CCF5F3; /* Couleur intérieure */
-    color: black; /* Couleur du texte */
-    padding: 10px 50px; /* Taille du bouton */
-    border: 2px solid #00BBB0; /* Bordure cyan */
-    border-radius: 25px; /* Arrondir les coins */
-    font-size: 28px; /* Taille du texte */
-    font-weight: bold; /* Texte en gras */
+    background-color: #CCF5F3;
+    color: black;
+    padding: 10px 50px;
+    border: 2px solid #00BBB0;
+    border-radius: 25px;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease; /* Animation fluide */
+    transition: all 0.3s ease;
 }
 
 .btn-connexion:hover {
-    background-color: #00BBB0; /* Fond cyan */
-    color: black; /* Texte reste noir */
-    border-color: #00BBB0; /* Assure une bordure homogène */
-}
-
-button.btn {
-    margin-top: 20px; /* Ajoute un espace au-dessus du bouton */
     background-color: #00BBB0;
-    color: white;
-    padding: 12px 24px; /* Augmente la taille du bouton */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px; /* Taille du texte du bouton */
-}
-
-button.btn:hover {
-    background-color: #009D92; /* Couleur différente au survol */
+    color: black;
+    border-color: #00BBB0;
 }
 
 .footer {
-    position: fixed;
+    margin-top: 50px;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -127,16 +125,188 @@ button.btn:hover {
     padding: 10px 0;
 }
 
-form {
+.form-pas-entete {
     display: flex;
-    flex-direction: column; /* Aligne les éléments verticalement */
-    align-items: center; /* Centre horizontalement */
-    margin-top: 20px; /* Ajoute un espacement au-dessus du formulaire */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
-form div {
-    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ */
-    width: 100%; /* Permet au champ de prendre tout l'espace disponible */
-    max-width: 300px; /* Définit une largeur maximale */
-    text-align: left; /* Garde le label aligné à gauche */
+#bouton-connexion-bas {
+    margin-bottom: 10px;
+}
+
+.form-pas-entete div {
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 300px;
+    text-align: left;
+}
+
+.rouge {
+    width: 100%;
+    max-width: 500px;
+    font-size: 22px;
+    background-color: #f0f0f0;
+    border: solid 2px red;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.normal {
+    width: 100%;
+    max-width: 500px;
+    font-size: 22px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.require {
+    color : red; 
+}
+
+#togglePwd {
+    margin-left : 25px;
+    border: solid 2px black;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+.btn-action {
+    background-color: #CCF5F3;
+    color: black;
+    padding: 10px 20px;
+    border: 2px solid #00BBB0;
+    border-radius: 25px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Animation fluide */
+    width: 300px;
+    height: 500px;
+    margin-top: 30px;
+    /*margin-left: 50px;*/
+    text-align: center;
+}
+
+.btn-action:hover {
+    background-color: #00BBB0;
+    color: black;
+    border-color: #00BBB0;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-action .fas {
+    font-size: 75px;
+}
+
+.info-text {
+    font-size: 48px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.container-accueil {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.presentation-accueil {
+    font-size: 20px;
+    margin: 30px auto;
+    max-width: 800px; /* Largeur maximale */
+    text-align: center;
+    color: #000; /* Texte sombre */
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+.presentation-accueil h2 {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.presentation-accueil h3 {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 30px;
+    color: #000;
+}
+
+.presentation-accueil ul {
+    font-size: 18px;
+    list-style: none;
+    padding: 0;
+}
+
+.presentation-accueil li {
+    font-size: 18px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.presentation-accueil em {
+    font-size: 1rem;
+    color: #555;
+}
+
+@media screen and (max-width: 768px) {
+    .info-text {
+        font-size: calc(var(--font-size) * 0.4);
+    }
+
+    .footer {
+        display: none;
+    }
+    
+    :root {
+        --font-size: 50px; /* Réduction de la taille de la police pour les petits écrans */
+        --button-size: 60px; /* Réduction de la taille des boutons pour les petits écrans */
+    }
+
+    .btn-action {
+        font-size: calc(var(--font-size) * 0.33);
+        padding: calc(var(--button-size) / 3) calc(var(--button-size) / 2);
+        height: auto; /* Hauteur automatique */
+        width: calc(var(--button-size) * 3.1);
+    }
+
+    .btn-action .fas {
+        font-size: calc(var(--font-size) * 0.5);
+    }
+
+    .footer-text {
+        display: none;
+    }
 }
