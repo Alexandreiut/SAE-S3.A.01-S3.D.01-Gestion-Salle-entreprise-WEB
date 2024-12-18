@@ -157,10 +157,10 @@
         }
     }
     
-    function getListeSalle($connexion){
+    function getListeSalle($pdo){
         $tableauSalles = array();
         try {
-            $requeteSalle = $connexion->prepare("SELECT identifiant, nom FROM salle ORDER BY nom ASC");
+            $requeteSalle = $pdo->prepare("SELECT identifiant, nom FROM salle ORDER BY nom ASC");
             if ($requeteSalle->execute()) {
                 while ($ligne = $requeteSalle->fetch(PDO::FETCH_ASSOC)) {
                     $tableauSalles[] = $ligne['identifiant'];
@@ -175,4 +175,41 @@
         }
     }
 
+    function getAttributSalle($pdo, $idSalle) {
+        try {
+            $tableauSalle = array();
+            
+            $requeteSalle = "SELECT nom, capacite, videoProjecteur, ecranXXL, nombreOrdinateur, typeOrdinateur, imprimante FROM salle WHERE identifiant = ?";
+            $resultats = $pdo->prepare($requeteSalle);
+            $resultats->execute([$idSalle]);
+            $salleData = $resultats->fetch(PDO::FETCH_ASSOC);
+            
+            $tableauSalle = array(
+                'nom' => $salleData['nom'],
+                'capacite' => $salleData['capacite'],
+                'videoProjecteur' => $salleData['videoProjecteur'],
+                'ecranXXL' => $salleData['ecranXXL'],
+                'nombreOrdinateur' => $salleData['nombreOrdinateur'],
+                'typeOrdinateur' => $salleData['typeOrdinateur'],
+                'imprimante' => $salleData['imprimante']
+            );
+            
+            $requeteLogiciels = "SELECT id_logiciel FROM logiciel_salle WHERE id_salle = ?";
+            $resultatsLogiciels = $pdo->prepare($requeteLogiciels);
+            $resultatsLogiciels->execute([$idSalle]);
+            
+            $listeLogiciel = array();
+            while ($logiciel = $resultatsLogiciels->fetch(PDO::FETCH_ASSOC)) {
+                $listeLogiciel[] = $logiciel['id_logiciel'];
+            }
+            
+            $tableauSalle['listeLogiciel'] = $listeLogiciel;
+            
+            return $tableauSalle;
+            
+        } catch (Exception $e) {
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    
 ?>

@@ -11,21 +11,23 @@ VALUES
 -- Utilisateur
 
 -- Employés
+-- Insertion des utilisateurs avec mot de passe en MD5
 INSERT INTO utilisateur (nom, prenom, telephone, role, login, motDePasse)
 VALUES
-('Dupont', 'Pierre', '2614000000', 'employé', 'pierre_dupont', 'password123'),
-('Lexpert', 'Noemie', '2614000000', 'employé', 'noemie_lexpert', 'password123'),
-('Dujardin', 'Océane', '2633000000', 'employé', 'oceane_dujardin', 'password123'),
-('Durand', 'Bill', '2696000000', 'employé', 'bill_durand', 'password123'),
-('Dupont', 'Max', '2614000000', 'employé', 'max_dupont', 'password123'),
-('Martin', 'Martin', '2678000000', 'employé', 'martin_martin', 'password123'),
-('Legrand', 'Jean-Pierre', '2689000000', 'employé', 'jean_pierre_legrand', 'password123'),
-('Deneuve', 'Zoé', '2626000000', 'employé', 'zoe_denueve', 'password123');
+('Dupont', 'Pierre', '2614', 'employé', 'pierre_dupont', MD5('password123')),
+('Lexpert', 'Noemie', '2614', 'employé', 'noemie_lexpert', MD5('password123')),
+('Dujardin', 'Océane', '2633', 'employé', 'oceane_dujardin', MD5('password123')),
+('Durand', 'Bill', '2696', 'employé', 'bill_durand', MD5('password123')),
+('Dupont', 'Max', '2614', 'employé', 'max_dupont', MD5('password123')),
+('Martin', 'Martin', '2678', 'employé', 'martin_martin', MD5('password123')),
+('Legrand', 'Jean-Pierre', '2689', 'employé', 'jean_pierre_legrand', MD5('password123')),
+('Deneuve', 'Zoé', '2626', 'employé', 'zoe_denueve', MD5('password123'));
 
 -- Administrateur
 INSERT INTO utilisateur (nom, prenom, telephone, role, login, motDePasse)
 VALUES
-('nomAdmin', 'prenomAdmin', '2614000000', 'administrateur', 'admin', 'password123');
+('nomAdmin', 'prenomAdmin', '2614', 'administrateur', 'admin', MD5('password123'));
+
 
 -- Logiciels 
 INSERT INTO logiciel (nom) 
@@ -63,8 +65,8 @@ VALUES
 -- interlocuteurs
 INSERT INTO interlocuteur (nom, prenom, telephone) 
 VALUES 
-('Legendre', 'Noémie', '0600000000'),
-('Leroux', 'Jacques', '0600000001'),
+('Legendre', 'Noémie', '0600'),
+('Leroux', 'Jacques', '0601'),
 ('Marin', 'Hector', '0666666666'),
 ('Tournefeuille', 'Michel', '0655555555');
 
