@@ -1,13 +1,17 @@
 <?php
     session_start();
-    require("../../engine/fonction/connexion.php");
+    require("../../engine/fonction/fonctionsBDD.php");
+	require("../../engine/fonction/connexionBD.php");
     require("../../engine/fonction/fonctionSalle.php");
     require("../../engine/fonction/fonctionLogiciel.php");
+
 	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
-		deconnexion("../../index.php");
+		session_destroy();
+		header('Location: ../../index.php');
+		exit();
 	}
     try{
-        $connexion = connexion("RoomManager");
+        $pdo = ConnexionBD::getPDO();
         $videoProjecteur = "non";
         $ecranXxl = "non";
         $imprimante = "non";
@@ -22,7 +26,7 @@
             $imprimante = "oui";
         }
 
-        $listeLogiciel = getListeLogiciel($connexion);
+        $listeLogiciel = getListeLogiciel($pdo);
 	    $listeLogicielSelectionnes = array();
 
 	    foreach ($listeLogiciel as $logiciel) {
@@ -34,7 +38,7 @@
         if(isset($_POST["nomSalle"]) && isset($_POST["capaciteSalle"]) 
 	        && trim($_POST["nomSalle"]) != "" && $_POST["capaciteSalle"]!=""){
 			if($_SESSION["mode"] == "ajout"){
-				ajoutSalle($connexion,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
+				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
 		    	header('Location: consultationSalle.php');
 			} else {
 				$valeurOk = true;
