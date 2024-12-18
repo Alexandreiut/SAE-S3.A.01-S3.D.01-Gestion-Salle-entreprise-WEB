@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    background: linear-gradient(
+        to left,
+        #E3FFFE 0%,
+        #FFFFFF 40%,
+        #FFFFFF 60%,
+        #E3FFFE 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.main-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    gap: 30px; /* Espacement entre les lignes de boutons */
+}
+
+.row {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.btn-export {
+    background-color: #CCF5F3;
+    color: black;
+    padding: 10px 50px;
+    border: 2px solid #00BBB0;
+    border-radius: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.btn-export:hover {
+    background-color: #00BBB0;
+    color: black;
+    border-color: #00BBB0;
+}
+
+.btn-export:focus {
+    outline: 3px solid #00BBB0;
+    background-color: #99ECE7;
+}
+
+.btn-export:active {
+    background-color: #008F87;
+    transform: scale(0.95);
+}
+
+.btn-export i {
+    font-size: 24px;
+}
+
+.btn-export[desc]:hover::after {
+    content: attr(desc);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 14px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#tout-exporter{
+    margin-bottom: 60px;
+}
+
+.btn-export[desc]:hover::after {
+    opacity: 1;
+}

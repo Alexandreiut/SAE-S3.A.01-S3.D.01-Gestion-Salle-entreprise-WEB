@@ -1,0 +1,200 @@
+body {
+    background: linear-gradient(
+        to left,
+        #E3FFFE 0%,
+        #FFFFFF 20%,
+        #FFFFFF 80%,
+        #E3FFFE 100%
+    );
+    margin: 0;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-general {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Aligner à droite*/
+    align-items: flex-start;  /* Aligner en haut */
+}
+
+.btn-ajouter {
+    background-color: #CCF5F3; /* Couleur intérieure */
+    color: black; /* Couleur du texte */
+    padding: 10px 50px; /* Taille du bouton */
+    border: 2px solid #00BBB0; /* Bordure cyan */
+    border-radius: 25px; /* Arrondir les coins */
+    font-size: 28px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Animation fluide */
+}
+
+.btn-ajouter:hover {
+    background-color: #00BBB0; /* Fond cyan */
+    color: black; /* Texte reste noir */
+    border-color: #00BBB0; /* Assure une bordure homogène */
+}
+
+button.btn {
+    margin-bottom: 20px;
+    background-color: #00BBB0;
+    color: white;
+    border : none;
+    padding: 12px 24px; /* Augmente la taille du bouton */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Taille du texte du bouton */
+}
+
+button.btn:hover {
+    background-color: #009D92; /* Couleur différente au survol */
+}
+
+.titre {
+    text-align : center;
+}
+
+.cadre_principal {
+    font-size : 1.5em;
+    padding : 10px;
+    text-align : left;
+    width : 100%;
+}
+
+.cadre_principal input, select {
+    width : 100%;
+    height : 80px;
+    background-color : #F2F2F2;
+    border : 2px solid #00BBB0;
+    padding : 5px;
+    border-radius : 15px;
+}
+
+.cadre_principal select {
+    text-align : center;
+    border-radius : 0px;
+}
+
+.rouge {
+    color : red;
+}
+
+/*form div {
+    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ     
+    width: 100%; /* Permet au champ de prendre tout l'espace disponible 
+    text-align: left; /* Garde le label aligné à gauche 
+}*/
+
+.inputText {
+    font-size: 16px; /* Taille du texte */
+    width: 150px;     /* Largeur de l'input (100% de l'élément parent) */
+    
+    border: 2px solid #ccc; /* Bordure grise */
+    border-radius: 30px; /* Coins arrondis */
+    background-color: #fff; /* Fond blanc */
+}
+.inputNumber {
+    font-size: 16px; /* Taille du texte */
+    width: 90px;     /* Largeur de l'input (100% de l'élément parent) */
+    
+    border: 2px solid #ccc; /* Bordure grise */
+    border-radius: 30px; /* Coins arrondis */
+    background-color: #fff; /* Fond blanc */
+}
+
+.rowWithBorder {
+    border: 2px solid #ccc; /* Bordure grise claire */
+    border-radius: 8px; /* Coins arrondis pour un effet plus doux */
+    background-color: #f9f9f9; /* Fond légèrement gris clair */
+    padding-top: 15px;
+}
+
+.labelStyle {
+    font-weight: bold; /* Gras */
+    font-size: 16px;    /* Taille de la police en pixels */
+    color: #333;        /* Couleur de texte pour une meilleure lisibilité */
+}
+
+/* Classe pour chaque case à cocher avec une bordure arrondie */
+.checkbox-container {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid #007bff;
+    border-radius: 8px; /* Bordure arrondie */
+    background-color: #f8f9fa; /* Fond léger */
+    transition: background-color 0.3s, border-color 0.3s;
+    width: 130px; /* Largeur minimale */
+    height: 35px; /* Hauteur minimale */
+    text-align: center; /* Centrer le contenu */
+    vertical-align: top;
+}
+
+/* Ajouter un effet de survol */
+.checkbox-container:hover {
+    background-color: #007bff;
+    border-color: #0056b3;
+}
+
+/* Style pour les labels à l'intérieur du conteneur */
+.checkbox-container label {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    display: flex; align-items: center;
+}
+
+/* Style pour les cases à cocher */
+.checkbox-container input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    display: block;
+}
+
+.erreurInput{
+    border: 3px solid red;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Masqué par défaut */
+    justify-content: center;
+    align-items: center;
+}
+#overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+.btn {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+.bouton_cadre {
+
+    text-align:  center;
+}
+
+.fas {
+    margin : 3px;
+}

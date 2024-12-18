@@ -1,0 +1,249 @@
+:root {
+    --header-height: 11vh; /* Hauteur dynamique pour le header */
+    --footer-height: 100px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #016401; /* Couleur du header */
+    height: var(--header-height); /* Utilisation de la variable */
+    display: flex;
+    align-items: center; /* Centre verticalement les éléments */
+    justify-content: space-between; /* Sépare les éléments horizontalement */
+    padding: 0 20px; /* Ajoute un espace intérieur */
+    box-sizing: border-box;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 20px; /* Espace entre menu et logo */
+}
+
+.menu {
+    font-size: calc(var(--header-height) * 0.6);
+    color: #ffffff; /* Couleur par défaut */
+    cursor: pointer; /* Curseur au survol */
+    transition: transform 0.3s ease, color 0.3s ease; /* Animation fluide */
+}
+
+.menu:hover {
+    color: #D0D0D0;
+    transition: all 0.3s ease;
+}
+
+.menu-container{
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Optionnel, pour centrer le bouton horizontalement */
+    height: var(--header-height); /* Ta hauteur fixe pour l'en-tête */
+    width: 50px;
+
+}
+
+.container-deconnexion {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bott-menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Optionnel, pour centrer le bouton horizontalement */
+    height: 11%;
+}
+
+#menuIcon {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#menuIcon.fa-bars {
+    transform: rotate(0deg);
+}
+
+#menuIcon.fa-xmark {
+    transform: rotate(180deg)
+}
+
+.side-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: -250px;
+    width: 250px;
+    height: calc(100% - var(--header-height));
+    background-color: #333;
+    transition: left 0.3s ease;
+}
+
+/* Liens dans le menu */
+.side-menu ul {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.side-menu ul li {
+    margin: 20px 0;
+}
+
+.side-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Option pour le fond lorsque le menu est ouvert (transparence) */
+.side-menu.open {
+    left: 0; /* Le menu est déplacé à la position visible */
+}
+
+.foot-menu {
+    display: flex;
+    justify-content: space-between; /* Écarts uniformes entre les boutons */
+    align-items: center; /* Centre verticalement les boutons */
+    padding: 20px; /* Espace autour du menu */
+    background-color: #D9D9D9; /* Couleur de fond */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Ombre pour démarquer */
+    box-sizing: border-box; /* Inclut padding et bordures dans la largeur totale */
+    height: var(--footer-height);
+}
+
+.bouton-menu{
+    background-color: transparent;
+    border: none;
+}
+
+.logo {
+    height: 80%; /* L'image prend 80% de la hauteur du header */
+}
+
+.header-title {
+    height: 100%;
+    flex-grow: 1; /* Permet au titre de s'étendre au milieu */
+    display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
+    align-items: center; /* Centre verticalement l'icône et le texte */
+    justify-content: center; /* Centre horizontalement le contenu */
+    gap: 10px; /* Espace entre l'icône et le texte */
+}
+
+.header-title i {
+    font-size: calc(var(--header-height) * 0.6); /* Taille dynamique pour l'icône */
+    color: white;
+}
+
+.header-title h1 {
+    font-size: calc(var(--header-height) * 0.5); /* Taille dynamique pour le titre */
+    margin: 0; /* Supprime les marges par défaut */
+    color: #ffffff;
+}
+
+.deconnexion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: calc(var(--header-height) * 0.2);
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.deconnexion:hover {
+    background-color: #222;
+    transition: all 0.3s ease;
+}
+
+.deconnexion i {
+    margin-left: 10px; /* Ajoute un espace entre le texte et l'icône */
+    font-size: calc(var(--header-height) * 0.2);
+}
+
+.menuBouton {
+    flex: 1; /* Tous les boutons occupent un espace équivalent */
+    max-width: 150px; /* Limite la largeur des boutons */
+    margin: 0 10px; /* Espace horizontal entre les boutons */
+    text-align: center;
+    font-size: 1rem; /* Taille de la police */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menuBouton i {
+    display: block;
+    font-size: 1.8rem; /* Icône plus grande */
+    margin-bottom: 5px; /* Espace sous l'icône */
+}
+
+.deconnexion .deconnexion-text {
+    display: inline;
+}
+
+@media screen and (max-width: 768px) {
+
+    .deconnexion .deconnexion-text {
+        display: none;
+        font-size: 0.9rem;
+        text-align: center;
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .deconnexion {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .deconnexion i {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+
+    .header-left {
+        display: none;
+    }
+
+    .side-menu {
+        display: none;
+    }
+    .foot-menu {
+        flex-wrap: wrap; /* Permet aux boutons de passer à plusieurs lignes */
+        justify-content: center; /* Centre les boutons */
+    }
+
+    .menuBouton {
+        flex: none; /* Désactive l'occupation de tout l'espace pour chaque bouton */
+        margin: 5px 10px; /* Espace plus serré */
+        max-width: 100px; /* Réduction de la largeur */
+    }
+
+    .menuBouton i {
+        font-size: 1.5rem; /* Réduit légèrement la taille des icônes */
+    }
+
+    .menuBouton span {
+        font-size: 0.9rem; /* Réduction de la taille du texte */
+    }
+
+    .header-title h1 {
+        font-size: calc(var(--header-height) * 0.4); /* Taille de police réduite */
+    }
+}

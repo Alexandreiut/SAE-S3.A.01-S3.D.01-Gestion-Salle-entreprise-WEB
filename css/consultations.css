@@ -1,142 +1,185 @@
-:root {
-    --header-height: 11vh; /* Hauteur dynamique pour le header */
+.filtre {
+    margin-top: 4%;
+    padding: 1%;
+    background-color: #F2F2F2;
+    border: 2px solid #016401;
+    border-radius: 20px;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+/* Style pour les grands écrans (plus de 992px) */
+@media screen and (min-width: 992px) {
+    .sous-container-filtre {
+        display: flex;
+        width: 100%;
+        /*background-color: #0a53be;*/
+        gap: 5%; /* Définit l'espacement entre les éléments flex */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .saisi-filtre {
+        flex-grow: 1; /* Permet à l'élément de s'étendre */
+        width: 100%; /* S'assure que l'élément occupe toute la largeur restante de son parent */
+        background-color: #D9D9D9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .sous-container-filtre label {
+        white-space: nowrap;
+    }
+
+    .btn-rechercher-filtre {
+        width: 50%;
+        background-color: #D9D9D9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /***********************************************************************/
+    .hauteur-recherche {
+        height: 52vh;
+    }
+
+    .sous-container-nb-items {
+        display: flex;
+        /*justify-content: space-between;*/
+        align-items: center;
+        gap: 5%;
+        white-space: nowrap;
+    }
+
+    .sous-container-informations {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        /*height: 8%;*/
+        background-color: #F2F2F2;
+        border-radius: 25px;
+        padding-top: 0.75%;
+        padding-bottom: 0.75%;
+        /*box-sizing: border-box;*/
+    }
+
+    .texte-ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn-details-modifier, .btn-supprimer {
+        display: flex;
+        align-items: center;
+        width: min-content;
+        height: 100%;
+        white-space: nowrap;
+        gap: 15px;
+        border-radius: 15px;
+        padding: 0.1% 1% 0.1% 0.5%;
+    }
+
+
+    .btn-details-modifier {
+        background-color: #CCF5F3;
+        border: 2px solid #00BBB0;
+    }
+
+    .btn-supprimer {
+        background-color: #F1D5D5;
+        border: 2px solid #E93C3C;
+    }
+
+    .taille-icon-infos {
+        font-size: 125%;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: center; /* Centre les boutons horizontalement */
+        align-items: center; /* Centrage vertical */
+        gap: 10px; /* Espacement entre les éléments */
+        flex: 1; /* Prend tout l'espace pour centrer */
+    }
+
+    .page-info {
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .btn-navigation-page {
+        background-color: #D9D9D9;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .container-btn-add {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn-add {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #ccf5f3;
+        border: 2px solid #00bbb0;
+        border-radius: 20px;
+        padding: 5px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        color: black;
+        white-space: nowrap;
+        width: fit-content;
+    }
+
+
+
+
+    /*.container-nav-page {*/
+    /*    display: grid;*/
+    /*    justify-content: center;*/
+    /*}*/
+
+    /*.btn-precedent {*/
+
+    /*}*/
+
+    /*.page-actuelle {*/
+
+    /*}*/
 }
 
-.header {
-    background-color: #016401; /* Couleur du header */
-    height: var(--header-height); /* Utilisation de la variable */
-    display: flex;
-    align-items: center; /* Centre verticalement les éléments */
-    justify-content: space-between; /* Sépare les éléments horizontalement */
-    padding: 0 20px; /* Ajoute un espace intérieur */
-    box-sizing: border-box;
-}
+/* Style pour les petits écrans (moins de 992px) */
+@media screen and (max-width: 992px) {
+    .sous-container-filtre {
+        display: inline-grid;
+        width: 100%;
+        padding: 10px;
+    }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    gap: 20px; /* Espace entre menu et logo */
-}
+    .saisi-filtre {
+        /*flex-grow: 1; !* Permet à l'élément de s'étendre *!*/
+        width: 70%; /* S'assure que l'élément occupe toute la largeur restante de son parent */
+        background-color: #D9D9D9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        /*margin-bottom: 10px; !* Ajout d'espace entre les champs *!*/
+    }
 
-.menu {
-    font-size: calc(var(--header-height) * 0.6);
-    color: #ffffff; /* Couleur par défaut */
-    cursor: pointer; /* Curseur au survol */
-    transition: transform 0.3s ease, color 0.3s ease; /* Animation fluide */
-}
-
-.menu-container{
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Optionnel, pour centrer le bouton horizontalement */
-    height: var(--header-height); /* Ta hauteur fixe pour l'en-tête */
-    width: 50px;
-
-}
-
-#menuIcon {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-#menuIcon.fa-bars {
-    transform: rotate(0deg);
-}
-  
-#menuIcon.fa-xmark {
-    transform: rotate(180deg)
-}
-
-.side-menu {
-    position: fixed;
-    top: var(--header-height);
-    left: -250px;
-    width: 250px;
-    height: calc(100% - var(--header-height));
-    background-color: #333;
-    transition: left 0.3s ease;
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Liens dans le menu */
-.side-menu ul {
-    list-style-type: none;
-    padding: 20px;
-    margin: 0;
-}
-
-.side-menu ul li {
-    margin: 20px 0;
-}
-
-.side-menu ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-/* Option pour le fond lorsque le menu est ouvert (transparence) */
-.side-menu.open {
-    left: 0; /* Le menu est déplacé à la position visible */
-}
-
-.bouton-menu{
-    background-color: transparent;
-    border: none;
-}
-
-.logo {
-    height: 80%; /* L'image prend 80% de la hauteur du header */
-    cursor: pointer;
-}
-
-.header-title {
-    height: 100%;
-    flex-grow: 1; /* Permet au titre de s'étendre au milieu */
-    display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
-    align-items: center; /* Centre verticalement l'icône et le texte */
-    justify-content: center; /* Centre horizontalement le contenu */
-    gap: 10px; /* Espace entre l'icône et le texte */
-}
-
-.header-title i {
-    font-size: calc(var(--header-height) * 0.6); /* Taille dynamique pour l'icône */
-    color: white;
-}
-
-.header-title h1 {
-    font-size: calc(var(--header-height) * 0.5); /* Taille dynamique pour le titre */
-    margin: 0; /* Supprime les marges par défaut */
-    color: #ffffff;
-}
-
-.deconnexion {
-    display: flex;
-    align-items: center; /* Centre verticalement le bouton et l'icône */
-    justify-content: center;
-    background-color: black; /* Couleur de fond */
-    color: white; /* Couleur du texte */
-    border: none; /* Supprime les bordures */
-    padding: 10px 20px; /* Ajoute des espaces internes */
-    border-radius: 5px; /* Coins arrondis */
-    font-size: calc(var(--header-height) * 0.2); /* Taille dynamique */
-    cursor: pointer; /* Change le curseur en main au survol */
-}
-
-.deconnexion:hover {
-    background-color: #222;
-    transition: all 0.3s ease;
-}
-
-.deconnexion i {
-    margin-left: 10px; /* Ajoute un espace entre le texte et l'icône */
-    font-size: calc(var(--header-height) * 0.2);
+    .btn-rechercher-filtre {
+        width: 50%;
+        background-color: #D9D9D9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        /*width: 100%;*/
+        margin-top: 10px; /* Ajout d'espace entre les champs et le bouton */
+    }
 }
 
 body {

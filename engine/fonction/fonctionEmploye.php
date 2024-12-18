@@ -1,26 +1,73 @@
 <?php
-    function getListeEmploye($connexion) {
-        $tableauEmployes = array(); // Initialisation d'un tableau pour stocker les employés.
-        try {
-            // Préparer la requête pour récupérer le nom et le prénom des employés.
-            $requeteEmployes = $connexion->prepare("SELECT identifiant, nom, prenom FROM utilisateur WHERE role = 'employé' ORDER BY nom ASC, prenom ASC");
+    function ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp) {
+        
+        $requete = "INSERT INTO utilisateur(nom, prenom, telephone, role, login, motDePasse)
+                    VALUES (:nom, :prenom, NULLIF(:telephone, ''), 'employe', :login, md5(:motDePasse))";
+        
+        $stmt = $pdo->prepare($requete);
+        
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':telephone', $telephone);
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':motDePasse', $mdp);
+        
+        $stmt->execute();
+    }
+    
+    function verifChamps() {
+        
+        $verifications = [];
+        
+        if (isset($_POST['telephone']) && $_POST['telephone'] != "" ) {
             
-            // Exécuter la requête.
-            if ($requeteEmployes->execute()) {
-                // Parcourir les résultats et ajouter chaque employé (nom et prénom) au tableau.
-                while ($ligne = $requeteEmployes->fetch(PDO::FETCH_ASSOC)) {
-                    $tableauEmployes[] = [
-                        'identifiant' => $ligne['identifiant'],
-                        'nom' => $ligne['nom'],
-                        'prenom' => $ligne['prenom']
-                    ];
-                }
+            // vérifie que le téléphone soit un entier
+            try {
+                intval($_POST['telephone']);
+                $estEntier = true;
+            } catch (Exception $e) {
+                $estEntier = false;
             }
-            return $tableauEmployes; // Retourner le tableau contenant les noms et prénoms des employés.
         }
-        catch (Exception $e) {
-            // Gérer les erreurs et lancer une exception avec le message d'erreur.
-            throw new PDOException($e->getMessage(), $e->getCode());
-        }  
+        
+        $verifications['nom'] = isset($_POST['nom']) && $_POST['nom'] != "";
+        $verifications['prenom'] = isset($_POST['prenom']) && $_POST['prenom'] != "";
+        $verifications['telephone'] = isset($_POST['telephone']) 
+                                      && ($_POST['telephone'] == ""
+                                          || strlen($_POST['telephone']) == 4
+                                          && $estEntier);
+        $verifications['login'] = isset($_POST['login']) && $_POST['login'] != "";
+        $verifications['mdp'] = isset($_POST['mdp']) && $_POST['mdp'] != "";
+        $verifications['confirm_mdp'] = isset($_POST['confirm_mdp']) && $_POST['confirm_mdp'] != "" && $_POST['confirm_mdp'] == $_POST['mdp'];
+        
+        $verifications['tout'] = true;
+        foreach ($verifications as $verif) {
+            $verifications['tout'] &= $verif;
+        }
+        
+        return $verifications;
+    }
+    
+    function modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp) {
+        
+        $requete = "UPDATE utilisateur
+                    SET
+                        nom = :nom,
+                        prenom = :prenom,
+                        telephone = NULLIF(:telephone, ''),
+                        login = :login,
+                        motDePasse = md5(:motDePasse)
+                    WHERE identifiant = :id";
+        
+        $stmt = $pdo->prepare($requete);
+        
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':telephone', $telephone);
+        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':motDePasse', $mdp);
+        $stmt->bindParam(':id', $id);
+        
+        $stmt->execute();
     }
 ?>

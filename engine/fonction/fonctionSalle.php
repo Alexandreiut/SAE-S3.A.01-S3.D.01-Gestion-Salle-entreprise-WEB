@@ -1,5 +1,5 @@
 <?php
-    function ajoutSalle($connexion, $nom, $capacite, $nombreOrdinateur, $typeOrdinateur, $videoProjecteur, $ecranXXL, $imprimante, $listeLogiciel) {
+    function ajoutSalle($pdo, $nom, $capacite, $nombreOrdinateur, $typeOrdinateur, $videoProjecteur, $ecranXXL, $imprimante, $listeLogiciel) {
         $tableauParametre = array();
 
         try {
@@ -17,7 +17,7 @@
             }
             
             // Exécution de la requête pour obtenir l'identifiant manquant
-            $resultat = $connexion->query($requeteIdDisponible);
+            $resultat = $pdo->query($requeteIdDisponible);
             $idSalle = $resultat->fetchColumn();  // Récupérer la première colonne du premier résultat
 
 
@@ -36,7 +36,7 @@
             VALUES 
             (?, ?, ?, ?, ?, ?, ?, ?);";
             
-            $resultats = $connexion->prepare($requeteAjoutSalle);
+            $resultats = $pdo->prepare($requeteAjoutSalle);
             $resultats->execute($tableauParametre);
             
             if (!empty($listeLogiciel)) {
@@ -46,12 +46,12 @@
                 $valeurs = [];
                 foreach ($listeLogiciel as $logiciel) {
                     $valeurs[] = "(?, ?)";               
-                    $tableauParametre[] = getIdByLogiciel($connexion, $logiciel);
+                    $tableauParametre[] = getIdByLogiciel($pdo, $logiciel);
                     $tableauParametre[] = $idSalle;
                 }
                 
                 $requeteAjoutLogicielSalle .= implode(", ", $valeurs) . ";";
-                $resultats = $connexion->prepare($requeteAjoutLogicielSalle);
+                $resultats = $pdo->prepare($requeteAjoutLogicielSalle);
                 $resultats->execute($tableauParametre);
             }
         } catch (Exception $e) {
@@ -59,7 +59,7 @@
         }
     }
 
-    function modifieSalle($connexion, $id, $nom, $capacite, $nombreOrdinateur, $typeOrdinateur, $videoProjecteur, $ecranXXL, $imprimante, $listeLogiciel) {
+    function modifieSalle($pdo, $id, $nom, $capacite, $nombreOrdinateur, $typeOrdinateur, $videoProjecteur, $ecranXXL, $imprimante, $listeLogiciel) {
         $tableauParametre = array();
     
         try {
@@ -82,7 +82,7 @@
                 WHERE identifiant = :id";
             
             // Préparation et exécution de la requête
-            $resultats = $connexion->prepare($requeteModifieSalle);
+            $resultats = $pdo->prepare($requeteModifieSalle);
             $tableauParametre = array(
                 ':nom' => $nom,
                 ':capacite' => $capacite,
@@ -99,7 +99,7 @@
             if (!empty($listeLogiciel)) {
                 // Suppression des anciens logiciels associés à la salle
                 $requeteSuppressionLogiciel = "DELETE FROM logiciel_salle WHERE id_salle = :id";
-                $resultats = $connexion->prepare($requeteSuppressionLogiciel);
+                $resultats = $pdo->prepare($requeteSuppressionLogiciel);
                 $resultats->execute([':id' => $id]);
     
                 // Ajout des nouveaux logiciels pour cette salle
@@ -108,7 +108,7 @@
                 $valeurs = [];
                 foreach ($listeLogiciel as $logiciel) {
                     // Récupérer l'id du logiciel (assurez-vous que la fonction getIdByLogiciel existe et retourne un ID valide)
-                    $idLogiciel = getIdByLogiciel($connexion, $logiciel);
+                    $idLogiciel = getIdByLogiciel($pdo, $logiciel);
                     $valeurs[] = "(?, ?)";               
                     $tableauParametre[] = $idLogiciel;
                     $tableauParametre[] = $id;
@@ -118,7 +118,7 @@
                 $requeteAjoutLogicielSalle .= implode(", ", $valeurs);
                 
                 // Exécution de l'insertion des logiciels
-                $resultats = $connexion->prepare($requeteAjoutLogicielSalle);
+                $resultats = $pdo->prepare($requeteAjoutLogicielSalle);
                 $resultats->execute($tableauParametre);
             }
     
@@ -127,10 +127,10 @@
         }
     }
 
-    function verifieReservationSalle($connexion, $idSalle) {
+    function verifieReservationSalle($pdo, $idSalle) {
         try {
             $requeteVerification = "SELECT COUNT(*) FROM reservation WHERE salle = :idSalle";
-            $stmt = $connexion->prepare($requeteVerification);
+            $stmt = $pdo->prepare($requeteVerification);
             $stmt->bindParam(':idSalle', $idSalle, PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetchColumn();
@@ -140,17 +140,17 @@
         }
     }
     
-    function supprimerSalle($connexion, $idSalle) {
+    function supprimerSalle($pdo, $idSalle) {
         try {
             $requeteSuppressionLogiciel = "DELETE FROM logiciel_salle WHERE id_salle = :id";
             $requeteSuppressionReservation = "DELETE FROM reservation WHERE salle = :id";
             $requeteSuppressionSalle = "DELETE FROM salle WHERE identifiant = :id";
 
-            $resultats = $connexion->prepare($requeteSuppressionLogiciel);
+            $resultats = $pdo->prepare($requeteSuppressionLogiciel);
             $resultats->execute([':id' => $idSalle]);
-            $resultats = $connexion->prepare($requeteSuppressionReservation);
+            $resultats = $pdo->prepare($requeteSuppressionReservation);
             $resultats->execute([':id' => $idSalle]);
-            $resultats = $connexion->prepare($requeteSuppressionSalle);
+            $resultats = $pdo->prepare($requeteSuppressionSalle);
             $resultats->execute([':id' => $idSalle]);
         } catch (Exception $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
