@@ -30,6 +30,9 @@
     $offset = ($pageActuelle - 1) * $sallesParPages;
     $salles = getSalles($offset, $sallesParPages);
 
+    //recup listeActivité
+    $listeActivites = getListeActivites();
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -70,34 +73,53 @@
 
         <div class="container">
         <!-- Filtres -->
-            <div class="row filtre">
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <label for="activite">Activité :</label>
-                        <select id="activite" class="saisi-filtre">
-                            <option>Tous</option>
-                        </select>
+            <div class="filtre">
+                <form action="consultationEmploye.php" method="get">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <label for="employe">Nom Salle :</label>
+                                <input id="employe" type="text" class="saisi-filtre" name="nomEmploye">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <button class="btn-rechercher-filtre" type="submit">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                </form>
+                <div class="row">
+                    <hr class="mt-2 mb-2">
                 </div>
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <label for="employe">Employé :</label>
-                        <input id="employe" type="text" class="saisi-filtre">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <label for="activite">Activité :</label>
+                                <select id="activite" class="saisi-filtre">
+                                    <option>Tous</option>
+                                    <?php affichageListeActivites($listeActivites)?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <label for="salle">Nom Employé :</label>
+                                <input id="salle" type="text" class="saisi-filtre">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <button class="btn-rechercher-filtre">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <label for="salle">Salle :</label>
-                        <input id="salle" type="text" class="saisi-filtre">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <button class="btn-rechercher-filtre">
-                            Rechercher
-                        </button>
-                    </div>
-                </div>
+                </form>
             </div>
 
             <!-- Nombre d'item trouvé -->
