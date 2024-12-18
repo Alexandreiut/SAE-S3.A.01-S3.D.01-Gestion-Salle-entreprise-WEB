@@ -1,6 +1,8 @@
 <?php
     function ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp) {
         
+        echo 'AAAAAAAAAAAAAH';
+        
         $requete = "INSERT INTO utilisateur(nom, prenom, telephone, role, login, motDePasse)
                     VALUES (:nom, :prenom, NULLIF(:telephone, ''), 'employe', :login, md5(:motDePasse))";
         
