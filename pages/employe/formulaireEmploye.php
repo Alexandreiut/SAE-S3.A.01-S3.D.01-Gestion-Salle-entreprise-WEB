@@ -2,25 +2,28 @@
 
     session_start();
     
-    //TESTS
-    // $_SESSION['mode'] = 'modification'; //test
-    // $_SESSION['id'] = 8;
-    // $_SESSION['nom'] = 'a';
-    // $_SESSION['prenom'] = 'a';
-    // $_SESSION['telephone'] = 4235;
-    // $_SESSION['login'] = 'a';
-    // $_SESSION['mdp'] = 'a';
-    //TESTS
+    if(session_id() != $_SESSION['session']){
+		header('Location: connexion.php');
+		exit();
+	}
+	
+	$role = $_SESSION['role'];
+
+	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
+		session_destroy();
+		header('Location: ../../index.php');
+		exit();
+	}
     
-    if (!isset($_SESSION['mode'])) {
-        header('Location: consultationEmploye.php');
+    if (isset($_POST['mode'])) {
+        $_SESSION['mode'] = $_POST['mode'];
     }
     
     try {
         require('../../engine/fonction/fonctionEmploye.php');
         require("../../engine/fonction/connexionBD.php");
         
-        if (!empty($_POST)) {
+        if (isset($_POST['nom'])) {
             $verifications = verifChamps();
             
             if ($verifications['tout']) {
@@ -32,7 +35,7 @@
                     || !isset($_POST['telephone']) || !isset($_POST['login'])
                     || !isset($_POST['mdp'])) {
                         
-                    throw new Exception('informations manquantes pour ajout');
+                    throw new Exception('informations manquantes');
                 }
                 
                 if ($_SESSION['mode'] == 'ajout') {
@@ -44,16 +47,16 @@
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
                     ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp);
-                    $_SESSION['ajout_employe'] = true;
+                    $_POST['ajout_employe'] = true;
                 } else {
                     
                     // test présence id
-                    if (!isset($_SESSION['id'])) {
+                    if (!isset($_POST['id'])) {
                             
-                        throw new Exception('informations manquantes pour modification');
+                        throw new Exception('idenfiant manquant pour modification');
                     }
                     
-                    $id = htmlspecialchars($_SESSION['id']);
+                    $id = htmlspecialchars($_POST['id']);
                     $nom = htmlspecialchars($_POST['nom']);
                     $prenom = htmlspecialchars($_POST['prenom']);
                     $telephone = htmlspecialchars($_POST['telephone']);
@@ -61,16 +64,16 @@
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
                     modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp);
-                    $_SESSION['modif_employe'] = true;
+                    $_POST['modif_employe'] = true;
                 }
                 header('Location: consultationEmploye.php');
             }
         }
         
     } catch (Exception $e) {
-        //echo $e;
-        //header('Location: erreurBD.php');
+        header('Location: erreurBD.php');
     }
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -156,8 +159,6 @@
                                         
                                         if (isset($_POST['nom'])) {
                                             echo htmlspecialchars($_POST['nom']);
-                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['nom'])) {
-                                            echo $_SESSION['nom'];
                                         }
                                         
                                         echo '"';
@@ -179,8 +180,6 @@
                                         
                                         if (isset($_POST['prenom'])) {
                                             echo htmlspecialchars($_POST['prenom']);
-                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['prenom'])) {
-                                            echo $_SESSION['prenom'];
                                         }
                                         
                                         echo '"';
@@ -202,8 +201,6 @@
                                         
                                         if (isset($_POST['telephone'])) {
                                             echo htmlspecialchars($_POST['telephone']);
-                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['telephone'])) {
-                                            echo $_SESSION['telephone'];
                                         }
                                         
                                         echo '"';
@@ -234,8 +231,6 @@
                                         
                                         if (isset($_POST['login'])) {
                                             echo htmlspecialchars($_POST['login']);
-                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['login'])) {
-                                            echo $_SESSION['login'];
                                         }
                                         
                                         echo '"';
@@ -257,8 +252,6 @@
                                         
                                         if (isset($_POST['mdp'])) {
                                             echo htmlspecialchars($_POST['mdp']);
-                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['mdp'])) {
-                                            echo $_SESSION['mdp'];
                                         }
                                         
                                         echo '"';
@@ -280,8 +273,6 @@
                                         
                                         if (isset($_POST['confirm_mdp'])) {
                                             echo htmlspecialchars($_POST['confirm_mdp']);
-                                        } else if ($_SESSION['mode'] == 'modification' && isset ($_SESSION['mdp'])) {
-                                            echo $_SESSION['mdp'];
                                         }
                                         
                                         echo '"';

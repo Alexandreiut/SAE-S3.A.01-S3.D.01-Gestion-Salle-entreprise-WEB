@@ -99,94 +99,10 @@
 
             <!-- Résultat recherche -->
             <div class="hauteur-recherche">
+                
                 <div class="row mt-1">
                     <div class="sous-container-informations">
                         <span class="col-lg-4 texte-ellipsis">A6</span>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                            Voir les détails
-                        </div>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                            Modifier
-                        </div>
-                        <div class="col-lg-2 btn-supprimer">
-                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                            Supprimer
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="sous-container-informations">
-                        <span class="col-lg-4 texte-ellipsis">A7</span>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                            Voir les détails
-                        </div>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                            Modifier
-                        </div>
-                        <div class="col-lg-2 btn-supprimer">
-                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                            Supprimer
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="sous-container-informations">
-                        <span class="col-lg-4 texte-ellipsis">Salle bleu</span>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                            Voir les détails
-                        </div>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                            Modifier
-                        </div>
-                        <div class="col-lg-2 btn-supprimer">
-                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                            Supprimer
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="sous-container-informations">
-                        <span class="col-lg-4 texte-ellipsis">Salle ronde</span>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                            Voir les détails
-                        </div>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                            Modifier
-                        </div>
-                        <div class="col-lg-2 btn-supprimer">
-                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                            Supprimer
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="sous-container-informations">
-                        <span class="col-lg-4 texte-ellipsis">Salle picasso</span>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                            Voir les détails
-                        </div>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                            Modifier
-                        </div>
-                        <div class="col-lg-2 btn-supprimer">
-                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                            Supprimer
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="sous-container-informations">
-                        <span class="col-lg-4 texte-ellipsis">Je suis un nom de salle trop longggggggggggggggggggggggggggggggggggggggggggggggggg</span>
                         <div class="col-lg-2 btn-details-modifier">
                             <i class="fa-solid fa-circle-info taille-icon-infos"></i>
                             Voir les détails
@@ -220,11 +136,14 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1 container-btn-add">
-                    <button class="btn-add">
-                        <i class="fa-solid fa-plus"></i>
-                        <i class="fa-solid fa-user"></i>
-                        Ajouter un employé
-                    </button>
+                    <form action = "formulaireEmploye.php" method = "post">
+                        <input type = "hidden" name = "mode" value = "ajout">
+                        <button type = "submit" class="btn-add">
+                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-user"></i>
+                            Ajouter un employé
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
