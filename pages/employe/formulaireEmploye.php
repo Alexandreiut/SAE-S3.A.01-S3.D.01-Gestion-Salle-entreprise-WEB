@@ -17,6 +17,9 @@
     
     if (isset($_POST['mode'])) {
         $_SESSION['mode'] = $_POST['mode'];
+        if ($_SESSION['mode'] == 'modification' && !isset($_SESSION['mdp_crypte'])) {
+            $_SESSION['mdp_crypte'] = $_POST['mdp'];
+        }
     }
     
     try {
@@ -71,7 +74,8 @@
         }
         
     } catch (Exception $e) {
-        header('Location: erreurBD.php');
+        echo $e;
+        //header('Location: erreurBD.php');
     }
 
 ?>
@@ -238,6 +242,9 @@
                                     ><br><br>
                                 </div>
                                 <?php
+                                
+                                    if ($_SESSION['mode'] == 'ajout') {
+                                
                                     echo '<div class = "col-12';
                                     if (isset ($verifications) && !$verifications['mdp']) {
                                         echo " rouge";
@@ -260,24 +267,72 @@
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['confirm_mdp']) {
+                                    if (isset ($verifications) && !$verifications['alt_mdp']) {
                                         echo " rouge";
                                     }
                                     echo '">';
                                 ?>
-                                    <!-- mot de passe -->
-                                    <label for = "confirm_mdp">Confirmation mot de Passe : <span class = "rouge">*</span></label><br>
-                                    <input type = "password" name = "confirm_mdp" id = "confirm_mdp" required placeholder = "Confirmez le mot de passe"
+                                    <!-- confirmation mot de passe -->
+                                    <label for = "alt_mdp">Confirmation mot de Passe : <span class = "rouge">*</span></label><br>
+                                    <input type = "password" name = "alt_mdp" id = "alt_mdp" required placeholder = "Confirmez le mot de passe"
                                     <?php
                                         echo 'value = "';
                                         
-                                        if (isset($_POST['confirm_mdp'])) {
-                                            echo htmlspecialchars($_POST['confirm_mdp']);
+                                        if (isset($_POST['alt_mdp'])) {
+                                            echo htmlspecialchars($_POST['alt_mdp']);
                                         }
                                         
                                         echo '"';
                                     ?>
                                     ><br><br>
+                                </div>
+                                <?php
+                                    } else {
+
+                                echo '<div class = "col-12';
+                                if (isset ($verifications) && !$verifications['alt_mdp']) {
+                                    echo " rouge";
+                                }
+                                echo '">';
+                                ?>
+                                    <!-- mot de passe à retaper -->
+                                    <label for = "alt_mdp">Mot de Passe actuel : <span class = "rouge">*</span></label><br>
+                                    <input type = "password" name = "alt_mdp" id = "alt_mdp" required placeholder = "Entrez le mot de passe actuel du compte"
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['alt_mdp'])) {
+                                            echo htmlspecialchars($_POST['alt_mdp']);
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
+                                </div>
+                                <?php
+                                echo '<div class = "col-12';
+                                if (isset ($verifications) && !$verifications['mdp']) {
+                                    echo " rouge";
+                                }
+                                echo '">';
+                                ?>
+                                    <!-- mot de passe à retaper -->
+                                    <label for = "mdp">Nouveau Mot de Passe : <span class = "rouge">*</span></label><br>
+                                    <input type = "password" name = "mdp" id = "mdp" required placeholder = "Entrez le nouveau mot de passe actuel du compte"
+                                    <?php
+                                        echo 'value = "';
+                                        
+                                        if (isset($_POST['mdp']) && $_POST['mdp'] != $_SESSION['mdp_crypte']) {
+                                            echo htmlspecialchars($_POST['mdp']);
+                                        }
+                                        
+                                        echo '"';
+                                    ?>
+                                    ><br><br>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                                 </div>
                             </div>
                         </div>
@@ -305,6 +360,13 @@
                         <br/>
                     </div>
                 </div>
+                <?php
+                    if (isset($_POST['id'])) {
+                ?>
+                <input type = 'hidden' name = 'id' value = "<?php echo $_POST['id']; ?>">
+                <?php
+                    }
+                ?>
             </form>
         </div>
         <div id="footMenu" class="foot-menu d-md-none">

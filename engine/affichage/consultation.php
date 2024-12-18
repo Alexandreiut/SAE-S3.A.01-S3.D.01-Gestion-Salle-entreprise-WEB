@@ -4,6 +4,13 @@
 
         foreach ($employes as $e) {
             echo '<form action="' . $lien . '" method="post">
+                    <input type = "hidden" name = "mode" value = "modification">
+                    <input type = "hidden" name = "id" value = "'.$e['identifiant'].'">
+                    <input type = "hidden" name = "nom" value = "'.$e['nom'].'">
+                    <input type = "hidden" name = "prenom" value = "'.$e['prenom'].'">
+                    <input type = "hidden" name = "telephone" value = "'.$e['telephone'].'">
+                    <input type = "hidden" name = "login" value = "'.$e['login'].'">
+                    <input type = "hidden" name = "mdp" value = "'.$e['motDePasse'].'">
                     <div class="row mt-1 mb-1">
                         <div class="sous-container-informations">
                             <input type="text" value="' . $e["identifiant"]. '" hidden>

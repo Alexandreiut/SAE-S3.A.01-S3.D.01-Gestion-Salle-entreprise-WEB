@@ -40,7 +40,10 @@
                                           && $estEntier);
         $verifications['login'] = isset($_POST['login']) && $_POST['login'] != "";
         $verifications['mdp'] = isset($_POST['mdp']) && $_POST['mdp'] != "";
-        $verifications['confirm_mdp'] = isset($_POST['confirm_mdp']) && $_POST['confirm_mdp'] != "" && $_POST['confirm_mdp'] == $_POST['mdp'];
+        $verifications['alt_mdp'] = isset($_POST['alt_mdp']) && $_POST['alt_mdp'] != ""
+                                  && ($_SESSION['mode'] == 'ajout' ?
+                                      $_POST['alt_mdp'] == $_POST['mdp']
+                                      : md5($_POST['alt_mdp']) == $_SESSION['mdp_crypte']);
         
         $verifications['tout'] = true;
         foreach ($verifications as $verif) {

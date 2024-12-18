@@ -31,7 +31,7 @@
     $employes = getEmployes($offset, $employesParPages);
 
 //    var_dump($nbEmployes);
-//    var_dump($employes);
+    // var_dump($employes);
 //    var_dump(ceil(8/10));
 ?>
 <!DOCTYPE HTML>
