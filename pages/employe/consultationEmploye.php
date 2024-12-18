@@ -10,16 +10,29 @@
         exit();
     }
 
-    $role = $_SESSION['role'];
-
     if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
         session_destroy();
         header('Location: ../../index.php');
         exit();
     }
 
-    $employes = getEmployes();
-    var_dump($employes);
+    $role = $_SESSION['role'];
+
+    $employesParPages = 10;
+    $nbEmployes = getNbEmployes();
+    $pageTotal = (int) ceil($nbEmployes/$employesParPages);
+    if (!isset($_GET["page"]) || !filter_var($_GET["page"], FILTER_VALIDATE_INT) || (int) $_GET["page"] < 1 || (int) $_GET["page"] > $pageTotal) {
+        header("Location: " . $_SERVER["PHP_SELF"] . "?page=1");
+        exit();
+    }
+    $pageActuelle = (int) $_GET["page"];
+
+    $offset = ($pageActuelle - 1) * $employesParPages;
+    $employes = getEmployes($offset, $employesParPages);
+
+//    var_dump($nbEmployes);
+//    var_dump($employes);
+//    var_dump(ceil(8/10));
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -93,30 +106,15 @@
             <!-- Nombre d'item trouvé -->
             <div class="row mt-3 mb-3">
                 <div class="col-12 sous-container-nb-items">
-                    Nombre d'employés trouvé : <span>150</span>
+                    Nombre d'employés trouvé : <span><?=$nbEmployes?></span>
                 </div>
             </div>
 
             <!-- Résultat recherche -->
             <div class="hauteur-recherche">
-                
-                <div class="row mt-1">
-                    <div class="sous-container-informations">
-                        <span class="col-lg-4 texte-ellipsis">A6</span>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                            Voir les détails
-                        </div>
-                        <div class="col-lg-2 btn-details-modifier">
-                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                            Modifier
-                        </div>
-                        <div class="col-lg-2 btn-supprimer">
-                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                            Supprimer
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    affichageEmployes($employes);
+                ?>
             </div>
 
             <!-- Navigation page et ajout salle -->
@@ -124,21 +122,25 @@
                 <hr>
                 <div class="col-lg-4 offset-lg-4">
                     <div class="navigation">
-                        <button class="btn btn-navigation-page">
-                            <i class="fa-solid fa-arrow-left"></i>
-                            Précédent
-                        </button>
-                        <span class="page-info">1/10</span>
-                        <button class="btn btn-navigation-page">
-                            Suivant
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                        <form action="consultationEmploye.php" method="get">
+                            <button class="btn btn-navigation-page <?php if ($pageActuelle === 1) echo"cacher";?>" value="<?=$pageActuelle -1?>" name="page" type="submit">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                Précédent
+                            </button>
+                            <span class="page-info"><?=$pageActuelle . "/" . $pageTotal?></span>
+                            <button class="btn btn-navigation-page <?php if ($pageActuelle === $pageTotal) echo"cacher";?>" value="<?=$pageActuelle +1?>" name="page" type="submit">
+                                Suivant
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1 container-btn-add">
-                    <form action = "formulaireEmploye.php" method = "post">
-                        <input type = "hidden" name = "mode" value = "ajout">
-                        <button type = "submit" class="btn-add">
+                    <?php
+                    $lien = "formulaireEmploye.php";
+                    ?>
+                    <form action="<?=$lien?>" method="post">
+                        <button class="btn-add" name="action" value="ajout" type="submit">
                             <i class="fa-solid fa-plus"></i>
                             <i class="fa-solid fa-user"></i>
                             Ajouter un employé

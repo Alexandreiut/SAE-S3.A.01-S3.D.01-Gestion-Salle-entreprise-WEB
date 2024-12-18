@@ -6,6 +6,10 @@
     border-radius: 20px;
 }
 
+.cacher {
+    visibility: hidden;
+}
+
 /* Style pour les grands écrans (plus de 992px) */
 @media screen and (min-width: 992px) {
     .sous-container-filtre {
@@ -40,6 +44,9 @@
     /***********************************************************************/
     .hauteur-recherche {
         height: 52vh;
+        padding-right: 1.5%;
+        padding-left: 1.5%;
+        overflow: hidden auto;
     }
 
     .sous-container-nb-items {
@@ -74,9 +81,9 @@
         width: min-content;
         height: 100%;
         white-space: nowrap;
-        gap: 15px;
+        gap: 10px;
         border-radius: 15px;
-        padding: 0.1% 1% 0.1% 0.5%;
+        padding: 0.1% 1.5% 0.1% 0.5%;
     }
 
 
