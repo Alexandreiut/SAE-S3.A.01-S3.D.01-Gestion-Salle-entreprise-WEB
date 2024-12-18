@@ -11,10 +11,11 @@
     // $_SESSION['login'] = 'a';
     // $_SESSION['mdp'] = 'a';
     //TESTS
-    
-    if (!isset($_SESSION['mode'])) {
-        header('Location: consultationEmploye.php');
-    }
+
+// TODO : vérification par la session id (voir accueil.php pour un exemple)
+//    if (!isset($_SESSION['mode'])) {
+//        header('Location: consultationEmploye.php');
+//    }
     
     try {
         require('../../engine/fonction/fonctionEmploye.php');

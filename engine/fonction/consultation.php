@@ -5,7 +5,7 @@
         try {
             $pdo = ConnexionBD::getPDO();
 
-            $requete = "SELECT nom, prenom FROM utilisateur WHERE role = 'employé' ORDER BY identifiant LIMIT :limit OFFSET :offset";
+            $requete = "SELECT identifiant, nom, prenom FROM utilisateur WHERE role = 'employé' ORDER BY identifiant LIMIT :limit OFFSET :offset";
             $stmt = $pdo->prepare($requete);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);

@@ -75,11 +75,6 @@
         text-overflow: ellipsis;
     }
 
-    .form-btn-items {
-        /*box-sizing: border-box;*/
-        padding: 0.1% 1.5% 0.1% 0.5%;
-    }
-
     .btn-details-modifier, .btn-supprimer {
         display: flex;
         align-items: center;
@@ -88,6 +83,7 @@
         white-space: nowrap;
         gap: 10px;
         border-radius: 15px;
+        padding: 0.1% 1.5% 0.1% 0.5%;
     }
 
 
