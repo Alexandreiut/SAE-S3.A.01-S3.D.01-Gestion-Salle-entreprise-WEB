@@ -18,6 +18,12 @@
 
     $role = $_SESSION['role'];
 
+    //recherche par filtre nom
+//    if (isset($_GET["nomEmploye"])) {
+//        var_dump($_GET["nomEmploye"]);
+//    }
+
+    //vérification numéro page et récup donnée employé
     $employesParPages = 10;
     $nbEmployes = getNbEmployes();
     $pageTotal = (int) ceil($nbEmployes/$employesParPages);
@@ -29,6 +35,10 @@
 
     $offset = ($pageActuelle - 1) * $employesParPages;
     $employes = getEmployes($offset, $employesParPages);
+
+    //recup listeActivité
+    $listeActivites = getListeActivites();
+//    var_dump($listeActivites);
 
 //    var_dump($nbEmployes);
 //    var_dump($employes);
@@ -73,34 +83,53 @@
 
         <div class="container">
         <!-- Filtres -->
-            <div class="row filtre">
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <label for="activite">Activité :</label>
-                        <select id="activite" class="saisi-filtre">
-                            <option>Tous</option>
-                        </select>
+            <div class="filtre">
+                <form action="consultationEmploye.php" method="get">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <label for="employe">Nom Employé :</label>
+                                <input id="employe" type="text" class="saisi-filtre" name="nomEmploye">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <button class="btn-rechercher-filtre" type="submit">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                </form>
+                <div class="row">
+                    <hr class="mt-2 mb-2">
                 </div>
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <label for="employe">Employé :</label>
-                        <input id="employe" type="text" class="saisi-filtre">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <label for="activite">Activité :</label>
+                                <select id="activite" class="saisi-filtre">
+                                    <option>Tous</option>
+                                    <?php affichageListeActivites($listeActivites)?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <label for="salle">Salle :</label>
+                                <input id="salle" type="text" class="saisi-filtre">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="sous-container-filtre">
+                                <button class="btn-rechercher-filtre">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <label for="salle">Salle :</label>
-                        <input id="salle" type="text" class="saisi-filtre">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="sous-container-filtre">
-                        <button class="btn-rechercher-filtre">
-                            Rechercher
-                        </button>
-                    </div>
-                </div>
+                </form>
             </div>
 
             <!-- Nombre d'item trouvé -->
@@ -136,10 +165,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1 container-btn-add">
-                    <?php
-                    $lien = "formulaireEmploye.php";
-                    ?>
-                    <form action="<?=$lien?>" method="post">
+                    <form action="formulaireEmploye.php" method="post">
                         <button class="btn-add" name="action" value="ajout" type="submit">
                             <i class="fa-solid fa-plus"></i>
                             <i class="fa-solid fa-user"></i>

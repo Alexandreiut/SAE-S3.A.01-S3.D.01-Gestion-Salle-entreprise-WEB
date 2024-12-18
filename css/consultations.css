@@ -1,5 +1,5 @@
 .filtre {
-    margin-top: 4%;
+    margin-top: 3%;
     padding: 1%;
     background-color: #F2F2F2;
     border: 2px solid #016401;
@@ -43,7 +43,7 @@
 
     /***********************************************************************/
     .hauteur-recherche {
-        height: 52vh;
+        height: 50vh;
         padding-right: 1.5%;
         padding-left: 1.5%;
         overflow: hidden auto;

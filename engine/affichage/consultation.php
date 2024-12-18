@@ -1,9 +1,14 @@
 <?php
+
+    function affichageListeActivites($listeActivites) {
+        foreach ($listeActivites as $a) {
+            echo '<option value="'. $a["identifiant"] .'">' . $a["nom"] . '</option>';
+        }
+    }
     function affichageEmployes($employes) {
-        $lien = "formulaireEmploye.php";
 
         foreach ($employes as $e) {
-            echo '<form action="' . $lien . '" method="post">
+            echo '<form action="formulaireEmploye.php" method="post">
                     <div class="row mt-1 mb-1">
                         <div class="sous-container-informations">
                             <input type="text" value="' . $e["identifiant"]. '" hidden>
@@ -16,7 +21,7 @@
                                 <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
                                 Modifier
                             </button>
-                            <button class="col-lg-2 btn-supprimer">
+                            <button class="col-lg-2 btn-supprimer" type="button">
                                 <i class="fa-solid fa-trash-can taille-icon-infos"></i>
                                 Supprimer
                             </button>
