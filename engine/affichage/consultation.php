@@ -6,7 +6,6 @@
         }
     }
     function affichageEmployes($employes) {
-
         foreach ($employes as $e) {
             echo '<form action="formulaireEmploye.php" method="post">
                     <div class="row mt-1 mb-1">
@@ -31,10 +30,8 @@
         }
     }
     function affichageSalle($salles) {
-        $lien = "formulaireSalle.php";
-
         foreach ($salles as $s) {
-            echo '<form action="' . $lien . '" method="post">
+            echo '<form action="formulaireSalle.php" method="post">
                     <div class="row mt-1 mb-1">
                         <div class="sous-container-informations">
                             <input type="text" value="' . $s["identifiant"]. '" hidden>

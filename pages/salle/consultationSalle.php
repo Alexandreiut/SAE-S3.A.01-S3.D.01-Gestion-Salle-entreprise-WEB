@@ -174,11 +174,11 @@
 		<div id="sideMenu" class="side-menu">
 			<ul>
                 <li><a href="../accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
-                <li><a href="../salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
+                <li><a href="consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
                 <li><a href="../reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
                 <?php
                 if($role === "administrateur") {
-                    echo "<li><a href='consultationEmploye.php'><i class='fas fa-user'></i> Employé</a></li>";
+                    echo "<li><a href='../employe/consultationEmploye.php'><i class='fas fa-user'></i> Employé</a></li>";
                 }
                 ?>
                 <li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
