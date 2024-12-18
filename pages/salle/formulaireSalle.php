@@ -5,9 +5,16 @@
     require("../../engine/fonction/fonctionSalle.php");
     require("../../engine/fonction/fonctionLogiciel.php");
 
+	if(session_id() != $_SESSION['session']){
+		header('Location: ../../connexion.php');
+		exit();
+	}
+
+	$role = $_SESSION['role'];
+
 	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
 		session_destroy();
-		header('Location: ../../index.php');
+		header('Location: ../index.php');
 		exit();
 	}
     try{
@@ -37,7 +44,7 @@
 		$valeurOk = false;
         if(isset($_POST["nomSalle"]) && isset($_POST["capaciteSalle"]) 
 	        && trim($_POST["nomSalle"]) != "" && $_POST["capaciteSalle"]!=""){
-			if($_SESSION["mode"] == "ajout"){
+			if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
 				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
 		    	header('Location: consultationSalle.php');
 			} else {
@@ -73,11 +80,11 @@
             <div class="header-title">
                 <h1>
 					<?php 
-						/*if($_SESSION["mode"] == "ajout"){
+						if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
 							echo '<span class = "fas fa-plus fa-door-open"></span> Ajouter salle';
 						} else {
 							echo '<span class = "fas fa-wrench fa-door-open"></span> Modifier salle';
-						}*/	
+						}	
 					?>
 				</h1>
             </div>
@@ -94,13 +101,7 @@
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
-				<?php 
-					/*if ($_SESSION['role'] == "administrateur"){
-						echo '<li><a href="../accueilAdmin.php"><i class="fas fa-house"></i> Accueil</a></li>';
-					} else {
-						echo '<li><a href="../accueilEmploye.php"><i class="fas fa-house"></i> Accueil</a></li>';
-					}*/
-				?>
+				<li><a href="accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
 				<li><a href="../salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
 				<li><a href="../reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
 				<li><a href="../employe/consultationEmploye.php"><i class="fas fa-user"></i> Employé</a></li>
@@ -173,14 +174,16 @@
 					</div>
 				</div>
 				<div class = "col-6 offset-4">
+					
 					<?php 
-						/*if($_SESSION["mode"] == "ajout"){
+						if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
+							echo '<input type="hidden" name="action" value="ajout">';
 							echo '<button type="submit" class="btn-ajouter"><span class = "fas fa-plus fa-door-open"></span> Ajouter la salle</button>';
 						} else {
+							echo '<input type="hidden" name="action" value="modifier">';
 							echo '<button type="submit" onclick="showConfirmation()" class="btn-ajouter"><span class = "fas fa-wrench fa-door-open"></span> Modifier la salle</button>';
-						}*/	
-					?>
-                    
+						}	
+					?>                    
                 </div>
 			</form>
 		</div>
