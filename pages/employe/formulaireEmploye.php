@@ -43,7 +43,7 @@
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
                     ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp);
-                    // $_POST['ajout_employe'] = true;
+                    $_SESSION['ajout_employe'] = true;
                 } else {
                     
                     // test présence id
@@ -60,7 +60,7 @@
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
                     modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp);
-                    // $_POST['modif_employe'] = true;
+                    $_SESSION['modif_employe'] = true;
                 }
                 header('Location: consultationEmploye.php');
             }
@@ -371,7 +371,6 @@
 				</div>
 			</div>
 		</div>
-        <script src="../../engine/js/menu.js" defer></script>*
-        <script src="../../engine/js/confirmation.js" defer></script>
+        <script src="../../engine/js/menu.js" defer></script>
     </body>
 </html>    
