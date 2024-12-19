@@ -41,7 +41,7 @@
         $verifications['login'] = isset($_POST['login']) && $_POST['login'] != "";
         $verifications['mdp'] = isset($_POST['mdp']) && ($_POST['action'] == 'modifier' ?  true : $_POST['mdp'] != "" );
         
-        $verifications['alt_mdp'] = isset($_POST['alt_mdp']) && ($_POST['action'] == 'modifier' ?  $_POST['mdp'] == $_POST['alt_mdp'] : $_POST['alt_mdp'] != "" );
+        $verifications['alt_mdp'] = isset($_POST['alt_mdp']) && $_POST['mdp'] == $_POST['alt_mdp'] && ($_POST['action'] == 'modifier' ?  true : $_POST['alt_mdp'] != "" );
         
         
         

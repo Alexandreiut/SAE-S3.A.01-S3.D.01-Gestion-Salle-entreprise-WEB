@@ -212,7 +212,7 @@
                 </div>
             </div>
         </div>
-
         <script src="../../engine/js/menu.js" defer></script>
+        <script src="../../engine/js/notification.js" defer></script>
     </body>
 </html>

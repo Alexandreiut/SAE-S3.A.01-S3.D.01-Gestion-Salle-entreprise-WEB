@@ -43,7 +43,7 @@
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
                     ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp);
-                    $_POST['ajout_employe'] = true;
+                    // $_POST['ajout_employe'] = true;
                 } else {
                     
                     // test présence id
@@ -60,11 +60,11 @@
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
                     modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp);
-                    $_POST['modif_employe'] = true;
+                    // $_POST['modif_employe'] = true;
                 }
                 header('Location: consultationEmploye.php');
             }
-        } else {
+        } else if ($_POST['action'] == 'modifier') {
             
             recupEmploye($pdo, $_POST['id']);
             
@@ -322,7 +322,7 @@
                         </div>
                     </div>
                     <div class = "col-6 offset-3">
-                        <button type="submit" class="btn-ajouter">
+                        <button type = "submit" class="btn-envoyer" id = "btn-envoyer">
                         <?php 
                         echo '<span class = "fas fa-';
                         if ($_POST['action'] == 'ajout') {
@@ -371,6 +371,7 @@
 				</div>
 			</div>
 		</div>
-        <script src="../../engine/js/menu.js" defer></script>
+        <script src="../../engine/js/menu.js" defer></script>*
+        <script src="../../engine/js/confirmation.js" defer></script>
     </body>
 </html>    
