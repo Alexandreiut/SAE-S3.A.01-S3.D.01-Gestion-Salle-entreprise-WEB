@@ -6,15 +6,13 @@
     require("../../engine/fonction/fonctionLogiciel.php");
 
 	if(session_id() != $_SESSION['session']){
-		header('Location: ../../connexion.php');
+		header('Location: ../../index.php');
 		exit();
 	}
 
-	$role = $_SESSION['role'];
-
 	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
 		session_destroy();
-		header('Location: ../index.php');
+		header('Location: ../../index.php');
 		exit();
 	}
     try{
@@ -23,42 +21,41 @@
         $ecranXxl = "non";
         $imprimante = "non";
 
-        if(isset($_POST["videoProjecteur"]) || (isset($_SESSION["videoProjecteur"]) && $_SESSION["videoProjecteur"] == "oui")){
+        if(isset($_POST["videoProjecteur"])){
             $videoProjecteur = "oui";
         }
-        if(isset($_POST["ecranXxl"]) || (isset($_SESSION["ecranXxl"]) && $_SESSION["ecranXxl"] == "oui")){
+        if(isset($_POST["ecranXxl"])){
             $ecranXxl = "oui";
         }
-        if(isset($_POST["imprimante"]) || (isset($_SESSION["imprimante"]) && $_SESSION["imprimante"] == "oui")){
+        if(isset($_POST["imprimante"])){
             $imprimante = "oui";
         }
-
         $listeLogiciel = getListeLogiciel($pdo);
 	    $listeLogicielSelectionnes = array();
 		if(isset($_POST["action"]) && $_POST["action"] == "modifier"){
 			$listeInfoSalle=getAttributSalle($pdo,$_POST["idSalle"]);
 		}
-		
 
 	    foreach ($listeLogiciel as $logiciel) {
 	        if (isset($_POST[$logiciel["nom"]])) {
 		        $listeLogicielSelectionnes[] = $logiciel["nom"];
 		    }
 	    }
-        if(isset($_POST["nomSalle"]) && isset($_POST["capaciteSalle"]) 
-	        && trim($_POST["nomSalle"]) != "" && $_POST["capaciteSalle"]!=""){
-			if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
-				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
-		    	header('Location: consultationSalle.php');
+		if (isset($_POST["nomSalle"]) && isset($_POST["capaciteSalle"] ) 
+		&& trim($_POST["nomSalle"]) != "" && $_POST["capaciteSalle"]!="") {
+			if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
+				modifieSalle($pdo, $_POST["idSalle"], $_POST["nomSalle"], $_POST["capaciteSalle"], $_POST["nombreOrdinateur"], $_POST["typeOrdinateur"], $videoProjecteur, $ecranXxl, $imprimante, $listeLogicielSelectionnes);
+				header('Location: consultationSalle.php');
 			} else {
-				if(verifieReservationSalle($pdo,$_POST["idSalle"])){
-
-				} else {
-					modifieSalle($pdo,$_POST["idSalle"],$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
-		    		header('Location: consultationSalle.php');
-				}
+				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
+		   		header('Location: consultationSalle.php');
 			}	
-	    }
+		}
+
+		if(isset($_POST["idSalle"])){
+			$salleReservee=verifieReservationSalle($pdo,$_POST["idSalle"]);
+		}
+		
 
 	} catch ( Exception $e ) {
 		header('Location: consultationSalle.php');
@@ -117,9 +114,9 @@
 			</ul>
 		</div>
 		<div class="container-fluid">
-			<form method="post" action="formulaireSalle.php">
+			<form method="post" id="formSalle" name="formSalle" action="formulaireSalle.php">
 				<h1>Informations salle</h1>
-				<div class="row rowWithBorder">
+				<div class="row">
 					<div class="col-6 col-md-6 col-sm-12">
 						<label for="nomSalle" class="labelStyle">Nom :*  </label>
 						<input name="nomSalle" id="nomSalle" placeholder="Nom de la salle" class="inputText <?php if(isset($_POST["nomSalle"]) && trim($_POST["nomSalle"])=="") {echo "erreurInput";}?>" value="<?php if (isset($_POST["nomSalle"])) {echo $_POST["nomSalle"];} else if (isset($listeInfoSalle["nom"])){echo $listeInfoSalle["nom"];}?>">
@@ -129,7 +126,7 @@
 						<input name="typeOrdinateur" id="typeOrdinateur" placeholder="" class="inputText" value="<?php if (isset($_POST["typeOrdinateur"])) {echo $_POST["typeOrdinateur"];} else if (isset($listeInfoSalle["typeOrdinateur"])){echo $listeInfoSalle["typeOrdinateur"];}?>" >
 					</div>
 				</div>
-				<div class="row rowWithBorder">	
+				<div class="row">	
 					<div class="col-6 col-md-6 col-sm-12">
 						<label for="capaciteSalle" class="labelStyle">Place assise :* </label>
 						<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" 
@@ -143,7 +140,7 @@
 							oninput="nombreValide(this)">
 					</div>
 				</div>
-				<div class="row rowWithBorder">
+				<div class="row">
 					<div class="col-4 col-md-4 col-sm-4">
 						<label for="videoProjecteur" class="labelStyle">Projecteur : </label>
 						<input type="checkbox" id="videoProjecteur" name="videoProjecteur" <?php if (isset($_POST["videoProjecteur"])) {echo " checked ";} else if (isset($listeInfoSalle["videoProjecteur"]) && $listeInfoSalle["videoProjecteur"] == "oui"){echo "checked";}?>>
@@ -161,7 +158,7 @@
 					<h5>Choisissez les logiciels :</h5>
 				</div>
 
-        		<div class="row rowWithBorder">
+        		<div class="row">
 					<div class="col-12 col-md-12 col-sm-12">
 					<?php
 						foreach ($listeLogiciel as $logiciel) {
@@ -189,25 +186,32 @@
 						} else {
 							echo '<input type="hidden" name="idSalle" value="' . $_POST["idSalle"]. '" hidden>';
 							echo '<input type="hidden" name="action" value="modifier">';
-							echo '<button type="submit" onclick="showConfirmation()" class="btn-ajouter"><span class = "fas fa-wrench fa-door-open"></span> Modifier la salle</button>';
+							echo '<button type="submit" id="modifieSalle" onclick="showOverlay(event,'.$salleReservee.')" class="btn-ajouter">';
+							echo '<span class="fas fa-wrench fa-door-open"></span> Modifier la salle';
+						    echo '</button>';
 						}	
 					?>                    
                 </div>
 			</form>
+			
 		</div>
 		
 
 		<div class="footer">
 			<p>2024 © RoomManager. IUT de Rodez.</p>
 		</div>
+
+		<script src="../../engine/js/feunetreConfirmation.js"></script>
+		<script src="../../engine/js/outilVerification.js"></script>
+		<script src="../../engine/js/menu.js"></script>
+		<script src="../../engine/js/verificationChamps.js"></script>
+
 		<div id="overlay" style="display: none;">
 			<div id="overlay-content">
 				<p>La salle est déjà réservée. Voulez-vous quand même la modifier ?</p>
-				<button class="btn" onclick="handleResponse(true)" id="confirmBtn">Oui, Modifier</button>
+				<button class="btn" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
 				<button class="btn" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
 			</div>
 		</div>
-		<script src="../../engine/js/outilVerification.js"></script>
-		<script src="../../engine/js/menu.js"></script>
 	</body>
 </html>

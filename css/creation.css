@@ -106,13 +106,6 @@ button.btn:hover {
     background-color: #fff; /* Fond blanc */
 }
 
-.rowWithBorder {
-    border: 2px solid #ccc; /* Bordure grise claire */
-    border-radius: 8px; /* Coins arrondis pour un effet plus doux */
-    background-color: #f9f9f9; /* Fond légèrement gris clair */
-    padding-top: 15px;
-}
-
 .labelStyle {
     font-weight: bold; /* Gras */
     font-size: 16px;    /* Taille de la police en pixels */
