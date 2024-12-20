@@ -27,7 +27,10 @@
     $employesParPages = 10;
     $nbEmployes = getNbEmployes();
     $pageTotal = (int) ceil($nbEmployes/$employesParPages);
-    if (!isset($_GET["page"]) || !filter_var($_GET["page"], FILTER_VALIDATE_INT) || (int) $_GET["page"] < 1 || (int) $_GET["page"] > $pageTotal) {
+    if ($pageTotal == 0) {
+        $pageTotal = 1;
+    }
+    if (!isset($_GET["page"]) || !filter_var($_GET["page"], FILTER_VALIDATE_INT) || (int) $_GET["page"] < 1 || (int) $_GET["page"] > $pageTotal ) {
         header("Location: " . $_SERVER["PHP_SELF"] . "?page=1");
         exit();
     }
