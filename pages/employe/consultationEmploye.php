@@ -212,7 +212,15 @@
                 </div>
             </div>
         </div>
-
+        <span id = "modification" value = "<?php if (isset($_SESSION['modif_employe']) && $_SESSION['modif_employe']) {
+                                                    echo true;
+                                                    $_SESSION['modif_employe'] = false;
+                                                }?>"></span>
+        <span id = "ajout" value = "<?php   if (isset($_SESSION['ajout_employe']) && $_SESSION['ajout_employe']) {
+                                                echo true;
+                                                $_SESSION['ajout_employe'] = false;
+                                            }?>"></span>
         <script src="../../engine/js/menu.js" defer></script>
+        <script src="../../engine/js/notification.js" defer></script>
     </body>
 </html>

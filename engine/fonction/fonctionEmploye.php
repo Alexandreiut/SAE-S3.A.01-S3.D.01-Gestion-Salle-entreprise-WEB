@@ -39,11 +39,11 @@
                                           || strlen($_POST['telephone']) == 4
                                           && $estEntier);
         $verifications['login'] = isset($_POST['login']) && $_POST['login'] != "";
-        $verifications['mdp'] = isset($_POST['mdp']) && $_POST['mdp'] != "";
-        $verifications['alt_mdp'] = isset($_POST['alt_mdp']) && $_POST['alt_mdp'] != ""
-                                  && ($_SESSION['mode'] == 'ajout' ?
-                                      $_POST['alt_mdp'] == $_POST['mdp']
-                                      : md5($_POST['alt_mdp']) == $_SESSION['mdp_crypte']);
+        $verifications['mdp'] = isset($_POST['mdp']) && ($_POST['action'] == 'modifier' ?  true : $_POST['mdp'] != "" );
+        
+        $verifications['alt_mdp'] = isset($_POST['alt_mdp']) && $_POST['mdp'] == $_POST['alt_mdp'] && ($_POST['action'] == 'modifier' ?  true : $_POST['alt_mdp'] != "" );
+        
+        
         
         $verifications['tout'] = true;
         foreach ($verifications as $verif) {
@@ -60,9 +60,13 @@
                         nom = :nom,
                         prenom = :prenom,
                         telephone = NULLIF(:telephone, ''),
-                        login = :login,
-                        motDePasse = md5(:motDePasse)
-                    WHERE identifiant = :id";
+                        login = :login";
+        
+        if ($mdp != "") {
+            $requete .= " ,motDePasse = md5(:motDePasse)";
+        }
+        
+        $requete .= " WHERE identifiant = :id";
         
         $stmt = $pdo->prepare($requete);
         
@@ -70,9 +74,33 @@
         $stmt->bindParam(':prenom', $prenom);
         $stmt->bindParam(':telephone', $telephone);
         $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':motDePasse', $mdp);
+        
+        if ($mdp != "") {
+             $stmt->bindParam(':motDePasse', $mdp);
+        }
+        
         $stmt->bindParam(':id', $id);
         
         $stmt->execute();
+    }
+    
+    function recupEmploye($pdo, $id) {
+        
+        $requete = "SELECT nom, prenom, telephone, login, motDePasse FROM utilisateur WHERE identifiant = :id";
+        
+        $resultat = $pdo->prepare($requete);
+        
+        $resultat->bindParam('id', $id);
+        
+        $resultat->execute();
+        
+        $infos = $resultat->fetch();
+        
+        $_POST['nom'] = $infos['nom'];
+        $_POST['prenom'] = $infos['prenom'];
+        $_POST['telephone'] = $infos['telephone'];
+        $_POST['login'] = $infos['login'];
+        $_POST['mdp'] = $infos['motDePasse'];
+        
     }
 ?>

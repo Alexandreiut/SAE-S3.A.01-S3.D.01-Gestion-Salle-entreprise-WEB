@@ -9,6 +9,12 @@
 			header('Location: pages/accueil.php');
 			exit();
 		}
+
+		if(isset($_COOKIE['cookieLogin'])){
+			$cookieLogin = $_COOKIE['cookieLogin'];
+		} else {
+			$cookieLogin = "";
+		}
 		
 		$login = "";
 		$login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
@@ -21,10 +27,10 @@
 		
 		if(isset($_POST['login']) && isset($_POST['pwd']) && !empty($_POST['login']) && !empty($_POST['pwd'])) {
 			$pwd = htmlspecialchars($_POST['pwd']);
-
 			$resultat = authentification($pdo, $login, $pwd);
 			
 			if($resultat[1]) {
+				setcookie('cookieLogin', $_POST['login'], time() + 120);
 				$_SESSION['login'] = $login;
 				$_SESSION['role'] = getRole($pdo, $login, $pwd);
 				$_SESSION['session'] = session_id();
@@ -99,7 +105,7 @@
 				<label for="login" class="saisie-text">Identifiant :</label>
 				<span class="saisie-text require">*</span><br/>
 				<div class="<?php echo$couleurIdentifiant?>">
-					<input type="text" name="login" placeholder="Entrez votre identifiant" value="<?php echo $login?>" required>
+					<input type="text" name="login" placeholder="Entrez votre identifiant" value="<?php echo $cookieLogin?>" required>
 				</div>
 				<?php
 					if($couleurIdentifiant == "rouge"){

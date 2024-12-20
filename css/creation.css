@@ -21,7 +21,7 @@ body {
     align-items: flex-start;  /* Aligner en haut */
 }
 
-.btn-ajouter {
+.btn-envoyer {
     background-color: #CCF5F3; /* Couleur intérieure */
     color: black; /* Couleur du texte */
     padding: 10px 50px; /* Taille du bouton */
@@ -33,7 +33,7 @@ body {
     transition: all 0.3s ease; /* Animation fluide */
 }
 
-.btn-ajouter:hover {
+.btn-envoyer:hover {
     background-color: #00BBB0; /* Fond cyan */
     color: black; /* Texte reste noir */
     border-color: #00BBB0; /* Assure une bordure homogène */
