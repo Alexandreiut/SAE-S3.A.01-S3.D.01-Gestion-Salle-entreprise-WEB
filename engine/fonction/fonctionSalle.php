@@ -94,32 +94,25 @@
                 ':id' => $id
             );
             $resultats->execute($tableauParametre);
-    
-            // Si la liste des logiciels est fournie, on doit gérer les relations avec la table logiciel_salle
-            if (!empty($listeLogiciel)) {
-                // Suppression des anciens logiciels associés à la salle
-                $requeteSuppressionLogiciel = "DELETE FROM logiciel_salle WHERE id_salle = :id";
-                $resultats = $pdo->prepare($requeteSuppressionLogiciel);
-                $resultats->execute([':id' => $id]);
-    
-                // Ajout des nouveaux logiciels pour cette salle
+            
+            $requeteSuppressionLogiciel = "DELETE FROM logiciel_salle WHERE id_salle = :id";
+            $resultats = $pdo->prepare($requeteSuppressionLogiciel);
+            $resultats->execute([':id' => $id]);
+            
+                if (!empty($listeLogiciel)) {
+                $param = array();
                 $requeteAjoutLogicielSalle = "INSERT INTO logiciel_salle (id_logiciel, id_salle) VALUES ";
                 
                 $valeurs = [];
                 foreach ($listeLogiciel as $logiciel) {
-                    // Récupérer l'id du logiciel (assurez-vous que la fonction getIdByLogiciel existe et retourne un ID valide)
-                    $idLogiciel = getIdByLogiciel($pdo, $logiciel);
                     $valeurs[] = "(?, ?)";               
-                    $tableauParametre[] = $idLogiciel;
-                    $tableauParametre[] = $id;
+                    $param[] = getIdByLogiciel($pdo, $logiciel);
+                    $param[] = $id;
                 }
                 
-                // Ajouter les valeurs à la requête
-                $requeteAjoutLogicielSalle .= implode(", ", $valeurs);
-                
-                // Exécution de l'insertion des logiciels
+                $requeteAjoutLogicielSalle .= implode(", ", $valeurs) . ";";
                 $resultats = $pdo->prepare($requeteAjoutLogicielSalle);
-                $resultats->execute($tableauParametre);
+                $resultats->execute($param);
             }
     
         } catch (Exception $e) {
