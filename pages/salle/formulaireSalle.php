@@ -71,7 +71,7 @@
         <link rel="stylesheet" href="../../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../../ressources/fontawesome-free-6.5.1-web/css/all.css">
         <link rel="stylesheet" href="../../css/bandeau.css"/>
-        <link rel="stylesheet" href="../../css/creation.css"/>
+        <link rel="stylesheet" href="../../css/formSalle.css"/>
     </head>
 	<body>
 		<div class="header">

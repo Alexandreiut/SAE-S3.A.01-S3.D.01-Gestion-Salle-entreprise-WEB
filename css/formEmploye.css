@@ -1,0 +1,91 @@
+body {
+    background: linear-gradient(
+        to left,
+        #E3FFFE 0%,
+        #FFFFFF 20%,
+        #FFFFFF 80%,
+        #E3FFFE 100%
+    );
+    margin: 0;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-principale {
+    margin: 25px auto; /* Décalage vertical */
+    margin-bottom: 0px;
+    padding: 40px; /* Espace interne */
+    max-width: 900px; /* Limite de largeur */
+    background: white;
+    border-radius: 15px; /* Bords arrondis */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Ombre */
+    display: flex; /* Organisation des colonnes */
+    flex-wrap: wrap; /* Gestion des petits écrans */
+    justify-content: space-between; /* Équilibrage entre les colonnes */
+    gap: 30px; /* Espacement entre colonnes */
+    max-height: fit-content; /* S'adapte au contenu, arrêt au bouton */
+    overflow: hidden; /* Empêche le débordement visuel */
+}
+
+.titre h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px; /* Plus d'espace sous le titre */
+    text-align: center;
+    width: 100%; /* Permet de garder le titre centré sur toute la largeur */
+}
+
+.label-form {
+    font-weight: bold;
+    color: #333; /* Couleur plus foncée pour lisibilité */
+    margin-bottom: 10px; /* Plus d'espace avec les champs */
+    display: block;
+}
+
+.input-form {
+    width: calc(100% - 20px); /* Garde un peu d'espace interne */
+    padding: 15px; /* Ajout d’espace supplémentaire */
+    margin-bottom: 20px; /* Plus d'espace entre les champs */
+    border: 1px solid #ccc; /* Couleur plus douce */
+    border-radius: 8px; /* Bords arrondis */
+    font-size: 1rem;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1); /* Effet subtil */
+}
+
+.btn-envoyer {
+    background-color: #CCF5F3;
+    color: black;
+    padding: 10px 50px;
+    border: 2px solid #00BBB0;
+    border-radius: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 30px auto; /* Centre le bouton */
+    margin-bottom: 100px;
+}
+
+.btn-envoyer:hover {
+    background-color: #00BBB0;
+    color: black;
+    border-color: #00BBB0;
+}
+
+.rouge {
+    color: red;
+    font-weight: bold;
+}
+
+/* Ajout d'espacement entre les colonnes */
+.container > div {
+    flex: 1 1 calc(50% - 30px); /* Chaque colonne occupe environ 50% */
+    min-width: 300px; /* Largeur minimale */
+    padding: 10px; /* Ajout de padding interne */
+}
+
+.fas {
+    margin: 3px;
+}

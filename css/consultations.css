@@ -90,11 +90,25 @@
     .btn-details-modifier {
         background-color: #CCF5F3;
         border: 2px solid #00BBB0;
+        transition: all 0.3s ease;
     }
 
     .btn-supprimer {
         background-color: #F1D5D5;
         border: 2px solid #E93C3C;
+        transition: all 0.3s ease;
+    }
+
+    .btn-details-modifier:hover {
+        background-color: #00BBB0;
+        border: 2px solid #00BBB0;
+        transition: all 0.3s ease;
+    }
+
+    .btn-supprimer:hover {
+        background-color: #E93C3C;
+        border: 2px solid #E93C3C;
+        transition: all 0.3s ease;
     }
 
     .taille-icon-infos {

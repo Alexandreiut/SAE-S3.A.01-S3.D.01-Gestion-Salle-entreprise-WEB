@@ -99,7 +99,7 @@
         <link rel="stylesheet" href="../../css/bandeau.css" />
         <link rel="stylesheet" href="../../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../../ressources/fontawesome-free-6.5.1-web/css/all.css">
-        <link rel="stylesheet" href="../../css/creation.css" />
+        <link rel="stylesheet" href="../../css/formEmploye.css" />
     </head>
     <body>
         <div class="header">
@@ -125,7 +125,7 @@
                 </h1>
             </div>
 
-			<form method="post" action="accueilAdmin.php">
+			<form method="post" action="">
 				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
 				<button type="submit" class="deconnexion">
 					<span class="deconnexion-text">Se déconnecter</span>
@@ -137,18 +137,18 @@
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
-				<li><a href="../accueilAdmin.php"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="../accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
 				<li><a href="../salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
 				<li><a href="../reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
 				<li><a href="../employe/consultationEmploye.php"><i class="fas fa-user"></i> Employé</a></li>
 				<li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
-        <div class = "container" id="container-general">
+        <div class = "container">
             <form action = "" method = "post">
                 <div class = "row">
                     <div class = "col-lg-6 col-12">
-                        <div class = "cadre_principal">
+                        <div class = "container-principale">
                             <div class = "row">
                                 <div class = "col-12 titre">
                                     <h1>Informations<br/>personnelles</h1>
@@ -161,8 +161,8 @@
                                     echo '">';
                                 ?>
                                     <!-- nom -->
-                                    <label for = "nom">Nom : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" name = "nom" id = "nom" required placeholder = "Entrez le nom de l'employé" 
+                                    <label for = "nom" class="label-form">Nom : <span class = "rouge">*</span></label><br>
+                                    <input type = "text" class="input-form" name = "nom" id = "nom" required placeholder = "Entrez le nom de l'employé" 
                                     <?php
                                         echo 'value = "';
                                         
@@ -182,8 +182,8 @@
                                     echo '">';
                                 ?>
                                     <!-- prénom -->
-                                    <label for = "prenom">Prénom : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" name = "prenom" id = "prenom" required placeholder = "Entrez le prénom de l'employé"
+                                    <label for = "prenom" class="label-form">Prénom : <span class = "rouge">*</span></label><br>
+                                    <input type = "text" class="input-form" name = "prenom" id = "prenom" required placeholder = "Entrez le prénom de l'employé"
                                     <?php
                                         echo 'value = "';
                                         
@@ -203,8 +203,8 @@
                                     echo '">';
                                 ?>
                                     <!-- téléphone -->
-                                    <label for = "telephone">Téléphone (optionnel) : </label><br>
-                                    <input type = "text" maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé"
+                                    <label for = "telephone" class="label-form">Téléphone (optionnel) : </label><br>
+                                    <input type = "text" class="input-form" maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé"
                                     <?php
                                         echo 'value = "';
                                         
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     <div class = "col-lg-6 col-12">
-                        <div class = "cadre_principal col-6">
+                        <div class = "container-principale">
                             <div class = "row">
                                 <div class = "col-12 titre">
                                     <h1>Informations du<br/>compte</h1>
@@ -233,8 +233,8 @@
                                     echo '">';
                                 ?>
                                     <!-- login -->
-                                    <label for = "login">Identifiant : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" name = "login" id = "login" required placeholder = "Entrez l'idenfiant du compte"
+                                    <label for = "login" class="label-form">Identifiant : <span class = "rouge">*</span></label><br>
+                                    <input type = "text" class="input-form" name = "login" id = "login" required placeholder = "Entrez l'idenfiant du compte"
                                     <?php
                                         echo 'value = "';
                                         
@@ -257,8 +257,8 @@
                                     echo '">';
                                 ?>
                                     <!-- mot de passe -->
-                                    <label for = "mdp">Mot de Passe : <span class = "rouge">*</span></label><br>
-                                    <input type = "password" name = "mdp" id = "mdp" required placeholder = "Entrez le mot de passe du compte"
+                                    <label for = "mdp" class="label-form">Mot de Passe : <span class = "rouge">*</span></label><br>
+                                    <input type = "password" class="input-form" name = "mdp" id = "mdp" required placeholder = "Entrez le mot de passe du compte"
                                     <?php
                                         echo 'value = "';
                                         
@@ -281,8 +281,8 @@
                                 
                                 ?>
                                     <!-- mot de passe à retaper -->
-                                    <label for = "mdp">Nouveau mot de Passe :</label><br>
-                                    <input type = "password" name = "mdp" id = "mdp" placeholder = "Entrez le nouveau mot de passe du compte"
+                                    <label for = "mdp" class="label-form">Nouveau mot de Passe :</label><br>
+                                    <input type = "password" class="input-form" name = "mdp" id = "mdp" placeholder = "Entrez le nouveau mot de passe du compte"
                                     <?php
                                         echo 'value = "';
                                         
@@ -304,8 +304,8 @@
                                     echo '">';
                                 ?>
                                     <!-- confirmation mot de passe -->
-                                    <label for = "alt_mdp">Confirmation mot de Passe : <?php if ($_POST['action'] == 'ajout') { echo '<span class = "rouge">*</span>'; } ?></label><br>
-                                    <input type = "password" name = "alt_mdp" id = "alt_mdp" placeholder = "Confirmez le mot de passe" <?php if ($_POST['action'] == 'ajout') { echo 'required'; } ?>
+                                    <label for = "alt_mdp" class="label-form">Confirmation mot de Passe : <?php if ($_POST['action'] == 'ajout') { echo '<span class = "rouge">*</span>'; } ?></label><br>
+                                    <input type = "password" class="input-form" name = "alt_mdp" id = "alt_mdp" placeholder = "Confirmez le mot de passe" <?php if ($_POST['action'] == 'ajout') { echo 'required'; } ?>
                                     <?php
                                         echo 'value = "';
                                         
@@ -336,12 +336,6 @@
                         }
                         ?>
                         l'employé</button>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
                     </div>
                 </div>
                 <?php
@@ -361,7 +355,7 @@
 				<div class = "row">
 					<table>
 						<tr>
-							<td><a href="accueilAdmin.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+							<td><a href="accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
 							<td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
 							<td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
 							<td><a href="employe/consultationEmploye.php"><button class="menuBouton"><i class="fas fa-user"></i><span>Employé</span></button></a></td>
