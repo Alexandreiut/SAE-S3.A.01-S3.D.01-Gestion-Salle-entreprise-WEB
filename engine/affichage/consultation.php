@@ -1,32 +1,31 @@
 <?php
 
-    function affichageListeActivites($listeActivites) {
+    function affichageListeActivites($listeActivites, $selectedId) {
         foreach ($listeActivites as $a) {
-            echo '<option value="'. $a["identifiant"] .'">' . $a["nom"] . '</option>';
+            $isSelected = ($a["identifiant"] == $selectedId) ? ' selected' : '';
+            echo '<option value="' . $a["identifiant"] . '"' . $isSelected . '>' . $a["nom"] . '</option>';
         }
     }
     function affichageEmployes($employes) {
         foreach ($employes as $e) {
-            echo '<form action="formulaireEmploye.php" method="post">
-                    <div class="row mt-1 mb-1">
-                        <div class="sous-container-informations">
-                            <input type="text" name = "id" value="' . $e["identifiant"]. '" hidden>
-                            <span class="col-lg-4 texte-ellipsis">' . $e["prenom"] . " " . $e["nom"] . '</span>
-                            <button class="col-lg-2 btn-details-modifier" name="action" value="détails" type="submit">
-                                <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                                Voir les détails
-                            </button>
-                            <button class="col-lg-2 btn-details-modifier" name="action" value="modifier" type="submit">
-                                <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                                Modifier
-                            </button>
-                            <button class="col-lg-2 btn-supprimer" type="button">
-                                <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                                Supprimer
-                            </button>
-                        </div>
+            echo '<div class="row mt-1 mb-1">
+                    <div class="sous-container-informations">
+                        <input type="text" name = "id" value="' . $e["identifiant"]. '" hidden>
+                        <span class="col-lg-4 texte-ellipsis">' . $e["prenom"] . " " . $e["nom"] . '</span>
+                        <button class="col-lg-2 btn-details-modifier" name="action" value="détails" type="submit">
+                            <i class="fa-solid fa-circle-info taille-icon-infos"></i>
+                            Voir les détails
+                        </button>
+                        <button class="col-lg-2 btn-details-modifier" name="action" value="modifier" type="submit">
+                            <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
+                            Modifier
+                        </button>
+                        <button class="col-lg-2 btn-supprimer" type="button">
+                            <i class="fa-solid fa-trash-can taille-icon-infos"></i>
+                            Supprimer
+                        </button>
                     </div>
-                </form>';
+                </div>';
         }
     }
     function affichageSalle($salles) {
