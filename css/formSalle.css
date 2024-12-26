@@ -98,12 +98,13 @@ body {
     height: 35px; /* Hauteur minimale */
     text-align: center; /* Centrer le contenu */
     vertical-align: top;
+    transition: all 0.3s ease;
 }
 
 /* Ajouter un effet de survol */
 .checkbox-container:hover {
     background-color: #007bff;
-    border-color: #0056b3;
+    transition: all 0.3s ease;
 }
 
 .erreur {
@@ -136,6 +137,56 @@ body {
     text-align: center;
 }
 
+.text-overlay {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.bouton-annuler-overlay {
+    background-color: #E93C3C;
+    color: white;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 30px;
+    text-align: center;
+    align-items: center;
+}
+
+.bouton-modifier-overlay {
+    background-color: #00BBB0;
+    color: white;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    align-items: center;
+}
+
 .fas {
     margin : 3px;
+}
+@media screen and (max-width: 768px) {
+    .btn-envoyer {
+        background-color: #CCF5F3;
+        color: black;
+        padding: 10px 50px;
+        border: 2px solid #00BBB0;
+        border-radius: 25px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: block;
+        margin: 30px auto;
+        margin-bottom: 100px;
+    }
 }

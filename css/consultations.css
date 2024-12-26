@@ -156,10 +156,13 @@
         color: black;
         white-space: nowrap;
         width: fit-content;
+        transition: all 0.3s ease;
     }
 
-
-
+    .btn-add:hover {
+        background-color: #00BBB0;
+        transition: all 0.3s ease;
+    }
 
     /*.container-nav-page {*/
     /*    display: grid;*/

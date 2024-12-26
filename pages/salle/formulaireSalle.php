@@ -48,10 +48,12 @@
 		&& trim($_POST["nomSalle"]) != "" && $_POST["capaciteSalle"]!="") {
 			if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
 				modifieSalle($pdo, $_POST["idSalle"], $_POST["nomSalle"], $_POST["capaciteSalle"], $_POST["nombreOrdinateur"], $_POST["typeOrdinateur"], $videoProjecteur, $ecranXxl, $imprimante, $listeLogicielSelectionnes);
+				$_SESSION['modif_salle'] = true;
 				header('Location: consultationSalle.php');
 			} else {
 				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
-		   		header('Location: consultationSalle.php');
+				$_SESSION['ajout_salle'] = true;
+				header('Location: consultationSalle.php');
 			}	
 		}
 
@@ -87,13 +89,16 @@
 
             <div class="offset-lg-2 col-lg-4 header-title">
                 <h1>
-                    <?php 
-						if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
-							echo '<span class = "fas fa-plus fa-door-open"></span> Ajouter salle';
-						} else {
-							echo '<span class = "fas fa-wrench fa-door-open"></span> Modifier salle';
-						}	
-					?>
+				<?php 
+                        echo '<span class = "fas fa-';
+                        if ($_POST['action'] == 'ajout') {
+                            echo 'plus">';
+                        } else {
+                            echo 'edit">';
+                        }
+                    ?>
+                    </span>
+                    <span class = "fas fa-door-open"></span> Salle
                 </h1>
             </div>
 
@@ -241,16 +246,16 @@
                 </div>
             </div>
         </div>
-		<script src="../../engine/js/feunetreConfirmation.js"></script>
-		<script src="../../engine/js/outilVerification.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 		<script src="../../engine/js/menu.js"></script>
-		<script src="../../engine/js/verificationChamps.js"></script>
+		<script src="../../engine/js/fenetreConfirmation.js"></script>
+		<script src="../../engine/js/outilVerification.js"></script>
 
 		<div id="overlay" style="display: none;">
 			<div id="overlay-content">
-				<p>La salle est déjà réservée. Voulez-vous quand même la modifier ?</p>
-				<button class="btn" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
-				<button class="btn" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
+				<p class="text-overlay">La salle est déjà réservée. Voulez-vous quand même la modifier ?</p>
+				<button class="bouton-annuler-overlay" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
+				<button class="bouton-modifier-overlay" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
 			</div>
 		</div>
 	</body>

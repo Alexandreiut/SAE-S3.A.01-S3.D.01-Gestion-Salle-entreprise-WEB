@@ -1,18 +1,18 @@
-// Fonction pour afficher la fenêtre de confirmation
-function showConfirmation() {
-    // Afficher l'overlay
-    if($valeurOk){
-        document.getElementById('overlay').style.display = 'flex'; 
+function showOverlay(event,affichage) {
+    if(affichage){
+        event.preventDefault(); // Empêche la soumission initiale du formulaire
+        document.getElementById("overlay").style.display = "block"; // Affiche l'overlay
     }
     
 }
+function hideOverlay() {
+    document.getElementById("overlay").style.display = "none"; // Cache l'overlay
+}
 
-// Fonction pour gérer la réponse de l'utilisateur
-function handleResponse(response) {
-    
-    if (response) {
-        modifieSalle($connexion,$_SESSION["idSalle"],$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
-		header('Location: consultationSalle.php');
+function handleResponse(confirm) {
+    if (confirm) {
+        document.getElementById("formSalle").submit();
+    } else {
+        hideOverlay();
     }
-    document.getElementById('overlay').style.display = 'none';
 }

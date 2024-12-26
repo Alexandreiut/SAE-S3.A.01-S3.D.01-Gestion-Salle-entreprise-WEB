@@ -208,6 +208,14 @@
                 </div>
             </div>
         </div>
+        <span id = "modification" value = "<?php if (isset($_SESSION['modif_salle']) && $_SESSION['modif_salle']) {
+                                                    echo true;
+                                                    $_SESSION['modif_salle'] = false;
+                                                }?>"></span>
+        <span id = "ajout" value = "<?php   if (isset($_SESSION['ajout_salle']) && $_SESSION['ajout_salle']) {
+                                                echo true;
+                                                $_SESSION['ajout_salle'] = false;
+                                            }?>"></span>
         <script src="../../engine/js/menu.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
         <script src="../../engine/js/notificationSalle.js" defer></script>

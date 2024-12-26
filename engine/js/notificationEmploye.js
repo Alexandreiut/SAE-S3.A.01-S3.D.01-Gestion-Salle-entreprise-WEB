@@ -18,13 +18,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-    if (ajout.getAttribute('value')) {
-        const popup = document.getElementById("customPopup");
-        popup.classList.remove("hidden");
-        document.getElementById("closePopup").addEventListener("click", function () {
-            popup.classList.add("hidden");
-        });
-    }
-});

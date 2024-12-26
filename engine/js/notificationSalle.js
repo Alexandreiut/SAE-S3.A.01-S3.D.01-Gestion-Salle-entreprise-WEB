@@ -5,26 +5,36 @@ document.addEventListener("DOMContentLoaded", function () {
     if (ajout.getAttribute('value')) {
         Swal.fire({
             title: 'Ajout effectué',
-            text: 'Ajout de l\'employé effectué.',
+            text: 'Ajout de la salle effectué.',
             icon: 'success',
             confirmButtonText: 'OK'
         });
     } else if (modification.getAttribute('value')) {
         Swal.fire({
             title: 'Modification effectué',
-            text: 'Modification de l\'employé effectué.',
+            text: 'Modification de la salle effectué.',
             icon: 'success',
             confirmButtonText: 'OK'
         });
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    if (ajout.getAttribute('value')) {
-        const popup = document.getElementById("customPopup");
-        popup.classList.remove("hidden");
-        document.getElementById("closePopup").addEventListener("click", function () {
-            popup.classList.add("hidden");
-        });
-    }
-});
+// Fenetre avec confirmation
+
+// Swal.fire({
+//     title: "Are you sure?",
+//     text: "You won't be able to revert this!",
+//     icon: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#3085d6",
+//     cancelButtonColor: "#d33",
+//     confirmButtonText: "Yes, delete it!"
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       Swal.fire({
+//         title: "Deleted!",
+//         text: "Your file has been deleted.",
+//         icon: "success"
+//       });
+//     }
+//   });
