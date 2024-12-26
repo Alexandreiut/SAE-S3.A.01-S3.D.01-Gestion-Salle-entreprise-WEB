@@ -208,7 +208,8 @@
                 </div>
             </div>
         </div>
-
         <script src="../../engine/js/menu.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+        <script src="../../engine/js/notificationSalle.js" defer></script>
     </body>
 </html>

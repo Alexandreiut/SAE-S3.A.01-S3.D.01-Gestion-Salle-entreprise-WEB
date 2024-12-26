@@ -224,6 +224,7 @@
                                                 $_SESSION['ajout_employe'] = false;
                                             }?>"></span>
         <script src="../../engine/js/menu.js" defer></script>
-        <script src="../../engine/js/notification.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+        <script src="../../engine/js/notificationEmploye.js" defer></script>
     </body>
 </html>

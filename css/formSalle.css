@@ -12,111 +12,77 @@ body {
     justify-content: center;
 }
 
-#container-general {
+.container-principale {
+    margin: 25px auto; /* Décalage vertical */
+    margin-bottom: 0px;
+    padding: 40px; /* Espace interne */
+    max-width: 900px; /* Limite de largeur */
+    background: white;
+    border-radius: 15px; /* Bords arrondis */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15); /* Ombre */
+    display: flex; /* Organisation des colonnes */
+    flex-wrap: wrap; /* Gestion des petits écrans */
+    justify-content: space-between; /* Équilibrage entre les colonnes */
+    gap: 30px; /* Espacement entre colonnes */
+    max-height: fit-content; /* S'adapte au contenu, arrêt au bouton */
+    overflow: hidden; /* Empêche le débordement visuel */
+}
+
+.titre h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px; /* Plus d'espace sous le titre */
     text-align: center;
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end; /* Aligner à droite*/
-    align-items: flex-start;  /* Aligner en haut */
+    width: 100%; /* Permet de garder le titre centré sur toute la largeur */
+}
+
+.label-form {
+    font-weight: bold;
+    color: #333; /* Couleur plus foncée pour lisibilité */
+    margin-bottom: 10px; /* Plus d'espace avec les champs */
+    display: block;
+}
+
+.label-form-checkbox {
+    font-weight: bold;
+    color: #333; /* Couleur plus foncée pour lisibilité */
+    margin-bottom: 10px; /* Plus d'espace avec les champs */
+}
+
+.input-form {
+    width: 100%; /* Garde un peu d'espace interne */
+    padding: 15px; /* Ajout d’espace supplémentaire */
+    margin-bottom: 20px; /* Plus d'espace entre les champs */
+    border: 1px solid #ccc; /* Couleur plus douce */
+    border-radius: 8px; /* Bords arrondis */
+    font-size: 18px;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1); /* Effet subtil */
 }
 
 .btn-envoyer {
-    background-color: #CCF5F3; /* Couleur intérieure */
-    color: black; /* Couleur du texte */
-    padding: 10px 50px; /* Taille du bouton */
-    border: 2px solid #00BBB0; /* Bordure cyan */
-    border-radius: 25px; /* Arrondir les coins */
-    font-size: 28px; /* Taille du texte */
-    font-weight: bold; /* Texte en gras */
+    background-color: #CCF5F3;
+    color: black;
+    padding: 10px 50px;
+    border: 2px solid #00BBB0;
+    border-radius: 25px;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease; /* Animation fluide */
+    transition: all 0.3s ease;
+    display: block;
+    margin: 30px auto; /* Centre le bouton */
+    margin-bottom: 0px;
 }
 
 .btn-envoyer:hover {
-    background-color: #00BBB0; /* Fond cyan */
-    color: black; /* Texte reste noir */
-    border-color: #00BBB0; /* Assure une bordure homogène */
-}
-
-button.btn {
-    margin-bottom: 20px;
     background-color: #00BBB0;
-    color: white;
-    border : none;
-    padding: 12px 24px; /* Augmente la taille du bouton */
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px; /* Taille du texte du bouton */
-}
-
-button.btn:hover {
-    background-color: #009D92; /* Couleur différente au survol */
-}
-
-.titre {
-    text-align : center;
-}
-
-.cadre_principal {
-    font-size : 1.5em;
-    padding : 10px;
-    text-align : left;
-    width : 100%;
-}
-
-.cadre_principal input, select {
-    width : 100%;
-    height : 80px;
-    background-color : #F2F2F2;
-    border : 2px solid #00BBB0;
-    padding : 5px;
-    border-radius : 15px;
-}
-
-.cadre_principal select {
-    text-align : center;
-    border-radius : 0px;
+    color: black;
+    border-color: #00BBB0;
 }
 
 .rouge {
-    color : red;
-}
-
-/*form div {
-    margin-bottom: 20px; /* Ajoute un espacement entre chaque champ     
-    width: 100%; /* Permet au champ de prendre tout l'espace disponible 
-    text-align: left; /* Garde le label aligné à gauche 
-}*/
-
-.inputText {
-    font-size: 16px; /* Taille du texte */
-    width: 150px;     /* Largeur de l'input (100% de l'élément parent) */
-    
-    border: 2px solid #ccc; /* Bordure grise */
-    border-radius: 30px; /* Coins arrondis */
-    background-color: #fff; /* Fond blanc */
-}
-.inputNumber {
-    font-size: 16px; /* Taille du texte */
-    width: 90px;     /* Largeur de l'input (100% de l'élément parent) */
-    
-    border: 2px solid #ccc; /* Bordure grise */
-    border-radius: 30px; /* Coins arrondis */
-    background-color: #fff; /* Fond blanc */
-}
-
-.rowWithBorder {
-    border: 2px solid #ccc; /* Bordure grise claire */
-    border-radius: 8px; /* Coins arrondis pour un effet plus doux */
-    background-color: #f9f9f9; /* Fond légèrement gris clair */
-    padding-top: 15px;
-}
-
-.labelStyle {
-    font-weight: bold; /* Gras */
-    font-size: 16px;    /* Taille de la police en pixels */
-    color: #333;        /* Couleur de texte pour une meilleure lisibilité */
+    color: red;
+    font-weight: bold;
 }
 
 /* Classe pour chaque case à cocher avec une bordure arrondie */
@@ -140,26 +106,15 @@ button.btn:hover {
     border-color: #0056b3;
 }
 
-/* Style pour les labels à l'intérieur du conteneur */
-.checkbox-container label {
-    font-weight: bold;
-    color: #333;
-    font-size: 14px;
-    margin-bottom: 5px;
-    display: block;
-    display: flex; align-items: center;
-}
-
-/* Style pour les cases à cocher */
-.checkbox-container input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin: 0 auto;
-    display: block;
-}
-
-.erreurInput{
-    border: 3px solid red;
+.erreur {
+    width: 100%;
+    max-width: 500px;
+    font-size: 18px;
+    background-color: #f0f0f0;
+    border: solid 2px red;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
 }
 
 #overlay {
@@ -173,26 +128,12 @@ button.btn:hover {
     justify-content: center;
     align-items: center;
 }
+
 #overlay-content {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-}
-.btn {
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 10px 0;
-}
-
-.bouton_cadre {
-
-    text-align:  center;
 }
 
 .fas {
