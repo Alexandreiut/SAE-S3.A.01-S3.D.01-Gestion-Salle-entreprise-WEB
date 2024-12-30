@@ -92,7 +92,6 @@ if ($auMoinsUnChampsInitialise) {
 } else {
     $nbReservations = getNbReservations();
     $result = traiterReservations($nbReservations, 'getReservations', [], $reservationsParPages);
-    echo "2";
 }
 
 // Initialise les variables pour pouvoir les afficher
