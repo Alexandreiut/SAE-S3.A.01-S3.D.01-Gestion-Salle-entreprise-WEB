@@ -3,7 +3,7 @@
     session_start();
     
     if(session_id() != $_SESSION['session']){
-		header('Location: connexion.php');
+		header('Location: ../../index.php.php');
 		exit();
 	}
 	
@@ -331,21 +331,26 @@
                 
             </form>
         </div>
+        <!-- Menu pour téléphone -->
         <div id="footMenu" class="foot-menu d-md-none">
-			<div class = "container bott-menu-container">
-				<div class = "row">
-					<table>
-						<tr>
-							<td><a href="accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
-							<td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
-							<td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
-							<td><a href="employe/consultationEmploye.php"><button class="menuBouton"><i class="fas fa-user"></i><span>Employé</span></button></a></td>
-							<td><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
+            <div class = "container bott-menu-container">
+                <div class = "row">
+                    <table>
+                        <tr>
+                            <td><a href="../accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+                            <td><a href="../salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+                            <td><a href="../reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+                            <?php
+                            if($role === "administrateur") {
+                                echo "<td><a href='consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
+                            }
+                            ?>
+                            <td><a href="../exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
         <script src="../../engine/js/menu.js" defer></script>
     </body>
 </html>    

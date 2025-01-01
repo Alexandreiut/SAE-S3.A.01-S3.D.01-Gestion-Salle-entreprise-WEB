@@ -58,7 +58,7 @@
 		}
 
 		if(isset($_POST["idSalle"])){
-			$salleReservee=verifieReservationSalle($pdo,$_POST["idSalle"]);
+			$salleReservee=!estNonReserve($pdo,$_POST["idSalle"]);
 		}
 		
 
@@ -116,8 +116,8 @@
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
-				<li><a href="accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
-				<li><a href="../salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
+				<li><a href="../accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
 				<li><a href="../reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
 				<li><a href="../employe/consultationEmploye.php"><i class="fas fa-user"></i> Employé</a></li>
 				<li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
@@ -146,7 +146,7 @@
 									<br><br>
 								</div>
 								<div class="col-12">
-									<label for="nombreOrdinateur" class="label-form">Nombre PC : </label><br/>
+									<label for="nombreOrdinateur" class="label-form">Nombre d'ordinateurs : </label><br/>
 									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" 
 										class="input-form" value="<?php if (isset($_POST["nombreOrdinateur"])) {echo $_POST["nombreOrdinateur"];} else if (isset($listeInfoSalle["nombreOrdinateur"])){echo $listeInfoSalle["nombreOrdinateur"];}?>" 
 										oninput="nombreValide(this)">
@@ -162,7 +162,7 @@
                                     <h1>Caractéristiques techniques<br/>de la salle</h1>
                                 </div>
 								<div class="col-12">
-									<label for="typeOrdinateur" class="label-form">Type ordinateur : </label><br/>
+									<label for="typeOrdinateur" class="label-form">Type d'ordinateur : </label><br/>
 									<input name="typeOrdinateur" id="typeOrdinateur" placeholder="Entrez le système d'exploitation des ordinateurs" class="input-form" value="<?php if (isset($_POST["typeOrdinateur"])) {echo $_POST["typeOrdinateur"];} else if (isset($listeInfoSalle["typeOrdinateur"])){echo $listeInfoSalle["typeOrdinateur"];}?>" >
 									<br><br>
 								</div>
@@ -237,7 +237,7 @@
                             <td><a href="../reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
                             <?php
                             if($role === "administrateur") {
-                                echo "<td><a href='consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
+                                echo "<td><a href='../employe/consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
                             }
                             ?>
                             <td><a href="../exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>

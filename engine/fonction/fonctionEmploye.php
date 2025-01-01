@@ -101,6 +101,30 @@
         $_POST['telephone'] = $infos['telephone'];
         $_POST['login'] = $infos['login'];
         $_POST['mdp'] = $infos['motDePasse'];
-        
+    }
+
+    function supprimerEmploye($pdo, $id) {
+
+        if(estNonReservant($pdo, $id)){
+            $requete = "DELETE FROM utilisateur WHERE identifiant = :id";
+		    $resultat = $pdo->prepare($requete);
+            $resultat->bindParam('id', $id);
+		    $resultat->execute();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function estNonReservant($pdo, $id) {
+
+        //Optimiser
+        $requete = "SELECT COUNT(*) FROM reservation WHERE reservant = :id";
+        $resultat = $pdo->prepare($requete);
+        $resultat->bindParam('id', $id);
+        $resultat->execute();
+
+        return $resultat->fetch()['COUNT(*)'] == 0;
     }
 ?>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="fr">
 <head>
-    <title>Base de données à l'arrêt</title>
+    <title>Erreur base de données</title>
     <meta name="Description" content="Erreur base de données" />
     <meta name="Keywords" content="medicament, medilog, erreur, base de données" />
     <link rel="stylesheet" href="../css/erreur.css" />

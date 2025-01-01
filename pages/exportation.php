@@ -4,7 +4,7 @@
 	session_start();
 	
 	if(session_id() != $_SESSION['session']){
-		header('Location: connexion.php');
+		header('Location: ../index.php');
 		exit();
 	}
 

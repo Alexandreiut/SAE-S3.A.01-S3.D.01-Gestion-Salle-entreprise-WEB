@@ -119,36 +119,6 @@
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
-
-    function verifieReservationSalle($pdo, $idSalle) {
-        try {
-            $requeteVerification = "SELECT COUNT(*) FROM reservation WHERE salle = :idSalle";
-            $stmt = $pdo->prepare($requeteVerification);
-            $stmt->bindParam(':idSalle', $idSalle, PDO::PARAM_INT);
-            $stmt->execute();
-            $result = $stmt->fetchColumn();
-            return $result >= 1;
-        } catch (Exception $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
-        }
-    }
-    
-    function supprimerSalle($pdo, $idSalle) {
-        try {
-            $requeteSuppressionLogiciel = "DELETE FROM logiciel_salle WHERE id_salle = :id";
-            $requeteSuppressionReservation = "DELETE FROM reservation WHERE salle = :id";
-            $requeteSuppressionSalle = "DELETE FROM salle WHERE identifiant = :id";
-
-            $resultats = $pdo->prepare($requeteSuppressionLogiciel);
-            $resultats->execute([':id' => $idSalle]);
-            $resultats = $pdo->prepare($requeteSuppressionReservation);
-            $resultats->execute([':id' => $idSalle]);
-            $resultats = $pdo->prepare($requeteSuppressionSalle);
-            $resultats->execute([':id' => $idSalle]);
-        } catch (Exception $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
-        }
-    }
     
     function getListeSalle($pdo){
         $tableauSalles = array();
@@ -205,4 +175,36 @@
         }
     }
     
+    function supprimerSalle($pdo, $id) {
+
+        if(estNonReserve($pdo, $id)){
+
+            // Suppression des logiciels associé à la salle
+            $requete = "DELETE FROM logiciel_salle WHERE id_salle = :id";
+		    $resultat = $pdo->prepare($requete);
+            $resultat->bindParam('id', $id);
+		    $resultat->execute();
+
+            //Suppression de la salle
+            $requete = "DELETE FROM salle WHERE identifiant = :id";
+		    $resultat = $pdo->prepare($requete);
+            $resultat->bindParam('id', $id);
+		    $resultat->execute();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function estNonReserve($pdo, $id) {
+
+        //Optimiser
+        $requete = "SELECT COUNT(*) FROM reservation WHERE salle = :id";
+        $resultat = $pdo->prepare($requete);
+        $resultat->bindParam('id', $id);
+        $resultat->execute();
+
+        return $resultat->fetch()['COUNT(*)'] == 0;
+    }
 ?>

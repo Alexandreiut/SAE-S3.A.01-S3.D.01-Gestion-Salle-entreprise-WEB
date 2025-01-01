@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const modification = document.getElementById("modification");
     const ajout = document.getElementById("ajout");
+    const suppression = document.getElementById("suppression");
     
     if (ajout.getAttribute('value')) {
         Swal.fire({
@@ -14,6 +15,20 @@ document.addEventListener("DOMContentLoaded", function () {
             title: 'Modification effectué',
             text: 'Modification de l\'employé effectué.',
             icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (suppression.getAttribute('value') == 'true') {
+        Swal.fire({
+            title: 'Suppression effectué',
+            text: 'Suppression de l\'employé effectué.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    } else if (suppression.getAttribute('value') == 'false') {
+        Swal.fire({
+            title: 'Suppression impossible',
+            text: 'Suppression de l\'employé impossible, il a effectué une réservation.',
+            icon: "error",
             confirmButtonText: 'OK'
         });
     }

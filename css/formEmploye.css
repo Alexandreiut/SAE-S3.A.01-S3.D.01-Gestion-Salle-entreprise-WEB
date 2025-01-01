@@ -7,7 +7,6 @@ body {
         #E3FFFE 100%
     );
     margin: 0;
-    font-family: Arial, sans-serif;
     align-items: center;
     justify-content: center;
 }
@@ -88,13 +87,6 @@ body {
     border-radius: 10px;
     box-sizing: border-box;
     outline: none;
-}
-
-/* Ajout d'espacement entre les colonnes */
-.container > div {
-    flex: 1 1 calc(50% - 30px); /* Chaque colonne occupe environ 50% */
-    min-width: 300px; /* Largeur minimale */
-    padding: 10px; /* Ajout de padding interne */
 }
 
 .fas {

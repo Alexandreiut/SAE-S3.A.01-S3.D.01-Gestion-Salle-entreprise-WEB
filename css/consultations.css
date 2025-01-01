@@ -1,211 +1,3 @@
-.filtre {
-    margin-top: 3%;
-    padding: 1%;
-    background-color: #F2F2F2;
-    border: 2px solid #016401;
-    border-radius: 20px;
-}
-
-.cacher {
-    visibility: hidden;
-}
-
-/* Style pour les grands écrans (plus de 992px) */
-@media screen and (min-width: 992px) {
-    .sous-container-filtre {
-        display: flex;
-        width: 100%;
-        /*background-color: #0a53be;*/
-        gap: 5%; /* Définit l'espacement entre les éléments flex */
-        align-items: center;
-        justify-content: center;
-    }
-
-    .saisi-filtre {
-        flex-grow: 1; /* Permet à l'élément de s'étendre */
-        width: 100%; /* S'assure que l'élément occupe toute la largeur restante de son parent */
-        background-color: #D9D9D9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
-    .sous-container-filtre label {
-        white-space: nowrap;
-    }
-
-    .btn-rechercher-filtre {
-        width: 50%;
-        background-color: #D9D9D9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    /***********************************************************************/
-    .hauteur-recherche {
-        height: 50vh;
-        padding-right: 1.5%;
-        padding-left: 1.5%;
-        overflow: hidden auto;
-    }
-
-    .sous-container-nb-items {
-        display: flex;
-        /*justify-content: space-between;*/
-        align-items: center;
-        gap: 5%;
-        white-space: nowrap;
-    }
-
-    .sous-container-informations {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        /*height: 8%;*/
-        background-color: #F2F2F2;
-        border-radius: 25px;
-        padding-top: 0.75%;
-        padding-bottom: 0.75%;
-        /*box-sizing: border-box;*/
-    }
-
-    .texte-ellipsis {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .btn-details-modifier, .btn-supprimer {
-        display: flex;
-        align-items: center;
-        width: min-content;
-        height: 100%;
-        white-space: nowrap;
-        gap: 10px;
-        border-radius: 15px;
-        padding: 0.1% 1.5% 0.1% 0.5%;
-    }
-
-
-    .btn-details-modifier {
-        background-color: #CCF5F3;
-        border: 2px solid #00BBB0;
-        transition: all 0.3s ease;
-    }
-
-    .btn-supprimer {
-        background-color: #F1D5D5;
-        border: 2px solid #E93C3C;
-        transition: all 0.3s ease;
-    }
-
-    .btn-details-modifier:hover {
-        background-color: #00BBB0;
-        border: 2px solid #00BBB0;
-        transition: all 0.3s ease;
-    }
-
-    .btn-supprimer:hover {
-        background-color: #E93C3C;
-        border: 2px solid #E93C3C;
-        transition: all 0.3s ease;
-    }
-
-    .taille-icon-infos {
-        font-size: 125%;
-    }
-
-    .navigation {
-        display: flex;
-        justify-content: center; /* Centre les boutons horizontalement */
-        align-items: center; /* Centrage vertical */
-        gap: 10px; /* Espacement entre les éléments */
-        flex: 1; /* Prend tout l'espace pour centrer */
-    }
-
-    .page-info {
-        background-color: #f2f2f2;
-        border: 1px solid #ccc;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-
-    .btn-navigation-page {
-        background-color: #D9D9D9;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-    }
-
-    .container-btn-add {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .btn-add {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        background-color: #ccf5f3;
-        border: 2px solid #00bbb0;
-        border-radius: 20px;
-        padding: 5px 15px;
-        cursor: pointer;
-        font-weight: bold;
-        color: black;
-        white-space: nowrap;
-        width: fit-content;
-        transition: all 0.3s ease;
-    }
-
-    .btn-add:hover {
-        background-color: #00BBB0;
-        transition: all 0.3s ease;
-    }
-
-    /*.container-nav-page {*/
-    /*    display: grid;*/
-    /*    justify-content: center;*/
-    /*}*/
-
-    /*.btn-precedent {*/
-
-    /*}*/
-
-    /*.page-actuelle {*/
-
-    /*}*/
-}
-
-/* Style pour les petits écrans (moins de 992px) */
-@media screen and (max-width: 992px) {
-    .sous-container-filtre {
-        display: inline-grid;
-        width: 100%;
-        padding: 10px;
-    }
-
-    .saisi-filtre {
-        /*flex-grow: 1; !* Permet à l'élément de s'étendre *!*/
-        width: 70%; /* S'assure que l'élément occupe toute la largeur restante de son parent */
-        background-color: #D9D9D9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-        /*margin-bottom: 10px; !* Ajout d'espace entre les champs *!*/
-    }
-
-    .btn-rechercher-filtre {
-        width: 50%;
-        background-color: #D9D9D9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        /*width: 100%;*/
-        margin-top: 10px; /* Ajout d'espace entre les champs et le bouton */
-    }
-}
-
 body {
     background: linear-gradient(
         to left,
@@ -215,16 +7,500 @@ body {
         #E3FFFE 100%
     );
     margin: 0;
-    font-family: Arial, sans-serif;
     align-items: center;
     justify-content: center;
 }
 
-.footer {
+.filtre {
+    margin-top: 3%;
+    padding: 1%;
+    background-color: #F2F2F2;
+    border: 2px solid #016401;
+    border-radius: 20px;
+}
+
+.hr {
+    width: 98%; /* Réduction de la longueur */
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.cacher {
+    visibility: hidden;
+}
+
+.sous-container-filtre {
+    display: flex;
     width: 100%;
+    /*background-color: #0a53be;*/
+    gap: 5%; /* Définit l'espacement entre les éléments flex */
+    align-items: center;
+    justify-content: center;
+}
+
+.saisi-filtre {
+    flex-grow: 1; /* Permet à l'élément de s'étendre */
+    width: 100%; /* S'assure que l'élément occupe toute la largeur restante de son parent */
+    background-color: #D9D9D9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.sous-container-filtre label {
+    white-space: nowrap;
+}
+
+.btn-rechercher-filtre {
+    width: 50%;
+    background-color: #D9D9D9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-rechercher-filtre:hover {
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.btn-rechercher-filtre .btn-recherche-text {
+    display: inline;
+}
+
+.btn-rechercher-filtre .btn-recherche-logo {
+    display: none;
+    font-size: 0.9rem;
     text-align: center;
-    font-size: 18px;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+/***********************************************************************/
+.hauteur-recherche {
+    height: 50vh;
+    padding-right: 1.5%;
+    padding-left: 1.5%;
+    overflow: hidden auto;
+}
+
+.sous-container-nb-items {
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+    gap: 5%;
+    white-space: nowrap;
+}
+
+.sous-container-informations {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /*height: 8%;*/
+    background-color: #F2F2F2;
+    border-radius: 25px;
+    padding-top: 0.75%;
+    padding-bottom: 0.75%;
+    /*box-sizing: border-box;*/
+}
+
+.texte-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-details-modifier, .btn-supprimer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min-content;
+    height: 100%;
+    /* width: 150px; */
+    white-space: nowrap;
+    gap: 10px;
+    border-radius: 15px;
+    padding: 0.1% 1.5% 0.1% 0.5%;
+}
+
+.btn-details-modifier {
+    background-color: #CCF5F3;
+    border: 2px solid #00BBB0;
+    transition: all 0.3s ease;
+}
+
+.btn-supprimer {
+    background-color: #F1D5D5;
+    border: 2px solid #E93C3C;
+    transition: all 0.3s ease;
+}
+
+.btn-details-modifier:hover {
+    background-color: #00BBB0;
+    border: 2px solid #00BBB0;
+    transition: all 0.3s ease;
+}
+
+.btn-supprimer:hover {
+    background-color: #E93C3C;
+    border: 2px solid #E93C3C;
+    transition: all 0.3s ease;
+}
+
+.btn-details-modifier .btn-details-modifier-text {
+    display: inline;
+}
+
+ .btn-supprimer .btn-supprimer-text {
+    display: inline;
+}
+
+.taille-icon-infos {
+    font-size: 125%;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center; /* Centre les boutons horizontalement */
+    align-items: center; /* Centrage vertical */
+    gap: 10px; /* Espacement entre les éléments */
+    flex: 1; /* Prend tout l'espace pour centrer */
+}
+
+.page-info {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.btn-navigation-page {
+    background-color: #D9D9D9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-navigation-page:hover {
+    background-color: #bbb;
+    border: 1px solid #bbb;
+    transition: all 0.3s ease;
+}
+
+.container-btn-add {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-add {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #ccf5f3;
+    border: 2px solid #00bbb0;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
     font-weight: bold;
     color: black;
-    padding: 10px 0;
+    white-space: nowrap;
+    width: fit-content;
+    transition: all 0.3s ease;
+}
+
+.btn-add:hover {
+    background-color: #00BBB0;
+    transition: all 0.3s ease;
+}
+
+.btn-add .btn-add-text {
+    display: inline;
+}
+
+/*.container-nav-page {*/
+/*    display: grid;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.btn-precedent {*/
+
+/*}*/
+
+/*.page-actuelle {*/
+
+/*}*/
+
+/* Style pour les petits écrans (moins de 992px) */
+@media screen and (max-width: 768px) {
+    .btn-add .btn-add-text {
+        display: none;
+        font-size: 0.9rem;
+        text-align: center;
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .btn-add {
+        margin-top: 20px;
+        margin-bottom: 125px;
+    }
+
+    .btn-details-modifier .btn-details-modifier-text {
+        display: none;
+        font-size: 0.9rem;
+        text-align: center;
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .btn-rechercher-filtre .btn-recherche-text {
+        display: none;
+    }
+
+    .btn-rechercher-filtre .btn-recherche-logo {
+        display: block; /* Affiche le logo */
+        margin: 0; /* Supprime les marges autour du logo */
+    }
+
+    .btn-details-modifier {
+        border: none;
+        background-color: transparent;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+     .btn-supprimer .btn-supprimer-text {
+        display: none;
+        font-size: 0.9rem;
+        text-align: center;
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .btn-supprimer {
+        color: #E93C3C;
+        border: none;
+        background-color: transparent;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-details-modifier:hover,
+    .btn-supprimer:hover {
+        background-color: inherit;
+        border: none;
+        transition: none;
+    }
+
+    .btn-rechercher-filtre:hover{
+        background-color: #ccc;
+        border: 1px solid #ccc;
+        transition: all 0.3s ease;
+    }
+
+    .sous-container-filtre {
+        display: flex; /* Active le mode flexbox */
+        flex-wrap: wrap; /* Permet d'ajuster les éléments s'il y a un débordement */
+        width: 100%; /* Prend toute la largeur disponible */
+        gap: 10px; /* Ajoute un espacement entre les éléments */
+        align-items: center; /* Centre verticalement les éléments */
+        justify-content: center; /* Espace uniforme entre les labels et les inputs */
+        padding: 10px; /* Espacement interne */
+    }
+
+    .saisi-filtre {
+        flex-grow: 1;
+        width: 70%; /* S'assure que l'élément occupe toute la largeur restante de son parent */
+        background-color: #D9D9D9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        /*margin-bottom: 10px; !* Ajout d'espace entre les champs *!*/
+    }
+
+    .hauteur-recherche {
+        height: 40vh;
+        padding-right: 1.5%;
+        padding-left: 1.5%;
+        overflow: hidden auto;
+    }
+
+    .hr {
+        width: 94%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .container-btn-add {
+        justify-content: center;
+    }
+
+    .btn-rechercher-filtre {
+        display: flex; /* Active le mode flexbox */
+        align-items: center; /* Centre verticalement le contenu */
+        justify-content: center; /* Centre horizontalement le contenu */
+        width: 25%;
+        height: auto;
+        background-color: #D9D9D9;
+        border: 1px solid #ccc;
+        border-radius: 5px; /* Coins arrondis */
+        margin-top: 0px; /* Espacement avec les autres éléments */
+        transition: all 0.3s ease;
+    }
+
+    .sous-container-informations {
+        display: flex;
+        justify-content: space-between; /* Aligne les boutons à droite */
+        align-items: center;
+        gap: 15px; /* Espace entre les boutons */
+        padding-right: 15px; /* Ajoute un espacement par rapport au bord droit */
+    }
+
+    .sous-container-informations > div:first-child {
+        flex: 1; /* Prend toute la place disponible pour le nom */
+        min-width: 150px; /* Largeur minimale pour maintenir l'alignement */
+    }
+
+    .sous-container-informations > div:last-child {
+        display: flex;
+        gap: 10px; /* Espace entre les boutons */
+    }
+
+    .sous-container-informations span {
+        flex-grow: 1; /* Permet au texte de prendre tout l'espace disponible */
+        text-align: left; /* Aligne le texte à gauche */
+        white-space: nowrap; /* Empêche le texte de se couper */
+        overflow: hidden; /* Cache le contenu débordant */
+        margin-left: 8px;
+        text-overflow: ellipsis; /* Ajoute "..." si le texte déborde */
+    }
+
+    .sous-container-informations button {
+        flex-shrink: 0; /* Empêche les boutons de rétrécir */
+        text-align: center; /* Centre le contenu des boutons */
+        margin-right: 8px;
+    }
+    
+    .sous-container-informations > button {
+        width: auto; /* Permet une largeur adaptée au contenu */
+        height: auto; /* Permet une hauteur adaptée au contenu */
+        padding: 5px 10px; /* Ajuste l'espacement interne */
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    .btn-details-modifier,
+    .btn-supprimer {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        background-color: transparent; /* Fond transparent */
+        border: none; /* Supprime les bordures */
+        cursor: pointer;
+    }
+    
+    .sous-container-informations > div {
+        flex: 1; /* Assure que les informations à gauche occupent tout l'espace restant */
+    }
+
+    .sous-container-informations button i {
+        font-size: 20px; /* Taille des icônes */
+        color: #000; /* Couleur des icônes */
+    }
+
+    .sous-container-informations button.btn-supprimer i {
+        color: #E93C3C; /* Couleur rouge pour le bouton supprimer */
+    }
+
+    .sous-container-informations > div,
+    .btn-details-modifier,
+    .btn-supprimer {
+        flex: 0 0 2%; /* Largeur fixe (30% ou ajuster selon vos besoins) */
+        text-align: center;
+    }
+
+    .btn-details-modifier,
+    .btn-supprimer {
+        padding: 1px 3px; /* Espacement interne des boutons */
+        gap: 5px; /* Espacement entre icône et texte dans les boutons */
+    }
+
+    .texte-ellipsis {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+/*Pop up informations*/
+#popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#popup-content-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+#popup-content {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+#popup-content h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#popup-close {
+    background-color: #F78A8A;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#popup-close:hover {
+    background-color: #E93C3C;
 }
