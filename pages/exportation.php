@@ -15,6 +15,17 @@
 		header('Location: ../index.php');
 		exit();
 	}
+    
+    // if (isset($_POST['modeExport'])) {
+        // var_dump($_POST['modeExport']);
+        
+        // require("../engine/fonction/fonctionExportation.php");
+        
+        // if ($_POST['modeExport'] == "activite") {
+            // exporterActivite();
+        // }
+    // }
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -69,37 +80,49 @@
             <!-- Ligne 1 : Deux boutons en haut -->
             <div class="row justify-content-center mb-4">
                 <div class="col-12 col-md-5 text-center mb-3 mb-md-0">
-                    <button class="btn-export w-100" desc="Exporter toutes les données des activités">
-                        <i class="fas fa-chalkboard-teacher"></i> Activités
-                    </button>
+                    <form enctype="multipart/form-data" action="activites.csv" method="post">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                        <input name="userfile" value = "activites.csv" type="hidden" />
+                        <button type = "submit" name = "modeExport" value = "activite" class="btn-export w-100" desc="Exporter toutes les données des activités">
+                            <i class="fas fa-chalkboard-teacher"></i> Activités
+                        </button>
+                    </form>
                 </div>
                 <div class="col-12 col-md-5 text-center">
-                    <button class="btn-export w-100" desc="Exporter toutes les données des employés">
-                        <i class="fas fa-user"></i> Employés
-                    </button>
+                    <form action = "" method = "post" >
+                        <button type = "submit" name = "modeExport" value = "employe" class="btn-export w-100" desc="Exporter toutes les données des employés">
+                            <i class="fas fa-user"></i> Employés
+                        </button>
+                    </form>
                 </div>
             </div>
 
             <!-- Ligne 2 : Deux boutons au milieu -->
             <div class="row justify-content-center mb-4">
                 <div class="col-12 col-md-5 text-center mb-3 mb-md-0">
-                    <button class="btn-export w-100" desc="Exporter toutes les données des réservations">
-                        <i class="fas fa-clock-rotate-left"></i> Réservations
-                    </button> 
+                    <form action = "" method = "post" >
+                        <button type = "submit" name = "modeExport" value = "reservation" class="btn-export w-100" desc="Exporter toutes les données des réservations">
+                            <i class="fas fa-clock-rotate-left"></i> Réservations
+                        </button>
+                    </form>
                 </div>
                 <div class="col-12 col-md-5 text-center">
-                    <button class="btn-export w-100" desc="Exporter toutes les données des salles">
-                        <i class="fas fa-door-open"></i> Salles
-                    </button>
+                    <form action = "" method = "post" >
+                        <button type = "submit" name = "modeExport" value = "salle" class="btn-export w-100" desc="Exporter toutes les données des salles">
+                            <i class="fas fa-door-open"></i> Salles
+                        </button>
+                    </form>
                 </div>
             </div>
 
             <!-- Ligne 3 : Un bouton centré tout en bas -->
             <div class="row justify-content-center">
                 <div class="col-12 col-md- text-center">
-                    <button class="btn-export w-100" id="tout-exporter" desc="Exporter toutes les données disponibles" onclick="confirmExport()"> <!-- Ajout du onclick -->
-                        <i class="fas fa-download"></i> Tout Exporter
-                    </button>
+                    <form action = "" method = "post" >
+                        <button type = "submit" name = "modeExport" value = "tout" class="btn-export w-100" id="tout-exporter" desc="Exporter toutes les données disponibles"> <!-- Ajout du onclick -->
+                            <i class="fas fa-download"></i> Tout Exporter
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
