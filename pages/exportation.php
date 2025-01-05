@@ -1,5 +1,4 @@
 <?php
-	require("../engine/fonction/fonctionsBDD.php");
 
 	session_start();
 	
@@ -16,15 +15,26 @@
 		exit();
 	}
     
-    // if (isset($_POST['modeExport'])) {
-        // var_dump($_POST['modeExport']);
+    if (isset($_POST['modeExport'])) {
+        var_dump($_POST['modeExport']);
         
-        // require("../engine/fonction/fonctionExportation.php");
+        require("../engine/fonction/fonctionExportation.php");
         
-        // if ($_POST['modeExport'] == "activite") {
-            // exporterActivite();
-        // }
-    // }
+        require("../engine/fonction/connexionBD.php");
+        $pdo = ConnexionBD::getPDO();
+        
+        if ($_POST['modeExport'] == "activite") {
+            exporterActivites($pdo);
+        } else if ($_POST['modeExport'] == "employe") {
+            
+        } else if ($_POST['modeExport'] == "reservation") {
+            
+        } else if ($_POST['modeExport'] == "salle") {
+            
+        } else { // tout
+            
+        }
+    }
     
 ?>
 <!DOCTYPE html>
@@ -80,9 +90,7 @@
             <!-- Ligne 1 : Deux boutons en haut -->
             <div class="row justify-content-center mb-4">
                 <div class="col-12 col-md-5 text-center mb-3 mb-md-0">
-                    <form enctype="multipart/form-data" action="activites.csv" method="post">
-                        <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                        <input name="userfile" value = "activites.csv" type="hidden" />
+                    <form action="" method="post">
                         <button type = "submit" name = "modeExport" value = "activite" class="btn-export w-100" desc="Exporter toutes les données des activités">
                             <i class="fas fa-chalkboard-teacher"></i> Activités
                         </button>
