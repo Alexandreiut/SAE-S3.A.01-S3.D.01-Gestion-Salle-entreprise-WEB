@@ -16,7 +16,6 @@
 	}
     
     if (isset($_POST['modeExport'])) {
-        var_dump($_POST['modeExport']);
         
         require("../engine/fonction/fonctionExportation.php");
         
@@ -26,13 +25,13 @@
         if ($_POST['modeExport'] == "activite") {
             exporterActivites($pdo);
         } else if ($_POST['modeExport'] == "employe") {
-            
+            exporterEmployes($pdo);
         } else if ($_POST['modeExport'] == "reservation") {
-            
+            exporterReservations($pdo);
         } else if ($_POST['modeExport'] == "salle") {
-            
+            exporterSalles($pdo);
         } else { // tout
-            
+            exporterTout($pdo);
         }
     }
     
