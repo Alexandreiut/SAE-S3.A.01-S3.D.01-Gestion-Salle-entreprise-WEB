@@ -16,7 +16,6 @@
 			$cookieLogin = "";
 		}
 		
-		$login = "";
 		$login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : "";
 		$pwd = "";
 
@@ -105,7 +104,7 @@
 				<label for="login" class="saisie-text">Identifiant :</label>
 				<span class="saisie-text require">*</span><br/>
 				<div class="<?php echo$couleurIdentifiant?>">
-					<input type="text" name="login" placeholder="Entrez votre identifiant" value="<?php echo $cookieLogin?>" required>
+					<input type="text" name="login" placeholder="Entrez votre identifiant" value="<?php echo $login ?: $cookieLogin; ?>"  required>
 				</div>
 				<?php
 					if($couleurIdentifiant == "rouge"){
