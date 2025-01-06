@@ -160,6 +160,7 @@ html, body {
     cursor: pointer;
     text-align: center;
     white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
 .deconnexion:hover {

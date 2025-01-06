@@ -173,19 +173,23 @@ body {
 .fas {
     margin : 3px;
 }
+
+.btn-action .fas {
+    font-size: 75px;
+}
+
 @media screen and (max-width: 768px) {
     .btn-envoyer {
-        background-color: #CCF5F3;
-        color: black;
-        padding: 10px 50px;
-        border: 2px solid #00BBB0;
-        border-radius: 25px;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: block;
-        margin: 30px auto;
         margin-bottom: 100px;
+    }
+
+    .btn-envoyer {
+        font-size: 18px;
+        padding: 33 50;
+        height: auto;
+    }
+
+    .btn-envoyer .fas {
+        font-size: 20px;
     }
 }

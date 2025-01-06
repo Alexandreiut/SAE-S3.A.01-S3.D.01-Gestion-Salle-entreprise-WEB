@@ -237,7 +237,7 @@ body {
 /*}*/
 
 /* Style pour les petits écrans (moins de 992px) */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
     .btn-add .btn-add-text {
         display: none;
         font-size: 0.9rem;
