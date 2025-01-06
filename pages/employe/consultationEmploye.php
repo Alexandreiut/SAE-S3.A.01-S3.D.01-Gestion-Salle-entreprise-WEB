@@ -1,9 +1,11 @@
 <?php
     require("../../engine/fonction/fonctionsBDD.php");
+    require("../../engine/fonction/fonctionEmploye.php");
     require("../../engine/fonction/consultation.php");
     require("../../engine/affichage/consultation.php");
 
     session_start();
+    $pdo = ConnexionBD::getPDO();
 
     if(session_id() != $_SESSION['session']){
         header('Location: ../../index.php');
@@ -14,6 +16,11 @@
         session_destroy();
         header('Location: ../../index.php');
         exit();
+    }
+
+    if (isset($_POST['suppression']) && !empty($_POST['suppression'])) {
+        $id = htmlspecialchars($_POST['suppression']);
+        $estSupprime = supprimerEmploye($pdo, $id);
     }
 
     $role = $_SESSION['role'];
@@ -98,14 +105,15 @@
                         <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <button class="btn-rechercher-filtre" type="submit">
-                                    Rechercher
+                                    <span class="btn-recherche-logo"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    <span class="btn-recherche-text">Rechercher</span>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div class="row">
-                    <hr class="mt-2 mb-2">
+                    <hr class="mt-2 mb-2 hr">
                 </div>
                 <form>
                     <div class="row">
@@ -127,7 +135,8 @@
                         <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <button class="btn-rechercher-filtre">
-                                    Rechercher
+                                    <span class="btn-recherche-logo"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    <span class="btn-recherche-text">Rechercher</span>
                                 </button>
                             </div>
                         </div>
@@ -147,11 +156,17 @@
                 <?php
                     affichageEmployes($employes);
                 ?>
+                <div id="popup">
+                    <div id="popup-content-container">
+                        <div id="popup-content"></div>
+                        <br/><button id="popup-close">Fermer</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Navigation page et ajout salle -->
             <div class="row mt-3">
-                <hr>
+                <hr class="hr">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="navigation">
                         <form action="consultationEmploye.php" method="get">
@@ -173,6 +188,7 @@
                             <i class="fa-solid fa-plus"></i>
                             <i class="fa-solid fa-user"></i>
                             Ajouter un employé
+                            <!-- <span class="btn-add-text">Ajouter un employé</span> -->
                         </button>
                     </form>
                 </div>
@@ -223,7 +239,18 @@
                                                 echo true;
                                                 $_SESSION['ajout_employe'] = false;
                                             }?>"></span>
+        <?php
+            if(isset($estSupprime)) {
+                if ($estSupprime) {
+                    echo "<span id='suppression' value='true'></span>";
+                } else {
+                    echo "<span id='suppression' value='false'></span>";
+                }
+            }
+        ?>
         <script src="../../engine/js/menu.js" defer></script>
-        <script src="../../engine/js/notification.js" defer></script>
+        <script src="../../engine/js/informationsEmploye.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+        <script src="../../engine/js/notificationEmploye.js" defer></script>
     </body>
 </html>

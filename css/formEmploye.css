@@ -7,7 +7,6 @@ body {
         #E3FFFE 100%
     );
     margin: 0;
-    font-family: Arial, sans-serif;
     align-items: center;
     justify-content: center;
 }
@@ -65,7 +64,7 @@ body {
     transition: all 0.3s ease;
     display: block;
     margin: 30px auto; /* Centre le bouton */
-    margin-bottom: 100px;
+    margin-bottom: 0px;
 }
 
 .btn-envoyer:hover {
@@ -79,13 +78,37 @@ body {
     font-weight: bold;
 }
 
-/* Ajout d'espacement entre les colonnes */
-.container > div {
-    flex: 1 1 calc(50% - 30px); /* Chaque colonne occupe environ 50% */
-    min-width: 300px; /* Largeur minimale */
-    padding: 10px; /* Ajout de padding interne */
+.erreur {
+    width: 100%;
+    max-width: 500px;
+    font-size: 22px;
+    background-color: #f0f0f0;
+    border: solid 2px red;
+    border-radius: 10px;
+    box-sizing: border-box;
+    outline: none;
 }
 
 .fas {
     margin: 3px;
+}
+
+.btn-action .fas {
+    font-size: 75px;
+}
+
+@media screen and (max-width: 768px) {
+    .btn-envoyer {
+        margin-bottom: 100px;
+    }
+
+    .btn-envoyer {
+        font-size: 18px;
+        padding: 33 50;
+        height: auto;
+    }
+
+    .btn-envoyer .fas {
+        font-size: 20px;
+    }
 }

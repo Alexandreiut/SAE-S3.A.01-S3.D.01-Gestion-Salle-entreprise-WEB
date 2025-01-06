@@ -3,7 +3,7 @@
     session_start();
     
     if(session_id() != $_SESSION['session']){
-		header('Location: connexion.php');
+		header('Location: ../../index.php.php');
 		exit();
 	}
 	
@@ -144,6 +144,7 @@
 				<li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
+        
         <div class = "container">
             <form action = "" method = "post">
                 <div class = "row">
@@ -155,14 +156,11 @@
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['nom']) {
-                                        echo " rouge";
-                                    }
                                     echo '">';
                                 ?>
                                     <!-- nom -->
                                     <label for = "nom" class="label-form">Nom : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" class="input-form" name = "nom" id = "nom" required placeholder = "Entrez le nom de l'employé" 
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['nom']) { echo " erreur"; } ?> " name = "nom" id = "nom" required placeholder = "Entrez le nom de l'employé" 
                                     <?php
                                         echo 'value = "';
                                         
@@ -176,14 +174,11 @@
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['prenom']) {
-                                        echo " rouge";
-                                    }
                                     echo '">';
                                 ?>
                                     <!-- prénom -->
                                     <label for = "prenom" class="label-form">Prénom : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" class="input-form" name = "prenom" id = "prenom" required placeholder = "Entrez le prénom de l'employé"
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['prenom']) { echo " erreur"; } ?> " name = "prenom" id = "prenom" required placeholder = "Entrez le prénom de l'employé"
                                     <?php
                                         echo 'value = "';
                                         
@@ -197,14 +192,11 @@
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['telephone']) {
-                                        echo " rouge";
-                                    }
                                     echo '">';
                                 ?>
                                     <!-- téléphone -->
                                     <label for = "telephone" class="label-form">Téléphone (optionnel) : </label><br>
-                                    <input type = "text" class="input-form" maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé"
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['telephone']) { echo " erreur"; } ?> " maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé"
                                     <?php
                                         echo 'value = "';
                                         
@@ -227,14 +219,11 @@
                                 </div>
                                 <?php
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['login']) {
-                                        echo " rouge";
-                                    }
                                     echo '">';
                                 ?>
                                     <!-- login -->
                                     <label for = "login" class="label-form">Identifiant : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" class="input-form" name = "login" id = "login" required placeholder = "Entrez l'idenfiant du compte"
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['login']) { echo " erreur"; } ?> " name = "login" id = "login" required placeholder = "Entrez l'idenfiant du compte"
                                     <?php
                                         echo 'value = "';
                                         
@@ -251,14 +240,11 @@
                                 if ($_POST['action'] == 'ajout') {
                                 
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['mdp']) {
-                                        echo " rouge";
-                                    }
                                     echo '">';
                                 ?>
                                     <!-- mot de passe -->
                                     <label for = "mdp" class="label-form">Mot de Passe : <span class = "rouge">*</span></label><br>
-                                    <input type = "password" class="input-form" name = "mdp" id = "mdp" required placeholder = "Entrez le mot de passe du compte"
+                                    <input type = "password" class="input-form <?php if (isset ($verifications) && !$verifications['mdp']) { echo " erreur"; } ?>" name = "mdp" id = "mdp" required placeholder = "Entrez le mot de passe du compte"
                                     <?php
                                         echo 'value = "';
                                         
@@ -274,15 +260,12 @@
                                 } else {
 
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['mdp']) {
-                                        echo " rouge";
-                                    }
                                     echo '">';
                                 
                                 ?>
                                     <!-- mot de passe à retaper -->
                                     <label for = "mdp" class="label-form">Nouveau mot de Passe :</label><br>
-                                    <input type = "password" class="input-form" name = "mdp" id = "mdp" placeholder = "Entrez le nouveau mot de passe du compte"
+                                    <input type = "password" class="input-form <?php if (isset ($verifications) && !$verifications['mdp']) { echo " erreur"; } ?>" name = "mdp" id = "mdp" placeholder = "Entrez le nouveau mot de passe du compte"
                                     <?php
                                         echo 'value = "';
                                         
@@ -298,14 +281,11 @@
                                 }
                                     
                                     echo '<div class = "col-12';
-                                    if (isset ($verifications) && !$verifications['alt_mdp']) {
-                                        echo " rouge";
-                                    }
                                     echo '">';
                                 ?>
                                     <!-- confirmation mot de passe -->
                                     <label for = "alt_mdp" class="label-form">Confirmation mot de Passe : <?php if ($_POST['action'] == 'ajout') { echo '<span class = "rouge">*</span>'; } ?></label><br>
-                                    <input type = "password" class="input-form" name = "alt_mdp" id = "alt_mdp" placeholder = "Confirmez le mot de passe" <?php if ($_POST['action'] == 'ajout') { echo 'required'; } ?>
+                                    <input type = "password" class="input-form <?php if (isset ($verifications) && !$verifications['alt_mdp']) { echo " erreur"; } ?>" name = "alt_mdp" id = "alt_mdp" placeholder = "Confirmez le mot de passe" <?php if ($_POST['action'] == 'ajout') { echo 'required'; } ?>
                                     <?php
                                         echo 'value = "';
                                         
@@ -336,6 +316,7 @@
                         }
                         ?>
                         l'employé</button>
+                        <br/>
                     </div>
                 </div>
                 <?php
@@ -350,21 +331,26 @@
                 
             </form>
         </div>
+        <!-- Menu pour téléphone -->
         <div id="footMenu" class="foot-menu d-md-none">
-			<div class = "container bott-menu-container">
-				<div class = "row">
-					<table>
-						<tr>
-							<td><a href="accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
-							<td><a href="salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
-							<td><a href="reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
-							<td><a href="employe/consultationEmploye.php"><button class="menuBouton"><i class="fas fa-user"></i><span>Employé</span></button></a></td>
-							<td><a href="exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
+            <div class = "container bott-menu-container">
+                <div class = "row">
+                    <table>
+                        <tr>
+                            <td><a href="../accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+                            <td><a href="../salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+                            <td><a href="../reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+                            <?php
+                            if($role === "administrateur") {
+                                echo "<td><a href='consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
+                            }
+                            ?>
+                            <td><a href="../exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
         <script src="../../engine/js/menu.js" defer></script>
     </body>
 </html>    

@@ -15,6 +15,9 @@
 		header('Location: ../../index.php');
 		exit();
 	}
+
+	$role = $_SESSION['role'];
+
     try{
         $pdo = ConnexionBD::getPDO();
         $videoProjecteur = "non";
@@ -45,15 +48,17 @@
 		&& trim($_POST["nomSalle"]) != "" && $_POST["capaciteSalle"]!="") {
 			if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
 				modifieSalle($pdo, $_POST["idSalle"], $_POST["nomSalle"], $_POST["capaciteSalle"], $_POST["nombreOrdinateur"], $_POST["typeOrdinateur"], $videoProjecteur, $ecranXxl, $imprimante, $listeLogicielSelectionnes);
+				$_SESSION['modif_salle'] = true;
 				header('Location: consultationSalle.php');
 			} else {
 				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
-		   		header('Location: consultationSalle.php');
+				$_SESSION['ajout_salle'] = true;
+				header('Location: consultationSalle.php');
 			}	
 		}
 
 		if(isset($_POST["idSalle"])){
-			$salleReservee=verifieReservationSalle($pdo,$_POST["idSalle"]);
+			$salleReservee=!estNonReserve($pdo,$_POST["idSalle"]);
 		}
 		
 
@@ -75,142 +80,182 @@
     </head>
 	<body>
 		<div class="header">
-            <div class="header-left">
-				<div class="menu-container">
-					<button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
-				</div>
+            <div class="col-lg-2 header-left">
+                <div class="menu-container">
+                    <button type="submit" class="bouton-menu" id="menuButton"><i class="fas fa-bars menu" id="menuIcon"></i></button>
+                </div>
                 <img src="../../ressources/image/LogoRoomManagerReservation.png" alt="Logo" class="logo">
             </div>
 
-            <div class="header-title">
+            <div class="offset-lg-2 col-lg-4 header-title">
                 <h1>
-					<?php 
-						if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
-							echo '<span class = "fas fa-plus fa-door-open"></span> Ajouter salle';
-						} else {
-							echo '<span class = "fas fa-wrench fa-door-open"></span> Modifier salle';
-						}	
-					?>
-				</h1>
+				<?php 
+                        echo '<span class = "fas fa-';
+                        if ($_POST['action'] == 'ajout') {
+                            echo 'plus">';
+                        } else {
+                            echo 'edit">';
+                        }
+                    ?>
+                    </span>
+                    <span class = "fas fa-door-open"></span> Salle
+                </h1>
             </div>
- 
-			<form method="post" action="formulaireSalle.php">
-				<input type="hidden" name="deconnexion" id="deconnexion" value="1">
-				<button type="submit" class="deconnexion">
-					Se déconnecter
-					<i class="fas fa-right-from-bracket"></i>
-				</button>
-			</form>
+
+            <div class="offset-lg-2 col-lg-2 container-deconnexion">
+                <form method="post" action="formulaireSalle.php">
+                    <input type="hidden" name="deconnexion" id="deconnexion" value="1">
+                    <button type="submit" class="deconnexion">
+                        <span class="deconnexion-text">Se déconnecter</span>
+                        <i class="fas fa-right-from-bracket"></i>
+                    </button>
+                </form>
+            </div>
         </div>
 
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
-				<li><a href="accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
-				<li><a href="../salle/consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
+				<li><a href="../accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
+				<li><a href="consultationSalle.php"><i class="fas fa-door-open"></i> Salle</a></li>
 				<li><a href="../reservation/consultationReservation.php"><i class="fas fa-clock-rotate-left"></i> Réservation</a></li>
 				<li><a href="../employe/consultationEmploye.php"><i class="fas fa-user"></i> Employé</a></li>
 				<li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
-		<div class="container-fluid">
-			<form method="post" id="formSalle" name="formSalle" action="formulaireSalle.php">
-				<h1>Informations salle</h1>
-				<div class="row">
-					<div class="col-6 col-md-6 col-sm-12">
-						<label for="nomSalle" class="labelStyle">Nom :*  </label>
-						<input name="nomSalle" id="nomSalle" placeholder="Nom de la salle" class="inputText <?php if(isset($_POST["nomSalle"]) && trim($_POST["nomSalle"])=="") {echo "erreurInput";}?>" value="<?php if (isset($_POST["nomSalle"])) {echo $_POST["nomSalle"];} else if (isset($listeInfoSalle["nom"])){echo $listeInfoSalle["nom"];}?>">
-					</div>
-					<div class="col-6 col-md-6 col-sm-12">
-						<label for="typeOrdinateur" class="labelStyle">Type ordinateur : </label>
-						<input name="typeOrdinateur" id="typeOrdinateur" placeholder="" class="inputText" value="<?php if (isset($_POST["typeOrdinateur"])) {echo $_POST["typeOrdinateur"];} else if (isset($listeInfoSalle["typeOrdinateur"])){echo $listeInfoSalle["typeOrdinateur"];}?>" >
-					</div>
-				</div>
-				<div class="row">	
-					<div class="col-6 col-md-6 col-sm-12">
-						<label for="capaciteSalle" class="labelStyle">Place assise :* </label>
-						<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" 
-							class="inputNumber <?php if(isset($_POST["capaciteSalle"]) && $_POST["capaciteSalle"]=="") {echo "erreurInput";};?>" value="<?php if (isset($_POST["capaciteSalle"])) {echo $_POST["capaciteSalle"];} else if (isset($listeInfoSalle["capacite"])){echo $listeInfoSalle["capacite"];}?>" 
-							oninput="nombreValide(this)">
-					</div>
-					<div class="col-6 col-md-6 col-sm-12">
-						<label for="nombreOrdinateur" class="labelStyle">Nombre PC : </label>
-						<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" 
-							class="inputNumber" value="<?php if (isset($_POST["nombreOrdinateur"])) {echo $_POST["nombreOrdinateur"];} else if (isset($listeInfoSalle["nombreOrdinateur"])){echo $listeInfoSalle["nombreOrdinateur"];}?>" 
-							oninput="nombreValide(this)">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-4 col-md-4 col-sm-4">
-						<label for="videoProjecteur" class="labelStyle">Projecteur : </label>
-						<input type="checkbox" id="videoProjecteur" name="videoProjecteur" <?php if (isset($_POST["videoProjecteur"])) {echo " checked ";} else if (isset($listeInfoSalle["videoProjecteur"]) && $listeInfoSalle["videoProjecteur"] == "oui"){echo "checked";}?>>
-					</div>
-					<div class="col-4 col-md-4 col-sm-4">
-						<label for="ecranXxl" class="labelStyle">Écran XXL : </label>
-						<input type="checkbox" id="ecranXxl" name="ecranXxl" <?php if (isset($_POST["ecranXxl"])) {echo " checked ";} else if (isset($listeInfoSalle["ecranXxl"]) && $listeInfoSalle["ecranXxl"] == "oui"){echo "checked";}?>>
-					</div>
-					<div class="col-4 col-md-4 col-sm-4">
-						<label for="imprimante" class="labelStyle">Imprimante : </label>
-						<input type="checkbox" id="imprimante" name="imprimante" <?php if (isset($_POST["imprimante"])) {echo " checked ";} else if (isset($listeInfoSalle["imprimante"]) && $listeInfoSalle["imprimante"] == "oui"){echo "checked";}?>>
-					</div>
-				</div>
-        		<div class="col-12 col-md-12 col-sm-12">
-					<h5>Choisissez les logiciels :</h5>
-				</div>
 
-        		<div class="row">
-					<div class="col-12 col-md-12 col-sm-12">
-					<?php
-						foreach ($listeLogiciel as $logiciel) {
-							echo '<div class="col-4 checkbox-container">'; 
-							echo '<label for="'.$logiciel["nom"].'" class="labelStyle">';
-							echo $logiciel["nom"];
-							echo '<input type="checkbox" id="'.$logiciel["nom"].'" name="'.$logiciel["nom"].'" style="margin-left: 8px;"';
-							if (isset($_POST[$logiciel["nom"]])) {
-								echo " checked ";
-							} else if (isset($listeInfoSalle["listeLogiciel"]) && in_array($logiciel["identifiant"], $listeInfoSalle["listeLogiciel"])){
-								echo " checked ";
-							}
-							echo '>';
-							echo '</label>';
-							echo '</div>';
-						}
-					?>
-					</div>
-				</div>
-				<div class = "col-6 offset-4">
-					<?php 
-						if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
+		<div class = "container">
+            <form method="post" id="formSalle" name="formSalle" action="">
+                <div class = "row">
+                    <div class = "col-lg-6 col-12">
+                        <div class = "container-principale">
+                            <div class = "row">
+                                <div class = "col-12 titre">
+                                    <h1>Informations de<br/>la salle</h1>
+                                </div>
+								<div class="col-12">
+									<label for="nomSalle" class="label-form">Nom : <span class = "rouge">*</span></label><br/>
+									<input name="nomSalle" id="nomSalle" placeholder="Nom de la salle" class="input-form <?php if(isset($_POST["nomSalle"]) && trim($_POST["nomSalle"])=="") {echo "erreur";}?>" value="<?php if (isset($_POST["nomSalle"])) {echo $_POST["nomSalle"];} else if (isset($listeInfoSalle["nom"])){echo $listeInfoSalle["nom"];}?>">
+									<br><br>
+								</div>
+								<div class="col-12">
+									<label for="capaciteSalle" class="label-form">Places assises : <span class = "rouge">*</span></label><br/>
+									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" 
+										class="input-form <?php if(isset($_POST["capaciteSalle"]) && $_POST["capaciteSalle"]=="") {echo "erreur";};?>" value="<?php if (isset($_POST["capaciteSalle"])) {echo $_POST["capaciteSalle"];} else if (isset($listeInfoSalle["capacite"])){echo $listeInfoSalle["capacite"];}?>" 
+										oninput="nombreValide(this)">
+									<br><br>
+								</div>
+								<div class="col-12">
+									<label for="nombreOrdinateur" class="label-form">Nombre d'ordinateurs : </label><br/>
+									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" 
+										class="input-form" value="<?php if (isset($_POST["nombreOrdinateur"])) {echo $_POST["nombreOrdinateur"];} else if (isset($listeInfoSalle["nombreOrdinateur"])){echo $listeInfoSalle["nombreOrdinateur"];}?>" 
+										oninput="nombreValide(this)">
+										<br>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "col-lg-6 col-12">
+                        <div class = "container-principale">
+                            <div class = "row">
+                                <div class = "col-12 titre">
+                                    <h1>Caractéristiques techniques<br/>de la salle</h1>
+                                </div>
+								<div class="col-12">
+									<label for="typeOrdinateur" class="label-form">Type d'ordinateur : </label><br/>
+									<input name="typeOrdinateur" id="typeOrdinateur" placeholder="Entrez le système d'exploitation des ordinateurs" class="input-form" value="<?php if (isset($_POST["typeOrdinateur"])) {echo $_POST["typeOrdinateur"];} else if (isset($listeInfoSalle["typeOrdinateur"])){echo $listeInfoSalle["typeOrdinateur"];}?>" >
+									<br><br>
+								</div>
+								<div class="col-12">
+									<input type="checkbox" id="videoProjecteur" name="videoProjecteur" <?php if (isset($_POST["videoProjecteur"])) {echo " checked ";} else if (isset($listeInfoSalle["videoProjecteur"]) && $listeInfoSalle["videoProjecteur"] == "oui"){echo "checked";}?>>
+									<label for="videoProjecteur" class="label-form-checkbox">&nbsp;Projecteur</label>
+									<br><br>
+								</div>
+								<div class="col-12">
+									<input type="checkbox" id="ecranXxl" name="ecranXxl" <?php if (isset($_POST["ecranXxl"])) {echo " checked ";} else if (isset($listeInfoSalle["ecranXxl"]) && $listeInfoSalle["ecranXxl"] == "oui"){echo "checked";}?>>
+									<label for="ecranXxl" class="label-form-checkbox">&nbsp;Écran XXL</label>
+									<br><br>
+								</div>
+								<div class="col-12">
+									<input type="checkbox" id="imprimante" name="imprimante" <?php if (isset($_POST["imprimante"])) {echo " checked ";} else if (isset($listeInfoSalle["imprimante"]) && $listeInfoSalle["imprimante"] == "oui"){echo "checked";}?>>
+									<label for="imprimante" class="label-form-checkbox">&nbsp;Imprimante</label>
+									<br><br>
+								</div>
+								<div class="col-12">
+									<span class="label-form">Choisissez les logiciels :</span>
+									<?php
+										foreach ($listeLogiciel as $logiciel) {
+											echo '<div class="col-3 checkbox-container">'; 
+											echo '<label for="'.$logiciel["nom"].'" class="label-form">';
+											echo $logiciel["nom"];
+											echo '<input type="checkbox" id="'.$logiciel["nom"].'" name="'.$logiciel["nom"].'" style="margin-left: 8px;"';
+											if (isset($_POST[$logiciel["nom"]])) {
+												echo " checked ";
+											} else if (isset($listeInfoSalle["listeLogiciel"]) && in_array($logiciel["identifiant"], $listeInfoSalle["listeLogiciel"])){
+												echo " checked ";
+											}
+											echo '>';
+											echo '</label>';
+											echo '</div>';
+										}
+									?>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "col-6 offset-3">
+                        <?php 
+                        if ($_POST['action'] == 'ajout') {
 							echo '<input type="hidden" name="action" value="ajout">';
-							echo '<button type="submit" class="btn-envoyer"><span class = "fas fa-plus fa-door-open"></span> Ajouter la salle</button>';
-						} else {
+							echo "<button type = 'submit' class='btn-envoyer' id = 'btn-envoyer'>";
+                            echo '<span class = "fas fa-plus"></span>';
+                            echo '<span class = "fas fa-door-open"></span>';
+                            echo ' Ajouter la salle</button>';
+                        } else {
 							echo '<input type="hidden" name="idSalle" value="' . $_POST["idSalle"]. '" hidden>';
 							echo '<input type="hidden" name="action" value="modifier">';
 							echo '<button type="submit" id="modifieSalle" onclick="showOverlay(event,'.$salleReservee.')" class="btn-envoyer">';
-							echo '<span class="fas fa-wrench fa-door-open"></span> Modifier la salle';
-						    echo '</button>';
-						}	
-					?>                    
+                            echo '<span class = "fas fa-edit"></span>';
+                            echo '<span class = "fas fa-door-open"></span>';
+                            echo ' Modifier la salle</button>';
+                        }
+                        ?>
+                        <br/>
+                    </div>
+                </div>                
+            </form>
+        </div>
+
+		<!-- Menu pour téléphone -->
+        <div id="footMenu" class="foot-menu d-md-none">
+            <div class = "container bott-menu-container">
+                <div class = "row">
+                    <table>
+                        <tr>
+                            <td><a href="../accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
+                            <td><a href="../salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+                            <td><a href="../reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
+                            <?php
+                            if($role === "administrateur") {
+                                echo "<td><a href='../employe/consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
+                            }
+                            ?>
+                            <td><a href="../exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
+                        </tr>
+                    </table>
                 </div>
-			</form>
-			
-		</div>
-		
-
-		<div class="footer">
-			<p>2024 © RoomManager. IUT de Rodez.</p>
-		</div>
-
-		<script src="../../engine/js/feunetreConfirmation.js"></script>
-		<script src="../../engine/js/outilVerification.js"></script>
+            </div>
+        </div>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 		<script src="../../engine/js/menu.js"></script>
-		<script src="../../engine/js/verificationChamps.js"></script>
+		<script src="../../engine/js/fenetreConfirmation.js"></script>
+		<script src="../../engine/js/outilVerification.js"></script>
 
 		<div id="overlay" style="display: none;">
 			<div id="overlay-content">
-				<p>La salle est déjà réservée. Voulez-vous quand même la modifier ?</p>
-				<button class="btn" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
-				<button class="btn" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
+				<p class="text-overlay">La salle est déjà réservée. Voulez-vous quand même la modifier ?</p>
+				<button class="bouton-annuler-overlay" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
+				<button class="bouton-modifier-overlay" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
 			</div>
 		</div>
 	</body>

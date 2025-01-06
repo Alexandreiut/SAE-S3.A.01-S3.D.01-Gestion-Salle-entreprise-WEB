@@ -1,9 +1,11 @@
 <?php
     require("../../engine/fonction/fonctionsBDD.php");
     require("../../engine/fonction/consultation.php");
+    require("../../engine/fonction/fonctionSalle.php");
     require("../../engine/affichage/consultation.php");
 
     session_start();
+    $pdo = ConnexionBD::getPDO();
 
     if(session_id() != $_SESSION['session']){
         header('Location: ../../index.php');
@@ -12,8 +14,13 @@
 
     if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
         session_destroy();
-        header('Location: ../../../index.php');
+        header('Location: ../../index.php');
         exit();
+    }
+
+    if (isset($_POST['suppression']) && !empty($_POST['suppression'])) {
+        $id = htmlspecialchars($_POST['suppression']);
+        $estSupprime = supprimerSalle($pdo, $id);
     }
 
     $role = $_SESSION['role'];
@@ -88,14 +95,15 @@
                         <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <button class="btn-rechercher-filtre" type="submit">
-                                    Rechercher
+                                    <span class="btn-recherche-logo"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    <span class="btn-recherche-text">Rechercher</span>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div class="row">
-                    <hr class="mt-2 mb-2">
+                    <hr class="mt-2 mb-2 hr">
                 </div>
                 <form>
                     <div class="row">
@@ -117,7 +125,8 @@
                         <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <button class="btn-rechercher-filtre">
-                                    Rechercher
+                                    <span class="btn-recherche-logo"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    <span class="btn-recherche-text">Rechercher</span>
                                 </button>
                             </div>
                         </div>
@@ -137,11 +146,17 @@
                 <?php
                     affichageSalle($salles);
                 ?>
+                <div id="popup">
+                    <div id="popup-content-container">
+                        <div id="popup-content"></div>
+                        <br/><button id="popup-close">Fermer</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Navigation page et ajout salle -->
             <div class="row mt-3">
-                <hr>
+                <hr class="hr">
                 <div class="col-lg-4 offset-lg-4">
                     <div class="navigation">
                         <form action="consultationSalle.php" method="get">
@@ -195,11 +210,11 @@
                     <table>
                         <tr>
                             <td><a href="../accueil.php"><button class="menuBouton"><i class="fas fa-house"></i><span>Accueil</span></button></a></td>
-                            <td><a href="../salle/consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
+                            <td><a href="consultationSalle.php"><button class="menuBouton"><i class="fas fa-door-open"></i><span>Salle</span></button></a></td>
                             <td><a href="../reservation/consultationReservation.php"><button class="menuBouton"><i class="fas fa-clock-rotate-left"></i><span>Réservation</span></button></a></td>
                             <?php
                             if($role === "administrateur") {
-                                echo "<td><a href='consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
+                                echo "<td><a href='../employe/consultationEmploye.php'><button class='menuBouton'><i class='fas fa-user'></i><span>Employé</span></button></a></td>";
                             }
                             ?>
                             <td><a href="../exportation.php"><button class="menuBouton"><i class="fas fa-download"></i><span>Télécharger</span></button></a></td>
@@ -208,7 +223,26 @@
                 </div>
             </div>
         </div>
-
+        <span id = "modification" value = "<?php if (isset($_SESSION['modif_salle']) && $_SESSION['modif_salle']) {
+                                                    echo true;
+                                                    $_SESSION['modif_salle'] = false;
+                                                }?>"></span>
+        <span id = "ajout" value = "<?php   if (isset($_SESSION['ajout_salle']) && $_SESSION['ajout_salle']) {
+                                                echo true;
+                                                $_SESSION['ajout_salle'] = false;
+                                            }?>"></span>
+        <?php
+            if(isset($estSupprime)) {
+                if ($estSupprime) {
+                    echo "<span id='suppression' value='true'></span>";
+                } else {
+                    echo "<span id='suppression' value='false'></span>";
+                }
+            }
+        ?>
         <script src="../../engine/js/menu.js" defer></script>
+        <script src="../../engine/js/informationsSalle.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+        <script src="../../engine/js/notificationSalle.js" defer></script>
     </body>
 </html>
