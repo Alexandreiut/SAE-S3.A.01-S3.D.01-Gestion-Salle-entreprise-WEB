@@ -1,4 +1,5 @@
 <?php
+    require("../engine/fonction/consultation.php");
 
 	session_start();
 	
@@ -22,7 +23,6 @@
         
         require("../engine/fonction/fonctionExportation.php");
         
-        require("../engine/fonction/connexionBD.php");
         $pdo = ConnexionBD::getPDO();
         
         if ($_POST['modeExport'] == "activite") {
@@ -41,11 +41,11 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../ressources/fontawesome-free-6.5.1-web/css/all.min.css"> <!-- Lien vers Font Awesome -->
+        <link rel="stylesheet" href="../ressources/fontawesome-free-6.5.1-web/css/all.min.css">
         <link rel="stylesheet" href="../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../css/exportationCss.css">
+        <link rel="stylesheet" href="../css/exportation.css">
         <link rel="stylesheet" href="../css/bandeau.css" />
-        <title>Exportation</title><!-- <link rel="stylesheet" href="../css/connexion.css" /> -->
+        <title>Exportation</title>
     </head>
     <body>
         <div class="header">
@@ -57,7 +57,7 @@
             </div>
 
             <div class="offset-lg-2 col-lg-4 header-title">
-                <h1>Exportation</h1>
+                <h1>Télécharger</h1>
             </div>
 
             <div class="offset-lg-2 col-lg-2 container-deconnexion">
@@ -87,42 +87,103 @@
 		</div>
     
         <div class="container main-container">
-            <!-- Ligne 1 : Deux boutons en haut -->
-            <div class="row justify-content-center mb-4">
-                <div class="col-12 col-md-5 text-center mb-3 mb-md-0">
-                    <form action="" method="post">
-                        <button type = "submit" name = "modeExport" value = "activite" class="btn-export w-100" desc="Exporter toutes les données des activités">
-                            <i class="fas fa-chalkboard-teacher"></i> Activités
-                        </button>
-                    </form>
-                </div>
-                <div class="col-12 col-md-5 text-center">
-                    <form action = "" method = "post" >
-                        <button type = "submit" name = "modeExport" value = "employe" class="btn-export w-100" desc="Exporter toutes les données des employés">
-                            <i class="fas fa-user"></i> Employés
-                        </button>
-                    </form>
-                </div>
+            <!-- Titre explicatif pour la première ligne -->
+            <div class="mb-4 text-center">
+                <h2>Choisissez le type de données à exporter</h2>
+                <p>Vous pouvez exporter les données relatives aux activités, employés, réservations ou salles en cliquant sur les boutons ci-dessous.</p>
             </div>
 
-            <!-- Ligne 2 : Deux boutons au milieu -->
-            <div class="row justify-content-center mb-4">
-                <div class="col-12 col-md-5 text-center mb-3 mb-md-0">
-                    <form action = "" method = "post" >
-                        <button type = "submit" name = "modeExport" value = "reservation" class="btn-export w-100" desc="Exporter toutes les données des réservations">
-                            <i class="fas fa-clock-rotate-left"></i> Réservations
-                        </button>
-                    </form>
-                </div>
-                <div class="col-12 col-md-5 text-center">
-                    <form action = "" method = "post" >
-                        <button type = "submit" name = "modeExport" value = "salle" class="btn-export w-100" desc="Exporter toutes les données des salles">
-                            <i class="fas fa-door-open"></i> Salles
-                        </button>
-                    </form>
-                </div>
+            <!-- Tableau centré pour les boutons -->
+            <div class="table-container">
+                <table class="export-table">
+                    <thead>
+                        <tr>
+                            <th class="cell">Fichier</th>
+                            <th class="cell">Format</th>
+                            <th class="cell">Eléments</th>
+                            <th class="cell">Télécharger</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="info-cell cell">
+                                Activités
+                            </td>
+                            <td class="info-cell cell">
+                                csv
+                            </td>
+                            <td class="info-cell cell">
+                                <?php echo getNbActivites()?> activité(s)
+                            </td>
+                            <td class="button-cell cell">
+                                <form action="" method="post">
+                                    <button type="submit" name="modeExport" value="activite" class="btn-export w-100" aria-label="Exporter les activités">
+                                    <i class="fas fa-download"></i><span class="btn-export-text"> Télécharger</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="info-cell cell">
+                                Employés
+                            </td>
+                            <td class="info-cell cell">
+                                csv
+                            </td>
+                            <td class="info-cell cell">
+                                <?php echo getNbEmployes()?> employé(s)
+                            </td>
+                            <td class="button-cell cell">
+                                <form action="" method="post">
+                                    <button type="submit" name="modeExport" value="employe" class="btn-export w-100" aria-label="Exporter les employés">
+                                    <i class="fas fa-download"></i><span class="btn-export-text"> Télécharger</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="info-cell cell">
+                                Réservations
+                            </td>
+                            <td class="info-cell cell">
+                                csv
+                            </td>
+                            <td class="info-cell espace cell">
+                                <?php echo getNbReservation()?> réservation(s)
+                            </td>
+                            <td class="button-cell cell">
+                                <form action="" method="post">
+                                    <button type="submit" name="modeExport" value="reservation" class="btn-export w-100" aria-label="Exporter les réservations">
+                                    <i class="fas fa-download"></i><span class="btn-export-text"> Télécharger</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="info-cell cell">
+                                Salles
+                            </td>
+                            <td class="info-cell cell">
+                                csv
+                            </td>
+                            <td class="info-cell cell">
+                                <?php echo getNbSalles()?> salle(s)
+                            </td>
+                            <td class="button-cell cell">
+                                <form action="" method="post">
+                                    <button type="submit" name="modeExport" value="salle" class="btn-export w-100" aria-label="Exporter les salles">
+                                    <i class="fas fa-download"></i><span class="btn-export-text"> Télécharger</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+
+
+
         <div id="footMenu" class="foot-menu d-md-none">
 			<div class = "container bott-menu-container">
 				<div class = "row">
@@ -142,7 +203,6 @@
 				</div>
 			</div>
 		</div>
-        <script src="../engine/js/exportation.js" defer></script>
         <script src="../engine/js/menu.js" defer></script>
     </body>
 </html>

@@ -1,0 +1,138 @@
+/* Corps de la page */
+body {
+    margin: 0;
+    background: linear-gradient(
+        to left,
+        #E3FFFE 0%,
+        #FFFFFF 40%,
+        #FFFFFF 60%,
+        #E3FFFE 100%
+    );
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Hauteur de la page */
+}
+
+/* Conteneur principal */
+.main-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 40px;
+}
+
+/* Conteneur du tableau */
+.table-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Table */
+.export-table {
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    min-width: 400px;
+    width: auto;
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    /* border: 2px solid midnightblue; */
+    border: 1px solid #ddd;
+}
+
+thead tr {
+    background-color: midnightblue;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.cell {
+    padding: 20px 30px;
+}
+
+tbody, tr, td, th {
+    border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+
+}
+
+/* Boutons */
+.btn-export {
+    background-color: #CCF5F3;
+    color: black;
+    padding: 10px 50px;
+    border: 2px solid #00bbb0;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-export:hover {
+    background-color: #00BBB0;
+    transition: all 0.3s ease;
+}
+
+.btn-export .btn-export-text {
+    display: inline;
+}
+
+.espace {
+    padding-right: 10px;
+    white-space: nowrap; /* Empêche le texte d'aller à la ligne */
+    min-width: 150px; /* Ajustez cette valeur selon vos besoins */
+    text-align: left; /* Aligne le texte à gauche (optionnel) */
+}
+
+/* Texte */
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    color: #666;
+    max-width: 80%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .export-table {
+        width: 100%;
+    }
+
+    .btn-export .btn-export-text {
+        display: none;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    .cell {
+        padding: 5px 10px;
+    }
+
+    .table-container {
+        margin-bottom: 100px;
+    }
+}
