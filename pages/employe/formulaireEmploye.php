@@ -196,7 +196,7 @@
                                 ?>
                                     <!-- téléphone -->
                                     <label for = "telephone" class="label-form">Téléphone (optionnel) : </label><br>
-                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['telephone']) { echo " erreur"; } ?> " maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé"
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['telephone']) { echo " erreur"; } ?> " maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé (4 chiffres)"
                                     <?php
                                         echo 'value = "';
                                         
