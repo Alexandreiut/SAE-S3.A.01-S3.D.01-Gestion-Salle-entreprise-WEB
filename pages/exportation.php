@@ -17,6 +17,9 @@
     
     if (isset($_POST['modeExport'])) {
         
+        //vide le dossier de csv pour éviter une surcharge
+        array_map('unlink', glob("../csv/*.*"));
+        
         require("../engine/fonction/fonctionExportation.php");
         
         require("../engine/fonction/connexionBD.php");
@@ -30,8 +33,6 @@
             exporterReservations($pdo);
         } else if ($_POST['modeExport'] == "salle") {
             exporterSalles($pdo);
-        } else { // tout
-            exporterTout($pdo);
         }
     }
     
@@ -117,17 +118,6 @@
                     <form action = "" method = "post" >
                         <button type = "submit" name = "modeExport" value = "salle" class="btn-export w-100" desc="Exporter toutes les données des salles">
                             <i class="fas fa-door-open"></i> Salles
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Ligne 3 : Un bouton centré tout en bas -->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md- text-center">
-                    <form action = "" method = "post" >
-                        <button type = "submit" name = "modeExport" value = "tout" class="btn-export w-100" id="tout-exporter" desc="Exporter toutes les données disponibles"> <!-- Ajout du onclick -->
-                            <i class="fas fa-download"></i> Tout Exporter
                         </button>
                     </form>
                 </div>
