@@ -11,7 +11,7 @@ function hideOverlay() {
 
 function handleResponse(confirm) {
     if (confirm) {
-        document.getElementById("formSalle").submit();
+        document.getElementById("form").submit();
     } else {
         hideOverlay();
     }

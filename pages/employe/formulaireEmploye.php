@@ -46,10 +46,8 @@
                     $_SESSION['ajout_employe'] = true;
                 } else {
                     
-                    // test présence id
-                    if (!isset($_POST['id'])) {
-                            
-                        throw new Exception('idenfiant manquant pour modification');
+                    if (isset($_POST['id'])) {
+                        $employeReservant=!estNonReservant($pdo, $_POST['id']);
                     }
                     
                     $id = htmlspecialchars($_POST['id']);
@@ -65,6 +63,10 @@
                 header('Location: consultationEmploye.php');
             }
         } else if ($_POST['action'] == 'modifier') {
+
+            if (isset($_POST['id'])) {
+                $employeReservant=!estNonReservant($pdo, $_POST['id']);
+            }
             
             recupEmploye($pdo, $_POST['id']);
             
@@ -98,7 +100,7 @@
         <meta name="Description" content="" />
         <link rel="stylesheet" href="../../css/bandeau.css" />
         <link rel="stylesheet" href="../../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="../../ressources/fontawesome-free-6.5.1-web/css/all.css">
+        <link rel="stylesheet" href="../../ressources/fontawesome-free-6.5.1-web/css/all.css"/>
         <link rel="stylesheet" href="../../css/formEmploye.css" />
     </head>
     <body>
@@ -146,7 +148,7 @@
 		</div>
         
         <div class = "container">
-            <form action = "" method = "post">
+            <form action = "" method = "post" id="form" name="form">
                 <div class = "row">
                     <div class = "col-lg-6 col-12">
                         <div class = "container-principale">
@@ -302,8 +304,8 @@
                         </div>
                     </div>
                     <div class = "col-6 offset-3">
-                        <button type = "submit" class="btn-envoyer" id = "btn-envoyer">
-                        <?php 
+                        <?php
+                        echo '<button type = "submit" class="btn-envoyer" id = "btn-envoyer" onclick="showOverlay(event, '.$employeReservant.')">';
                         echo '<span class = "fas fa-';
                         if ($_POST['action'] == 'ajout') {
                             echo 'plus"></span>';
@@ -351,6 +353,15 @@
                 </div>
             </div>
         </div>
+        <script src="../../engine/js/fenetreConfirmation.js"></script>
         <script src="../../engine/js/menu.js" defer></script>
+
+        <div id="overlay" style="display: none;">
+			<div id="overlay-content">
+				<p class="text-overlay">L'employé a effectué une réservation. Voulez-vous quand même le modifier ?</p>
+				<button class="bouton-annuler-overlay" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
+				<button class="bouton-modifier-overlay" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
+			</div>
+		</div>
     </body>
 </html>    

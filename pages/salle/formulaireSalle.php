@@ -125,7 +125,7 @@
 		</div>
 
 		<div class = "container">
-            <form method="post" id="formSalle" name="formSalle" action="">
+            <form method="post" id="form" name="form" action="">
                 <div class = "row">
                     <div class = "col-lg-6 col-12">
                         <div class = "container-principale">

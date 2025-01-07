@@ -119,7 +119,6 @@
 
     function estNonReservant($pdo, $id) {
 
-        //Optimiser
         $requete = "SELECT COUNT(*) FROM reservation WHERE reservant = :id";
         $resultat = $pdo->prepare($requete);
         $resultat->bindParam('id', $id);

@@ -170,6 +170,14 @@ body {
     align-items: center;
 }
 
+.bouton-annuler-overlay:hover {
+    background-color: #A90C0C;
+}
+
+.bouton-modifier-overlay:hover {
+    background-color: #007770;
+}
+
 .fas {
     margin : 3px;
 }
