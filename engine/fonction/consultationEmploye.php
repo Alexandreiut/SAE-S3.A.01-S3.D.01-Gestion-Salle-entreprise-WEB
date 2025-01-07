@@ -70,7 +70,7 @@
         try {
             $pdo = ConnexionBD::getPDO();
 
-            $requete = "SELECT identifiant, nom, prenom FROM utilisateur WHERE role = 'employé' ORDER BY identifiant LIMIT :limit OFFSET :offset";
+            $requete = "SELECT identifiant, nom, prenom, telephone FROM utilisateur WHERE role = 'employé' ORDER BY identifiant LIMIT :limit OFFSET :offset";
             $stmt = $pdo->prepare($requete);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -85,7 +85,7 @@
         try {
             $pdo = ConnexionBD::getPDO();
 
-            $requete = "SELECT identifiant, nom, prenom FROM utilisateur WHERE nom LIKE :nom ORDER BY identifiant LIMIT :limit OFFSET :offset";
+            $requete = "SELECT identifiant, nom, prenom, telephone FROM utilisateur WHERE nom LIKE :nom ORDER BY identifiant LIMIT :limit OFFSET :offset";
             $stmt = $pdo->prepare($requete);
             $stmt->bindValue(':nom', $nom . '%');
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -102,7 +102,7 @@
             $pdo = ConnexionBD::getPDO();
 
             // Base de la requête
-            $requete = "SELECT DISTINCT u.identifiant, u.nom, u.prenom FROM reservation 
+            $requete = "SELECT DISTINCT u.identifiant, u.nom, u.prenom, u.telephone FROM reservation 
                     JOIN utilisateur as u ON reservant = u.identifiant
                     JOIN salle as s ON salle = s.identifiant 
                     WHERE 1=1"; // '1=1' permet d'ajouter dynamiquement des conditions sans erreur de syntaxe

@@ -71,7 +71,8 @@ function getSalles($offset, $limit) {
     try {
         $pdo = ConnexionBD::getPDO();
 
-        $requete = "SELECT identifiant, nom FROM salle ORDER BY nom LIMIT :limit OFFSET :offset";
+        $requete = "SELECT identifiant, nom, capacite, videoProjecteur, ecranXXL, nombreOrdinateur, typeOrdinateur, imprimante 
+                    FROM salle ORDER BY nom LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($requete);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -86,7 +87,8 @@ function getSalleParNom($offset, $limit, $nom) {
     try {
         $pdo = ConnexionBD::getPDO();
 
-        $requete = "SELECT identifiant, nom FROM salle WHERE nom LIKE :nom ORDER BY identifiant LIMIT :limit OFFSET :offset";
+        $requete = "SELECT identifiant, nom, capacite, videoProjecteur, ecranXXL, nombreOrdinateur, typeOrdinateur, imprimante
+                    FROM salle WHERE nom LIKE :nom ORDER BY identifiant LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($requete);
         $stmt->bindValue(':nom', $nom . '%');
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -103,7 +105,8 @@ function getSalleParActiviteEmploye($offset, $limit, $activite = "0", $employe =
         $pdo = ConnexionBD::getPDO();
 
         // Base de la requête
-        $requete = "SELECT DISTINCT s.identifiant, s.nom FROM reservation 
+        $requete = "SELECT DISTINCT s.identifiant, s.nom, s.capacite, s.videoProjecteur, s.ecranXXL, s.nombreOrdinateur, s.typeOrdinateur, s.imprimante
+                    FROM reservation 
                     JOIN utilisateur as u ON reservant = u.identifiant
                     JOIN salle as s ON salle = s.identifiant 
                     WHERE 1=1"; // '1=1' permet d'ajouter dynamiquement des conditions sans erreur de syntaxe
