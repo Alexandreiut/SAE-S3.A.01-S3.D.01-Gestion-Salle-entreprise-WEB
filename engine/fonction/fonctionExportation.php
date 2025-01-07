@@ -2,7 +2,7 @@
     
     function exporterActivites($pdo) {
         
-        $nomFichier = "../csv/activites ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../poubelle_temporaire/activites ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         $requete = "SELECT lpad(identifiant, 7, '0') AS id, nom FROM activite";
@@ -21,7 +21,7 @@
     
     function exporterEmployes($pdo) {
         
-        $nomFichier = "../csv/employes ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../poubelle_temporaire/employes ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         $requete = "SELECT lpad(identifiant, 6, '0') AS id, nom, prenom, telephone FROM utilisateur";
@@ -40,7 +40,7 @@
     
     function exporterReservations($pdo) {
         
-        $nomFichier = "../csv/reservations ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../poubelle_temporaire/reservations ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         $requete = "SELECT lpad(reservation.identifiant, 6, '0') AS id, DATE_FORMAT(date, '%d/%m/%Y') AS date,
@@ -70,7 +70,7 @@
     
     function exporterSalles($pdo) {
         
-        $nomFichier = "../csv/salles ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../poubelle_temporaire/salles ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         $requete = "SELECT identifiant, lpad(identifiant, 8, '0') AS id, nom, capacite, videoProjecteur, ecranXXL, nombreOrdinateur, typeOrdinateur, imprimante FROM salle";
