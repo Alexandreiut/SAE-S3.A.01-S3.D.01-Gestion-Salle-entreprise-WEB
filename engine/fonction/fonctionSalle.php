@@ -120,19 +120,20 @@
         }
     }
     
-    function getListeSalle($pdo){
+    function getListeSalle($pdo) {
         $tableauSalles = array();
         try {
             $requeteSalle = $pdo->prepare("SELECT identifiant, nom FROM salle ORDER BY nom ASC");
             if ($requeteSalle->execute()) {
                 while ($ligne = $requeteSalle->fetch(PDO::FETCH_ASSOC)) {
-                    $tableauSalles[] = $ligne['identifiant'];
-                    $tableauSalles[] = $ligne['nom'];
+                    $tableauSalles[] = [
+                        'identifiant' => $ligne['identifiant'],
+                        'nom' => $ligne['nom']
+                    ];
                 }
             }
             return $tableauSalles; 
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             // Gérer les erreurs et lancer une exception avec le message d'erreur.
             throw new PDOException($e->getMessage(), $e->getCode());
         }

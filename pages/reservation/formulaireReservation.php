@@ -5,7 +5,6 @@
     require("../../engine/fonction/fonctionEmploye.php");
     require("../../engine/fonction/fonctionActivite.php");
     require("../../engine/fonction/fonctionSalle.php");
-    require("../../engine/fonction/outilDate.php");
 
 	if(session_id() != $_SESSION['session']){
 		header('Location: ../../index.php');
@@ -27,6 +26,7 @@
         $listeSalle = getListeSalle($pdo);
         $listeEmploye = getEmploye($pdo);
         $listeActivite = getListeActivites($pdo);
+        
         if(empty($listeSalle) || empty($listeEmploye) || empty($listeActivite)){
             header('Location: consultationReservation.php');
         }

@@ -212,7 +212,7 @@ $listeActivites = getListeActivites();
 
             <!-- Résultat recherche -->
             <div class="hauteur-recherche">
-                <form action="formulaireReservation.php" method="get">
+                <form action="formulaireReservation.php" method="post">
                     <?php
                     if (!empty($reservations)) {
                         affichageReservations($reservations);
