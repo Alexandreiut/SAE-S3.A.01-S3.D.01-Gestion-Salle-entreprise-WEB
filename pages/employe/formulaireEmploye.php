@@ -153,6 +153,7 @@
 			</ul>
 		</div>
         
+        <!-- Formulaire -->
         <div class = "container">
             <form action = "" method = "post" id="form" name="form">
                 <div class = "row">

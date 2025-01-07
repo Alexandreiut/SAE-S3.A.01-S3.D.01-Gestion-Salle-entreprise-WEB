@@ -6,6 +6,8 @@
     require("../../engine/fonction/fonctionActivite.php");
     require("../../engine/fonction/fonctionSalle.php");
 
+    $role = $_SESSION['role'];
+
 	if(session_id() != $_SESSION['session']){
 		header('Location: ../../index.php');
 		exit();
@@ -116,15 +118,17 @@
 				<li><a href="../exportation.php"><i class="fas fa-download"></i> Télécharger</a></li>
 			</ul>
 		</div>
-        <div class="container-fluid">
-			<form method="post" id="formReservation" name="formReservation" action="formulaireReservation.php">
-				<h1>Informations réservation</h1>
+
+        <!-- Formulaire -->
+        <div class="container">
+			<form method="post" id="form" name="form" action="formulaireReservation.php">
+				<span class="titre"><h1>Informations réservation</h1></span>
 				<div class="row">
-                    <div class="col-4 col-md-4 col-sm-12">
-                        <label for="nomSalle" class="labelStyle">Salle :*  </label>
+                    <div class="col-lg-6 col-12">
+                        <label for="nomSalle" class="label-form">Salle : <span class = "rouge">*</span>  </label>
                         <?php 
                         $errorClass = "";
-                        if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]=="") {$errorClass="erreurInput";};
+                        if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]=="") {$errorClass="erreur";};
                             echo '<select name="nomSalle" id="nomSalle" class="'.$errorClass.'" >';
                             echo '<option value="">-- Sélectionnez une salle --</option>';
                             foreach ($listeSalle as $salle) {
@@ -138,11 +142,11 @@
                             echo '</select>';
                         ?>                       
                     </div>
-                    <div class="col-4 col-md-4 col-sm-12">
-                        <label for="nomActivite" class="labelStyle">Activite :*  </label>
+                    <div class="col-lg-6 col-12">
+                        <label for="nomActivite" class="label-form">Activite : <span class = "rouge">*</span>  </label>
                         <?php 
                             $errorClass = "";
-                            if(isset($_POST["nomActivite"]) && $_POST["nomActivite"]=="") {$errorClass="erreurInput";};
+                            if(isset($_POST["nomActivite"]) && $_POST["nomActivite"]=="") {$errorClass="erreur";};
                             echo '<select name="nomActivite" id="nomActivite" class='.$errorClass.'>';
                             echo '<option value="">-- Sélectionnez une activité --</option>';
                             foreach ($listeActivite as $activite) {
@@ -156,11 +160,11 @@
                             echo '</select>';
                         ?>
                     </div>
-                    <div class="col-4 col-md-4 col-sm-12">
-                        <label for="nomEmploye" class="labelStyle">Employe :*  </label>
+                    <div class="col-lg-6 col-12">
+                        <label for="nomEmploye" class="label-form">Employe : <span class = "rouge">*</span>  </label>
                         <?php 
                             $errorClass = "";
-                            if(isset($_POST["nomEmploye"]) && $_POST["nomEmploye"]=="") {$errorClass="erreurInput";};
+                            if(isset($_POST["nomEmploye"]) && $_POST["nomEmploye"]=="") {$errorClass="erreur";};
                             echo '<select name="nomEmploye" id="nomEmploye" class="'.$errorClass.'" >';
                             echo '<option value="">-- Sélectionnez un employé --</option>';
                             foreach ($listeEmploye as $employe) {
@@ -174,19 +178,17 @@
                             echo '</select>';
                         ?>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 col-md-4 col-sm-12">
+                    <div class="col-lg-6 col-12">
                         <!-- Date picker -->
-                        <label for="date" class="labelStyle">Date *</label>
-                        <input type="date" name="date" id="date" class="form-control <?php if(isset($_POST["date"]) && $_POST["date"]=="") {echo "erreurInput";};?>"  value="<?php if (isset($_POST["date"])) {echo $_POST["date"];} else if (isset($listeInfoReservation["date"])){echo $listeInfoReservation["date"];}?>">
+                        <label for="date" class="label-form">Date : <span class = "rouge">*</span></label>
+                        <input type="date" name="date" id="date" class="form-control <?php if(isset($_POST["date"]) && $_POST["date"]=="") {echo "erreur";};?>"  value="<?php if (isset($_POST["date"])) {echo $_POST["date"];} else if (isset($listeInfoReservation["date"])){echo $listeInfoReservation["date"];}?>">
                     </div>
-                    <div class="col-4 col-md-4 col-sm-6">
+                    <div class="col-lg-6 col-12">
                         <!-- Heure début -->
-                        <label for="heureDebut" class="labelStyle">Heure début *</label>
+                        <label for="heureDebut" class="label-form">Heure début : <span class = "rouge">*</span></label>
                         <?php
                             $errorClass = "";
-                            if(isset($_POST["heureDebut"]) && $_POST["heureDebut"]=="") {$errorClass="erreurInput";};
+                            if(isset($_POST["heureDebut"]) && $_POST["heureDebut"]=="") {$errorClass="erreur";};
                         ?>
                         <select name="heureDebut" id="heureDebut" class="form-control <?php echo $errorClass; ?>" >
                             <option value="">-- Sélectionnez l'heure de début --</option>
@@ -214,12 +216,12 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="col-4 col-md-4 col-sm-6">
+                    <div class="col-lg-6 col-12">
                         <!-- Heure fin -->
-                        <label for="heureFin" class="labelStyle">Heure fin *</label>
+                        <label for="heureFin" class="label-form">Heure fin :  <span class = "rouge">*</span></label>
                         <?php
                             $errorClass = "";
-                            if(isset($_POST["heureDebut"]) && $_POST["heureDebut"]=="") {$errorClass="erreurInput";};
+                            if(isset($_POST["heureDebut"]) && $_POST["heureDebut"]=="") {$errorClass="erreur";};
                         ?>
                         <select name="heureFin" id="heureFin" class="form-control <?php echo $errorClass; ?>" >
                             <option value="">-- Sélectionnez l'heure de fin --</option>
@@ -252,52 +254,42 @@
                             <?php endforeach; ?>
                         </select>
                     </div>    
-                </div>
-                <div class="row">
-                    <div class="col-4 col-md-4 col-sm-12">
-                        <label for="nomInterlocuteur" class="labelStyle">Nom interlocuteur : </label>
-						<input name="nomInterlocuteur" id="nomInterlocuteur" placeholder="" class="inputText" value="<?php if (isset($_POST["nomInterlocuteur"])) {echo $_POST["nomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurNom"])){echo $listeInfoReservation["interlocuteurNom"];}?>" >
+                    <div class="col-lg-6 col-12">
+                        <label for="nomInterlocuteur" class="label-form">Nom interlocuteur : </label>
+						<input name="nomInterlocuteur" id="nomInterlocuteur" placeholder="" class="input-form" value="<?php if (isset($_POST["nomInterlocuteur"])) {echo $_POST["nomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurNom"])){echo $listeInfoReservation["interlocuteurNom"];}?>" >
 					</div>
-                    <div class="col-4 col-md-4 col-sm-12">
-                        <label for="prenomInterlocuteur" class="labelStyle">Prénom interlocuteur : </label>
-						<input name="prenomInterlocuteur" id="prenomInterlocuteur" placeholder="" class="inputText" value="<?php if (isset($_POST["prenomInterlocuteur"])) {echo $_POST["prenomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurPrenom"])){echo $listeInfoReservation["interlocuteurPrenom"];}?>" >				
+                    <div class="col-lg-6 col-12">
+                        <label for="prenomInterlocuteur" class="label-form">Prénom interlocuteur : </label>
+						<input name="prenomInterlocuteur" id="prenomInterlocuteur" placeholder="" class="input-form" value="<?php if (isset($_POST["prenomInterlocuteur"])) {echo $_POST["prenomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurPrenom"])){echo $listeInfoReservation["interlocuteurPrenom"];}?>" >				
                     </div>
-                    <div class="col-4 col-md-4 col-sm-12">
-                    <label for="numeroInterlocuteur" class="labelStyle">Numéro interlocuteur : </label>
-                    <input 
-                        name="numeroInterlocuteur" 
-                        id="numeroInterlocuteur" 
-                        type="text"
-                        maxlength="10"
-                        placeholder="" 
-                        class="inputText" 
-                        value="<?php if (isset($_POST['numeroInterlocuteur'])) {echo $_POST['numeroInterlocuteur'];} else if (isset($listeInfoReservation['interlocuteurNumero'])) {echo $listeInfoReservation['interlocuteurNumero'];} ?>" 
-                        oninput="validerNombre(this,10)">
-
+                    <div class="col-lg-6 col-12">
+                        <label for="numeroInterlocuteur" class="label-form">Numéro interlocuteur : </label>
+                        <input 
+                            name="numeroInterlocuteur" 
+                            id="numeroInterlocuteur" 
+                            type="text"
+                            maxlength="10"
+                            placeholder="" 
+                            class="input-form" 
+                            value="<?php if (isset($_POST['numeroInterlocuteur'])) {echo $_POST['numeroInterlocuteur'];} else if (isset($listeInfoReservation['interlocuteurNumero'])) {echo $listeInfoReservation['interlocuteurNumero'];} ?>" 
+                            oninput="validerNombre(this,10)">
                     </div>
-                </div>
-                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <label for="objectReservation" class="label-form">Object : </label>
+                        <input name="objectReservation" id="objectReservation" placeholder="" class="input-form" value="<?php if (isset($_POST["objectReservation"])) {echo $_POST["objectReservation"];} else if (isset($listeInfoReservation["object"])){echo $listeInfoReservation["object"];}?>" >		
+                    </div>
                     <div class="col-12 col-md-12 col-sm-12">
-                    <div>
-                        <label for="description" class="labelStyle">Description de la réservation :</label><br>
-                        <textarea id="description" name="description" rows="4" cols="180" placeholder=""><?php 
-                            if (isset($_POST["description"])) {
-                                echo htmlspecialchars(trim($_POST["description"]));
-                            } else if (isset($listeInfoReservation["descriptionActivite"])) {
-                                echo htmlspecialchars(trim($listeInfoReservation["descriptionActivite"]));
-                            }
-                        ?></textarea>
+                        <div>
+                            <label for="description" class="label-form">Description de la réservation :</label><br>
+                            <textarea id="description" name="description" rows="4" cols="180" placeholder=""><?php 
+                                if (isset($_POST["description"])) {
+                                    echo htmlspecialchars(trim($_POST["description"]));
+                                } else if (isset($listeInfoReservation["descriptionActivite"])) {
+                                    echo htmlspecialchars(trim($listeInfoReservation["descriptionActivite"]));
+                                }
+                            ?></textarea>
+                        </div>
                     </div>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-12 col-sm-12">
-                    <label for="objectReservation" class="labelStyle">Object : </label>
-                    <input name="objectReservation" id="objectReservation" placeholder="" class="inputText" value="<?php if (isset($_POST["objectReservation"])) {echo $_POST["objectReservation"];} else if (isset($listeInfoReservation["object"])){echo $listeInfoReservation["object"];}?>" >		
-                    </div>
-                </div>
-                <div class="row">
 					<div class = "col-6 offset-4">
 						<?php 
 							if(isset($_POST["action"]) && $_POST["action"] == "ajout"){
@@ -315,6 +307,7 @@
 				</div>
             </form>
         </div>
+
         <!-- Menu latéral -->
 		<!--Initialement caché-->
 		<div id="sideMenu" class="side-menu">
