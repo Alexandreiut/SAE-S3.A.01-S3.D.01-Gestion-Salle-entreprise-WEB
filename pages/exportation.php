@@ -1,5 +1,8 @@
 <?php
     require("../engine/fonction/consultation.php");
+    require("../engine/fonction/consultationEmploye.php");
+    require("../engine/fonction/consultationSalle.php");
+    require("../engine/fonction/consultationReservation.php");
 
 	session_start();
 	
