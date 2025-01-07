@@ -126,4 +126,24 @@
 
         return $resultat->fetch()['COUNT(*)'] == 0;
     }
+    function getEmploye($pdo) {
+        $tableauEmployes = array();
+        try {
+            $requeteEmploye = $pdo->prepare("SELECT identifiant, nom, prenom FROM utilisateur WHERE role = 'employé' ORDER BY nom ASC");
+            if ($requeteEmploye->execute()) {
+                while ($ligne = $requeteEmploye->fetch(PDO::FETCH_ASSOC)) {
+                    $tableauEmployes[] = [
+                        'identifiant' => $ligne['identifiant'],
+                        'nom' => $ligne['nom'],
+                        'prenom' => $ligne['prenom']
+                    ];
+                }
+            }
+            return $tableauEmployes;
+        } catch (Exception $e) {
+            // Gérer les erreurs et relancer une exception avec le message d'erreur.
+            throw new PDOException($e->getMessage(), $e->getCode());
+        }
+    }
+    
 ?>

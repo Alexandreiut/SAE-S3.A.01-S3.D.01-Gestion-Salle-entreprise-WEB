@@ -55,100 +55,260 @@
         }
     }
 
-    function ajoutReservation($connexion,$date,$heureDebut,$heureFin,$description,$usage,$interlocuteur,$salle,$activite,$reservant){
-        $tableauParametre = array();
-
+    function ajoutReservation($connexion, $date, $heureDebut, $heureFin, $description, $usage, $nomInterlocuteur, $prenomInterlocuteur, $numeroInterlocuteur, $salle, $activite, $reservant) {
         try {
-            $idReservation = "";
-
-            $requeteIdDisponible = 
-            "SELECT MIN(t1.identifiant + 1) AS premier_identifiant_manquant
-            FROM reservation t1
-            LEFT JOIN reservation t2 ON t1.identifiant + 1 = t2.identifiant
-            WHERE t2.identifiant IS NULL;";    
-            
-            $resultat = $connexion->query($requeteIdDisponible);
-            $idReservation = $resultat->fetchColumn(); 
-
-
-            $tableauParametre[] = $idReservation;
-            $tableauParametre[] = $date;
-            $tableauParametre[] = $heureDebut;
-            $tableauParametre[] = $heureFin;
-            $tableauParametre[] = $description;
-            $tableauParametre[] = $usage;
-            $tableauParametre[] = $interlocuteur;
-            $tableauParametre[] = $salle;
-            $tableauParametre[] = $activite;
-            $tableauParametre[] = $reservant;
-
-            $requeteAjoutReservation = 
-            "INSERT INTO reservation (identifiant, date, heureDebut, heureFin, descriptionActivite, object, interlocuteur, salle, activite, reservant)
-            VALUES 
-            (?,?,?,?,?,?,?,?,?,?);";
-            
-            $resultats = $connexion->prepare($requeteAjoutReservation);
-            $resultats->execute($tableauParametre);
-            
-        } catch (Exception $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
-        }
-    }
-
-    function verifieExistance($connexion,$salle,$activite,$employe){
-        $existanceOk = true;
-        try {
-            $requeteSalle="SELECT identifiant FROM salle where identifiant = ?";
-            $requeteActivite="SELECT identifiant FROM activite where identifiant = ?";
-            $requeteEmploye="SELECT identifiant FROM employe where identifiant = ?";
-            //TODO FINIR 
-
-        } catch (Exception $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
-        }
-    }
-
-    function modifieReservation($connexion,$identifiant,$date,$heureDebut,$heureFin,$description,$usage,$interlocuteur,$salle,$activite,$reservant){
-        $tableauParametre = array();
+            // Vérifie si la réservation est ajoutable
+            $requeteReservationPossible = "
+                SELECT COUNT(*) 
+                FROM reservation 
+                WHERE date = ? 
+                AND (
+                    salle = ? 
+                    OR reservant = ?
+                )
+                AND (
+                    (? BETWEEN heureDebut AND heureFin) OR
+                    (? BETWEEN heureDebut AND heureFin) OR
+                    (heureDebut BETWEEN ? AND ?) OR
+                    (heureFin BETWEEN ? AND ?)
+                );
+            ";
+            $tableauParametre = [$date, $salle, $reservant, $heureDebut, $heureFin, $heureDebut, $heureFin, $heureDebut, $heureFin];
     
+            $requete = $connexion->prepare($requeteReservationPossible);
+            $requete->execute($tableauParametre);
+            $nombreChevauchements = $requete->fetchColumn();
+    
+            if ($nombreChevauchements == 0) {
+                // Recherche ou insertion de l'interlocuteur
+                $requeteInterlocuteur = "
+                    SELECT identifiant FROM interlocuteur 
+                    WHERE nom = ? AND prenom = ? AND telephone = ?;
+                ";
+                $requete = $connexion->prepare($requeteInterlocuteur);
+                $requete->execute([$nomInterlocuteur, $prenomInterlocuteur, $numeroInterlocuteur]);
+                $interlocuteur = $requete->fetch(PDO::FETCH_ASSOC);
+    
+                if ($interlocuteur) {
+                    $idInterlocuteur = $interlocuteur['identifiant'];
+                } else if(!empty($nomInterlocuteur)) {
+                    // Recherche du premier identifiant manquant
+                    $idInterlocuteur = getPremierIdentifiantDisponible($connexion, 'interlocuteur');
+    
+                    // Insertion de l'interlocuteur
+                    $requeteInsertion = "
+                        INSERT INTO interlocuteur (identifiant, nom, prenom, telephone)
+                        VALUES (?, ?, ?, ?);
+                    ";
+                    $requete = $connexion->prepare($requeteInsertion);
+                    $requete->execute([$idInterlocuteur, $nomInterlocuteur, $prenomInterlocuteur, $numeroInterlocuteur]);
+                } else{
+                    $idInterlocuteur = NULL;
+                }
+    
+                // Recherche du premier identifiant manquant pour la réservation
+                $idReservation = getPremierIdentifiantDisponible($connexion, 'reservation');
+    
+                // Insertion de la réservation
+                $requeteAjoutReservation = "
+                    INSERT INTO reservation (identifiant, date, heureDebut, heureFin, descriptionActivite, object, interlocuteur, salle, activite, reservant)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                ";
+                $tableauParametre = [
+                    $idReservation, $date, $heureDebut, $heureFin, $description, $usage,
+                    $idInterlocuteur, $salle, $activite, $reservant
+                ];
+                $requete = $connexion->prepare($requeteAjoutReservation);
+                $requete->execute($tableauParametre);
+    
+                return true;
+            } 
+            return false; // Chevauchement détecté
+        } catch (Exception $e) {
+            // Gestion des erreurs
+            echo "Erreur : " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    // Fonction utilitaire pour récupérer le premier identifiant manquant
+    function getPremierIdentifiantDisponible($connexion, $table) {
+        $requeteIdDisponible = "
+            SELECT MIN(t1.identifiant + 1) AS premier_identifiant_manquant
+            FROM $table t1
+            LEFT JOIN $table t2 ON t1.identifiant + 1 = t2.identifiant
+            WHERE t2.identifiant IS NULL
+        ";
+        $requete = $connexion->prepare($requeteIdDisponible);
+        $requete->execute();
+        return $requete->fetchColumn() ?? 1;
+    }
+    
+    
+
+    function modifieReservation($connexion, $identifiant, $date, $heureDebut, $heureFin, $description, $usage, $nomInterlocuteur, $prenomInterlocuteur, $numeroInterlocuteur, $salle, $activite, $reservant) {
         try {
-            if ($nombreOrdinateur == "") {
-                $nombreOrdinateur = 0;
-            }
+            // Vérifie si la réservation est ajoutable
+            $requeteReservationPossible = "
+                SELECT COUNT(*) 
+                FROM reservation 
+                WHERE date = ? 
+                AND (
+                    salle = ? 
+                    OR reservant = ?
+                )
 
-            $requeteModifieSalle = "
-                UPDATE reservation 
-                SET 
-                    date = :date, 
-                    heureDebut = :heureDebut, 
-                    heureFin = :heureFin, 
-                    descriptionActivite = :descriptionActivite, 
-                    object = :object, 
-                    interlocuteur = :interlocuteur, 
-                    salle = :salle,
-                    activite = :activite,
-                    reservation = :reservation
-                WHERE identifiant = :id";
+                AND (
+                    (? BETWEEN heureDebut AND heureFin) OR
+                    (? BETWEEN heureDebut AND heureFin) OR
+                    (heureDebut BETWEEN ? AND ?) OR
+                    (heureFin BETWEEN ? AND ?)
+                )
+                AND identifiant != ?;
+            ";
+            $tableauParametre = [$date, $salle, $reservant, $heureDebut, $heureFin, $heureDebut, $heureFin, $heureDebut, $heureFin, $identifiant];
+    
+            $requete = $connexion->prepare($requeteReservationPossible);
+            $requete->execute($tableauParametre);
+            $nombreChevauchements = $requete->fetchColumn();
+    
+            if ($nombreChevauchements == 0) {
+                // Vérifier si la réservation existe
+                $requeteVerification = "
+                    SELECT interlocuteur FROM reservation WHERE identifiant = ?;
+                ";
+                $requete = $connexion->prepare($requeteVerification);
+                $requete->execute([$identifiant]);
+                $reservationExistante = $requete->fetch(PDO::FETCH_ASSOC);
+
+        
+                $ancienInterlocuteur = $reservationExistante['interlocuteur'];
+        
+                // Rechercher l'interlocuteur correspondant aux informations fournies
+                $requeteInterlocuteur = "
+                    SELECT identifiant FROM interlocuteur 
+                    WHERE nom = ? AND prenom = ? AND telephone = ?;
+                ";
+                $requete = $connexion->prepare($requeteInterlocuteur);
+                $requete->execute([$nomInterlocuteur, $prenomInterlocuteur, $numeroInterlocuteur]);
+                $interlocuteur = $requete->fetch(PDO::FETCH_ASSOC);
+        
+                if ($interlocuteur) {
+                    $idInterlocuteur = $interlocuteur['identifiant'];
+                } else if(!empty($nomInterlocuteur)){
+                    // Créer un nouvel interlocuteur
+                    $idInterlocuteur = getPremierIdentifiantDisponible($connexion, 'interlocuteur');
+                    $requeteInsertion = "
+                        INSERT INTO interlocuteur (identifiant, nom, prenom, telephone)
+                        VALUES (?, ?, ?, ?);
+                    ";
+                    $requete = $connexion->prepare($requeteInsertion);
+                    $requete->execute([$idInterlocuteur, $nomInterlocuteur, $prenomInterlocuteur, $numeroInterlocuteur]);
+                } else {
+                    $idInterlocuteur = NULL;
+                }
+                // Modifier la réservation
+                $requeteModification = "
+                    UPDATE reservation
+                    SET date = ?, heureDebut = ?, heureFin = ?, descriptionActivite = ?, object = ?, interlocuteur = ?, salle = ?, activite = ?, reservant = ?
+                    WHERE identifiant = ?;
+                ";
+                $tableauParametre = [
+                    $date, $heureDebut, $heureFin, $description, $usage, $idInterlocuteur, 
+                    $salle, $activite, $reservant, $identifiant
+                ];
+                $requete = $connexion->prepare($requeteModification);
+                $requete->execute($tableauParametre);
+        
+                // Vérifier si l'ancien interlocuteur est toujours utilisé
+                if ($ancienInterlocuteur != $idInterlocuteur) {
+                    $requeteVerifAncienInterlocuteur = "
+                        SELECT COUNT(*) FROM reservation WHERE interlocuteur = ?;
+                    ";
+                    $requete = $connexion->prepare($requeteVerifAncienInterlocuteur);
+                    $requete->execute([$ancienInterlocuteur]);
+                    $nombreReservations = $requete->fetchColumn();
+        
+                    // Supprimer l'ancien interlocuteur s'il n'est plus utilisé
+                    if ($nombreReservations == 0) {
+                        $requeteSuppression = "
+                            DELETE FROM interlocuteur WHERE identifiant = ?;
+                        ";
+                        $requete = $connexion->prepare($requeteSuppression);
+                        $requete->execute([$ancienInterlocuteur]);
+                    }
+                }
+        
+                return true;
+            } 
+            return false;
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function getAttributReservation($pdo, $idReservation) {
+        try {
+            $tableauReservation = array();
             
-            $resultats = $connexion->prepare($requeteModifieSalle);
-            $tableauParametre = array(
-                ':date' => $date,
-                ':heureDebut' => $heureDebut,
-                ':heureFin' => $heureFin,
-                ':descriptionActivite' => $description,
-                ':object' => $usage,
-                ':interlocuteur' => $interlocuteur,
-                ':salle' => $salle,
-                ':activite' => $activite,
-                ':reservant' => $reservant,
-                ':id' => $id
-            );
-            $resultats->execute($tableauParametre);
-
+            // Requête principale pour récupérer les détails de la réservation
+            $requeteReservation = "SELECT 
+                                        date, 
+                                        heureDebut, 
+                                        heureFin, 
+                                        descriptionActivite, 
+                                        object, 
+                                        interlocuteur, 
+                                        salle, 
+                                        activite, 
+                                        reservant 
+                                   FROM reservation 
+                                   WHERE identifiant = ?";
+            $resultats = $pdo->prepare($requeteReservation);
+            $resultats->execute([$idReservation]);
+            $reservationData = $resultats->fetch(PDO::FETCH_ASSOC);
+    
+            if ($reservationData) {
+                // Fragmentation de l'heure de début
+                list($heureDebut, $minuteDebut) = explode(':', $reservationData['heureDebut']);
+                list($heureFin, $minuteFin) = explode(':', $reservationData['heureFin']);
+            
+                // Remplissage du tableau des données de la réservation
+                $tableauReservation = array(
+                    'date' => $reservationData['date'],
+                    'heureDebut' => $heureDebut,
+                    'minuteDebut' => $minuteDebut,
+                    'heureFin' => $heureFin,
+                    'minuteFin' => $minuteFin,
+                    'descriptionActivite' => $reservationData['descriptionActivite'],
+                    'object' => $reservationData['object'],
+                    'interlocuteur' => $reservationData['interlocuteur'],
+                    'salle' => $reservationData['salle'],
+                    'activite' => $reservationData['activite'],
+                    'reservant' => $reservationData['reservant']
+                );
+            
+                $requeteInterlocuteur = "SELECT nom, prenom, telephone FROM interlocuteur WHERE identifiant = ?";
+                $resultatsInterlocuteur = $pdo->prepare($requeteInterlocuteur);
+                $resultatsInterlocuteur->execute([$reservationData['interlocuteur']]);
+                
+                $interlocuteurData = $resultatsInterlocuteur->fetch(PDO::FETCH_ASSOC);
+            
+                // Ajout des informations de l'interlocuteur au tableau de réservation
+                if ($interlocuteurData) {
+                    $tableauReservation['interlocuteurNom'] = $interlocuteurData['nom'];
+                    $tableauReservation['interlocuteurPrenom'] = $interlocuteurData['prenom'];
+                    $tableauReservation['interlocuteurNumero'] = $interlocuteurData['telephone'];
+                }
+            }
+            
+    
+            return $tableauReservation;
+    
         } catch (Exception $e) {
             throw new PDOException($e->getMessage(), $e->getCode());
         }
-
     }
 
     function annulerReservation($pdo, $id) {

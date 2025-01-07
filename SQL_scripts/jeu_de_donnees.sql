@@ -65,8 +65,8 @@ VALUES
 -- interlocuteurs
 INSERT INTO interlocuteur (nom, prenom, telephone) 
 VALUES 
-('Legendre', 'Noémie', '0600'),
-('Leroux', 'Jacques', '0601'),
+('Legendre', 'Noémie', '0600000000'),
+('Leroux', 'Jacques', '0600000001'),
 ('Marin', 'Hector', '0666666666'),
 ('Tournefeuille', 'Michel', '0655555555');
 

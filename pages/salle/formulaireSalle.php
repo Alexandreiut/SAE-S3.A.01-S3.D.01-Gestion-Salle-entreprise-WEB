@@ -142,14 +142,14 @@
 									<label for="capaciteSalle" class="label-form">Places assises : <span class = "rouge">*</span></label><br/>
 									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" placeholder="Test"
 										class="input-form <?php if(isset($_POST["capaciteSalle"]) && $_POST["capaciteSalle"]=="") {echo "erreur";};?>" value="<?php if (isset($_POST["capaciteSalle"])) {echo $_POST["capaciteSalle"];} else if (isset($listeInfoSalle["capacite"])){echo $listeInfoSalle["capacite"];}?>" 
-										oninput="nombreValide(this)">
+										oninput="validerNombre(this,4)">
 									<br><br>
 								</div>
 								<div class="col-12">
 									<label for="nombreOrdinateur" class="label-form">Nombre d'ordinateurs : </label><br/>
 									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" placeholder="Test"
 										class="input-form" value="<?php if (isset($_POST["nombreOrdinateur"])) {echo $_POST["nombreOrdinateur"];} else if (isset($listeInfoSalle["nombreOrdinateur"])){echo $listeInfoSalle["nombreOrdinateur"];}?>" 
-										oninput="nombreValide(this)">
+										oninput="validerNombre(this,4)">
 										<br>
 								</div>
                             </div>
@@ -244,12 +244,14 @@
                         </tr>
                     </table>
                 </div>
-            </div>
-        </div>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
-		<script src="../../engine/js/menu.js"></script>
-		<script src="../../engine/js/fenetreConfirmation.js"></script>
-		<script src="../../engine/js/outilVerification.js"></script>
+			</form>
+			
+		</div>
+		
+
+		<div class="footer">
+			<p>2024 © RoomManager. IUT de Rodez.</p>
+		</div>
 
 		<div id="overlay" style="display: none;">
 			<div id="overlay-content">
@@ -258,5 +260,12 @@
 				<button class="bouton-modifier-overlay" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
 			</div>
 		</div>
+		
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+		<script src="../../engine/js/menu.js"></script>
+		<script src="../../engine/js/fenetreConfirmation.js"></script>
+		<script src="../../engine/js/outilVerification.js"></script>
+
+		
 	</body>
 </html>

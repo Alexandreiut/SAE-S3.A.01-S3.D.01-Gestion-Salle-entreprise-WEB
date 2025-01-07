@@ -18,7 +18,7 @@
                                 <i class="fa-solid fa-circle-info taille-icon-infos"></i>
                                 <span class="btn-details-modifier-text">Voir les détails</span>
                             </button>
-                            <button class="col-lg-2 btn-details-modifier" name="action" value="modifier" type="submit">
+                            <button class="col-lg-2 btn-details-modifier" name="action" value="modifier" type="submit" formmethod="post">
                                 <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
                                 <span class="btn-details-modifier-text">Modifier</span>
                             </button>
@@ -58,10 +58,10 @@
 
     function affichageReservations($reservations) {
         foreach ($reservations as $r) {
-            echo '<form action="formulaireSalle.php" method="post">
+            echo '<form action="formulaireReservation.php" method="post">
                         <div class="row mt-1 mb-1">
                             <div class="sous-container-informations">
-                                <input type="text" name="idSalle" value="' . $r["identifiant"]. '" hidden>
+                                <input type="text" name="idReservation" value="' . $r["identifiant"]. '" hidden>
                                 <span class="col-lg-4 texte-ellipsis">' . $r["date"] . ", " . $r["heureDebut"] . " à " . $r["heureFin"] .'</span>
                                 <button class="col-lg-2 btn-details-modifier" name="action" value="détails" type="submit">
                                     <i class="fa-solid fa-circle-info taille-icon-infos"></i>
