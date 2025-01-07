@@ -76,10 +76,18 @@ function getReservations($offset, $limit) {
     try {
         $pdo = ConnexionBD::getPDO();
 
-        $requete = "SELECT identifiant,  DATE_FORMAT(date, '%d/%m/%Y') AS date, 
+        $requete = "SELECT reservation.identifiant,  DATE_FORMAT(date, '%d/%m/%Y') AS date, 
                                          DATE_FORMAT(heureDebut, '%H:%i') AS heureDebut, 
-                                         DATE_FORMAT(heureFin, '%H:%i') AS heureFin  
-                                         FROM reservation LIMIT :limit OFFSET :offset";
+                                         DATE_FORMAT(heureFin, '%H:%i') AS heureFin, 
+                                         activite.nom AS activite,
+                                         salle.nom AS salle,
+                                         utilisateur.nom AS nom,
+                                         utilisateur.prenom AS prenom
+                                         FROM reservation
+                                         JOIN salle ON reservation.salle = salle.identifiant
+                                         JOIN utilisateur ON reservation.reservant = utilisateur.identifiant
+                                         JOIN activite ON reservation.activite = activite.identifiant
+                                         LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($requete);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -157,4 +165,13 @@ function getReservationsParFiltres($offset, $limit, array $filtres) {
     }
 }
 
+function annulerReservation($pdo, $id) {
+
+    $requete = "DELETE FROM reservation WHERE identifiant = :id";
+    $resultat = $pdo->prepare($requete);
+    $resultat->bindParam('id', $id);
+    $resultat->execute();
+
+    return true;
+}
 ?>
