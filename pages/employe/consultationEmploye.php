@@ -1,13 +1,22 @@
 <?php
     require("../../engine/fonction/fonctionsBDD.php");
-    require("../../engine/fonction/fonctionEmploye.php");
     require("../../engine/fonction/consultation.php");
+    require("../../engine/fonction/fonctionEmploye.php");
+    require("../../engine/fonction/consultationEmploye.php");
     require("../../engine/affichage/consultation.php");
 
     session_start();
     $pdo = ConnexionBD::getPDO();
 
     if(session_id() != $_SESSION['session']){
+        header('Location: ../../index.php');
+        exit();
+    }
+
+    $role = $_SESSION['role'];
+
+    //si l'utilisateur n'est pas administrateur
+    if ($role != "administrateur") {
         header('Location: ../../index.php');
         exit();
     }
@@ -23,36 +32,76 @@
         $estSupprime = supprimerEmploye($pdo, $id);
     }
 
-    $role = $_SESSION['role'];
+    //gestion recherche par filtre
+    function calculePagination($nbEmployes, $employesParPages) {
+        $pageTotal = (int) ceil($nbEmployes / $employesParPages);
+        if (!isset($_GET["page"]) || !filter_var($_GET["page"], FILTER_VALIDATE_INT) || (int) $_GET["page"] < 1 || (int) $_GET["page"] > $pageTotal) {
+            $_GET["page"] = '1';
+        }
+        $pageActuelle = (int) $_GET["page"];
 
-    //recherche par filtre nom
-//    if (isset($_GET["nomEmploye"])) {
-//        var_dump($_GET["nomEmploye"]);
-//    }
+        return ["pageActuelle" => $pageActuelle,
+            "pageTotal" => $pageTotal];
+    }
+    function calculeOffset($pageActuelle, $employesParPages) {
+        return ($pageActuelle - 1) * $employesParPages;
+    }
 
-    //vérification numéro page et récup donnée employé
+    function traiterEmployes($nbEmployes, $nomFonction, array $params, $employesParPages) {
+        $result = [
+            "employes" => [],
+            "pageActuelle" => 0,
+            "pageTotal" => 0
+        ];
+
+        if ($nbEmployes !== 0) {
+            $pagination = calculePagination($nbEmployes, $employesParPages);
+            $pageActuelle = $pagination["pageActuelle"];
+            $offset = calculeOffset($pageActuelle, $employesParPages);
+
+            $result = [
+                // appel la fonction $nomFonction avec les args $offset et $sallesParPages et $params (si non vide)
+                "employes" => call_user_func_array($nomFonction, array_merge([$offset, $employesParPages], $params)),
+                "pageActuelle" => $pagination["pageActuelle"],
+                "pageTotal" => $pagination["pageTotal"]
+            ];
+        }
+
+        return $result;
+    }
+
     $employesParPages = 10;
-    $nbEmployes = getNbEmployes();
-    $pageTotal = (int) ceil($nbEmployes/$employesParPages);
-    if ($pageTotal == 0) {
-        $pageTotal = 1;
-    }
-    if (!isset($_GET["page"]) || !filter_var($_GET["page"], FILTER_VALIDATE_INT) || (int) $_GET["page"] < 1 || (int) $_GET["page"] > $pageTotal ) {
-        header("Location: " . $_SERVER["PHP_SELF"] . "?page=1");
-        exit();
-    }
-    $pageActuelle = (int) $_GET["page"];
 
-    $offset = ($pageActuelle - 1) * $employesParPages;
-    $employes = getEmployes($offset, $employesParPages);
+    $nomEmployeRequeteHTTP = isset($_GET["nomEmploye"]) ? htmlspecialchars($_GET["nomEmploye"]) : null;
+    $activiteRequeteHTTP = isset($_GET["activite"]) ? htmlspecialchars($_GET["activite"]) : null;
+    $salleRequeteHTTP = isset($_GET["salle"]) ? htmlspecialchars($_GET["salle"]) : null;
+
+    // Si le champs de saisi du nom de l'employé est remplis
+    if (!empty($nomEmployeRequeteHTTP)) {
+        $nomEmploye = htmlspecialchars($nomEmployeRequeteHTTP);
+        $nbEmployes = getNbEmployesParNom($nomEmploye);
+        $result = traiterEmployes($nbEmployes, 'getEmployeParNom', [$nomEmploye], $employesParPages);
+
+        // Si le champs de saisi de l'activité et/ou de la salle est remplis
+    } elseif (!empty($activiteRequeteHTTP) && $activiteRequeteHTTP !== "Tous" || !empty($salleRequeteHTTP)) {
+        $activite = htmlspecialchars($activiteRequeteHTTP);
+        $salle = htmlspecialchars($salleRequeteHTTP);
+        $nbEmployes = getNbEmployesParActiviteSalle($activite, $salle);
+        $result = traiterEmployes($nbEmployes, 'getEmployeParActiviteSalle', [$activite, $salle], $employesParPages);
+
+        // Si aucun champs remplis
+    } else {
+        $nbEmployes = getNbEmployes();
+        $result = traiterEmployes($nbEmployes, 'getEmployes', [], $employesParPages);
+    }
+
+    // Initialise les variables pour pouvoir les afficher
+    $employes = $result["employes"];
+    $pageActuelle = $result["pageActuelle"];
+    $pageTotal = $result["pageTotal"];
 
     //recup listeActivité
     $listeActivites = getListeActivites();
-//    var_dump($listeActivites);
-
-//    var_dump($nbEmployes);
-    // var_dump($employes);
-//    var_dump(ceil(8/10));
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -99,7 +148,7 @@
                         <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <label for="employe">Nom Employé :</label>
-                                <input id="employe" type="text" class="saisi-filtre" name="nomEmploye">
+                                <input id="employe" type="text" class="saisi-filtre" name="nomEmploye" value="<?= $nomEmploye ?? '' ?>">
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -115,21 +164,21 @@
                 <div class="row">
                     <hr class="mt-2 mb-2 hr">
                 </div>
-                <form>
+                <form action="consultationEmploye.php" method="get">
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <label for="activite">Activité :</label>
-                                <select id="activite" class="saisi-filtre">
-                                    <option>Tous</option>
-                                    <?php affichageListeActivites($listeActivites)?>
+                                <select id="activite" class="saisi-filtre" name="activite">
+                                    <option value="0">Tous</option>
+                                    <?php affichageListeActivites($listeActivites, $activite ?? 0)?>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <label for="salle">Salle :</label>
-                                <input id="salle" type="text" class="saisi-filtre">
+                                <input id="salle" type="text" class="saisi-filtre" name="salle" value="<?= $salle ?? '' ?>">
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -154,7 +203,11 @@
             <!-- Résultat recherche -->
             <div class="hauteur-recherche">
                 <?php
-                    affichageEmployes($employes);
+                    if (!empty($employes)) {
+                        affichageEmployes($employes);
+                    } else {
+                        echo "pas de données trouvé";
+                    }
                 ?>
                 <div id="popup">
                     <div id="popup-content-container">
@@ -170,15 +223,24 @@
                 <div class="col-lg-4 offset-lg-4">
                     <div class="navigation">
                         <form action="consultationEmploye.php" method="get">
-                            <button class="btn btn-navigation-page <?php if ($pageActuelle === 1) echo"cacher";?>" value="<?=$pageActuelle -1?>" name="page" type="submit">
+                            <button class="btn-navigation-page <?php if ($pageActuelle === 1 || $pageActuelle === 0) echo"cacher";?>" value="<?=$pageActuelle -1?>" name="page" type="submit">
                                 <i class="fa-solid fa-arrow-left"></i>
                                 Précédent
                             </button>
                             <span class="page-info"><?=$pageActuelle . "/" . $pageTotal?></span>
-                            <button class="btn btn-navigation-page <?php if ($pageActuelle === $pageTotal) echo"cacher";?>" value="<?=$pageActuelle +1?>" name="page" type="submit">
+                            <button class="btn-navigation-page <?php if ($pageActuelle === $pageTotal) echo"cacher";?>" value="<?=$pageActuelle +1?>" name="page" type="submit">
                                 Suivant
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
+                            <?php if (isset($nomEmploye)) {
+                                echo '<input type="hidden" name="nomSalle" value="'. $nomEmploye .'">';
+                            } ?>
+                            <?php if (isset($activite)) {
+                                echo '<input type="hidden" name="activite" value="'. $activite .'">';
+                            } ?>
+                            <?php if (isset($salle)) {
+                                echo '<input type="hidden" name="salle" value="'. $salle .'">';
+                            } ?>
                         </form>
                     </div>
                 </div>
@@ -188,7 +250,6 @@
                             <i class="fa-solid fa-plus"></i>
                             <i class="fa-solid fa-user"></i>
                             Ajouter un employé
-                            <!-- <span class="btn-add-text">Ajouter un employé</span> -->
                         </button>
                     </form>
                 </div>
