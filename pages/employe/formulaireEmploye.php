@@ -311,13 +311,15 @@
                     </div>
                     <div class = "col-6 offset-3">
                         <?php
-                        echo '<button type = "submit" class="btn-envoyer" id = "btn-envoyer" onclick="showOverlay(event, '.$employeReservant.')">';
-                        echo '<span class = "fas fa-';
                         if ($_POST['action'] == 'ajout') {
+                            echo '<button type = "submit" class="btn-envoyer" id = "btn-envoyer">';
+                            echo '<span class = "fas fa-';
                             echo 'plus"></span>';
                             echo '<span class = "fas fa-user"></span>';
                             echo ' Ajouter';
                         } else {
+                            echo '<button type = "submit" class="btn-envoyer" id = "btn-envoyer" onclick="showOverlay(event, '.$employeReservant.')">';
+                            echo '<span class = "fas fa-';
                             echo 'edit"></span>';
                             echo '<span class = "fas fa-user"></span>';
                             echo ' Modifier';

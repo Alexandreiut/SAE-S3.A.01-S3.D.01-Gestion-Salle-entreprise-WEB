@@ -21,14 +21,14 @@
     try{
         $pdo = ConnexionBD::getPDO();
         $videoProjecteur = "non";
-        $ecranXxl = "non";
+        $ecranXXL = "non";
         $imprimante = "non";
 
         if(isset($_POST["videoProjecteur"])){
             $videoProjecteur = "oui";
         }
-        if(isset($_POST["ecranXxl"])){
-            $ecranXxl = "oui";
+        if(isset($_POST["ecranXXL"])){
+            $ecranXXL = "oui";
         }
         if(isset($_POST["imprimante"])){
             $imprimante = "oui";
@@ -47,11 +47,11 @@
 		if (isset($_POST["nomSalle"]) && isset($_POST["capaciteSalle"] ) 
 		&& trim($_POST["nomSalle"]) != "" && $_POST["capaciteSalle"]!="") {
 			if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
-				modifieSalle($pdo, $_POST["idSalle"], $_POST["nomSalle"], $_POST["capaciteSalle"], $_POST["nombreOrdinateur"], $_POST["typeOrdinateur"], $videoProjecteur, $ecranXxl, $imprimante, $listeLogicielSelectionnes);
+				modifieSalle($pdo, $_POST["idSalle"], $_POST["nomSalle"], $_POST["capaciteSalle"], $_POST["nombreOrdinateur"], $_POST["typeOrdinateur"], $videoProjecteur, $ecranXXL, $imprimante, $listeLogicielSelectionnes);
 				$_SESSION['modif_salle'] = true;
 				header('Location: consultationSalle.php');
 			} else {
-				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXxl,$imprimante,$listeLogicielSelectionnes);
+				ajoutSalle($pdo,$_POST["nomSalle"],$_POST["capaciteSalle"],$_POST["nombreOrdinateur"],$_POST["typeOrdinateur"],$videoProjecteur,$ecranXXL,$imprimante,$listeLogicielSelectionnes);
 				$_SESSION['ajout_salle'] = true;
 				header('Location: consultationSalle.php');
 			}	
@@ -140,14 +140,14 @@
 								</div>
 								<div class="col-12">
 									<label for="capaciteSalle" class="label-form">Places assises : <span class = "rouge">*</span></label><br/>
-									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" 
+									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" placeholder="Test"
 										class="input-form <?php if(isset($_POST["capaciteSalle"]) && $_POST["capaciteSalle"]=="") {echo "erreur";};?>" value="<?php if (isset($_POST["capaciteSalle"])) {echo $_POST["capaciteSalle"];} else if (isset($listeInfoSalle["capacite"])){echo $listeInfoSalle["capacite"];}?>" 
 										oninput="nombreValide(this)">
 									<br><br>
 								</div>
 								<div class="col-12">
 									<label for="nombreOrdinateur" class="label-form">Nombre d'ordinateurs : </label><br/>
-									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" 
+									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" placeholder="Test"
 										class="input-form" value="<?php if (isset($_POST["nombreOrdinateur"])) {echo $_POST["nombreOrdinateur"];} else if (isset($listeInfoSalle["nombreOrdinateur"])){echo $listeInfoSalle["nombreOrdinateur"];}?>" 
 										oninput="nombreValide(this)">
 										<br>
@@ -172,8 +172,8 @@
 									<br><br>
 								</div>
 								<div class="col-12">
-									<input type="checkbox" id="ecranXxl" name="ecranXxl" <?php if (isset($_POST["ecranXxl"])) {echo " checked ";} else if (isset($listeInfoSalle["ecranXxl"]) && $listeInfoSalle["ecranXxl"] == "oui"){echo "checked";}?>>
-									<label for="ecranXxl" class="label-form-checkbox">&nbsp;Écran XXL</label>
+									<input type="checkbox" id="ecranXXL" name="ecranXXL" <?php if (isset($_POST["ecranXXL"])) {echo " checked ";} else if (isset($listeInfoSalle["ecranXXL"]) && $listeInfoSalle["ecranXXL"] == "oui"){echo "checked";}?>>
+									<label for="ecranXXL" class="label-form-checkbox">&nbsp;Écran XXL</label>
 									<br><br>
 								</div>
 								<div class="col-12">

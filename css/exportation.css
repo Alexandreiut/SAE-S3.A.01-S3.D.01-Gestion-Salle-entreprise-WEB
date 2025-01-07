@@ -88,7 +88,7 @@ tbody tr:nth-child(even) {
 }
 
 .espace {
-    padding-right: 10px;
+    padding-right: 30px;
     white-space: nowrap; /* Empêche le texte d'aller à la ligne */
     min-width: 150px; /* Ajustez cette valeur selon vos besoins */
     text-align: left; /* Aligne le texte à gauche (optionnel) */
