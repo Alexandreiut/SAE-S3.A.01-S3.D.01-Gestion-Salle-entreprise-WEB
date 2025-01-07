@@ -163,10 +163,7 @@
                                 <div class = "col-12 titre">
                                     <h1>Informations<br/>personnelles</h1>
                                 </div>
-                                <?php
-                                    echo '<div class = "col-12';
-                                    echo '">';
-                                ?>
+                                <div class = "col-12">
                                     <!-- nom -->
                                     <label for = "nom" class="label-form">Nom : <span class = "rouge">*</span></label><br>
                                     <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['nom']) { echo " erreur"; } ?> " name = "nom" id = "nom" required placeholder = "Entrez le nom de l'employé" 
@@ -179,12 +176,9 @@
                                         
                                         echo '"';
                                     ?>
-                                    ><br><br>
+                                    ><br>
                                 </div>
-                                <?php
-                                    echo '<div class = "col-12';
-                                    echo '">';
-                                ?>
+                                <div class = "col-12'">'
                                     <!-- prénom -->
                                     <label for = "prenom" class="label-form">Prénom : <span class = "rouge">*</span></label><br>
                                     <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['prenom']) { echo " erreur"; } ?> " name = "prenom" id = "prenom" required placeholder = "Entrez le prénom de l'employé"
@@ -197,12 +191,9 @@
                                         
                                         echo '"';
                                     ?>
-                                    ><br><br>
+                                    ><br>
                                 </div>
-                                <?php
-                                    echo '<div class = "col-12';
-                                    echo '">';
-                                ?>
+                                <div class = "col-12'">'
                                     <!-- téléphone -->
                                     <label for = "telephone" class="label-form">Téléphone (optionnel) : </label><br>
                                     <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['telephone']) { echo " erreur"; } ?> " maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé (4 chiffres)"
@@ -215,7 +206,7 @@
                                         
                                         echo '"';
                                     ?>
-                                    ><br><br>
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -226,10 +217,7 @@
                                 <div class = "col-12 titre">
                                     <h1>Informations du<br/>compte</h1>
                                 </div>
-                                <?php
-                                    echo '<div class = "col-12';
-                                    echo '">';
-                                ?>
+                                <div class = "col-12">
                                     <!-- login -->
                                     <label for = "login" class="label-form">Identifiant : <span class = "rouge">*</span></label><br>
                                     <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['login']) { echo " erreur"; } ?> " name = "login" id = "login" required placeholder = "Entrez l'idenfiant du compte"
@@ -248,8 +236,7 @@
                                 
                                 if ($_POST['action'] == 'ajout') {
                                 
-                                    echo '<div class = "col-12';
-                                    echo '">';
+                                    echo '<div class = "col-12">';
                                 ?>
                                     <!-- mot de passe -->
                                     <label for = "mdp" class="label-form">Mot de Passe : <span class = "rouge">*</span></label><br>
@@ -267,9 +254,7 @@
                                 </div>
                                 <?php
                                 } else {
-
-                                    echo '<div class = "col-12';
-                                    echo '">';
+                                    echo '<div class = "col-12">';
                                 
                                 ?>
                                     <!-- mot de passe à retaper -->
@@ -289,8 +274,7 @@
                                 <?php
                                 }
                                     
-                                    echo '<div class = "col-12';
-                                    echo '">';
+                                    echo '<div class = "col-12">';
                                 ?>
                                     <!-- confirmation mot de passe -->
                                     <label for = "alt_mdp" class="label-form">Confirmation mot de Passe : <?php if ($_POST['action'] == 'ajout') { echo '<span class = "rouge">*</span>'; } ?></label><br>
@@ -304,7 +288,7 @@
                                         
                                         echo '"';
                                     ?>
-                                    ><br><br>
+                                    >
                                     </div>
                                 </div>
                             </div>
@@ -314,14 +298,12 @@
                         <?php
                         if ($_POST['action'] == 'ajout') {
                             echo '<button type = "submit" class="btn-envoyer" id = "btn-envoyer">';
-                            echo '<span class = "fas fa-';
-                            echo 'plus"></span>';
+                            echo '<span class = "fas fa-plus"></span>';
                             echo '<span class = "fas fa-user"></span>';
                             echo ' Ajouter';
                         } else {
                             echo '<button type = "submit" class="btn-envoyer" id = "btn-envoyer" onclick="showOverlay(event, '.$employeReservant.')">';
-                            echo '<span class = "fas fa-';
-                            echo 'edit"></span>';
+                            echo '<span class = "fas fa-edit"></span>';
                             echo '<span class = "fas fa-user"></span>';
                             echo ' Modifier';
                         }

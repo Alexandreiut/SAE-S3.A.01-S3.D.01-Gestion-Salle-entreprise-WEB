@@ -32,7 +32,7 @@ body {
     font-weight: bold;
     margin-top: 20px;
     color: #333;
-    margin-bottom: 30px; /* Plus d'espace sous le titre */
+    margin-bottom: 5px; /* Plus d'espace sous le titre */
     text-align: center;
     width: 100%; /* Permet de garder le titre centré sur toute la largeur */
 }
@@ -54,6 +54,20 @@ body {
     box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1); /* Effet subtil */
 }
 
+.marge {
+    margin-bottom: 9px;
+}
+
+.textarea-full-width {
+    width: 100%; /* Prend toute la largeur disponible du conteneur */
+    box-sizing: border-box; /* Inclut le padding et les bordures dans la largeur */
+    padding: 10px; /* Ajoutez un espace interne pour l'esthétique */
+    font-size: 16px; /* Taille de police pour le contenu */
+    border: 1px solid #ccc; /* Bordure pour l'apparence */
+    border-radius: 5px; /* Coins arrondis */
+    resize: vertical; /* Permet uniquement le redimensionnement vertical */
+  }
+
 .btn-envoyer {
     background-color: #CCF5F3;
     color: black;
@@ -66,7 +80,7 @@ body {
     transition: all 0.3s ease;
     display: block;
     margin: 30px auto; /* Centre le bouton */
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 .btn-envoyer:hover {
@@ -93,4 +107,20 @@ body {
 
 .fas {
     margin: 3px;
+}
+
+@media screen and (max-width: 768px) {
+    .btn-envoyer {
+        margin-bottom: 130px;
+    }
+
+    .btn-envoyer {
+        font-size: 18px;
+        padding: 33 50;
+        height: auto;
+    }
+
+    .btn-envoyer .fas {
+        font-size: 20px;
+    }
 }

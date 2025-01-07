@@ -154,10 +154,6 @@ body {
     margin: 3px;
 }
 
-.btn-action .fas {
-    font-size: 75px;
-}
-
 @media screen and (max-width: 768px) {
     .btn-envoyer {
         margin-bottom: 100px;
