@@ -48,7 +48,7 @@
         <link rel="stylesheet" href="../ressources/bootstrap-5.3.2-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/exportation.css">
         <link rel="stylesheet" href="../css/bandeau.css" />
-        <title>Exportation</title>
+        <title>RoomManager - Téléchargements</title>
     </head>
     <body>
         <div class="header">
