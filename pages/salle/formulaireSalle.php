@@ -140,14 +140,14 @@
 								</div>
 								<div class="col-12">
 									<label for="capaciteSalle" class="label-form">Places assises : <span class = "rouge">*</span></label><br/>
-									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" 
+									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" placeholder="Test"
 										class="input-form <?php if(isset($_POST["capaciteSalle"]) && $_POST["capaciteSalle"]=="") {echo "erreur";};?>" value="<?php if (isset($_POST["capaciteSalle"])) {echo $_POST["capaciteSalle"];} else if (isset($listeInfoSalle["capacite"])){echo $listeInfoSalle["capacite"];}?>" 
 										oninput="nombreValide(this)">
 									<br><br>
 								</div>
 								<div class="col-12">
 									<label for="nombreOrdinateur" class="label-form">Nombre d'ordinateurs : </label><br/>
-									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" 
+									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" placeholder="Test"
 										class="input-form" value="<?php if (isset($_POST["nombreOrdinateur"])) {echo $_POST["nombreOrdinateur"];} else if (isset($listeInfoSalle["nombreOrdinateur"])){echo $listeInfoSalle["nombreOrdinateur"];}?>" 
 										oninput="nombreValide(this)">
 										<br>
