@@ -5,6 +5,7 @@ require("../../engine/fonction/consultationReservation.php");
 require("../../engine/affichage/consultation.php");
 
 session_start();
+$pdo = ConnexionBD::getPDO();
 
 if (session_id() != $_SESSION['session']){
     header('Location: ../../index.php');
@@ -17,6 +18,11 @@ if (isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
     session_destroy();
     header('Location: ../../index.php');
     exit();
+}
+
+if (isset($_POST['suppression']) && !empty($_POST['suppression'])) {
+    $id = htmlspecialchars($_POST['suppression']);
+    $estSupprime = annulerReservation($pdo, $id);
 }
 
 //gestion recherche par filtre
@@ -220,6 +226,12 @@ $listeActivites = getListeActivites();
                         echo "pas de données trouvé";
                     }
                     ?>
+                    <div id="popup">
+                        <div id="popup-content-container">
+                            <div id="popup-content"></div>
+                            <br/><button id="popup-close">Fermer</button>
+                        </div>
+                    </div>
                 </form>
             </div>
 
@@ -318,7 +330,18 @@ $listeActivites = getListeActivites();
             echo true;
             $_SESSION['ajout_employe'] = false;
         }?>"></span>
+        <?php
+            if(isset($estSupprime)) {
+                if ($estSupprime) {
+                    echo "<span id='suppression' value='true'></span>";
+                } else {
+                    echo "<span id='suppression' value='false'></span>";
+                }
+            }
+        ?>
         <script src="../../engine/js/menu.js" defer></script>
-        <script src="../../engine/js/notification.js" defer></script>
+        <script src="../../engine/js/informationsReservation.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+        <script src="../../engine/js/notificationReservation.js" defer></script>
     </body>
 </html>

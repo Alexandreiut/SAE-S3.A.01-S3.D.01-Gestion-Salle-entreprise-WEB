@@ -63,17 +63,17 @@
                             <div class="sous-container-informations">
                                 <input type="text" name="idReservation" value="' . $r["identifiant"]. '" hidden>
                                 <span class="col-lg-4 texte-ellipsis">' . $r["date"] . ", " . $r["heureDebut"] . " à " . $r["heureFin"] .'</span>
-                                <button class="col-lg-2 btn-details-modifier" name="action" value="détails" type="submit">
+                                <button class="col-lg-2 btn-details-modifier" type="submit" formaction="" formmethod="post" name="details" data-id="'.$r["identifiant"].'" data-date="'.$r["date"].'" data-heure-debut="'.$r["heureDebut"].'" data-heure-fin="'.$r["heureFin"].'" data-activite="'.$r["activite"].'" data-salle="'.$r["salle"].'" data-nom="'.$r["nom"].'" data-prenom="'.$r["prenom"].'">
                                     <i class="fa-solid fa-circle-info taille-icon-infos"></i>
-                                    Voir les détails
+                                    <span class="btn-details-modifier-text">Voir les détails</span>
                                 </button>
                                 <button class="col-lg-2 btn-details-modifier" name="action" value="modifier" type="submit">
                                     <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
-                                    Modifier
+                                    <span class="btn-details-modifier-text">Modifier</span>
                                 </button>
-                                <button class="col-lg-2 btn-supprimer">
+                                <button class="col-lg-2 btn-supprimer" type="submit" formaction="" formmethod="post" name="suppression" value="' . $r["identifiant"] . '">
                                     <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-                                    Supprimer
+                                    <span class="btn-supprimer-text">Supprimer</span>
                                 </button>
                             </div>
                         </div>

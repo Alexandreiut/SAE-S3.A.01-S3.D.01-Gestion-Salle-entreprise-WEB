@@ -310,24 +310,4 @@
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
-
-    function annulerReservation($pdo, $id) {
-
-        $requete = "DELETE FROM reservation WHERE identifiant = :id";
-        $resultat = $pdo->prepare($requete);
-        $resultat->bindParam('id', $id);
-        $resultat->execute();
-
-        return true;
-    }
 ?>
-
-
-<!-- Pour le bouton supprimer -->
-
-<!-- <button class="col-lg-2 btn-supprimer" type="submit" formaction="" formmethod="post" name="suppression" value="' . $s["identifiant"] . '">
-    <i class="fa-solid fa-trash-can taille-icon-infos"></i>
-    Supprimer
-</button> -->
-
-<!-- !! Rajouter JS !! -->
