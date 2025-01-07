@@ -96,6 +96,7 @@
 
     //recup listeActivité
     $listeActivites = getListeActivites();
+    
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -293,6 +294,10 @@
         <span id = "ajout" value = "<?php   if (isset($_SESSION['ajout_salle']) && $_SESSION['ajout_salle']) {
                                                 echo true;
                                                 $_SESSION['ajout_salle'] = false;
+                                            }?>"></span>
+        <span id = "non_presente" value = "<?php   if (isset($_SESSION['salle_non_presente']) && $_SESSION['salle_non_presente']) {
+                                                echo true;
+                                                $_SESSION['salle_non_presente'] = false;
                                             }?>"></span>
         <?php
             if(isset($estSupprime)) {

@@ -300,6 +300,10 @@
                                                 echo true;
                                                 $_SESSION['ajout_employe'] = false;
                                             }?>"></span>
+        <span id = "non_present" value = "<?php   if (isset($_SESSION['employe_non_present']) && $_SESSION['employe_non_present']) {
+                                                echo true;
+                                                $_SESSION['employe_non_present'] = false;
+                                            }?>"></span>
         <?php
             if(isset($estSupprime)) {
                 if ($estSupprime) {

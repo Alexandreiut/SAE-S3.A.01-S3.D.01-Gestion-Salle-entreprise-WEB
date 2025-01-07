@@ -27,6 +27,11 @@
         
         $pdo = ConnexionBD::getPDO();
         
+        if ($_POST['action'] == 'modifier' && !estPresent($pdo, $_POST['id'])) {
+            $_SESSION['employe_non_present'] = true;
+            header('Location: consultationEmploye.php');
+        }
+        
         if (isset($_POST['nom'])) {
             $verifications = verifChamps();
             
@@ -67,6 +72,7 @@
                     $_SESSION['modif_employe'] = true;
                 }
                 header('Location: consultationEmploye.php');
+                exit();
             }
         } else if ($_POST['action'] == 'modifier') {
 
@@ -80,7 +86,8 @@
         
     } catch (Exception $e) {
         echo $e;
-        //header('Location: erreurBD.php');
+        header('Location: erreurBD.php');
+        exit();
     }
     
     if (isset($_POST['action'])) {

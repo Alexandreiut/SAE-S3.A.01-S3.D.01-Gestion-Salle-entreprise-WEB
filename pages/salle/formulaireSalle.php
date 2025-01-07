@@ -36,6 +36,12 @@
         $listeLogiciel = getListeLogiciel($pdo);
 	    $listeLogicielSelectionnes = array();
 		if(isset($_POST["action"]) && $_POST["action"] == "modifier"){
+            
+            if (!estPresente($pdo, $_POST["idSalle"])) {
+                $_SESSION['salle_non_presente'] = true;
+				header('Location: consultationSalle.php');
+            }
+            
 			$listeInfoSalle=getAttributSalle($pdo,$_POST["idSalle"]);
 		}
 

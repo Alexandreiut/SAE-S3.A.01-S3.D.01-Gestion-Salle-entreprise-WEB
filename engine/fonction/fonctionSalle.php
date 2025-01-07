@@ -207,4 +207,13 @@
 
         return $resultat->fetch()['COUNT(*)'] == 0;
     }
+    
+    function estPresente($pdo, $id) {
+        $requete = "SELECT COUNT(*) FROM salle WHERE identifiant = :id";
+        $resultat = $pdo->prepare($requete);
+        $resultat->bindParam('id', $id);
+        $resultat->execute();
+
+        return $resultat->fetch()['COUNT(*)'] > 0;
+    }
 ?>
