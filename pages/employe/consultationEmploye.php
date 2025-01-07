@@ -245,7 +245,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1 container-btn-add">
-                    <form action="formulaireEmploye.php" method="get">
+                    <form action="formulaireEmploye.php" method="post">
                         <button class="btn-add" name="action" value="ajout" type="submit">
                             <i class="fa-solid fa-plus"></i>
                             <i class="fa-solid fa-user"></i>
