@@ -16,9 +16,19 @@ try {
     // Connexion à la base cible
     $target_conn = new PDO("mysql:host=$target_host;dbname=$target_db;charset=utf8", $target_user, $target_pass);
     $target_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Obtenir la liste des tables dans la base source
-    $tables = $source_conn->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($tables as $table) {
+
+    // Ordre de traitement des tables
+    $table_order = [
+        "activite",
+        "logiciel",
+        "salle",
+        "logiciel_salle",
+        "utilisateur",
+        "interlocuteur",
+        "reservation"
+    ];
+
+    foreach ($table_order as $table) {
         echo "Traitement de la table : $table<br>";
         // Effacer les données existantes dans la table cible
         $target_conn->exec("DELETE FROM `$table`");
