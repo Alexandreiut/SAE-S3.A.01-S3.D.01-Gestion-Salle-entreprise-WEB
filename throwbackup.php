@@ -9,6 +9,7 @@ $target_host = "sql303.infinityfree.com"; // Adresse du serveur cible
 $target_user = "if0_38064272";     // Nom d'utilisateur de la base cible
 $target_pass = "KbBibGULEV"; // Mot de passe de la base cible
 $target_db = "if0_38064272_roommanager_backup";   // Nom de la base cible
+
 try {
     // Connexion à la base source
     $source_conn = new PDO("mysql:host=$source_host;dbname=$source_db;charset=utf8", $source_user, $source_pass);
@@ -28,10 +29,16 @@ try {
         "reservation"
     ];
 
+    // Suppression des données dans l'ordre inverse
+    $delete_order = array_reverse($table_order);
+    foreach ($delete_order as $table) {
+        echo "Suppression des données de la table : $table<br>";
+        $target_conn->exec("DELETE FROM `$table`");
+    }
+
+    // Insertion des données dans l'ordre normal
     foreach ($table_order as $table) {
         echo "Traitement de la table : $table<br>";
-        // Effacer les données existantes dans la table cible
-        $target_conn->exec("DELETE FROM `$table`");
         // Copier les données de la table source vers la table cible
         $data = $source_conn->query("SELECT * FROM `$table`")->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($data)) {
@@ -46,6 +53,7 @@ try {
         }
         echo "Données copiées pour la table : $table<br>";
     }
+
     echo "Sauvegarde terminée avec succès.";
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
