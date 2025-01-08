@@ -20,34 +20,27 @@ try {
     $target_conn = new PDO("mysql:host=$target_host;dbname=$target_db;charset=utf8", $target_user, $target_pass);
     $target_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Obtenir la liste des tables dans la base source
+    // Exporter les données de la base source
     $tables = $source_conn->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
-
     foreach ($tables as $table) {
-        echo "Traitement de la table : $table<br>";
+        // Effacer les données de la table cible
+        $target_conn->exec("TRUNCATE TABLE `$table`");
 
-        // Effacer les données existantes dans la table cible
-        $target_conn->exec("DELETE FROM `$table`");
-
-        // Copier les données de la table source vers la table cible
+        // Récupérer les données de la table source
         $data = $source_conn->query("SELECT * FROM `$table`")->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!empty($data)) {
-            foreach ($data as $row) {
-                $columns = array_keys($row);
-                $values = array_values($row);
+        // Insérer les données dans la table cible
+        foreach ($data as $row) {
+            $columns = array_keys($row);
+            $values = array_values($row);
 
-                $columns_list = "`" . implode("`, `", $columns) . "`";
-                $placeholders = rtrim(str_repeat("?, ", count($values)), ", ");
-
-                $stmt = $target_conn->prepare("INSERT INTO `$table` ($columns_list) VALUES ($placeholders)");
-                $stmt->execute($values);
-            }
+            $columns_list = "`" . implode("`, `", $columns) . "`";
+            $placeholders = rtrim(str_repeat("?, ", count($values)), ", ");
+            
+            $stmt = $target_conn->prepare("INSERT INTO `$table` ($columns_list) VALUES ($placeholders)");
+            $stmt->execute($values);
         }
-
-        echo "Données copiées pour la table : $table<br>";
     }
-
     echo "Sauvegarde terminée avec succès.";
 } catch (PDOException $e) {
     echo "Erreur : " . $e->getMessage();
