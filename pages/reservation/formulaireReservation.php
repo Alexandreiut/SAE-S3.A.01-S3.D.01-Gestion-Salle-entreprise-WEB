@@ -20,7 +20,7 @@
 	}
     $heuresDebut = range(7, 19); // 7h à 19h
     $heuresFin = range(7, 20);   // 7h à 20h
-
+    
     // Minutes possibles
     $minutes = [0, 15, 30, 45];
     try{
@@ -33,6 +33,12 @@
             header('Location: consultationReservation.php');
         }
         if(isset($_POST["action"]) && $_POST["action"] == "modifier" && isset($_POST["idReservation"])){
+            
+            if (!estPresente($pdo, $_POST["idReservation"])) {
+                $_SESSION['reservation_non_presente'] = true;
+                header('Location: consultationReservation.php');
+            }
+            
 			$listeInfoReservation=getAttributReservation($pdo,$_POST["idReservation"]);
 		}
         if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]!= "" 

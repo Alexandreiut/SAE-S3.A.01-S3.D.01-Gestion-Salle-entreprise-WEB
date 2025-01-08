@@ -310,4 +310,13 @@
             throw new PDOException($e->getMessage(), $e->getCode());
         }
     }
+    
+    function estPresente($pdo, $id) {
+        $requete = "SELECT COUNT(*) FROM reservation WHERE identifiant = :id";
+        $resultat = $pdo->prepare($requete);
+        $resultat->bindParam('id', $id);
+        $resultat->execute();
+
+        return $resultat->fetch()['COUNT(*)'] > 0;
+    }
 ?>

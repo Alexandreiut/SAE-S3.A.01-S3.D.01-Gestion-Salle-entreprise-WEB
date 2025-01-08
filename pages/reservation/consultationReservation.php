@@ -330,6 +330,10 @@ $listeActivites = getListeActivites();
             echo true;
             $_SESSION['ajout_employe'] = false;
         }?>"></span>
+        <span id = "non_presente" value = "<?php   if (isset($_SESSION['reservation_non_presente']) && $_SESSION['reservation_non_presente']) {
+                                                echo true;
+                                                $_SESSION['reservation_non_presente'] = false;
+                                            }?>"></span>
         <?php
             if(isset($estSupprime)) {
                 if ($estSupprime) {
