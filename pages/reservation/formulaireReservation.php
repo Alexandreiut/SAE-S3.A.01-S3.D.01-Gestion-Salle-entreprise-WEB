@@ -295,7 +295,7 @@
                             </div>
                             <div class = "col-12">
                                 <label for="objectReservation" class="label-form">Object : </label><br>
-                                <input name="objectReservation" id="objectReservation" placeholder="Entrez l'object de la réservation" class="input-form" value="<?php if (isset($_POST["objectReservation"])) {echo $_POST["objectReservation"];} else if (isset($listeInfoReservation["object"])){echo $listeInfoReservation["object"];}?>" >		
+                                <input name="objectReservation" id="objectReservation" placeholder="Entrez l'object de la réservation" class="input-form marge-fin" value="<?php if (isset($_POST["objectReservation"])) {echo $_POST["objectReservation"];} else if (isset($listeInfoReservation["object"])){echo $listeInfoReservation["object"];}?>" >		
                             </div>
                         </div>
                     </div>

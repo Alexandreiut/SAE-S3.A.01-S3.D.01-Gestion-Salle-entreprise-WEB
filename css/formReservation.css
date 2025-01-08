@@ -58,6 +58,10 @@ body {
     margin-bottom: 9px;
 }
 
+.marge-fin {
+    margin-bottom: 29px;
+}
+
 .textarea-full-width {
     width: 100%; /* Prend toute la largeur disponible du conteneur */
     box-sizing: border-box; /* Inclut le padding et les bordures dans la largeur */
