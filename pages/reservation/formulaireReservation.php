@@ -38,17 +38,19 @@
         if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]!= "" 
             && isset($_POST["nomActivite"]) && $_POST["nomActivite"]!= ""
             && isset($_POST["nomEmploye"]) && trim($_POST["nomEmploye"]) != ""
-            && isset($_POST["date"])
-            && isset($_POST["heureDebut"])
-            && isset($_POST["heureFin"])){
+            && isset($_POST["date"]) && $_POST["date"] != ""
+            && isset($_POST["heureDebut"]) && $_POST["heureDebut"] != ""
+            && isset($_POST["heureFin"]) && $_POST["heureFin"] != "" ){
                 $ok = false;
                 if(isset($_POST["nomInterlocuteur"]) && trim($_POST["nomInterlocuteur"])!= "" 
                 && isset($_POST["prenomInterlocuteur"]) && trim($_POST["prenomInterlocuteur"])!= ""
                 && isset($_POST["numeroInterlocuteur"]) && strlen($_POST["numeroInterlocuteur"]) == 10){
                     if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
                         $ok = modifieReservation($pdo,$_POST["idReservation"],$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],$_POST["nomInterlocuteur"],$_POST["prenomInterlocuteur"],$_POST["numeroInterlocuteur"],$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
+                        $_SESSION['modif_employe'] = true;
                     } else {
                         $ok = ajoutReservation($pdo,$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],$_POST["nomInterlocuteur"],$_POST["prenomInterlocuteur"],$_POST["numeroInterlocuteur"],$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
+                        $_SESSION['ajout_employe'] = true;
                     }
                     
                 } else if(isset($_POST["nomInterlocuteur"]) && trim($_POST["nomInterlocuteur"]) == "" 
@@ -56,8 +58,10 @@
                 && isset($_POST["numeroInterlocuteur"]) && trim($_POST["numeroInterlocuteur"]) == ""){
                     if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
                         $ok = modifieReservation($pdo,$_POST["idReservation"],$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],"","","",$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
+                        $_SESSION['modif_employe'] = true;
                     } else {
                         $ok = ajoutReservation($pdo,$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],"","","",$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
+                        $_SESSION['ajout_employe'] = true;
                     }
                 }
                 if ($ok){
@@ -134,7 +138,7 @@
                             <?php 
                             $errorClass = "";
                             if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]=="") {$errorClass="erreur";};
-                                echo '<select name="nomSalle" id="nomSalle" class="form-control marge '.$errorClass.'" >';
+                                echo '<select name="nomSalle" id="nomSalle" class="form-control marge '.$errorClass.'" required>';
                                 echo '<option value="">-- Sélectionnez une salle --</option>';
                                 foreach ($listeSalle as $salle) {
                                     $selected = "";
@@ -152,7 +156,7 @@
                             <?php 
                                 $errorClass = "";
                                 if(isset($_POST["nomActivite"]) && $_POST["nomActivite"]=="") {$errorClass="erreur";};
-                                echo '<select name="nomActivite" id="nomActivite" class=form-control marge '.$errorClass.'>';
+                                echo '<select name="nomActivite" id="nomActivite" class="form-control marge '.$errorClass.'" required>';
                                 echo '<option value="">-- Sélectionnez une activité --</option>';
                                 foreach ($listeActivite as $activite) {
                                     $selected = "";
@@ -170,7 +174,7 @@
                             <?php 
                                 $errorClass = "";
                                 if(isset($_POST["nomEmploye"]) && $_POST["nomEmploye"]=="") {$errorClass="erreur";};
-                                echo '<select name="nomEmploye" id="nomEmploye" class="form-control marge '.$errorClass.'" >';
+                                echo '<select name="nomEmploye" id="nomEmploye" class="form-control marge '.$errorClass.'" required>';
                                 echo '<option value="">-- Sélectionnez un employé --</option>';
                                 foreach ($listeEmploye as $employe) {
                                     $selected = "";
@@ -186,7 +190,7 @@
                             <!-- Date picker -->
                             <div class = "col-12">
                                 <label for="date" class="label-form">Date : <span class = "rouge">*</span></label>
-                                <input type="date" name="date" id="date" class="form-control marge <?php if(isset($_POST["date"]) && $_POST["date"]=="") {echo "erreur";};?>"  value="<?php if (isset($_POST["date"])) {echo $_POST["date"];} else if (isset($listeInfoReservation["date"])){echo $listeInfoReservation["date"];}?>">
+                                <input type="date" name="date" id="date" class="form-control marge <?php if(isset($_POST["date"]) && $_POST["date"]=="") {echo "erreur";};?>"  value="<?php if (isset($_POST["date"])) {echo $_POST["date"];} else if (isset($listeInfoReservation["date"])){echo $listeInfoReservation["date"];}?>" required>
                             </div>
                             <!-- Heure début -->
                             <div class = "col-12">
@@ -195,7 +199,7 @@
                                 $errorClass = "";
                                 if(isset($_POST["heureDebut"]) && $_POST["heureDebut"]=="") {$errorClass="erreur";};
                             ?>
-                                <select name="heureDebut" id="heureDebut" class="form-control marge <?php echo $errorClass; ?>" >
+                                <select name="heureDebut" id="heureDebut" class="form-control marge <?php echo $errorClass; ?>" required>
                                     <option value="">-- Sélectionnez l'heure de début --</option>
                                     <?php foreach ($heuresDebut as $heure): ?>
                                         <?php foreach ($minutes as $minute): ?>
@@ -226,9 +230,9 @@
                                 <label for="heureFin" class="label-form">Heure fin :  <span class = "rouge">*</span></label>
                             <?php
                                 $errorClass = "";
-                                if(isset($_POST["heureDebut"]) && $_POST["heureDebut"]=="") {$errorClass="erreur";};
+                                if(isset($_POST["heureFin"]) && $_POST["heureFin"]=="") {$errorClass="erreur";};
                             ?>
-                                <select name="heureFin" id="heureFin" class="form-control marge <?php echo $errorClass; ?>" >
+                                <select name="heureFin" id="heureFin" class="form-control marge <?php echo $errorClass; ?>" required>
                                     <option value="">-- Sélectionnez l'heure de fin --</option>
                                     <?php foreach ($heuresFin as $heure): ?>
                                         <?php foreach ($minutes as $minute): ?>
