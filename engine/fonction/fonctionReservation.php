@@ -264,7 +264,8 @@
                                         activite, 
                                         reservant 
                                    FROM reservation 
-                                   WHERE identifiant = ?";
+                                   WHERE identifiant = ?
+                                   ORDER BY  date, heureDebut, heureFin";
             $resultats = $pdo->prepare($requeteReservation);
             $resultats->execute([$idReservation]);
             $reservationData = $resultats->fetch(PDO::FETCH_ASSOC);
