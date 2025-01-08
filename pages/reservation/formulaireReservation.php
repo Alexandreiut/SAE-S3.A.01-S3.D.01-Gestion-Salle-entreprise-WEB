@@ -36,9 +36,9 @@
         if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]!= "" 
             && isset($_POST["nomActivite"]) && $_POST["nomActivite"]!= ""
             && isset($_POST["nomEmploye"]) && trim($_POST["nomEmploye"]) != ""
-            && isset($_POST["date"])
-            && isset($_POST["heureDebut"])
-            && isset($_POST["heureFin"])){
+            && isset($_POST["date"]) && $_POST["date"] != ""
+            && isset($_POST["heureDebut"]) && $_POST["heureDebut"] != "" 
+            && isset($_POST["heureFin"])&& $_POST["heureFin"] != ""){
                 $ok = false;
                 if(isset($_POST["nomInterlocuteur"]) && trim($_POST["nomInterlocuteur"])!= "" 
                 && isset($_POST["prenomInterlocuteur"]) && trim($_POST["prenomInterlocuteur"])!= ""
@@ -123,8 +123,8 @@
                     <div class="col-4 col-md-4 col-sm-12">
                         <label for="nomSalle" class="labelStyle">Salle :*  </label>
                         <?php 
-                        $errorClass = "";
-                        if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]=="") {$errorClass="erreurInput";};
+                            $errorClass = "";
+                            if(isset($_POST["nomSalle"]) && $_POST["nomSalle"]=="") {$errorClass="erreurInput";};
                             echo '<select name="nomSalle" id="nomSalle" class="'.$errorClass.'" >';
                             echo '<option value="">-- Sélectionnez une salle --</option>';
                             foreach ($listeSalle as $salle) {
@@ -219,7 +219,7 @@
                         <label for="heureFin" class="labelStyle">Heure fin *</label>
                         <?php
                             $errorClass = "";
-                            if(isset($_POST["heureDebut"]) && $_POST["heureDebut"]=="") {$errorClass="erreurInput";};
+                            if(isset($_POST["heureFin"]) && $_POST["heureFin"]=="") {$errorClass="erreurInput";};
                         ?>
                         <select name="heureFin" id="heureFin" class="form-control <?php echo $errorClass; ?>" >
                             <option value="">-- Sélectionnez l'heure de fin --</option>

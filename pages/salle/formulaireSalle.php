@@ -15,7 +15,6 @@
 		header('Location: ../../index.php');
 		exit();
 	}
-
 	$role = $_SESSION['role'];
 
     try{
@@ -66,7 +65,7 @@
 		header('Location: consultationSalle.php');
 		exit();
 	}
-	
+	var_dump($_POST);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -212,7 +211,23 @@
                             echo '<span class = "fas fa-door-open"></span>';
                             echo ' Ajouter la salle</button>';
                         } else {
-							echo '<input type="hidden" name="idSalle" value="' . $_POST["idSalle"]. '" hidden>';
+							$dataKeys = [
+								'idSalle',
+								'data-nom',
+								'data-cap',
+								'data-projecteur',
+								'data-ecran',
+								'data-nbordi',
+								'data-type',
+								'data-imprimante'
+							];
+				
+							// Boucle pour générer uniquement les champs `hidden` pour les clés dans $dataKeys
+							foreach ($dataKeys as $key) {
+								if (isset($_POST[$key])) {
+									echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($_POST[$key]) . '">';
+								}
+							}
 							echo '<input type="hidden" name="action" value="modifier">';
 							echo '<button type="submit" id="modifieSalle" onclick="showOverlay(event,'.$salleReservee.')" class="btn-envoyer">';
                             echo '<span class = "fas fa-edit"></span>';

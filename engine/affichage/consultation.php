@@ -42,7 +42,7 @@
                                 <i class="fa-solid fa-circle-info taille-icon-infos"></i>
                                 <span class="btn-details-modifier-text">Voir les détails</span>
                             </button>
-                            <button class="col-lg-2 btn-details-modifier" name="action" value="modifier" type="submit">
+                            <button class="col-lg-2 btn-details-modifier" name="action" value="modifier" type="submit" data-id="'.$s["identifiant"].'" data-nom="'.$s["nom"].'" data-cap="'.$s["capacite"].'" data-projecteur="'.$s["videoProjecteur"].'" data-ecran="'.$s["ecranXXL"].'" data-nbordi="'.$s["nombreOrdinateur"].'" data-type="'.$s["typeOrdinateur"].'" data-imprimante="'.$s["imprimante"].'">
                                 <i class="fa-solid fa-pen-to-square taille-icon-infos"></i>
                                 <span class="btn-details-modifier-text">Modifier</span>
                             </button>
