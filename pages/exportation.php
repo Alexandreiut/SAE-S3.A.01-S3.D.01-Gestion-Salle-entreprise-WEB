@@ -3,9 +3,10 @@
     require("../engine/fonction/consultationEmploye.php");
     require("../engine/fonction/consultationSalle.php");
     require("../engine/fonction/consultationReservation.php");
-
+    
 	session_start();
 	
+    // vérification session
 	if(session_id() != $_SESSION['session']){
 		header('Location: ../index.php');
 		exit();
@@ -13,12 +14,14 @@
 
     $role = $_SESSION['role'];
 	
+    // cas déconnexion
 	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
 		session_destroy();
 		header('Location: ../index.php');
 		exit();
 	}
     
+    // cas exportation
     if (isset($_POST['modeExport'])) {
         
         //vide le dossier de csv pour éviter une surcharge
@@ -51,6 +54,7 @@
         <title>RoomManager - Téléchargements</title>
     </head>
     <body>
+        <!-- bandeau menu et titre -->
         <div class="header">
             <div class="col-lg-2 header-left">
 				<div class="menu-container">
@@ -74,7 +78,7 @@
             </div>
         </div>
 
-		<!--Initialement caché-->
+		<!-- menu Initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
 				<li><a href="accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
@@ -99,6 +103,7 @@
             <!-- Tableau centré pour les boutons -->
             <div class="table-container">
                 <table class="export-table">
+                    <!-- entête tableau -->
                     <thead>
                         <tr>
                             <th class="cell">Fichier</th>
@@ -108,6 +113,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                    
+                        <!-- ligne exportation activités -->
                         <tr>
                             <td class="info-cell cell">
                                 Activités
@@ -126,6 +133,8 @@
                                 </form>
                             </td>
                         </tr>
+                        
+                        <!-- ligne exportation employés -->
                         <tr>
                             <td class="info-cell cell">
                                 Employés
@@ -144,6 +153,8 @@
                                 </form>
                             </td>
                         </tr>
+                        
+                        <!-- ligne exportation réservations -->
                         <tr>
                             <td class="info-cell cell">
                                 Réservations
@@ -162,6 +173,8 @@
                                 </form>
                             </td>
                         </tr>
+                        
+                        <!-- ligne exportation salles -->
                         <tr>
                             <td class="info-cell cell">
                                 Salles
@@ -184,9 +197,8 @@
                 </table>
             </div>
         </div>
-
-
-
+        
+        <!-- menu pour petit écran -->
         <div id="footMenu" class="foot-menu d-md-none">
 			<div class = "container bott-menu-container">
 				<div class = "row">

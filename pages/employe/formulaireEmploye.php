@@ -9,12 +9,13 @@
 	
 	$role = $_SESSION['role'];
 
-    //si l'utilisateur n'est pas administrateur
+    // redirection si l'utilisateur n'est pas administrateur
     if ($role != "administrateur") {
         header('Location: ../../index.php');
         exit();
     }
-
+    
+    // cas déconnexion
 	if(isset($_POST['deconnexion']) && $_POST['deconnexion'] == '1'){
 		session_destroy();
 		header('Location: ../../index.php');
@@ -27,7 +28,7 @@
         
         $pdo = ConnexionBD::getPDO();
         
-        if (isset($_POST['nom'])) {
+        if (isset($_POST['nom'])) { // vérification des champs si ils ont été remplis
             $verifications = verifChamps();
             
             if ($verifications['tout']) {
@@ -40,7 +41,7 @@
                     throw new Exception('informations manquantes');
                 }
                 
-                if ($_POST['action'] == 'ajout') {
+                if ($_POST['action'] == 'ajout') { // cas ajout d'un employé
                     
                     $nom = htmlspecialchars($_POST['nom']);
                     $prenom = htmlspecialchars($_POST['prenom']);
@@ -48,10 +49,13 @@
                     $login = htmlspecialchars($_POST['login']);
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
+                    // ajout employé
                     ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp);
                     $_SESSION['ajout_employe'] = true;
-                } else {
                     
+                } else { // cas modification d'un employé
+                    
+                    // vérification si l'employé a déjà réservé
                     if (isset($_POST['id'])) {
                         $employeReservant=!estNonReservant($pdo, $_POST['id']);
                     }
@@ -63,12 +67,16 @@
                     $login = htmlspecialchars($_POST['login']);
                     $mdp = htmlspecialchars($_POST['mdp']);
                     
+                    // modification employé
                     modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp);
                     $_SESSION['modif_employe'] = true;
                 }
+                
+                // redirection après opération
                 header('Location: consultationEmploye.php');
             }
-        } else if ($_POST['action'] == 'modifier') {
+            
+        } else if ($_POST['action'] == 'modifier') { // cas arrivée sur la page de modification
 
             if (isset($_POST['id'])) {
                 $employeReservant=!estNonReservant($pdo, $_POST['id']);
@@ -79,10 +87,10 @@
         }
         
     } catch (Exception $e) {
-        echo $e;
-        //header('Location: erreurBD.php');
+        header('Location: erreurBD.php');
     }
     
+    // sauvegarde de l'ancien mot de passe pour le comparer
     if (isset($_POST['action'])) {
         if ($_POST['action'] == 'modifier' && !isset($_POST['mdp_crypte'])) {
             $_POST['mdp_crypte'] = $_POST['mdp'];
@@ -110,6 +118,7 @@
         <link rel="stylesheet" href="../../css/formEmploye.css" />
     </head>
     <body>
+        <!-- bandeau menu et titre -->
         <div class="header">
             <div class="header-left">
 				<div class="menu-container">
@@ -142,7 +151,7 @@
 			</form>
         </div>
 
-		<!--Initialement caché-->
+		<!-- menu initialement caché-->
 		<div id="sideMenu" class="side-menu">
 			<ul>
 				<li><a href="../accueil.php"><i class="fas fa-house"></i> Accueil</a></li>
@@ -290,10 +299,12 @@
                                     ?>
                                     >
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                    
+                    <!-- bouton de validation du formulaire -->
                     <div class = "col-6 offset-3">
                         <?php
                         if ($_POST['action'] == 'ajout') {
@@ -311,7 +322,6 @@
                         l'employé</button>
                         <br/>
                     </div>
-                </div>
                 <?php
                     if (isset($_POST['id']) && isset($_POST['mdp_crypte'])) {
                 ?>
@@ -324,7 +334,7 @@
                 
             </form>
         </div>
-        <!-- Menu pour téléphone -->
+        <!-- Menu pour petit écran -->
         <div id="footMenu" class="foot-menu d-md-none">
             <div class = "container bott-menu-container">
                 <div class = "row">
@@ -346,7 +356,8 @@
         </div>
         <script src="../../engine/js/fenetreConfirmation.js"></script>
         <script src="../../engine/js/menu.js" defer></script>
-
+        
+        <!-- pop-up de validation de modification -->
         <div id="overlay" style="display: none;">
 			<div id="overlay-content">
 				<p class="text-overlay">L'employé a effectué une réservation. Voulez-vous quand même le modifier ?</p>

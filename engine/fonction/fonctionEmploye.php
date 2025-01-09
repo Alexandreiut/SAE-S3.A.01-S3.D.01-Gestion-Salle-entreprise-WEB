@@ -1,7 +1,7 @@
 <?php
+
+    // fonction d'ajout d'un employé
     function ajoutEmploye($pdo, $nom, $prenom, $telephone, $login, $mdp) {
-        
-        echo 'AAAAAAAAAAAAAH';
         
         $requete = "INSERT INTO utilisateur(nom, prenom, telephone, role, login, motDePasse)
                     VALUES (:nom, :prenom, NULLIF(:telephone, ''), 'employe', :login, md5(:motDePasse))";
@@ -17,6 +17,7 @@
         $stmt->execute();
     }
     
+    // vérification des données entrées par l'utilisateur
     function verifChamps() {
         
         $verifications = [];
@@ -32,6 +33,7 @@
             }
         }
         
+        // vérifications des champs
         $verifications['nom'] = isset($_POST['nom']) && $_POST['nom'] != "";
         $verifications['prenom'] = isset($_POST['prenom']) && $_POST['prenom'] != "";
         $verifications['telephone'] = isset($_POST['telephone']) 
@@ -43,8 +45,7 @@
         
         $verifications['alt_mdp'] = isset($_POST['alt_mdp']) && $_POST['mdp'] == $_POST['alt_mdp'] && ($_POST['action'] == 'modifier' ?  true : $_POST['alt_mdp'] != "" );
         
-        
-        
+        // détermine si tous les champs sont valides
         $verifications['tout'] = true;
         foreach ($verifications as $verif) {
             $verifications['tout'] &= $verif;
@@ -53,6 +54,7 @@
         return $verifications;
     }
     
+    // fonction de modification d'un employé
     function modifEmploye($pdo, $id, $nom, $prenom, $telephone, $login, $mdp) {
         
         $requete = "UPDATE utilisateur
@@ -62,6 +64,7 @@
                         telephone = NULLIF(:telephone, ''),
                         login = :login";
         
+        // le mot de passe n'est modifié que si un nouveau à été entré
         if ($mdp != "") {
             $requete .= " ,motDePasse = md5(:motDePasse)";
         }
@@ -75,6 +78,7 @@
         $stmt->bindParam(':telephone', $telephone);
         $stmt->bindParam(':login', $login);
         
+        // le mot de passe n'est modifié que si un nouveau à été entré
         if ($mdp != "") {
              $stmt->bindParam(':motDePasse', $mdp);
         }
@@ -84,6 +88,7 @@
         $stmt->execute();
     }
     
+    // fonction de récupération des données d'un employé à partir de son id
     function recupEmploye($pdo, $id) {
         
         $requete = "SELECT nom, prenom, telephone, login, motDePasse FROM utilisateur WHERE identifiant = :id";
@@ -102,7 +107,8 @@
         $_POST['login'] = $infos['login'];
         $_POST['mdp'] = $infos['motDePasse'];
     }
-
+    
+    // fonction de suppression d'un employé
     function supprimerEmploye($pdo, $id) {
 
         if(estNonReservant($pdo, $id)){
@@ -116,7 +122,8 @@
             return false;
         }
     }
-
+    
+    // vérifie si l'employé a réservé
     function estNonReservant($pdo, $id) {
 
         $requete = "SELECT COUNT(*) FROM reservation WHERE reservant = :id";
@@ -126,6 +133,8 @@
 
         return $resultat->fetch()['COUNT(*)'] == 0;
     }
+    
+    // permet d'obtenir la liste d'employés
     function getEmploye($pdo) {
         $tableauEmployes = array();
         try {
