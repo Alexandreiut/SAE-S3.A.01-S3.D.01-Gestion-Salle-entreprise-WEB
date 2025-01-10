@@ -244,20 +244,6 @@
                         </tr>
                     </table>
                 </div>
-			</form>
-			
-		</div>
-		
-
-		<div class="footer">
-			<p>2024 © RoomManager. IUT de Rodez.</p>
-		</div>
-
-		<div id="overlay" style="display: none;">
-			<div id="overlay-content">
-				<p class="text-overlay">La salle est déjà réservée. Voulez-vous quand même la modifier ?</p>
-				<button class="bouton-annuler-overlay" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
-				<button class="bouton-modifier-overlay" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
 			</div>
 		</div>
 		
@@ -265,7 +251,14 @@
 		<script src="../../engine/js/menu.js"></script>
 		<script src="../../engine/js/fenetreConfirmation.js"></script>
 		<script src="../../engine/js/outilVerification.js"></script>
-
+		
+		<div id="overlay">
+			<div id="overlay-content">
+				<p class="text-overlay">La salle est déjà réservée. Voulez-vous quand même la modifier ?</p>
+				<button class="bouton-annuler-overlay" onclick="handleResponse(false)" id="cancelBtn">Annuler</button>
+				<button class="bouton-modifier-overlay" onclick="handleResponse(true)" id="confirmBtn">Modifier</button>
+			</div>
+		</div>
 		
 	</body>
 </html>

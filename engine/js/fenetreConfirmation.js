@@ -3,8 +3,8 @@ function showOverlay(event,affichage) {
         event.preventDefault(); // Empêche la soumission initiale du formulaire
         document.getElementById("overlay").style.display = "block"; // Affiche l'overlay
     }
-    
 }
+
 function hideOverlay() {
     document.getElementById("overlay").style.display = "none"; // Cache l'overlay
 }

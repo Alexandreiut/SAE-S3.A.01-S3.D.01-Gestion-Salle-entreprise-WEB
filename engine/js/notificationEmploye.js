@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
             icon: 'success',
             confirmButtonText: 'OK'
         });
-    } else if (suppression.getAttribute('value') == 'true') {
+    } else if (suppression != null && suppression.getAttribute('value') == 'true') {
         Swal.fire({
             title: 'Suppression effectué',
             text: 'Suppression de l\'employé effectué.',
             icon: 'success',
             confirmButtonText: 'OK'
         });
-    } else if (suppression.getAttribute('value') == 'false') {
+    } else if (suppression != null && suppression.getAttribute('value') == 'false') {
         Swal.fire({
             title: 'Suppression impossible',
             text: 'Suppression de l\'employé impossible, il a effectué une réservation.',
