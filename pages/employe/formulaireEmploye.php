@@ -175,7 +175,7 @@
                                 <div class = "col-12">
                                     <!-- nom -->
                                     <label for = "nom" class="label-form">Nom : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['nom']) { echo " erreur"; } ?> " name = "nom" id = "nom" required placeholder = "Entrez le nom de l'employé" 
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['nom']) { echo " erreur"; } ?> " name = "nom" id = "nom" required placeholder = "Ex : Dupont, Martin, ..." 
                                     <?php
                                         echo 'value = "';
                                         
@@ -185,12 +185,12 @@
                                         
                                         echo '"';
                                     ?>
-                                    ><br>
+                                    ><br><br>
                                 </div>
-                                <div class = "col-12'">'
+                                <div class = "col-12'">
                                     <!-- prénom -->
                                     <label for = "prenom" class="label-form">Prénom : <span class = "rouge">*</span></label><br>
-                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['prenom']) { echo " erreur"; } ?> " name = "prenom" id = "prenom" required placeholder = "Entrez le prénom de l'employé"
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['prenom']) { echo " erreur"; } ?> " name = "prenom" id = "prenom" required placeholder = "Ex : Pierre, Max, ..."
                                     <?php
                                         echo 'value = "';
                                         
@@ -200,12 +200,12 @@
                                         
                                         echo '"';
                                     ?>
-                                    ><br>
+                                    ><br><br>
                                 </div>
-                                <div class = "col-12'">'
+                                <div class = "col-12'">
                                     <!-- téléphone -->
                                     <label for = "telephone" class="label-form">Téléphone (optionnel) : </label><br>
-                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['telephone']) { echo " erreur"; } ?> " maxlength = "4" name = "telephone" id = "telephone" placeholder = "Entrez le téléphone de l'employé (4 chiffres)"
+                                    <input type = "text" class="input-form <?php if (isset ($verifications) && !$verifications['telephone']) { echo " erreur"; } ?> " maxlength = "4" name = "telephone" id = "telephone" placeholder = "Ex :0123 (4 chiffres)"
                                     <?php
                                         echo 'value = "';
                                         

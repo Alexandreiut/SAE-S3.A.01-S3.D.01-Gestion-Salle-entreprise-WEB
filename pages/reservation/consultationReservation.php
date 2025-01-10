@@ -186,22 +186,24 @@ $listeActivites = getListeActivites();
                                 <input id="dateFin" type="date" class="saisi-filtre" name="dateFin" value="<?= $requeteHTTP['dateFin'] ?>">
                             </div>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <label for="heureDebut">Heure début :</label>
                                 <input id="heureDebut" type="time" class="saisi-filtre" name="heureDebut" value="<?= $requeteHTTP['heureDebut'] ?>">
                             </div>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <div class="sous-container-filtre">
                                 <label for="heureFin">Heure fin :</label>
                                 <input id="heureFin" type="time" class="saisi-filtre" name="heureFin" value="<?= $requeteHTTP['heureFin'] ?>">
                             </div>
                         </div>
-                        <div class="col-lg-2">
+                        <br/><br>
+                        <div class="col-12">
                             <div class="sous-container-filtre">
                                 <button class="btn-rechercher-filtre">
-                                    Rechercher
+                                    <span class="btn-recherche-logo"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    <span class="btn-recherche-text">Rechercher</span>
                                 </button>
                             </div>
                         </div>

@@ -103,15 +103,15 @@
             <div class="header-title">
                 <h1>
                     <?php 
-                        echo '<span class = "fas fa-';
+                        echo '<i class = "fas fa-';
                         if ($_POST['action'] == 'ajout') {
                             echo 'plus">';
                         } else {
                             echo 'edit">';
                         }
                     ?>
-                    </span>
-                    <span class = "fas fa-clock-rotate-left"></span> Réservation
+                    </i>
+                    <i class = "fas fa-clock-rotate-left"></i> Réservation
                 </h1>
             </div>
  
@@ -278,11 +278,11 @@
                         <div class = "container-principale">
                             <div class = "col-12">
                                 <label for="nomInterlocuteur" class="label-form">Nom interlocuteur : </label><br>
-                                <input name="nomInterlocuteur" id="nomInterlocuteur" placeholder="Entrez le nom de l'interlocuteur" class="input-form <?php if(!$interlocuteurOk && isset($_POST["nomInterlocuteur"]) && trim($_POST["nomInterlocuteur"]) == "" ){ echo "erreur";}?>" value="<?php if (isset($_POST["nomInterlocuteur"])) {echo $_POST["nomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurNom"])){echo $listeInfoReservation["interlocuteurNom"];}?>" >
+                                <input name="nomInterlocuteur" id="nomInterlocuteur" placeholder="Ex : Dupont, Martin, ..." class="input-form <?php if(!$interlocuteurOk && isset($_POST["nomInterlocuteur"]) && trim($_POST["nomInterlocuteur"]) == "" ){ echo "erreur";}?>" value="<?php if (isset($_POST["nomInterlocuteur"])) {echo $_POST["nomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurNom"])){echo $listeInfoReservation["interlocuteurNom"];}?>" >
                             </div>
                             <div class = "col-12">
                                 <label for="prenomInterlocuteur" class="label-form">Prénom interlocuteur : </label><br>
-                                <input name="prenomInterlocuteur" id="prenomInterlocuteur" placeholder="Entrez le prénom de l'interlocuteur" class="input-form <?php if(!$interlocuteurOk && isset($_POST["prenomInterlocuteur"]) && trim($_POST["prenomInterlocuteur"]) == "" ){ echo "erreur";}?>" value="<?php if (isset($_POST["prenomInterlocuteur"])) {echo $_POST["prenomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurPrenom"])){echo $listeInfoReservation["interlocuteurPrenom"];}?>" >				
+                                <input name="prenomInterlocuteur" id="prenomInterlocuteur" placeholder="Ex : Pierre, Max, ..." class="input-form <?php if(!$interlocuteurOk && isset($_POST["prenomInterlocuteur"]) && trim($_POST["prenomInterlocuteur"]) == "" ){ echo "erreur";}?>" value="<?php if (isset($_POST["prenomInterlocuteur"])) {echo $_POST["prenomInterlocuteur"];} else if (isset($listeInfoReservation["interlocuteurPrenom"])){echo $listeInfoReservation["interlocuteurPrenom"];}?>" >				
                             </div>
                             <div class = "col-12">
                                 <label for="numeroInterlocuteur" class="label-form">Numéro interlocuteur : </label><br>
@@ -291,14 +291,14 @@
                                 id="numeroInterlocuteur" 
                                 type="text"
                                 maxlength="10"
-                                placeholder="Entrez le numéro de téléphone de l'interlocuteur (10 chiffres)" 
+                                placeholder="Ex : 0123456789 (10 chiffres)" 
                                 class="input-form <?php if(!$interlocuteurOk && isset($_POST["numeroInterlocuteur"]) && strlen($_POST["numeroInterlocuteur"]) != 10 ){ echo "erreur";}?>" 
                                 value="<?php if (isset($_POST['numeroInterlocuteur'])) {echo $_POST['numeroInterlocuteur'];} else if (isset($listeInfoReservation['interlocuteurNumero'])) {echo $listeInfoReservation['interlocuteurNumero'];} ?>" 
                                 oninput="validerNombre(this,10)">
                             </div>
                             <div class = "col-12">
                                 <label for="objectReservation" class="label-form">Object : </label><br>
-                                <input name="objectReservation" id="objectReservation" placeholder="Entrez l'object de la réservation" class="input-form marge-fin" value="<?php if (isset($_POST["objectReservation"])) {echo $_POST["objectReservation"];} else if (isset($listeInfoReservation["object"])){echo $listeInfoReservation["object"];}?>" >		
+                                <input name="objectReservation" id="objectReservation" placeholder="Ex : réunion, formation, ..." class="input-form marge-fin" value="<?php if (isset($_POST["objectReservation"])) {echo $_POST["objectReservation"];} else if (isset($listeInfoReservation["object"])){echo $listeInfoReservation["object"];}?>" >		
                             </div>
                         </div>
                     </div>
@@ -306,7 +306,7 @@
                         <div class = "container-principale">
                             <div class = "col-12">
                                 <label for="description" class="label-form">Description de la réservation :</label>
-                                <textarea id="description" name="description" rows="4" cols="180" class="textarea-full-width" placeholder="Entrez une description de la réservation"><?php 
+                                <textarea id="description" name="description" rows="4" cols="180" class="textarea-full-width" placeholder="Ex : Validation maquette, Réunion avec le client, ..."><?php 
                                     if (isset($_POST["description"])) {
                                         echo htmlspecialchars(trim($_POST["description"]));
                                     } else if (isset($listeInfoReservation["descriptionActivite"])) {

@@ -64,7 +64,10 @@
             </div>
 
             <div class="offset-lg-2 col-lg-4 header-title">
-                <h1>Télécharger</h1>
+                <h1>
+                    <i class="fas fa-download"></i>
+                    Télécharger
+                </h1>
             </div>
 
             <div class="offset-lg-2 col-lg-2 container-deconnexion">

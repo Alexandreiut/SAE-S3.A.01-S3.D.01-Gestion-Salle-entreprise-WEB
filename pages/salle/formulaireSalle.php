@@ -135,19 +135,19 @@
                                 </div>
 								<div class="col-12">
 									<label for="nomSalle" class="label-form">Nom : <span class = "rouge">*</span></label><br/>
-									<input name="nomSalle" id="nomSalle" placeholder="Nom de la salle" class="input-form <?php if(isset($_POST["nomSalle"]) && trim($_POST["nomSalle"])=="") {echo "erreur";}?>" value="<?php if (isset($_POST["nomSalle"])) {echo $_POST["nomSalle"];} else if (isset($listeInfoSalle["nom"])){echo $listeInfoSalle["nom"];}?>">
+									<input name="nomSalle" id="nomSalle" placeholder="Ex : Salle sud, A305, ..." class="input-form <?php if(isset($_POST["nomSalle"]) && trim($_POST["nomSalle"])=="") {echo "erreur";}?>" value="<?php if (isset($_POST["nomSalle"])) {echo $_POST["nomSalle"];} else if (isset($listeInfoSalle["nom"])){echo $listeInfoSalle["nom"];}?>">
 									<br><br>
 								</div>
 								<div class="col-12">
 									<label for="capaciteSalle" class="label-form">Places assises : <span class = "rouge">*</span></label><br/>
-									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" placeholder="Test"
+									<input name="capaciteSalle" id="capaciteSalle" type="number" min="0" step="1" placeholder="Ex : 1, 0, ..."
 										class="input-form <?php if(isset($_POST["capaciteSalle"]) && $_POST["capaciteSalle"]=="") {echo "erreur";};?>" value="<?php if (isset($_POST["capaciteSalle"])) {echo $_POST["capaciteSalle"];} else if (isset($listeInfoSalle["capacite"])){echo $listeInfoSalle["capacite"];}?>" 
 										oninput="validerNombre(this,4)">
 									<br><br>
 								</div>
 								<div class="col-12">
 									<label for="nombreOrdinateur" class="label-form">Nombre d'ordinateurs : </label><br/>
-									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" placeholder="Test"
+									<input name="nombreOrdinateur" id="nombreOrdinateur" type="number" min="0" step="1" placeholder="Ex : 1, 0, ..."
 										class="input-form" value="<?php if (isset($_POST["nombreOrdinateur"])) {echo $_POST["nombreOrdinateur"];} else if (isset($listeInfoSalle["nombreOrdinateur"])){echo $listeInfoSalle["nombreOrdinateur"];}?>" 
 										oninput="validerNombre(this,4)">
 										<br>
@@ -163,7 +163,7 @@
                                 </div>
 								<div class="col-12">
 									<label for="typeOrdinateur" class="label-form">Type d'ordinateur : </label><br/>
-									<input name="typeOrdinateur" id="typeOrdinateur" placeholder="Entrez le système d'exploitation des ordinateurs" class="input-form" value="<?php if (isset($_POST["typeOrdinateur"])) {echo $_POST["typeOrdinateur"];} else if (isset($listeInfoSalle["typeOrdinateur"])){echo $listeInfoSalle["typeOrdinateur"];}?>" >
+									<input name="typeOrdinateur" id="typeOrdinateur" placeholder="Ex : Linux, Windows, PC Portable, ..." class="input-form" value="<?php if (isset($_POST["typeOrdinateur"])) {echo $_POST["typeOrdinateur"];} else if (isset($listeInfoSalle["typeOrdinateur"])){echo $listeInfoSalle["typeOrdinateur"];}?>" >
 									<br><br>
 								</div>
 								<div class="col-12">

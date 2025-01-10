@@ -136,12 +136,12 @@ html, body {
 }
 
 .header-title i {
-    font-size: calc(var(--header-height) * 0.6); /* Taille dynamique pour l'icône */
+    font-size: calc(var(--header-height) * 0.4); /* Taille dynamique pour l'icône */
     color: white;
 }
 
 .header-title h1 {
-    font-size: calc(var(--header-height) * 0.5); /* Taille dynamique pour le titre */
+    font-size: calc(var(--header-height) * 0.4); /* Taille dynamique pour le titre */
     margin: 0; /* Supprime les marges par défaut */
     color: #ffffff;
 }
