@@ -312,7 +312,7 @@
         }
     }
     
-    function estPresente($pdo, $id) {
+    function isReservationPresente($pdo, $id) {
         $requete = "SELECT COUNT(*) FROM reservation WHERE identifiant = :id";
         $resultat = $pdo->prepare($requete);
         $resultat->bindParam('id', $id);

@@ -23,7 +23,7 @@ function getNbReservationsParFiltres($filtres) {
                     WHERE 1=1"; // '1=1' permet d'ajouter dynamiquement des conditions sans erreur de syntaxe
         $params = [];
 
-        if (!empty($filtres["activite"])) {
+        if ($filtres["activite"] !== '0') {
             $requete .= " AND r.activite = :activite";
             $params[':activite'] = $filtres["activite"];
         }
@@ -49,12 +49,12 @@ function getNbReservationsParFiltres($filtres) {
         }
 
         if (!empty($filtres["heureDebut"])) {
-            $requete .= " AND r.heureDebut = :heureDebut";
+            $requete .= " AND r.heureDebut >= :heureDebut";
             $params[':heureDebut'] = $filtres["heureDebut"];
         }
 
         if (!empty($filtres["heureFin"])) {
-            $requete .= " AND r.heureFin = :heureFin";
+            $requete .= " AND r.heureFin <= :heureFin";
             $params[':heureFin'] = $filtres["heureFin"];
         }
 
@@ -87,6 +87,7 @@ function getReservations($offset, $limit) {
                                          JOIN salle ON reservation.salle = salle.identifiant
                                          JOIN utilisateur ON reservation.reservant = utilisateur.identifiant
                                          JOIN activite ON reservation.activite = activite.identifiant
+                                         ORDER BY date
                                          LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($requete);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -104,14 +105,19 @@ function getReservationsParFiltres($offset, $limit, array $filtres) {
         $requete = "SELECT r.identifiant,
                     DATE_FORMAT(date, '%d/%m/%Y') AS date, 
                     DATE_FORMAT(heureDebut, '%H:%i') AS heureDebut, 
-                    DATE_FORMAT(heureFin, '%H:%i') AS heureFin 
-                    FROM reservation as r
-                    JOIN salle as s ON r.salle = s.identifiant
-                    JOIN utilisateur as u ON r.reservant = u.identifiant
+                    DATE_FORMAT(heureFin, '%H:%i') AS heureFin,
+                    a.nom AS activite,
+                    s.nom AS salle,
+                    u.nom AS nom,
+                    u.prenom AS prenom
+                    FROM reservation AS r
+                    JOIN salle AS s ON r.salle = s.identifiant
+                    JOIN utilisateur AS u ON r.reservant = u.identifiant
+                    JOIN activite AS a ON r.activite = a.identifiant
                     WHERE 1=1"; // '1=1' permet d'ajouter dynamiquement des conditions sans erreur de syntaxe
         $params = [];
 
-        if (!empty($filtres["activite"])) {
+        if ($filtres["activite"] !== '0') {
             $requete .= " AND r.activite = :activite";
             $params[':activite'] = $filtres["activite"];
         }
@@ -137,12 +143,12 @@ function getReservationsParFiltres($offset, $limit, array $filtres) {
         }
 
         if (!empty($filtres["heureDebut"])) {
-            $requete .= " AND r.heureDebut = :heureDebut";
+            $requete .= " AND r.heureDebut >= :heureDebut";
             $params[':heureDebut'] = $filtres["heureDebut"];
         }
 
         if (!empty($filtres["heureFin"])) {
-            $requete .= " AND r.heureFin = :heureFin";
+            $requete .= " AND r.heureFin <= :heureFin";
             $params[':heureFin'] = $filtres["heureFin"];
         }
 
@@ -159,6 +165,7 @@ function getReservationsParFiltres($offset, $limit, array $filtres) {
         $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
 
         $stmt->execute();
+
         return $stmt->fetchAll();
     } catch (PDOException $e) {
         header('Location: ../../erreurs/erreurConnexion.php');

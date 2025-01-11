@@ -1,16 +1,19 @@
 <?php
-require("../../engine/fonction/fonctionsBDD.php");
-require("../../engine/fonction/consultation.php");
-require("../../engine/fonction/consultationReservation.php");
-require("../../engine/affichage/consultation.php");
+require_once("../../engine/fonction/fonctionsBDD.php");
+require_once("../../engine/fonction/consultation.php");
+require_once("../../engine/fonction/consultationReservation.php");
+require_once("../../engine/affichage/consultation.php");
 
 session_start();
 $pdo = ConnexionBD::getPDO();
+
+employeInnexistant($_SESSION["login"]);
 
 if (session_id() != $_SESSION['session']){
     header('Location: ../../index.php');
     exit();
 }
+
 
 $role = $_SESSION['role'];
 

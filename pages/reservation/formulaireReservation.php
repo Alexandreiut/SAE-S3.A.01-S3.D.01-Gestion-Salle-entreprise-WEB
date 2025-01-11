@@ -1,10 +1,13 @@
 <?php
     session_start();
-	require("../../engine/fonction/connexionBD.php");
-    require("../../engine/fonction/fonctionReservation.php");
-    require("../../engine/fonction/fonctionEmploye.php");
-    require("../../engine/fonction/fonctionActivite.php");
-    require("../../engine/fonction/fonctionSalle.php");
+	require_once("../../engine/fonction/connexionBD.php");
+    require_once("../../engine/fonction/fonctionsBDD.php");
+    require_once("../../engine/fonction/fonctionReservation.php");
+    require_once("../../engine/fonction/fonctionEmploye.php");
+    require_once("../../engine/fonction/fonctionActivite.php");
+    require_once("../../engine/fonction/fonctionSalle.php");
+
+    employeInnexistant($_SESSION["login"]);
 
     $role = $_SESSION['role'];
 
@@ -34,7 +37,7 @@
         }
         if(isset($_POST["action"]) && $_POST["action"] == "modifier" && isset($_POST["idReservation"])){
             
-            if (!estPresente($pdo, $_POST["idReservation"])) {
+            if (!isReservationPresente($pdo, $_POST["idReservation"])) {
                 $_SESSION['reservation_non_presente'] = true;
                 header('Location: consultationReservation.php');
             }

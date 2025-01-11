@@ -1,12 +1,14 @@
 <?php
-    require("../../engine/fonction/fonctionsBDD.php");
-    require("../../engine/fonction/consultation.php");
-    require("../../engine/fonction/fonctionSalle.php");
-    require("../../engine/fonction/consultationSalle.php");
-    require("../../engine/affichage/consultation.php");
+    require_once("../../engine/fonction/fonctionsBDD.php");
+    require_once("../../engine/fonction/consultation.php");
+    require_once("../../engine/fonction/fonctionSalle.php");
+    require_once("../../engine/fonction/consultationSalle.php");
+    require_once("../../engine/affichage/consultation.php");
 
     session_start();
     $pdo = ConnexionBD::getPDO();
+
+    employeInnexistant($_SESSION["login"]);
 
     if (session_id() != $_SESSION['session']){
         header('Location: ../../index.php');
@@ -96,6 +98,7 @@
 
     //recup listeActivité
     $listeActivites = getListeActivites();
+    
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -293,6 +296,10 @@
         <span id = "ajout" value = "<?php   if (isset($_SESSION['ajout_salle']) && $_SESSION['ajout_salle']) {
                                                 echo true;
                                                 $_SESSION['ajout_salle'] = false;
+                                            }?>"></span>
+        <span id = "non_presente" value = "<?php   if (isset($_SESSION['salle_non_presente']) && $_SESSION['salle_non_presente']) {
+                                                echo true;
+                                                $_SESSION['salle_non_presente'] = false;
                                             }?>"></span>
         <?php
             if(isset($estSupprime)) {

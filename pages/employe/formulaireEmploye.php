@@ -1,12 +1,15 @@
 <?php
-
+    require_once("../../engine/fonction/fonctionsBDD.php");
     session_start();
     
+    employeInnexistant($_SESSION["login"]);
+
     if(session_id() != $_SESSION['session']){
 		header('Location: ../../index.php');
 		exit();
 	}
-	
+
+
 	$role = $_SESSION['role'];
 
     // redirection si l'utilisateur n'est pas administrateur
@@ -23,12 +26,17 @@
 	}
     
     try {
-        require('../../engine/fonction/fonctionEmploye.php');
-        require("../../engine/fonction/connexionBD.php");
-        
+        require_once('../../engine/fonction/fonctionEmploye.php');
+        require_once("../../engine/fonction/connexionBD.php");
+
         $pdo = ConnexionBD::getPDO();
         
-        if (isset($_POST['nom'])) { // vérification des champs si ils ont été remplis
+        if ($_POST['action'] == 'modifier' && !estPresent($pdo, $_POST['id'])) {
+            $_SESSION['employe_non_present'] = true;
+            header('Location: consultationEmploye.php');
+        }
+        
+        if (isset($_POST['nom'])) {
             $verifications = verifChamps();
             
             if ($verifications['tout']) {
@@ -74,6 +82,7 @@
                 
                 // redirection après opération
                 header('Location: consultationEmploye.php');
+                exit();
             }
             
         } else if ($_POST['action'] == 'modifier') { // cas arrivée sur la page de modification
@@ -87,7 +96,9 @@
         }
         
     } catch (Exception $e) {
+        echo $e;
         header('Location: erreurBD.php');
+        exit();
     }
     
     // sauvegarde de l'ancien mot de passe pour le comparer

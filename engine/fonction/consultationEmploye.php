@@ -70,7 +70,7 @@
         try {
             $pdo = ConnexionBD::getPDO();
 
-            $requete = "SELECT identifiant, nom, prenom, telephone FROM utilisateur WHERE role = 'employé' ORDER BY identifiant LIMIT :limit OFFSET :offset";
+            $requete = "SELECT identifiant, nom, prenom, telephone FROM utilisateur WHERE role = 'employé' ORDER BY nom LIMIT :limit OFFSET :offset";
             $stmt = $pdo->prepare($requete);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -85,7 +85,7 @@
         try {
             $pdo = ConnexionBD::getPDO();
 
-            $requete = "SELECT identifiant, nom, prenom, telephone FROM utilisateur WHERE nom LIKE :nom ORDER BY identifiant LIMIT :limit OFFSET :offset";
+            $requete = "SELECT identifiant, nom, prenom, telephone FROM utilisateur WHERE nom LIKE :nom ORDER BY nom LIMIT :limit OFFSET :offset";
             $stmt = $pdo->prepare($requete);
             $stmt->bindValue(':nom', $nom . '%');
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -121,7 +121,7 @@
             }
 
             // Ajouter la clause LIMIT et OFFSET pour la pagination
-            $requete .= " LIMIT :limit OFFSET :offset";
+            $requete .= " ORDER BY u.nom LIMIT :limit OFFSET :offset";
 
             // Préparer la requête
             $stmt = $pdo->prepare($requete);

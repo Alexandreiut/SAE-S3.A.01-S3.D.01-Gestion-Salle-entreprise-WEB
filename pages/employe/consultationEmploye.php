@@ -1,12 +1,14 @@
 <?php
-    require("../../engine/fonction/fonctionsBDD.php");
-    require("../../engine/fonction/consultation.php");
-    require("../../engine/fonction/fonctionEmploye.php");
-    require("../../engine/fonction/consultationEmploye.php");
-    require("../../engine/affichage/consultation.php");
+    require_once("../../engine/fonction/fonctionsBDD.php");
+    require_once("../../engine/fonction/consultation.php");
+    require_once("../../engine/fonction/fonctionEmploye.php");
+    require_once("../../engine/fonction/consultationEmploye.php");
+    require_once("../../engine/affichage/consultation.php");
 
     session_start();
     $pdo = ConnexionBD::getPDO();
+
+    employeInnexistant($_SESSION["login"]);
 
     if(session_id() != $_SESSION['session']){
         header('Location: ../../index.php');
@@ -299,6 +301,10 @@
         <span id = "ajout" value = "<?php   if (isset($_SESSION['ajout_employe']) && $_SESSION['ajout_employe']) {
                                                 echo true;
                                                 $_SESSION['ajout_employe'] = false;
+                                            }?>"></span>
+        <span id = "non_present" value = "<?php   if (isset($_SESSION['employe_non_present']) && $_SESSION['employe_non_present']) {
+                                                echo true;
+                                                $_SESSION['employe_non_present'] = false;
                                             }?>"></span>
         <?php
             if(isset($estSupprime)) {

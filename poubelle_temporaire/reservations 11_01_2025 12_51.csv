@@ -1,0 +1,8 @@
+Ident;salle;employe;activite;date;heuredebut;heurefin;;;;;
+R000001;00000001;E000001;prêt;07/10/2024;17h00;19h00;club gym;Legendre;Noémie;0600000000;réunion
+R000005;00000001;E000003;prêt;08/10/2024;17h00;19h00;club gym;Legendre;Noémie;0600000000;AG
+R000008;00000001;E000003;formation;10/10/2024;08h00;18h00;Bureautique;Leroux;Jacques;0600000001;
+R000009;00000001;E000003;formation;11/10/2024;08h00;18h00;Bureautique;Leroux;Jacques;0600000001;
+R000019;00000004;E000005;prêt;07/01/2025;10h00;11h45;;Leroux;Jacques;0600000001;
+R000017;00000001;E000008;location;18/10/2024;08h00;13h00;Mairie;Marin;Hector;0666666666;réunion
+R000018;00000001;E000005;location;18/10/2024;13h00;19h00;Département;Tournefeuille;Michel;0655555555;réunion
