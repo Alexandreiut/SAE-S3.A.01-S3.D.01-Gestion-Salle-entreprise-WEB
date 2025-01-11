@@ -16,7 +16,19 @@
         
         $stmt->execute();
     }
-    
+
+    function isLoginDejaExistant($login) {
+        $pdo = ConnexionBD::getPDO();
+        $requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login";
+
+        $stmt = $pdo->prepare($requete);
+
+        $stmt->bindParam(':login', $login);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() >= 1;
+    }
+
     function verifChamps() {
         
         $verifications = [];
@@ -38,7 +50,7 @@
                                       && ($_POST['telephone'] == ""
                                           || strlen($_POST['telephone']) == 4
                                           && $estEntier);
-        $verifications['login'] = isset($_POST['login']) && $_POST['login'] != "";
+        $verifications['login'] = isset($_POST['login']) && $_POST['login'] != "" && !isLoginDejaExistant($_POST['login']);
         $verifications['mdp'] = isset($_POST['mdp']) && ($_POST['action'] == 'modifier' ?  true : $_POST['mdp'] != "" );
         
         $verifications['alt_mdp'] = isset($_POST['alt_mdp']) && $_POST['mdp'] == $_POST['alt_mdp'] && ($_POST['action'] == 'modifier' ?  true : $_POST['alt_mdp'] != "" );

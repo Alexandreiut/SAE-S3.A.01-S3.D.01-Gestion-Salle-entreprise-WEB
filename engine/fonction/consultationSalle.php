@@ -88,7 +88,7 @@ function getSalleParNom($offset, $limit, $nom) {
         $pdo = ConnexionBD::getPDO();
 
         $requete = "SELECT identifiant, nom, capacite, videoProjecteur, ecranXXL, nombreOrdinateur, typeOrdinateur, imprimante
-                    FROM salle WHERE nom LIKE :nom ORDER BY identifiant LIMIT :limit OFFSET :offset";
+                    FROM salle WHERE nom LIKE :nom ORDER BY nom LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($requete);
         $stmt->bindValue(':nom', $nom . '%');
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -125,7 +125,7 @@ function getSalleParActiviteEmploye($offset, $limit, $activite = "0", $employe =
         }
 
         // Ajouter la clause LIMIT et OFFSET pour la pagination
-        $requete .= " LIMIT :limit OFFSET :offset";
+        $requete .= " ORDER BY s.nom LIMIT :limit OFFSET :offset";
 
         // Préparer la requête
         $stmt = $pdo->prepare($requete);

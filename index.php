@@ -1,8 +1,8 @@
 <?php
 	try {
-		require("engine/fonction/fonctionsBDD.php");
-        require("engine/fonction/connexionBD.php");
-		
+        require_once("engine/fonction/connexionBD.php");
+		require_once("engine/fonction/fonctionsBDD.php");
+
 		session_start();
 		
 		if (isset($_SESSION['login']) && !empty($_SESSION['login'])) {

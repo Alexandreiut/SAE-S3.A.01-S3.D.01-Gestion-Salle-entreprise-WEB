@@ -1,4 +1,6 @@
 <?php
+    require_once('ConnexionBD.php');
+
     function authentification($pdo, $login = "", $pwd = ""){
 		$requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login";
 		
@@ -31,5 +33,27 @@
         $stmt->execute();
         
         return $stmt->fetch()["role"];
+    }
+
+    /**
+     * Déconnecte l'employé en train d'utiliser le site
+     * si l'employé est supprimé de l'application
+     *
+     * @return void
+     */
+    function employeInnexistant($loginEmploye) {
+        $pdo = ConnexionBD::getPDO();
+        $requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :loginEmploye";
+
+        $stmt = $pdo->prepare($requete);
+        $stmt->bindParam(':loginEmploye', $loginEmploye);
+
+        $stmt->execute();
+
+        if ($stmt->fetchColumn() < 1) {
+            session_destroy();
+            header('Location: ../../index.php');
+            exit();
+        }
     }
 ?>

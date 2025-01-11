@@ -1,7 +1,10 @@
 <?php
-	require("../engine/fonction/fonctionsBDD.php");
+    require_once("../engine/fonction/connexionBD.php");
+	require_once("../engine/fonction/fonctionsBDD.php");
 
 	session_start();
+
+    employeInnexistant($_SESSION["login"]);
 	
 	if(session_id() != $_SESSION['session']){
 		header('Location: ../index.php');

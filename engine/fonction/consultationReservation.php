@@ -79,7 +79,9 @@ function getReservations($offset, $limit) {
         $requete = "SELECT identifiant,  DATE_FORMAT(date, '%d/%m/%Y') AS date, 
                                          DATE_FORMAT(heureDebut, '%H:%i') AS heureDebut, 
                                          DATE_FORMAT(heureFin, '%H:%i') AS heureFin  
-                                         FROM reservation LIMIT :limit OFFSET :offset";
+                                         FROM reservation
+                                         ORDER BY date
+                                         LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($requete);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -139,7 +141,7 @@ function getReservationsParFiltres($offset, $limit, array $filtres) {
         }
 
         // Ajouter la clause LIMIT et OFFSET pour la pagination
-        $requete .= " LIMIT :limit OFFSET :offset";
+        $requete .= " ORDER BY r.date LIMIT :limit OFFSET :offset";
 
         $stmt = $pdo->prepare($requete);
 

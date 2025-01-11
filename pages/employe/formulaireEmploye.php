@@ -1,12 +1,15 @@
 <?php
-
+    require_once("../../engine/fonction/fonctionsBDD.php");
     session_start();
     
+    employeInnexistant($_SESSION["login"]);
+
     if(session_id() != $_SESSION['session']){
 		header('Location: ../../index.php.php');
 		exit();
 	}
-	
+
+
 	$role = $_SESSION['role'];
 
     //si l'utilisateur n'est pas administrateur
@@ -22,9 +25,9 @@
 	}
     
     try {
-        require('../../engine/fonction/fonctionEmploye.php');
-        require("../../engine/fonction/connexionBD.php");
-        
+        require_once('../../engine/fonction/fonctionEmploye.php');
+        require_once("../../engine/fonction/connexionBD.php");
+
         $pdo = ConnexionBD::getPDO();
         
         if ($_POST['action'] == 'modifier' && !estPresent($pdo, $_POST['id'])) {

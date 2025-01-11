@@ -1,5 +1,5 @@
 <?php
-require "connexionBD.php";
+require_once "connexionBD.php";
 
 function getListeActivites() {
     try {

@@ -1,12 +1,14 @@
 <?php
-    require("../../engine/fonction/fonctionsBDD.php");
-    require("../../engine/fonction/consultation.php");
-    require("../../engine/fonction/fonctionEmploye.php");
-    require("../../engine/fonction/consultationEmploye.php");
-    require("../../engine/affichage/consultation.php");
+    require_once("../../engine/fonction/fonctionsBDD.php");
+    require_once("../../engine/fonction/consultation.php");
+    require_once("../../engine/fonction/fonctionEmploye.php");
+    require_once("../../engine/fonction/consultationEmploye.php");
+    require_once("../../engine/affichage/consultation.php");
 
     session_start();
     $pdo = ConnexionBD::getPDO();
+
+    employeInnexistant($_SESSION["login"]);
 
     if(session_id() != $_SESSION['session']){
         header('Location: ../../index.php');

@@ -1,9 +1,11 @@
 <?php
     session_start();
-    require("../../engine/fonction/fonctionsBDD.php");
-	require("../../engine/fonction/connexionBD.php");
-    require("../../engine/fonction/fonctionSalle.php");
-    require("../../engine/fonction/fonctionLogiciel.php");
+	require_once("../../engine/fonction/connexionBD.php");
+    require_once("../../engine/fonction/fonctionsBDD.php");
+    require_once("../../engine/fonction/fonctionSalle.php");
+    require_once("../../engine/fonction/fonctionLogiciel.php");
+
+    employeInnexistant($_SESSION["login"]);
 
 	if(session_id() != $_SESSION['session']){
 		header('Location: ../../index.php');

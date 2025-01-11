@@ -1,10 +1,13 @@
 <?php
-    require("../engine/fonction/consultation.php");
-    require("../engine/fonction/consultationEmploye.php");
-    require("../engine/fonction/consultationSalle.php");
-    require("../engine/fonction/consultationReservation.php");
+    require_once("../engine/fonction/fonctionsBDD.php");
+    require_once("../engine/fonction/consultation.php");
+    require_once("../engine/fonction/consultationEmploye.php");
+    require_once("../engine/fonction/consultationSalle.php");
+    require_once("../engine/fonction/consultationReservation.php");
 
 	session_start();
+
+    employeInnexistant($_SESSION["login"]);
 	
 	if(session_id() != $_SESSION['session']){
 		header('Location: ../index.php');
@@ -24,7 +27,7 @@
         //vide le dossier de csv pour éviter une surcharge
         array_map('unlink', glob("../poubelle_temporaire/*.*"));
         
-        require("../engine/fonction/fonctionExportation.php");
+        require_once("../engine/fonction/fonctionExportation.php");
         
         $pdo = ConnexionBD::getPDO();
         
