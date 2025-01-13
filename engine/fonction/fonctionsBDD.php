@@ -1,5 +1,5 @@
 <?php
-    require_once('ConnexionBD.php');
+    require_once('connexionBD.php');
 
     function authentification($pdo, $login = "", $pwd = ""){
 		$requete = "SELECT COUNT(*) FROM utilisateur WHERE login = :login";
