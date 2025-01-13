@@ -200,10 +200,25 @@
                             ?>
                             </div>
                             <!-- Date picker -->
-                            <div class = "col-12">
-                                <label for="date" class="label-form">Date : <span class = "rouge">*</span></label>
-                                <input type="date" name="date" id="date" class="form-control marge <?php if(isset($_POST["date"]) && $_POST["date"]=="") {echo "erreur";};?>"  value="<?php if (isset($_POST["date"])) {echo $_POST["date"];} else if (isset($listeInfoReservation["date"])){echo $listeInfoReservation["date"];}?>" required>
+                            <!-- Date picker -->
+                            <div class="col-12">
+                                <label for="date" class="label-form">Date : <span class="rouge">*</span></label>
+                                <input 
+                                    type="date" 
+                                    name="date" 
+                                    id="date" 
+                                    class="form-control marge <?php if(isset($_POST['date']) && $_POST['date'] == '') { echo 'erreur'; } ?>"  
+                                    value="<?php 
+                                        if (isset($_POST['date'])) { 
+                                            echo $_POST['date']; 
+                                        } else if (isset($listeInfoReservation['date'])) { 
+                                            echo $listeInfoReservation['date']; 
+                                        } 
+                                    ?>" 
+                                    required 
+                                    oninput="disableSundays(this)">
                             </div>
+                            
                             <!-- Heure début -->
                             <div class = "col-12">
                                 <label for="heureDebut" class="label-form">Heure début : <span class = "rouge">*</span></label>
@@ -388,5 +403,6 @@
         <script src="../../engine/js/menu.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
         <script src="../../engine/js/notificationFormulaireReservation.js" defer></script>
+        <script src="../../engine/js/desactiveDimanche.js" defer></script>
     </body>
 </html>

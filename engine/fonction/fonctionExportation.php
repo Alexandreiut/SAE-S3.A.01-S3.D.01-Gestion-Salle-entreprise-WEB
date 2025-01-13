@@ -4,7 +4,7 @@
     function exporterActivites($pdo) {
         
         // création du fichier à exporter
-        $nomFichier = "../poubelle_temporaire/activites ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../csv/activites ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         // requête à la BDD
@@ -27,7 +27,7 @@
     function exporterEmployes($pdo) {
         
         // création du fichier à exporter
-        $nomFichier = "../poubelle_temporaire/employes ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../csv/employes ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         // requête à la BDD
@@ -50,7 +50,7 @@
     function exporterReservations($pdo) {
         
         // création du fichier à exporter
-        $nomFichier = "../poubelle_temporaire/reservations ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../csv/reservations ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         // requête à la BDD
@@ -84,7 +84,7 @@
     function exporterSalles($pdo) {
         
         // création du fichier à exporter
-        $nomFichier = "../poubelle_temporaire/salles ".date("d_m_Y h_i").".csv";
+        $nomFichier = "../csv/salles ".date("d_m_Y h_i").".csv";
         $fichier = fopen($nomFichier, "w");
         
         // requête pour la liste de salles

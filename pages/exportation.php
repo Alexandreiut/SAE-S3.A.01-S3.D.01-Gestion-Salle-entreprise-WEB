@@ -28,7 +28,7 @@
     if (isset($_POST['modeExport'])) {
         
         //vide le dossier de csv pour éviter une surcharge
-        array_map('unlink', glob("../poubelle_temporaire/*.*"));
+        array_map('unlink', glob("../csv/*.*"));
         
         require_once("../engine/fonction/fonctionExportation.php");
         
