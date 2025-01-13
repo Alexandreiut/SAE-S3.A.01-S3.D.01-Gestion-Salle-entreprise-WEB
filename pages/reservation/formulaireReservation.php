@@ -58,10 +58,10 @@
                     if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
                         $interlocuteurOk = true;
                         $ok = modifieReservation($pdo,$_POST["idReservation"],$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],$_POST["nomInterlocuteur"],$_POST["prenomInterlocuteur"],$_POST["numeroInterlocuteur"],$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
-                        $_SESSION['modif_employe'] = true;
+                        if($ok){$_SESSION['modif_employe'] = true;}
                     } else {
                         $ok = ajoutReservation($pdo,$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],$_POST["nomInterlocuteur"],$_POST["prenomInterlocuteur"],$_POST["numeroInterlocuteur"],$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
-                        $_SESSION['ajout_employe'] = true;
+                        if($ok){$_SESSION['ajout_employe'] = true;}
                     }
                     
                 } else if(isset($_POST["nomInterlocuteur"]) && trim($_POST["nomInterlocuteur"]) == "" 
@@ -70,10 +70,10 @@
                     $interlocuteurOk = true;
                     if (isset($_POST["action"]) && $_POST["action"] == "modifier"){
                         $ok = modifieReservation($pdo,$_POST["idReservation"],$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],"","","",$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
-                        $_SESSION['modif_employe'] = true;
+                        if($ok){$_SESSION['modif_employe'] = true;}
                     } else {
                         $ok = ajoutReservation($pdo,$_POST["date"],$_POST["heureDebut"],$_POST["heureFin"],$_POST["description"],$_POST["objectReservation"],"","","",$_POST["nomSalle"],$_POST["nomActivite"],$_POST["nomEmploye"]);
-                        $_SESSION['ajout_employe'] = true;
+                        if($ok){$_SESSION['ajout_employe'] = true;}
                     }
                 }
                 if ($ok){

@@ -46,7 +46,7 @@ CREATE TABLE `utilisateur` (
   `prenom` varchar(70) NOT NULL,
   `telephone` char(4),
   `role` varchar(70) NOT NULL,
-  `login` varchar(70) NOT NULL,
+  `login` varchar(70) NOT NULL UNIQUE,
   `motDePasse` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
