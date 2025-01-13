@@ -342,7 +342,7 @@
         </div>
         <?php
             if(isset($ok)) {
-                if (!$ok) {
+                if (!$ok && $interlocuteurOk) {
                     echo "<span id='conflit' value=' '></span>";
                 }
             }
