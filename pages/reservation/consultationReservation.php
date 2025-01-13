@@ -138,7 +138,7 @@ $listeActivites = getListeActivites();
             </div>
 
             <div class="offset-lg-2 col-lg-2 container-deconnexion">
-                <form method="post" action="consultationSalle.php">
+                <form method="post" action="consultationReservation.php">
                     <input type="hidden" name="deconnexion" id="deconnexion" value="1">
                     <button type="submit" class="deconnexion">
                         <span class="deconnexion-text">Se déconnecter</span>
